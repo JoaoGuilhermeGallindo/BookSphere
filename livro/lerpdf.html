@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="../pasta-css/lerpdf.css" />
+  <link rel="shortcut icon" href="../LOGOS/Favicon.png" type="image/x-icon">
+  <title>Leitura de PDF</title>
+</head>
+
+<body>
+  <embed id="pdfEmbed" type="application/pdf" width="100%" height="100%" />
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const pdfName = params.get("pdf"); // pega ?pdf= do link
+
+    if (pdfName) {
+      const pdfPath = `../livro/livros-pdf/${decodeURIComponent(pdfName)}`;
+      document.getElementById("pdfEmbed").src = pdfPath + "#toolbar=0";
+    } else {
+      document.body.innerHTML = "<p>Arquivo PDF não especificado.</p>";
+    }
+  </script>
+</body>
+
+</html>

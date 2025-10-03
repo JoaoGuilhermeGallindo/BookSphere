@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../pasta-css/sobre.css">
+    <link rel="stylesheet" href="../pasta-css/home.css">
+    <link rel="shortcut icon" href="../LOGOS/Favicon.png" type="image/x-icon">
+    <title>BookSphere</title>
+</head>
+
+<body>
+    <div class="cabeçario">
+        <img class="logo-cabeçario" src="../LOGOS/Logo-fundo transparente-recortado.png" alt="Logo do Site">
+        <div class="links">
+            <a href="../pasta-html/index.html">Início</a>
+            <a href="../pasta-html/livros.html">Livros</a>
+            <a href="../pasta-html/sobre.html">Sobre</a>
+        </div>
+        <button id="btn-modo-leitura"></button>
+        <!-- Victor está mechendo. Daqui -->
+        <div class="profile-dropdown">
+            <div class="profile-dropdown-btn">
+                <div class="profile-img">
+                    <img src="../IMAGENS/SemFoto.jpg" alt="">
+                </div>
+                <span style="display: none;" id="profile-nome" class="profile-nome"
+                    onclick="window.location.href='../pasta-html/login.html'" style="cursor:pointer;">
+                    Logar
+                </span>
+                <i id="setinha" class="fa-solid fa-angle-down" onclick="toggle()" style="cursor:pointer;"></i>
+
+            </div>
+        </div>
+    </div>
+    <ul class="profile-dropdown-list">
+        <li class="profile-dropdown-list-item">
+            <a href="../pasta-html/perfil.html">
+                <i class="fa-regular fa-user"></i>
+                Ver perfil
+            </a>
+        </li>
+        <li class="profile-dropdown-list-item">
+            <a href="../pasta-html/faleconosco.html">
+                <i class="fa-regular fa-circle-question"></i>
+                Suporte
+            </a>
+        </li>
+        <hr />
+        <li class="profile-dropdown-list-item">
+            <a href="#" id="logoutLink">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                Sair
+            </a>
+        </li>
+        </li>
+
+    </ul>
+
+    <div class="sobre">
+        <Div class="Texto">
+            <h1>Sobre nós</h1>
+            <h2>A gente acredita que ler transforma. Por isso, criamos um espaço simples e prático, feito para você
+                levar sua biblioteca no bolso e ter sempre uma boa leitura à mão. Aqui você encontra ebooks de todos
+                os tipos: histórias que emocionam, conteúdos para aprender algo novo e títulos que podem inspirar o
+                seu dia. Queremos que a leitura seja leve, acessível e faça parte da sua rotina sem complicação.
+                Nosso propósito é bem claro: Conectar pessoas a ideias que transformam. Então, escolha seu próximo
+                livro, relaxe e aproveite a jornada.
+            </h2>
+        </Div>
+        <div class="Foto">
+            <img src="../LOGOS/Logo.png" alt="Sobre nós">
+        </div>
+    </div>
+    </div>
+    <div class="Equipe">
+        <h1>Nossa Equipe</h1>
+    </div>
+
+    <div class="Equipe">
+
+        <div class="text-center">
+            <img src="../IMAGENS/Foto de Esdras.jpg" alt="Foto de Esdras"
+                class="w-20 h-20 rounded-full mx-auto mb-2 object-cover border-2 border-blue-500 p-1">
+            <h3 class="font-medium">Esdras Santos</h3>
+        </div>
+        <div class="text-center">
+            <img src="../IMAGENS/Foto de Gallindo.jpg" alt="Foto de Gallindo"
+                class="w-20 h-20 rounded-full mx-auto mb-2 object-cover border-2 border-blue-500 p-1">
+            <h3 class="font-medium">João Guilherme</h3>
+        </div>
+        <div class="text-center">
+            <img src="../IMAGENS/Foto de Leonardo.jpg" alt="Foto de Leonardo"
+                class="w-20 h-20 rounded-full mx-auto mb-2 object-cover border-2 border-blue-500 p-1">
+            <h3 class="font-medium">Leonardo Rafael</h3>
+        </div>
+        <div class="text-center">
+            <img src="../IMAGENS/Foto de Victor.jpg" alt="Foto de Victor"
+                class="w-20 h-20 rounded-full mx-auto mb-2 object-cover border-2 border-blue-500 p-1">
+            <h3 class="font-medium">Victor Kauã</h3>
+        </div>
+
+    </div>
+    <div class="fim">
+        <div class="conteudo-fim">
+            <div class="fim-esquerda">
+                <img class="img-fim" src="../LOGOS/Logo com fundo transparente.png" alt="">
+                <p>Descubra histórias que inspiram, emocionam e transformam. Navegue pela nossa coleção e encontre o
+                    próximo livro que vai acompanhar você em cada momento da sua jornada.</p>
+            </div>
+            <div class="meio">
+                <h1>Siga nas redes sociais</h1>
+                <div class="redes-sociais">
+                    <a href="https://www.instagram.com/booksphereoficial/">
+                        <img src="../LOGOS/instagram_logo_icon_189247.webp" alt="Instagram">
+                    </a>
+                    <a href="https://www.youtube.com/@BookSphereOficial">
+                        <img src="../LOGOS/youtube_logo_icon_189266.png" alt="Youtube">
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=61579033757460&locale=pt_BR">
+                        <img src="../LOGOS/facebook_logo_icon_189262.png" alt="FaceBook">
+                    </a>
+                </div>
+
+            </div>
+            <div class="fim-direita">
+                <img class="img-fim2" src="../LOGOS/Logo-centro.png" alt="">
+                <a href="../pasta-html/faleconosco.html">Fale conosco</a>
+            </div>
+        </div>
+    </div>
+    <div class="linha-horizontal">
+        <hr>
+    </div>
+    <div class="footer-copy">
+        <p>Copyright © BookSphere ™ 2025</p>
+    </div>
+    <script src="../pasta-js/personalizacao.js"></script>
+    <script src="../pasta-js/menuPerfil.js"></script>
+    <script src="../pasta-js/usersedit.js"></script>
+</body>
+
+</html>

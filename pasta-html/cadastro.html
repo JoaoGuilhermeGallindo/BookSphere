@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="LOGOS/Favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../pasta-css/cadastro.css">
+    <link rel="shortcut icon" href="../LOGOS/Favicon.png" type="image/x-icon">
+    <title>Cadastro</title>
+</head>
+
+<body>
+
+    <div class="main-login">
+
+        <div class="right-login">
+
+            <div class="card-login">
+                <img src="../LOGOS/Logo-fundo transparente-recortado.png">
+                <form id="formCadastro" action="../pasta-php/cadastrar.php" method="POST">
+
+                    <div class="textfield">
+                        <label for="nome">Nome completo</label>
+                        <input type="text" id="nome" name="nome" placeholder="Digite o seu nome" required>
+                    </div>
+
+                    <div class="textfield">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
+                    </div>
+
+                    <div class="textfield">
+                        <label for="usuario">Usuário</label>
+                        <input type="text" id="usuario" name="usuario" placeholder="Digite seu usuário" required>
+                    </div>
+
+                    <div class="textfield">
+                        <label for="senha">Senha</label>
+                        <input type="password" id="senha" name="senha" placeholder="Digite a senha" required>
+                    </div>
+
+                    <div class="textfield">
+                        <label for="confirmar-senha">Confirmar senha</label>
+                        <input type="password" id="confirmar_senha" name="confirmar_senha"
+                            placeholder="Confirme a senha" required>
+                    </div>
+
+                    <div class="signup-text">
+                        Já tem conta? <a href="login.html">Faça login na sua conta</a>.
+                    </div>
+
+                    <button type="submit" class="btn-login">Cadastre-se</button>
+
+                    <div class="box-msg">
+                        <p id="mensagem"></p>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="../pasta-js/cadastro.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,130 @@
+/* === Variáveis e Reset === */
+:root {
+    --bg-dark:         #121212;
+    --card-bg:         #1e1e1e;
+    --text-primary:    #E0E0E0;
+    --text-secondary:  #B0B0B0;
+    --gradient-start:  #06B6D4;
+    --gradient-end:    #3B82F6;
+    --focus-ring:      rgba(59,130,246,0.5);
+    --font-family:     'Poppins', sans-serif;
+    --radius:          16px;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body.dark-mode {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    background: radial-gradient(circle at top, #18181b, var(--bg-dark));
+    font-family: var(--font-family);
+    color: var(--text-primary);
+    padding: 1rem;
+  }
+  
+  /* Container com animação de fade-in e escala */
+  @keyframes fadeInScale {
+    0%   { opacity: 0; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  
+  .thankyou-container {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.6);
+    padding: 2.5rem 2rem;
+    max-width: 28rem;
+    width: 100%;
+    text-align: center;
+    animation: fadeInScale 0.6s ease-out forwards;
+  }
+  
+  /* Títulos com hierarquia clara */
+  .thankyou-container .message h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.75rem;
+  }
+  
+  .thankyou-container .message p {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.4;
+  }
+  
+  /* Botão “Voltar” com hover 3D e ripple */
+  #btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    border: none;
+    border-radius: var(--radius);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition:
+      transform 0.3s ease-out,
+      box-shadow 0.3s ease-out,
+      background-position 0.5s ease-out;
+    background-size: 200% 200%;
+  }
+  
+  #btn-back:hover {
+    background-position: 100% 0;
+    transform: translateY(-4px) scale(1.04);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+  }
+  
+  #btn-back:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px var(--focus-ring);
+  }
+  
+  /* Ícone SVG com leve movimento no hover */
+  .home-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    flex-shrink: 0;
+    transition: transform 0.3s ease-out, color 0.3s ease-out;
+  }
+  
+  #btn-back:hover .home-icon {
+    transform: translateX(-4px) rotate(-15deg);
+  }
+  
+  /* Ripple Effect */
+  @keyframes ripple {
+    0%   { transform: scale(0); opacity: 0.4; }
+    100% { transform: scale(4); opacity: 0; }
+  }
+  
+  #btn-back::after {
+    content: "";
+    position: absolute;
+    width: 100px; height: 100px;
+    background: rgba(255,255,255,0.4);
+    border-radius: 50%;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    pointer-events: none;
+  }
+  
+  #btn-back:active::after {
+    animation: ripple 0.6s ease-out forwards;
+  }
+  

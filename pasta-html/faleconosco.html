@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulário de Contato</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../pasta-css/faleconosco.css" />
+  <link rel="shortcut icon" href="../LOGOS/Favicon.png" type="image/x-icon">
+</head>
+
+<body class="dark-mode">
+  <main class="card">
+    <h1>Formulário de Contato</h1>
+    <form class="contact-form" action="https://formsubmit.co/joao.g.oliveira6@aluno.senai.br" method="POST">
+      <div class="form-group">
+        <input type="text" id="name" name="name" placeholder=" " required />
+        <label for="name">Nome</label>
+      </div>
+
+      <div class="form-group">
+        <input type="email" id="email" name="email" placeholder=" " required />
+        <label for="email">E-mail</label>
+      </div>
+
+      <div class="form-group">
+        <textarea id="message" name="message" placeholder=" " required></textarea>
+        <label for="message">Mensagem</label>
+      </div>
+
+      <input type="hidden" name="_next" value="http://localhost:3000/pasta-html/obrigado.html" />
+
+      <div class="form-actions">
+        <button id="btn-send" type="submit">
+          <span class="btn-text">Enviar</span>
+          <svg class="plane-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M2 21l21-9L2 3v7l15 2-15 2v7z" fill="currentColor" />
+          </svg>
+        </button>
+
+        <button id="btn-back" type="button">
+          <svg class="house-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 10l9-7 9 7v11a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z" fill="currentColor" />
+          </svg>
+          <span class="back-text">Voltar para Home</span>
+        </button>
+      </div>
+    </form>
+  </main>
+  <script src="../pasta-js/faleconosco.js"></script>
+</body>
+
+</html>

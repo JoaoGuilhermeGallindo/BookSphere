@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../pasta-css/perfil.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../pasta-css/home.css">
+    <link rel="shortcut icon" href="../LOGOS/Favicon.png" type="image/x-icon">
+    <title>BookSphere</title>
+</head>
+
+<body>
+    <div class="cabeçario">
+        <img class="logo-cabeçario" src="../LOGOS/Logo-fundo transparente-recortado.png" alt="Logo do Site">
+        <div class="links">
+            <a href="../pasta-html/index.html">Início</a>
+            <a href="../pasta-html/livros.html">Livros</a>
+            <a href="../pasta-html/sobre.html">Sobre</a>
+        </div>
+        <button id="btn-modo-leitura"></button>
+        <!-- Victor está mechendo. Daqui -->
+        <div class="profile-dropdown">
+            <div class="profile-dropdown-btn">
+                <div class="profile-img">
+                    <img src="../IMAGENS/SemFoto.jpg" alt="">
+                </div>
+                <span id="profile-nome" class="profile-nome" onclick="window.location.href='../pasta-html/login.html'"
+                    style="cursor:pointer;">
+                    Logar
+                </span>
+                <i class="fa-solid fa-angle-down" onclick="toggle()" style="cursor:pointer;"></i>
+
+            </div>
+        </div>
+    </div>
+    <ul class="profile-dropdown-list">
+        <li class="profile-dropdown-list-item">
+            <a href="../pasta-html/perfil.html">
+                <i class="fa-regular fa-user"></i>
+                Ver perfil
+            </a>
+        </li>
+        <li class="profile-dropdown-list-item">
+            <a href="../pasta-html/faleconosco.html">
+                <i class="fa-regular fa-circle-question"></i>
+                Suporte
+            </a>
+        </li>
+        <hr />
+        <li class="profile-dropdown-list-item">
+            <a href="#" id="logoutLink">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                Sair
+            </a>
+        </li>
+
+    </ul>
+
+    <main class="profile-container">
+        <aside class="profile-sidebar">
+            <div class="profile-card">
+                <div class="profile-avatar-wrapper">
+                    <img id="profile-avatar" src="../pasta-php/getAvatar.php" alt="Avatar do Usuário">
+                    <label for="avatar-upload" class="avatar-upload-btn" title="Mudar foto de perfil">
+                        <i class="fas fa-camera"></i>
+                    </label>
+                 <input type="file" id="avatar-upload" name="avatar" accept="image/*" style="display: none;">
+
+                </div>
+                <h2 id="user-name">Nome do Usuário</h2>
+                <p id="user-username">@username</p>
+            </div>
+        </aside>
+    </main>
+
+    <div class="fim">
+        <div class="conteudo-fim">
+            <div class="fim-esquerda">
+                <img class="img-fim" src="../LOGOS/Logo com fundo transparente.png" alt="">
+                <p>Descubra histórias que inspiram, emocionam e transformam. Navegue pela nossa coleção e encontre o
+                    próximo
+                    livro que vai acompanhar você em cada momento da sua jornada.</p>
+            </div>
+            <div class="meio">
+                <h1>Siga nas redes sociais</h1>
+                <div class="redes-sociais">
+                    <a href="https://www.instagram.com/booksphereoficial/">
+                        <img src="../LOGOS/instagram_logo_icon_189247.webp" alt="Instagram">
+                    </a>
+                    <a href="https://www.youtube.com/@BookSphereOficial">
+                        <img src="../LOGOS/youtube_logo_icon_189266.png" alt="Youtube">
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=61579033757460&locale=pt_BR">
+                        <img src="../LOGOS/facebook_logo_icon_189262.png" alt="FaceBook">
+                    </a>
+                </div>
+
+            </div>
+            <div class="fim-direita">
+                <img class="img-fim2" src="../LOGOS/Logo-centro.png" alt="">
+                <a href="../pasta-html/faleconosco.html">Fale conosco</a>
+            </div>
+        </div>
+    </div>
+    <div class="linha-horizontal">
+        <hr>
+    </div>
+    <div class="footer-copy">
+        <p>Copyright © BookSphere ™ 2025</p>
+    </div>
+    <script src="../pasta-js/personalizacao.js"></script>
+    <script src="../pasta-js/perfil.js"></script>
+    <script src="../pasta-js/menuPerfil.js"></script>
+
+</body>
+
+</html>

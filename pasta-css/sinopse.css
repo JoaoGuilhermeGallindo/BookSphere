@@ -1,0 +1,228 @@
+.container {
+  display: flex;
+  gap: 20px;
+  max-width: 1200px;
+  margin: auto;
+  margin-top: 120px;
+  margin-bottom: 150px;
+}
+
+
+.conteudo > .sinopse,
+.conteudo > .botoes {
+  margin-top: 2rem; /* escolha o valor que achar melhor */
+}
+
+.info,
+.sinopse,
+.botoes {
+  margin: 0;
+}
+
+.capa img {
+  width: 300px;
+  border-radius: 8px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+}
+
+.conteudo {
+  flex: 1;
+  
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.info {
+  margin-bottom: 10px;
+}
+
+.tag {
+  display: inline-block;
+  background-color: #365BA3;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.avaliacao {
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.estrelas {
+  color: #2b7a2b;
+  font-size: 16px;
+  margin-right: 5px;
+}
+
+.nota {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.download {
+  margin: 15px 0;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Container que agrupa os botões */
+.botoes {
+  display: flex;
+  /* Usa Flexbox para alinhar os botões */
+  gap: 1.5rem;
+  /* Cria um espaço entre os botões */
+  justify-content: center;
+  /* Centraliza a div no contêiner pai */
+  margin-top: 2rem;
+  /* Adiciona um espaço acima dos botões */
+}
+
+/* Estilo geral dos botões */
+.botoes button {
+  padding: 1rem 2.5rem;
+  /* Aumenta o espaçamento interno para botões maiores */
+  font-size: 1.1rem;
+  /* Aumenta o tamanho da fonte */
+  font-weight: 600;
+  /* Deixa o texto mais encorpado */
+  border-radius: 50px;
+  /* Deixa os botões com forma de pílula (bem modernos) */
+  cursor: pointer;
+  border: none;
+ 
+}
+
+#btn-download {
+  position: relative;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+  background-color: #e3e4e7;
+  border: 2px solid rgb(239, 8, 8);
+  cursor: pointer;
+  overflow: hidden;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#btn-download:disabled {
+  background-color: #e3e4e7;
+  color: white;
+  cursor: not-allowed;
+}
+
+.icon {
+  font-size: 18px;
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.progress {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0%;
+  background-color: rgb(239, 8, 8);
+  z-index: 0;
+  transition: width 2s ease;
+}
+
+.text {
+  position: relative;
+  z-index: 1;
+}
+
+#btn-LerPDF {
+  background-color: #e3e4e7;
+  color: black;
+   border: 2px solid rgb(239, 100, 8);
+}
+
+#btn-Ler {
+  background-color: #e3e4e7;
+  color: black;
+   border: 2px solid #256aebfd;
+}
+
+#btn-LerPDF:hover {
+  background-color: rgb(239, 100, 8);
+  color: white;
+}
+
+#btn-Ler:hover {
+  background-color: #256aebfd;
+  color: white;
+}
+
+#btn-download:hover {
+  background-color: rgb(239, 8, 8);
+  color: white;
+}
+
+/* Estilo específico para o botão de Ler Online */
+.botoes button:last-child {
+  background-color: #E5E7EB;
+  /* Cinza claro, suave e moderno */
+  color: black;
+  /* Cor do texto cinza escuro */
+}
+
+.botoes button:last-child:hover {
+  background-color: #315386;
+  color: white;
+}
+
+.sinopse h3 {
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.sinopse p {
+  font-size: 15px;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+.sinopse .leia {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.sinopse .mais {
+  display: none;
+  /* começa escondido */
+}
+
+.sinopse.expandida .mais {
+  display: inline;
+  /* quando tiver a classe "expandida", mostra */
+}
+
+.sinopse .leia {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 10px;
+  cursor: pointer;
+  color: #333;
+}
+
+.sinopse .leia:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,482 @@
+[
+    {
+      "id": "1",
+      "titulo": "A Divina Comédia",
+      "autor": "Dante Alighieri",
+      "capa": "../Capas/Livro10.jpg",
+      "sinopse": "O poema narra a jornada de Dante através do Inferno, Purgatório e Paraíso. Guiado pelo poeta Virgílio, ele atravessa os nove círculos do Inferno e sobe o Monte do Purgatório. No Paraíso, sua amada Beatriz o guia pelos nove céus até a presença de Deus.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "2",
+      "titulo": "Dom Casmurro",
+      "autor": "Machado de Assis",
+      "capa": "../Capas/Livro11.jpg",
+      "sinopse": "O romance narra a história de Bento Santiago, o Dom Casmurro, que, já velho, decide contar a história de sua vida, especialmente o romance com sua amada de infância, Capitu. A trama é movida pelo ciúme e pela dúvida sobre a fidelidade da esposa e a paternidade de seu filho.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "3",
+      "titulo": "A Carteira",
+      "autor": "Machado de Assis",
+      "capa": "../Capas/Livro12.jpg",
+      "sinopse": "A trama gira em torno de Honório, um advogado endividado que encontra uma carteira recheada de dinheiro. O conto explora o conflito moral do personagem entre o dever de devolver a carteira e o desejo de usar o dinheiro para resolver seus problemas financeiros.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "4",
+      "titulo": "A Arte Poética",
+      "autor": "Aristóteles",
+      "capa": "../Capas/A Arte Poética.jpg",
+      "sinopse": "Obra fundamental da teoria literária, na qual Aristóteles analisa a poesia e suas formas. Ele define conceitos como a tragédia, a epopeia e a comédia, e explora elementos como a mímese (imitação), a catarse (purificação das emoções) e a estrutura da trama.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "5",
+      "titulo": "Os Lusíadas",
+      "autor": "Luís Vaz de Camões",
+      "capa": "../Capas/Livro13.jpg",
+      "sinopse": "Poema épico que celebra os grandes feitos do povo português, com foco na viagem de Vasco da Gama às Índias. A obra mistura fatos históricos com elementos da mitologia greco-romana, exaltando a coragem e o espírito aventureiro dos navegadores de Portugal.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "6",
+      "titulo": "A Dama das Camélias",
+      "autor": "Alexandre Dumas Filho",
+      "capa": "../Capas/Livro14.jpg",
+      "sinopse": "Narra a trágica história de amor entre Armand Duval, um jovem da alta sociedade, e Marguerite Gautier, uma cortesã parisiense. A relação enfrenta o preconceito social e as dificuldades financeiras, culminando em um sacrifício por amor com consequências devastadoras.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "7",
+      "titulo": "Memórias Póstumas de Brás Cubas",
+      "autor": "Machado de Assis",
+      "capa": "../Capas/Livro15.jpg",
+      "sinopse": "Narrado por um 'defunto autor', Brás Cubas conta a história de sua vida a partir do túmulo. Com um tom irônico e digressivo, ele revela suas aventuras, amores e fracassos, tecendo uma crítica mordaz à elite e à sociedade brasileira do século XIX.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "8",
+      "titulo": "A Alma do Lázaro",
+      "autor": "José de Alencar",
+      "capa": "../Capas/Livro16.jpg",
+      "sinopse": "A obra transcende sua época, convidando a uma reflexão profunda sobre a condição humana e o poder transformador da fé e da esperança. É uma leitura que toca o coração e desperta questionamentos que ecoam na mente muito além da última página.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "9",
+      "titulo": "A Brasileira de Prazins",
+      "autor": "Camilo Castelo Branco",
+      "capa": "../Capas/Livro17.jpg",
+      "sinopse": "Conta a história de Marta de Prazins, prometida em casamento a um tio rico que fez fortuna no Brasil. No entanto, ela é apaixonada por José Dias. A novela explora os conflitos entre o amor, o dever e as convenções sociais da época.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "10",
+      "titulo": "Utopia",
+      "autor": "Thomas Morus",
+      "capa": "../Capas/A Utopia.jpg8.jpg",
+      "sinopse": "A obra descreve uma ilha-nação fictícia com um sistema político, social e religioso ideal, onde não há propriedade privada e todos trabalham para o bem comum. É uma crítica à sociedade europeia do século XVI e uma reflexão sobre como seria uma sociedade perfeita.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "11",
+      "titulo": "A Bela Madame Vargas",
+      "autor": "João do Rio",
+      "capa": "../Capas/Livro19.jpg",
+      "sinopse": "A história gira em torno de Madame Vargas, uma mulher bela e misteriosa que encanta e intriga a alta sociedade carioca do início do século XX. A obra explora temas como a hipocrisia social, os desejos ocultos e as complexidades das relações humanas.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "12",
+      "titulo": "A Esfinge sem Segredo",
+      "autor": "Oscar Wilde",
+      "capa": "../Capas/Livro20.jpg",
+      "sinopse": "Um homem narra a um amigo sua paixão por uma mulher enigmática e cheia de mistérios. Ele a segue e descobre que ela frequenta um local suspeito, o que o leva a acreditar que ela guarda um grande segredo. O conto explora a natureza do mistério e da obsessão.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "13",
+      "titulo": "Cancioneiro",
+      "autor": "Fernando Pessoa",
+      "capa": "../Capas/Cacioneiro.jpg",
+      "sinopse": "Coletânea de poemas de Fernando Pessoa (ortônimo), onde o autor explora temas como o fingimento poético, a dor, a saudade, o amor e a fragmentação do eu. É uma obra central para entender a lírica pessoana e sua famosa reflexão sobre a sinceridade na arte.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "14",
+      "titulo": "A Cartomante",
+      "autor": "Machado de Assis",
+      "capa": "../Capas/Cartomante.jpg",
+      "sinopse": "Narra a história de um triângulo amoroso entre Vilela, sua esposa Rita e o amigo do casal, Camilo. A trama explora a paixão proibida, a traição e o ciúme, culminando em uma visita a uma cartomante que sela tragicamente o destino dos amantes.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "15",
+      "titulo": "O que é o Casamento?",
+      "autor": "José de Alencar",
+      "capa": "../Capas/OQueEOCasamento.jpg",
+      "sinopse": "Neste conto, José de Alencar explora as diferentes facetas e percepções sobre o casamento na sociedade do século XIX. Através de diálogos e reflexões, o autor debate o amor, o interesse financeiro, as convenções sociais e o verdadeiro significado da união matrimonial.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "16",
+      "titulo": "Farsa de Inês Pereira",
+      "autor": "Gil Vicente",
+      "capa": "../Capas/FarsaDeInesPereira.jpg",
+      "sinopse": "Inês Pereira, uma jovem ambiciosa, recusa um pretendente honesto e trabalhador, Pêro Marques, para se casar com um escudeiro nobre, mas preguiçoso e infiel, Brás da Mata. A peça satiriza os casamentos por interesse e as ambições sociais da época.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "17",
+      "titulo": "Don Quixote. Vol. 2",
+      "autor": "Miguel de Cervantes Saavedra",
+      "capa": "../Capas/DomQuixote.jpg",
+      "sinopse": "A segunda parte da obra continua as aventuras do cavaleiro andante Dom Quixote e seu fiel escudeiro, Sancho Pança. Agora famosos devido à publicação de suas próprias histórias, eles encontram personagens que já os conhecem e interagem com suas fantasias.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "18",
+      "titulo": "Hamlet",
+      "autor": "William Shakespeare",
+      "capa": "../Capas/Hamlet.jpg",
+      "sinopse": "O príncipe Hamlet da Dinamarca é visitado pelo fantasma de seu pai, que revela ter sido assassinado por seu próprio irmão, Cláudio, que usurpou o trono e se casou com a rainha. Hamlet então busca vingança, em uma trama de loucura, traição e tragédia.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "19",
+      "titulo": "Helena",
+      "autor": "Machado de Assis",
+      "capa": "../Capas/Helena.jpg",
+      "sinopse": "Após a morte do Conselheiro Vale, sua filha ilegítima, Helena, é reconhecida e levada para viver com a família. Sua presença causa conflitos e desperta sentimentos complexos, especialmente em Estácio, o filho legítimo do conselheiro, que se vê dividido entre o afeto fraternal e uma atração proibida.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "20",
+      "titulo": "Os Maias",
+      "autor": "Eça de Queirós",
+      "capa": "../Capas/OsMaias.jpg",
+      "sinopse": "Crônica da vida de três gerações da família Maia, a obra retrata a alta sociedade lisboeta da segunda metade do século XIX. A trama central foca em Carlos da Maia e seu amor incestuoso por Maria Eduarda, em um enredo que critica a decadência moral e social de Portugal.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "21",
+      "titulo": "Mensagem",
+      "autor": "Fernando Pessoa",
+      "capa": "../Capas/Mensagem.jpg",
+      "sinopse": "Único livro de poemas em português publicado em vida por Fernando Pessoa, 'Mensagem' é uma obra de exaltação patriótica e mítica. Dividida em três partes, ela revisita os heróis e símbolos da história de Portugal, profetizando um futuro grandioso para a nação: o Quinto Império.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "22",
+      "titulo": "Os Sertões",
+      "autor": "Euclides da Cunha",
+      "capa": "../Capas/Os Sertões.jpg",
+      "sinopse": "Obra que mistura literatura, história e sociologia para narrar a Guerra de Canudos. O livro é dividido em três partes: 'A Terra', que descreve o sertão nordestino; 'O Homem', que analisa o sertanejo; e 'A Luta', que relata o sangrento conflito entre os seguidores de Antônio Conselheiro e as tropas do governo.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "23",
+      "titulo": "O Eu Profundo e os Outros Eus",
+      "autor": "Fernando Pessoa",
+      "capa": "../Capas/O Eu profundo e os outros eus.jpg",
+      "sinopse": "Uma coletânea de textos em prosa de Fernando Pessoa que explora a sua complexa heteronímia. A obra revela as reflexões do autor sobre a criação de seus outros 'eus' — como Alberto Caeiro, Ricardo Reis e Álvaro de Campos —, mergulhando na filosofia por trás de sua múltipla identidade literária.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "24",
+      "titulo": "Do Livro do Desassossego",
+      "autor": "Fernando Pessoa",
+      "capa": "../Capas/LivroDoDesassossego.jpg",
+      "sinopse": "Atribuído ao semi-heterônimo Bernardo Soares, este livro é um diário fragmentado de reflexões, pensamentos e divagações sobre o tédio, o sonho, a solidão e o absurdo da existência. É um retrato íntimo da angústia e da sensibilidade de um homem comum em Lisboa.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "25",
+      "titulo": "A Carta",
+      "autor": "Pero Vaz de Caminha",
+      "capa": "../Capas/ACartaDePeroVazDeCaminha.jpg",
+      "sinopse": "Considerado o documento inaugural da história do Brasil, a carta de Pero Vaz de Caminha ao rei D. Manuel I de Portugal relata a descoberta da nova terra em 1500. O texto descreve as primeiras impressões sobre a natureza exuberante e o contato com os povos indígenas.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "26",
+      "titulo": "Este Mundo da Injustiça Globalizada",
+      "autor": "José Saramago",
+      "capa": "../Capas/Este Mundo Da inustiça Globalizada.jpg",
+      "sinopse": "Neste ensaio, José Saramago faz uma crítica contundente à globalização e ao sistema neoliberal, argumentando que eles aprofundam a desigualdade e a injustiça social. O autor defende um debate mundial sobre a democracia e as causas de sua decadência.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "27",
+      "titulo": "A Tempestade",
+      "autor": "William Shakespeare",
+      "capa": "../Capas/ATempestade.jpg",
+      "sinopse": "Próspero, o legítimo Duque de Milão, usa seus poderes mágicos para provocar uma tempestade e naufragar o navio de seus inimigos em uma ilha onde vive exilado. A peça explora temas como vingança, perdão, poder e a natureza da humanidade.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "28",
+      "titulo": "O Pastor Amoroso",
+      "autor": "Fernando Pessoa",
+      "capa": "../Capas/OPastorAmoroso.jpg",
+      "sinopse": "Poema do heterônimo Alberto Caeiro, onde o eu-lírico, um pastor, reflete sobre o amor de uma forma simples e ligada à natureza. Ele trata o amor não como um pensamento complexo, mas como uma presença direta e sentida, assim como as flores e os rios que o cercam.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "29",
+      "titulo": "A Cidade e as Serras",
+      "autor": "José Maria Eça de Queirós",
+      "capa": "../Capas/ACidadeEAsSerras.jpg",
+      "sinopse": "A obra narra a história de Jacinto, um aristocrata rico e intelectualizado que vive em Paris, cercado pelo luxo e pela tecnologia, mas sente um grande vazio. Ele redescobre a felicidade e o sentido da vida ao retornar para a simplicidade do campo, nas serras de Portugal.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "30",
+      "titulo": "O Guardador de Rebanhos",
+      "autor": "Fernando Pessoa",
+      "capa": "../Capas/o-guardador-de-rebanhos-3.jpg",
+      "sinopse": "Principal obra do heterônimo Alberto Caeiro, mestre dos outros heterônimos. Nos poemas, o eu-lírico expressa uma visão de mundo pagã e antimetafísica, valorizando a sensação pura e a observação direta da realidade, sem a interferência do pensamento.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "31",
+      "titulo": "Via-Láctea",
+      "autor": "Olavo Bilac",
+      "capa": "../Capas/ViaLactea.jpg",
+      "sinopse": "Uma das obras mais célebres do parnasianismo brasileiro, 'Via Láctea' é uma coletânea de 35 sonetos que exploram o tema do amor, desde a paixão idealizada até a dor da perda e do ciúme. Os poemas são marcados pelo rigor formal e pela busca da perfeição estética.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "32",
+      "titulo": "Vozes d'África",
+      "autor": "Antônio Frederico de Castro Alves",
+      "capa": "../Capas/VozesDafrica.jpg",
+      "sinopse": "Poema épico de Castro Alves que dá voz ao continente africano personificado, lamentando a escravidão de seus filhos. A obra é um grito de protesto contra a desumanidade do tráfico negreiro e uma poderosa manifestação da poesia social e abolicionista do autor.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "33",
+      "titulo": "A Harpa do Crente",
+      "autor": "Alexandre Herculano",
+      "capa": "../Capas/AHarpaDoCrente.jpg",
+      "sinopse": "Publicada em 1838, esta obra reúne os primeiros poemas de Alexandre Herculano, sendo um marco do Romantismo em Portugal. Os poemas abordam temas como a liberdade, a pátria, Deus, o exílio e a morte, com um tom sóbrio e profundamente místico.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "34",
+      "titulo": "Os Escravos",
+      "autor": "Antônio Frederico de Castro Alves",
+      "capa": "../Capas/OsEscravos.jpg",
+      "sinopse": "Coletânea de poemas de Castro Alves dedicada à causa abolicionista. A obra inclui o famoso 'O Navio Negreiro', e denuncia a crueldade da escravidão, retratando o sofrimento dos escravizados e clamando por liberdade e justiça social.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "35",
+      "titulo": "A Viuvinha",
+      "autor": "José de Alencar",
+      "capa": "../Capas/AViuvinha.jpg",
+      "sinopse": "Jorge, um jovem que herda e gasta toda a fortuna do pai, se apaixona por Carolina. Ao descobrir que está falido na véspera do casamento, ele forja o próprio suicídio para proteger a honra da noiva. Anos depois, ele retorna para tentar reconquistar seu amor.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "36",
+      "titulo": "Contos para Velhos",
+      "autor": "Olavo Bilac",
+      "capa": "../Capas/Contos para Velhos.jpg",
+      "sinopse": "Neste livro, Olavo Bilac mostra sua faceta de contista. A obra reúne pequenas histórias e crônicas com um tom anedótico e humorístico, abordando o cotidiano, as relações humanas e os costumes da sociedade carioca da Belle Époque.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "37",
+      "titulo": "A Alegria da Revolução",
+      "autor": "Ken Knabb",
+      "capa": "../Capas/a-alegria-da-revolucao-1.webp",
+      "sinopse": "Uma análise crítica da sociedade moderna e uma exploração das possibilidades de uma revolução social autônoma e autogerida. A obra defende uma transformação radical que vá além das estruturas políticas e econômicas existentes, buscando uma vida com mais liberdade e prazer.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "38",
+      "titulo": "A Arte da Guerra",
+      "autor": "Sun Tzu",
+      "capa": "../Capas/A Arte da Guerra.jpg",
+      "sinopse": "Um tratado militar clássico escrito no século V a.C. A obra oferece estratégias e táticas sobre como vencer batalhas, enfatizando a importância do planejamento, da disciplina, do conhecimento do inimigo e do terreno, e da capacidade de evitar o confronto direto sempre que possível.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "39",
+      "titulo": "Nunca é Hora de Parar",
+      "autor": "David Goggins",
+      "capa": "../Capas/Nunca é Hora de Parar.jpg",
+      "sinopse": "Sequência de 'Nada Pode Me Ferir', David Goggins mergulha ainda mais fundo na mentalidade necessária para superar limites. O livro explora como construir uma 'armadura mental' e usar as dificuldades como combustível para o crescimento, incentivando o leitor a nunca se acomodar.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "40",
+      "titulo": "Nada Pode Me Ferir",
+      "autor": "David Goggins",
+      "capa": "../Capas/Nada Pode Me Ferir.jpg",
+      "sinopse": "A história de superação de David Goggins, que saiu de uma infância de pobreza e abuso para se tornar um dos homens mais resistentes do planeta. Ele detalha como a disciplina mental, o trabalho duro e a capacidade de abraçar a dor podem levar qualquer pessoa a superar seus limites.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "41",
+      "titulo": "O Mulato",
+      "autor": "Aluísio Azevedo",
+      "capa": "../Capas/Mulato.jpg",
+      "sinopse": "Marco do Naturalismo no Brasil, o romance conta a história de Raimundo, um jovem mulato rico e educado na Europa, que retorna ao Maranhão e se apaixona por sua prima, Ana Rosa. A trama expõe o preconceito racial e o conservadorismo da sociedade maranhense do século XIX.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "42",
+      "titulo": "A Igreja do Diabo",
+      "autor": "Machado de Assis",
+      "capa": "../Capas/A IgrejaDoDiabo.jpg",
+      "sinopse": "Neste conto irônico, o Diabo decide fundar sua própria igreja, pregando a prática das virtudes negativas, como a soberba e a cobiça. No entanto, ele descobre que seus fiéis, contraditoriamente, praticam o bem às escondidas, revelando a complexa natureza humana.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "43",
+      "titulo": "Utopia",
+      "autor": "Thomas Morus",
+      "capa": "../Capas/A Utopia.jpg",
+      "sinopse": "A obra descreve uma ilha-nação fictícia com um sistema político, social e religioso ideal, onde não há propriedade privada e todos trabalham para o bem comum. É uma crítica à sociedade europeia do século XVI e uma reflexão sobre como seria uma sociedade perfeita.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "44",
+      "titulo": "Adão e Eva",
+      "autor": "Machado de Assis",
+      "capa": "../Capas/AdaoEEva.jpg",
+      "sinopse": "Machado de Assis propõe uma nova e irônica versão para a história da criação do mundo e da perda do paraíso. O conto debate, com a elegância característica do autor, quem teve a maior culpa no episódio: o homem ou a mulher, Adão ou Eva.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "45",
+      "titulo": "Auto da Barca do Inferno",
+      "autor": "Gil Vicente",
+      "capa": "../Capas/O Auto da Barca do Inferno.jpg",
+      "sinopse": "A peça retrata o juízo final de forma satírica. As almas dos mortos chegam a um porto onde duas barcas as aguardam: uma para o Inferno, comandada pelo Diabo, e outra para o Paraíso, comandada por um Anjo. Personagens de diversas classes sociais são julgados por seus pecados em vida.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "46",
+      "titulo": "O Alienista",
+      "autor": "Machado de Assis",
+      "capa": "../Capas/O Alienista.jpg",
+      "sinopse": "O Dr. Simão Bacamarte, um renomado médico, funda um hospício em Itaguaí para estudar a loucura. Sua busca obsessiva por uma definição científica para a sanidade o leva a internar grande parte da população, até que ele chega a uma conclusão surpreendente sobre quem é o verdadeiro louco.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "47",
+      "titulo": "A Escrava Isaura",
+      "autor": "Bernardo Guimarães",
+      "capa": "../Capas/A Escrava Isaura.jpg",
+      "sinopse": "Obra central do abolicionismo, narra a história de Isaura, uma escrava de pele branca e educada, que é perseguida implacavelmente por seu senhor, Leôncio Almeida. A trama acompanha sua luta pela liberdade e seu romance com o jovem abolicionista Álvaro.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "48",
+      "titulo": "Iracema",
+      "autor": "José de Alencar",
+      "capa": "../Capas/A Iracema.jpg",
+      "sinopse": "Lenda poética sobre a origem do Ceará, o romance narra o amor proibido entre a índia Iracema, a 'virgem dos lábios de mel', e o colonizador português Martim. A história simboliza o encontro entre o nativo e o europeu, e o nascimento do povo brasileiro.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "49",
+      "titulo": "Livro de Mágoas",
+      "autor": "Florbela Espanca",
+      "capa": "../Capas/Livro de Maguas.jpg",
+      "sinopse": "Primeiro livro de poemas de Florbela Espanca, a obra é marcada por um tom melancólico e confessional. Os sonetos exploram temas como a saudade, a dor, o sofrimento amoroso e a busca por um ideal inatingível, revelando a alma inquieta da poetisa.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "50",
+      "titulo": "A Mulher de Preto",
+      "autor": "Machado de Assis",
+      "capa": "../Capas/A Mulher de Preto.jpg",
+      "sinopse": "O jovem médico Dr. Estevão se apaixona por uma misteriosa mulher de preto, Madalena, sem saber que ela é a esposa de seu melhor amigo, Meneses. O conto explora os limites da amizade, a traição e a hipocrisia das convenções sociais da época.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "51",
+      "titulo": "A Harpa do Crente",
+      "autor": "Alexandre Herculano",
+      "capa": "../Capas/A Harpa do Crente.png",
+      "sinopse": "Publicada em 1838, esta obra reúne os primeiros poemas de Alexandre Herculano, sendo um marco do Romantismo em Portugal. Os poemas abordam temas como a liberdade, a pátria, Deus, o exílio e a morte, com um tom sóbrio e profundamente místico.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "52",
+      "titulo": "O que é o Casamento?",
+      "autor": "José de Alencar",
+      "capa": "../Capas/O que E O Casamento.png",
+      "sinopse": "Neste conto, José de Alencar explora as diferentes facetas e percepções sobre o casamento na sociedade do século XIX. Através de diálogos e reflexões, o autor debate o amor, o interesse financeiro, as convenções sociais e o verdadeiro significado da união matrimonial.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "53",
+      "titulo": "Memórias de um Sargento de Milícias",
+      "autor": "Manuel Antônio de Almeida",
+      "capa": "../Capas/Memorias de um Sargento de Milicias.png",
+      "sinopse": "O romance narra as aventuras e travessuras de Leonardo, um menino malandro que cresce nas ruas do Rio de Janeiro na época do rei D. João VI. A obra é um retrato fiel e bem-humorado dos costumes e da vida popular da cidade no início do século XIX.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "54",
+      "titulo": "Vozes d'África",
+      "autor": "Antônio Frederico de Castro Alves",
+      "capa": "../Capas/Vozes d'África.png",
+      "sinopse": "Poema épico de Castro Alves que dá voz ao continente africano personificado, lamentando a escravidão de seus filhos. A obra é um grito de protesto contra a desumanidade do tráfico negreiro e uma poderosa manifestação da poesia social e abolicionista do autor.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "55",
+      "titulo": "Brás, Bexiga e Barra Funda",
+      "autor": "Alcântara Machado",
+      "capa": "../Capas/Brás, Bexiga e Barra Funda.png",
+      "sinopse": "Clássico do modernismo brasileiro, o livro retrata o cotidiano dos imigrantes italianos nos bairros pobres de São Paulo no início do século XX. Com uma linguagem coloquial e cinematográfica, os contos capturam a vida, os costumes e a fala ('macarrônico') dessa população.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "56",
+      "titulo": "A Pata da Gazela",
+      "autor": "José de Alencar",
+      "capa": "../Capas/A Pata da Gazela.png",
+      "sinopse": "O romance urbano narra a história de Horácio, um jovem que se apaixona por Amélia, uma bela moça da sociedade carioca, após vê-la apenas pelos seus pés perfeitos. A trama explora o contraste entre o amor idealizado e a realidade, e a importância da aparência nas relações sociais.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "57",
+      "titulo": "Os Escravos",
+      "autor": "Antônio Frederico de Castro Alves",
+      "capa": "../Capas/Os Escravos.png",
+      "sinopse": "Coletânea de poemas de Castro Alves dedicada à causa abolicionista. A obra inclui o famoso 'O Navio Negreiro', e denuncia a crueldade da escravidão, retratando o sofrimento dos escravizados e clamando por liberdade e justiça social.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "58",
+      "titulo": "O Primo Basílio",
+      "autor": "José Maria Eça de Queirós",
+      "capa": "../Capas/O Primo Basílio.png",
+      "sinopse": "Luísa, uma jovem casada e entediada, se envolve em um romance adúltero com seu primo Basílio, que retorna a Lisboa. A trama se complica quando a criada Juliana descobre o caso e passa a chantagear a patroa, em uma crítica à hipocrisia e futilidade da burguesia lisboeta.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "59",
+      "titulo": "O Mulato",
+      "autor": "Aluísio Azevedo",
+      "capa": "../Capas/O Mulato.png",
+      "sinopse": "Marco do Naturalismo no Brasil, o romance conta a história de Raimundo, um jovem mulato rico e educado na Europa, que retorna ao Maranhão e se apaixona por sua prima, Ana Rosa. A trama expõe o preconceito racial e o conservadorismo da sociedade maranhense do século XIX.",
+      "texto_completo": "Texto completo do livro aqui."
+    },
+    {
+      "id": "60",
+      "titulo": "Via-Láctea",
+      "autor": "Olavo Bilac",
+      "capa": "../Capas/Via-Láctea.png",
+      "sinopse": "Uma das obras mais célebres do parnasianismo brasileiro, 'Via Láctea' é uma coletânea de 35 sonetos que exploram o tema do amor, desde a paixão idealizada até a dor da perda e do ciúme. Os poemas são marcados pelo rigor formal e pela busca da perfeição estética.",
+      "texto_completo": "Texto completo do livro aqui."
+    }
+  ]

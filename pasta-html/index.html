@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../pasta-css/home.css">
+    <link rel="shortcut icon" href="../LOGOS/Favicon.png" type="image/x-icon">
+    <title>BookSphere</title>
+</head>
+<div class="cabeçario">
+    <img class="logo-cabeçario" src="../LOGOS/Logo-fundo transparente-recortado.png" alt="Logo do Site">
+    <div class="links">
+        <a href="../pasta-html/index.html">Início</a>
+        <a href="../pasta-html/livros.html">Livros</a>
+        <a href="../pasta-html/sobre.html">Sobre</a>
+    </div>
+    <button id="btn-modo-leitura"></button>
+    <!-- Victor está mechendo. Daqui -->
+    <div class="profile-dropdown">
+        <div class="profile-dropdown-btn">
+            <div class="profile-img">
+                <img src="../IMAGENS/SemFoto.jpg" alt="">
+            </div>
+            <span style="display: none;" id="profile-nome" class="profile-nome"
+                onclick="window.location.href='../pasta-html/login.html'" style="cursor:pointer;">
+                Logar
+            </span>
+            <i id="setinha" class="fa-solid fa-angle-down" onclick="toggle()" style="cursor:pointer;"></i>
+
+        </div>
+    </div>
+</div>
+<ul class="profile-dropdown-list">
+    <li class="profile-dropdown-list-item">
+        <a href="../pasta-html/perfil.html">
+            <i class="fa-regular fa-user"></i>
+            Ver perfil
+        </a>
+    </li>
+    <li class="profile-dropdown-list-item">
+        <a href="../pasta-html/faleconosco.html">
+            <i class="fa-regular fa-circle-question"></i>
+            Suporte
+        </a>
+    </li>
+    <hr />
+    <li class="profile-dropdown-list-item">
+        <a href="#" id="logoutLink">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            Sair
+        </a>
+    </li>
+
+</ul>
+
+<div class="centro">
+    <div class="texto-centro">
+        <h1>Explore o Universo dos Livros</h1>
+        <h2>Descubra, leia e aproveite suas histórias favoritas em um só lugar.</h2>
+    </div>
+    <img class="logo-centro" src="../LOGOS/Logo-centro.png" alt="">
+</div>
+<div class="abaixoDoCentro">
+    <h1>Os melhores títulos você encontra aqui!</h1>
+    <div class="livros">
+        <div class="livros-wrapper">
+            <!--1º Loop-->
+            <img src="../Capas/Os Sertões.jpg" alt="Os Sertões" />
+            <img src="../Capas/Mulato.jpg" alt="Mulato" />
+            <img src="../Capas/Dom Quixote Volume II.jpg" alt="Dom Quixote Volume II" />
+            <img src="../Capas/ViaLactea.jpg" alt="Via Lactea" />
+            <img src="../Capas/Macbeth.jpg" alt="Macbeth" />
+            <img src="../Capas/OsEscravos.jpg" alt="Os Escravos" />
+            <img src="../Capas/Dom Casmurro.jpg" alt="Dom Casmurro" />
+            <img src="../Capas/A Divina Comédia.jpg" alt="A Dívina Comédia" />
+            <img src="../Capas/A Dama das Camelias.jpg" alt="A Dama das Camelias" />
+            <img src="../Capas/A Alma do Lazaro.jpg" alt="A Alma do Lazaro" />
+            <img src="../Capas/Helena.jpg" alt="Helena" />
+            <img src="../Capas/A Bela Madame Vargas.jpg" alt="A Bela Madame Vargas" />
+            <img src="../Capas/A Utopia.jpg" alt="A Utopia" />
+            <img src="../Capas/A IgrejaDoDiabo.jpg" alt="A IgrejaDoDiabo" />
+            <img src="../Capas/A Moreninha.jpg" alt="A Moreninha" />
+            <img src="../Capas/AHarpaDoCrente.jpg" alt="A Harpa do Crente" />
+            <img src="../Capas/Cancioneiro.jpg" alt="Cacioneiro" />
+            <img src="../Capas/Este Mundo Da inustiça Globalizada.jpg" alt="Este Mundo Da injustiça Globalizada" />
+            <img src="../Capas/Livro de Maguas.jpg" alt="Livro de Maguas" />
+            <!--2º Loop-->
+            <img src="../Capas/Os Sertões.jpg" alt="Os Sertões" />
+            <img src="../Capas/Mulato.jpg" alt="Mulato" />
+            <img src="../Capas/Dom Quixote Volume II.jpg" alt="Dom Quixote Volume II" />
+            <img src="../Capas/ViaLactea.jpg" alt="Via Lactea" />
+            <img src="../Capas/Macbeth.jpg" alt="Macbeth" />
+            <img src="../Capas/OsEscravos.jpg" alt="Os Escravos" />
+            <img src="../Capas/Dom Casmurro.jpg" alt="Dom Casmurro" />
+            <img src="../Capas/A Divina Comédia.jpg" alt="A Dívina Comédia" />
+            <img src="../Capas/A Dama das Camelias.jpg" alt="A Dama das Camelias" />
+            <img src="../Capas/A Alma do Lazaro.jpg" alt="A Alma do Lazaro" />
+            <img src="../Capas/Helena.jpg" alt="Helena" />
+            <img src="../Capas/A Bela Madame Vargas.jpg" alt="A Bela Madame Vargas" />
+            <img src="../Capas/A Utopia.jpg" alt="A Utopia" />
+            <img src="../Capas/A IgrejaDoDiabo.jpg" alt="A IgrejaDoDiabo" />
+            <img src="../Capas/A Moreninha.jpg" alt="A Moreninha" />
+            <img src="../Capas/AHarpaDoCrente.jpg" alt="A Harpa do Crente" />
+            <img src="../Capas/Cancioneiro.jpg" alt="Cacioneiro" />
+            <img src="../Capas/Este Mundo Da inustiça Globalizada.jpg" alt="Este Mundo Da injustiça Globalizada" />
+            <img src="../Capas/Livro de Maguas.jpg" alt="Livro de Maguas" />
+            <!--3º Loop-->
+            <img src="../Capas/Os Sertões.jpg" alt="Os Sertões" />
+            <img src="../Capas/Mulato.jpg" alt="Mulato" />
+            <img src="../Capas/Dom Quixote Volume II.jpg" alt="Dom Quixote Volume II" />
+            <img src="../Capas/ViaLactea.jpg" alt="Via Lactea" />
+            <img src="../Capas/Macbeth.jpg" alt="Macbeth" />
+            <img src="../Capas/OsEscravos.jpg" alt="Os Escravos" />
+            <img src="../Capas/Dom Casmurro.jpg" alt="Dom Casmurro" />
+            <img src="../Capas/A Divina Comédia.jpg" alt="A Dívina Comédia" />
+            <img src="../Capas/A Dama das Camelias.jpg" alt="A Dama das Camelias" />
+            <img src="../Capas/A Alma do Lazaro.jpg" alt="A Alma do Lazaro" />
+            <img src="../Capas/Helena.jpg" alt="Helena" />
+            <img src="../Capas/A Bela Madame Vargas.jpg" alt="A Bela Madame Vargas" />
+            <img src="../Capas/A Utopia.jpg" alt="A Utopia" />
+            <img src="../Capas/A IgrejaDoDiabo.jpg" alt="A IgrejaDoDiabo" />
+            <img src="../Capas/A Moreninha.jpg" alt="A Moreninha" />
+            <img src="../Capas/AHarpaDoCrente.jpg" alt="A Harpa do Crente" />
+            <img src="../Capas/Cancioneiro.jpg" alt="Cacioneiro" />
+            <img src="../Capas/Este Mundo Da inustiça Globalizada.jpg" alt="Este Mundo Da injustiça Globalizada" />
+            <img src="../Capas/Livro de Maguas.jpg" alt="Livro de Maguas" />
+        </div>
+    </div>
+    <div class="vantagens">
+        <h1>Nossas Vantagens</h1>
+        <img src="../IMAGENS/vantagem-1.png" alt="" class="img-vantagem-1">
+        <img src="../IMAGENS/vantagem-2.png" alt="" class="img-vantagem-2">
+        <img src="../IMAGENS/vantagem-3.png" alt="" class="img-vantagem-3">
+        <img src="../IMAGENS/vantagem-4.png" alt="" class="img-vantagem-4">
+    </div>
+</div>
+<div class="fim">
+    <div class="conteudo-fim">
+        <div class="fim-esquerda">
+            <img class="img-fim" src="../LOGOS/Logo com fundo transparente.png" alt="">
+            <p>Descubra histórias que inspiram, emocionam e transformam. Navegue pela nossa coleção e encontre o próximo
+                livro que vai acompanhar você em cada momento da sua jornada.</p>
+        </div>
+        <div class="meio">
+            <h1>Siga nas redes sociais</h1>
+            <div class="redes-sociais">
+                <a href="https://www.instagram.com/booksphereoficial/">
+                    <img src="../LOGOS/instagram_logo_icon_189247.webp" alt="Instagram">
+                </a>
+                <a href="https://www.youtube.com/@BookSphereOficial">
+                    <img src="../LOGOS/youtube_logo_icon_189266.png" alt="Youtube">
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=61579033757460&locale=pt_BR">
+                    <img src="../LOGOS/facebook_logo_icon_189262.png" alt="FaceBook">
+                </a>
+            </div>
+
+        </div>
+        <div class="fim-direita">
+            <img class="img-fim2" src="../LOGOS/Logo-centro.png" alt="">
+            <a href="../pasta-html/faleconosco.html">Fale conosco</a>
+        </div>
+    </div>
+</div>
+<div class="linha-horizontal">
+    <hr>
+</div>
+<div class="footer-copy">
+    <p>Copyright © BookSphere ™ 2025</p>
+</div>
+<script src="../pasta-js/personalizacao.js"></script>
+<script src="../pasta-js/menuPerfil.js"></script>
+<script src="../pasta-js/usersedit.js"></script>
+</body>
+
+</html>

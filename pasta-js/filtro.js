@@ -38,7 +38,7 @@ const data = [
         id: "alma-do-lazaro",
         titulo: "A Alma do Lázaro",
         autor: "José de Alencar",
-        capa: "../Capas/AAlmadoLazaro.jpg",
+        capa: "../Capas/AAlmaDoLazaro.jpg",
         genero: "Romance"
     },
     {
@@ -52,14 +52,14 @@ const data = [
         id: "brasileira-de-prazins",
         titulo: "A Brasileira de Prazins",
         autor: "Camilo Castelo Branco",
-        capa: "../Capas/ABrasileiradePrazins.jpg",
+        capa: "../Capas/ABrasileiraDePrazins.jpg",
         genero: "Romance"
     },
     {
         id: "dama-das-camelias",
         titulo: "A Dama das Camélias",
         autor: "Alexandre Dumas Filho",
-        capa: "../Capas/ADamadasCamelias.jpg",
+        capa: "../Capas/ADamaDasCamelias.jpg",
         genero: "Romance"
     },
     {
@@ -73,21 +73,21 @@ const data = [
         id: "esfinge-sem-segredo",
         titulo: "A Esfinge sem Segredo",
         autor: "Oscar Wilde",
-        capa: "../Capas/AEsfingesemSegredo.jpg",
+        capa: "../Capas/AEsfingeSemSegredo.jpg",
         genero: "Conto"
     },
     {
         id: "harpa-do-crente",
         titulo: "A Harpa do Crente",
         autor: "Alexandre Herculano",
-        capa: "../Capas/AHarpadoCrente.jpg",
+        capa: "../Capas/AHarpaDoCrente.jpg",
         genero: "Poesia"
     },
     {
         id: "igreja-do-diabo",
         titulo: "A Igreja do Diabo",
         autor: "Machado de Assis",
-        capa: "../Capas/AIgrejadoDiabo.jpg",
+        capa: "../Capas/AIgrejaDoDiabo.jpg",
         genero: "Conto"
     },
     {
@@ -101,7 +101,7 @@ const data = [
         id: "mulher-de-preto",
         titulo: "A Mulher de Preto",
         autor: "Machado de Assis",
-        capa: "../Capas/AMulherdePreto.jpg",
+        capa: "../Capas/AMulherDePreto.jpg",
         genero: "Conto"
     },
     {
@@ -129,14 +129,14 @@ const data = [
         id: "cidade-e-asserras-",
         titulo: "A Cidade e as Serras",
         autor: "Eça de Queirós",
-        capa: "../Capas/ACidadeeasSerras.jpg",
+        capa: "../Capas/ACidadeEasSerras.jpg",
         genero: "Romance"
     },
     {
         id: "adao-e-eva",
         titulo: "Adão e Eva",
         autor: "Machado de Assis",
-        capa: "../Capas/AdaoeEva.jpg",
+        capa: "../Capas/AdaoEEva.jpg",
         genero: "Conto"
     },
     {
@@ -206,14 +206,14 @@ const data = [
         id: "livro-de-máguas",
         titulo: "Livro de Máguas",
         autor: "Florbela Espanca",
-        capa: "../Capas/LivrodeMaguas.jpg",
+        capa: "../Capas/LivroDeMaguas.jpg",
         genero: "Poesia"
     },
     {
         id: "livro-do-desassossego",
         titulo: "Livro do Desassossego",
         autor: "Fernando Pessoa",
-        capa: "../Capas/LivrodoDesassossego.jpg",
+        capa: "../Capas/LivroDoDesassossego.jpg",
         genero: "Filosofia"
     },
     {
@@ -255,7 +255,7 @@ const data = [
         id: "auto-da-barca-do-inferno",
         titulo: "Auto da Barca do Inferno",
         autor: "Gil Vicente",
-        capa: "../Capas/AutodaBarcadoInferno.jpg",
+        capa: "../Capas/AutoDaBarcaDoInferno.jpg",
         genero: "Teatro"
     },
     {
@@ -269,14 +269,14 @@ const data = [
         id: "contos-para-velhos",
         titulo: "Contos para Velhos",
         autor: "Olavo Bilac",
-        capa: "../Capas/ContosparaVelhos.jpg",
+        capa: "../Capas/ContosParaVelhos.jpg",
         genero: "Conto"
     },
     {
         id: "guardador-de-rebanhos",
         titulo: "O Guardador de Rebanhos",
         autor: "Fernando Pessoa (Alberto Caeiro)",
-        capa: "../Capas/OGuardadordeRebanhos.jpg",
+        capa: "../Capas/OGuardadorDeRebanhos.jpg",
         genero: "Poesia"
     },
     {
@@ -304,7 +304,7 @@ const data = [
         id: "a-mensageira-das-violetas",
         titulo: "A Mensageira das Violetas",
         autor: "Florbela Espanca",
-        capa: "../Capas/AMensageiradasVioletas.jpg",
+        capa: "../Capas/AMensageiraDasVioletas.jpg",
         genero: "Poesia"
     },
     {
@@ -318,21 +318,21 @@ const data = [
         id: "o-que-e-o-casamento",
         titulo: "O que é o Casamento?",
         autor: "José de Alencar",
-        capa: "../Capas/OQueeoCasamento.jpg",
+        capa: "../Capas/OQueEOCasamento.jpg",
         genero: "Ensaio"
     },
     {
         id: "farsa-de-ines-pereira",
         titulo: "Farsa de Inês Pereira",
         autor: "Gil Vicente",
-        capa: "../Capas/FarsadeInesPereira.jpg",
+        capa: "../Capas/FarsaDeInesPereira.jpg",
         genero: "Teatro"
     },
     {
         id: "alegria-da-revolucao",
         titulo: "A Alegria da Revolução",
         autor: "Ken Knab",
-        capa: "../Capas/AAlegriadaRevolucao.webp",
+        capa: "../Capas/AAlegriaDaRevolucao.webp",
         genero: "Ensaio"
     },
     {

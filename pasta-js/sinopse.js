@@ -393,9 +393,9 @@ const livros = {
     titulo: "O que é o Casamento?",
     autor: "José de Alencar",
     paginas: "108 Páginas",
-    capa: "../Capas/OQueEOCasamento.jpg",
+    capa: "../Capas/OqueEOCasamento.jpg",
     sinopse: `O Que é o Casamento? de José de Alencar, publicado em 1861, é um romance que explora as nuances e desafios do casamento através de uma narrativa envolvente e crítica. A história centra-se na vida de um casal que, apesar de apaixonado, enfrenta diversas dificuldades e desentendimentos. Alencar, com sua habilidade literária, apresenta uma análise profunda das expectativas sociais e pessoais que cercam o casamento, questionando os valores e normas da sociedade da época. O livro é uma reflexão sobre o amor, a convivência e os sacrifícios necessários para manter um relacionamento. Através de personagens bem desenvolvidos e situações realistas, Alencar oferece ao leitor uma visão perspicaz das complexidades da vida conjugal.`,
-    pdf: "OQueEOCasamento.pdf",
+    pdf: "OqueEOCasamento.pdf",
   },
   "farsa-de-ines-pereira": {
     titulo: "Farsa de Inês Pereira",

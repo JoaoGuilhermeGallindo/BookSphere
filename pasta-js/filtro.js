@@ -262,7 +262,7 @@ const data = [
         id: "eu-profundo",
         titulo: "O Eu Profundo e os Outros Eus",
         autor: "Fernando Pessoa",
-        capa: "../Capas/OEuProfundoeosOutrosEus.jpg",
+        capa: "../Capas/OEuProfundoEOsOutrosEus.jpg",
         genero: "Poesia"
     },
     {
@@ -318,7 +318,7 @@ const data = [
         id: "o-que-e-o-casamento",
         titulo: "O que é o Casamento?",
         autor: "José de Alencar",
-        capa: "../Capas/OQueEOCasamento.jpg",
+        capa: "../Capas/OqueEOCasamento.jpg",
         genero: "Ensaio"
     },
     {

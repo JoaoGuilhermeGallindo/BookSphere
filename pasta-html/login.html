@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../LOGOS/Favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../pasta-css/login.css">
+    <title>Login</title>
+</head>
+
+<body>
+
+    <button id="btn-modo-leitura"></button>
+
+    <div class="main-login">
+
+        <div class="right-login">
+            <form id="formLogin" class="card-login" action="../pasta-php/login.php" method="POST">
+
+
+                <Img src="../LOGOS/Logo-fundo transparente-recortado.png">
+
+                <!--<h1>LOGIN</h1>-->
+
+                <div class="textfield">
+                    <label for="usuario">Usuário</label>
+                    <input type="text" id="usuario" name="usuario" placeholder="Digite o seu usuário" required>
+                </div>
+
+                <div class="textfield">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" name="senha" placeholder="Digite a sua senha" required>
+                </div>
+
+                <button type="submit" class="btn-login">Login</button>
+
+                <div class="signup-text">
+                    Não tem conta? <a href="cadastro.html">Cadastre-se</a>.
+                </div>
+
+                <div class="box-msg">
+                    <p id="mensagem"></p>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <script src="../pasta-js/login.js"></script>
+    <script src="../pasta-js/personalizacao.js"></script>
+</body>
+
+</html>

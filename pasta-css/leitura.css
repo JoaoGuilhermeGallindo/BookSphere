@@ -1,0 +1,484 @@
+/* Reset e Configurações Globais */
+:root {
+    --primary-bg: #eee;
+    --text-color: #000;
+    --menu-bg: #2d72bc;
+    --menu-text: #fff;
+    --page-border: #000;
+    --button-color: #000;
+    --modal-bg: #fff;
+    --modal-text: #000;
+    --modal-textarea-bg: #f3f4f6;
+    --modal-textarea-border: #d1d5db;
+    --quote-bg: #f3f4f6;
+    --quote-border: #9ca3af;
+    --panel-bg: #fff;
+    --panel-border: #e5e7eb;
+    --item-border: #e5e7eb;
+    --item-hover-bg: #f9fafb;
+    --tooltip-bg: #1f2937;
+    --tooltip-text: #fff;
+}
+
+body {
+    background-color: var(--primary-bg);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+    overflow: hidden;
+}
+
+/* Modo Noturno */
+body.modo-noturno {
+    --primary-bg: #121212;
+    --text-color: #e2e8f0;
+    --page-border: #4a4a4a;
+    --button-color: #e2e8f0;
+    --modal-bg: #2a2a2a;
+    --modal-text: #e2e8f0;
+    --modal-textarea-bg: #1e1e1e;
+    --modal-textarea-border: #4a4a4a;
+    --quote-bg: #3a3a3a;
+    --quote-border: #a0aec0;
+    --panel-bg: #1e1e1e;
+    --panel-border: #4a4a4a;
+    --item-border: #4a4a4a;
+    --item-hover-bg: #2a2a2a;
+    --tooltip-bg: #3a3a3a;
+    --tooltip-text: #e2e8f0;
+}
+
+body.modo-noturno .flipbook-container canvas {
+    filter: invert(0.9) hue-rotate(180deg);
+}
+
+/* Modo Sépia */
+body.modo-sepia {
+    --primary-bg: #fbf0d9;
+    --text-color: #5b4636;
+    --page-border: #dcd0b9;
+    --button-color: #5b4636;
+    --modal-bg: #efe2cd;
+    --modal-text: #5b4636;
+    --modal-textarea-bg: #f5eada;
+    --modal-textarea-border: #dcd0b9;
+    --quote-bg: #e6dace;
+    --quote-border: #8c7b6a;
+    --panel-bg: #f5eada;
+    --panel-border: #dcd0b9;
+    --item-border: #dcd0b9;
+    --item-hover-bg: #efe2cd;
+    --tooltip-bg: #5b4636;
+    --tooltip-text: #f5eada;
+}
+
+body.modo-sepia .flipbook-container canvas {
+    filter: sepia(0.9);
+}
+
+/* Menu Lateral */
+nav.menu-lateral {
+    width: 60px;
+    height: 100%;
+    background-color: var(--menu-bg);
+    padding: 5px 0 40px 1%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: width 0.3s ease;
+    z-index: 1000;
+}
+
+nav.menu-lateral.expandir {
+    width: 300px;
+}
+
+.btn-expandir {
+    width: 100%;
+    padding-left: 10px;
+}
+
+.btn-expandir #btn-exp {
+    color: var(--menu-text);
+    font-size: 30px;
+    cursor: pointer;
+}
+
+ul {
+    height: 100%;
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+ul li.item-menu .itens {
+    color: var(--menu-text);
+    text-decoration: none;
+    font-size: 20px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    line-height: 40px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+ul li.item-menu .itens:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+ul li.item-menu .itens .txt-link {
+    margin-left: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: opacity 0.3s, margin-left 0.3s;
+    opacity: 0;
+}
+
+nav.menu-lateral.expandir .itens .txt-link {
+    margin-left: 20px;
+    opacity: 1;
+}
+
+ul li.item-menu .itens .icon>i {
+    font-size: 30px;
+}
+
+/* Flipbook e Navegação */
+.flipbook-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0px;
+    margin-left: 60px;
+    /* Espaço para o menu recolhido */
+    transition: margin-left 0.3s ease;
+}
+
+.flipbook-container.expandir {
+    margin-left: 300px;
+}
+
+.page-container {
+    position: relative;
+}
+
+.page-wrapper {
+    position: relative;
+    display: inline-block;
+    border: 2px solid var(--page-border);
+}
+
+.page-wrapper canvas {
+    display: block;
+}
+
+.page-wrapper>div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.textLayer {
+    opacity: 0;
+    /* Invisível por padrão */
+    line-height: 1.0;
+    color: transparent;
+    user-select: text;
+    pointer-events: auto;
+}
+
+.textLayer>span {
+    position: absolute;
+    white-space: pre;
+    cursor: text;
+    transform-origin: 0% 0%;
+}
+
+.highlight-layer {
+    pointer-events: none;
+}
+
+.highlight-box {
+    position: absolute;
+    background-color: rgba(52, 211, 153, 0.5);
+    /* Verde */
+    z-index: 10;
+}
+
+.annotation-box {
+    background-color: rgba(59, 130, 246, 0.5);
+    /* Azul */
+    cursor: pointer;
+}
+
+.button-left,
+.button-right {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-size: 34px;
+    color: var(--button-color);
+    z-index: 50;
+    align-self: center;
+}
+
+.button-left {
+    margin-right: 12px;
+}
+
+.button-right {
+    margin-left: 12px;
+}
+
+::selection {
+    background: rgba(96, 165, 250, 0.3);
+}
+
+/* Marcador de Página (Bookmark) */
+.bookmark-icon {
+    position: absolute;
+    top: 0;
+    display: none;
+    font-size: 48px;
+    color: #d9534f;
+    z-index: 20;
+    transform-origin: top left;
+}
+
+.bookmark-icon.left {
+    left: 0;
+}
+
+.bookmark-icon.right {
+    right: 0;
+    transform-origin: top right;
+}
+
+/* Modals */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: var(--modal-bg);
+    color: var(--modal-text);
+    padding: 20px;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.modal-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.modal-text {
+    margin-bottom: 1.5rem;
+}
+
+.modal-textarea {
+    width: 100%;
+    height: 100px;
+    border: 1px solid var(--modal-textarea-border);
+    border-radius: 4px;
+    padding: 8px;
+    background-color: var(--modal-textarea-bg);
+    color: var(--modal-text);
+}
+
+.modal-actions {
+    margin-top: 1rem;
+    text-align: right;
+}
+
+.modal-actions.space-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal-btn-primary,
+.modal-btn-secondary,
+.modal-btn-red,
+.modal-btn-yellow {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.modal-btn-primary {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.modal-btn-primary:hover {
+    background-color: #2563eb;
+}
+
+.modal-btn-secondary {
+    background-color: #d1d5db;
+    color: #1f2937;
+}
+
+.modal-btn-secondary:hover {
+    background-color: #9ca3af;
+}
+
+.modal-btn-red {
+    background-color: #ef4444;
+    color: white;
+}
+
+.modal-btn-red:hover {
+    background-color: #dc2626;
+}
+
+.modal-btn-yellow {
+    background-color: #f59e0b;
+    color: white;
+}
+
+.modal-btn-yellow:hover {
+    background-color: #d97706;
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+.modal-quote {
+    border-left: 4px solid var(--quote-border);
+    padding-left: 8px;
+    font-style: italic;
+    margin: 8px 0;
+    background-color: var(--quote-bg);
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.modal-note-text {
+    margin: 8px 0;
+    padding: 8px;
+}
+
+/* Painel de Anotações */
+.annotations-panel-class {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 384px;
+    max-width: 90%;
+    background-color: var(--panel-bg);
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+    border-left: 1px solid var(--panel-border);
+    z-index: 900;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.annotations-panel-class.open {
+    transform: translateX(0);
+}
+
+.annotations-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid var(--panel-border);
+}
+
+.annotations-panel-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.close-annotations-btn-class {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.close-annotations-btn-class:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.annotations-list-class {
+    overflow-y: auto;
+    height: calc(100% - 65px);
+}
+
+.annotation-item {
+    padding: 12px;
+    border-bottom: 1px solid var(--item-border);
+    cursor: pointer;
+}
+
+.annotation-item:hover {
+    background-color: var(--item-hover-bg);
+}
+
+.annotation-item .text-xs {
+    font-size: 0.75rem;
+    color: #6b7280;
+}
+
+body.modo-noturno .annotation-item .text-xs {
+    color: #a0aec0;
+}
+
+body.modo-sepia .annotation-item .text-xs {
+    color: #8c7b6a;
+}
+
+.annotation-item p {
+    font-size: 0.875rem;
+}
+
+/* Tooltip */
+.note-tooltip-class {
+    position: absolute;
+    display: none;
+    background-color: var(--tooltip-bg);
+    color: var(--tooltip-text);
+    font-size: 0.875rem;
+    border-radius: 4px;
+    padding: 4px 8px;
+    z-index: 1001;
+    pointer-events: none;
+    max-width: 300px;
+}

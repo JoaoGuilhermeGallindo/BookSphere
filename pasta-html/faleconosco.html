@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulário de Contato</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../pasta-css/faleconosco.css" />
+  <link rel="shortcut icon" href="../LOGOS/Favicon.png" type="image/x-icon">
+</head>
+
+<body>
+
+  <button id="btn-modo-leitura"></button>
+
+  <h1>Formulário de Contato</h1>
+  <form action="https://formsubmit.co/joao.g.oliveira6@gmail.com" method="POST" class="form">
+    <label for="name">Nome</label>
+    <input type="text" name="name" id="name" required />
+    <label for="email">E-mail</label>
+    <input type="email" name="email" id="email" required />
+    <label for="message">Mensagem</label>
+    <textarea name="message" id="message" required></textarea>
+    <input type="hidden" name="_captcha" value="false" />
+    <input type="hidden" name="_next" value="https://booksphere.sbs/pasta-html/obrigado.html" />
+
+    <div class="form-actions">
+      <button id="btn-send" type="submit">
+        <span class="btn-text">Enviar</span>
+        <svg class="plane-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M2 21l21-9L2 3v7l15 2-15 2v7z" fill="currentColor" />
+        </svg>
+      </button>
+
+      <button id="btn-back" type="button" onclick="window.location.href='../pasta-html/index.html'">
+        <span class="back-text">Voltar</span>
+      </button>
+    </div>
+  </form>
+
+  <script src="../pasta-js/faleconosco.js"></script>
+  <script src="../pasta-js/personalizacao.js"></script>
+</body>
+
+</html>

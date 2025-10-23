@@ -1,431 +1,393 @@
+// Setup de elementos
 const params = new URLSearchParams(window.location.search);
 const pdfFile = params.get("pdf");
-
 if (!pdfFile) {
     document.body.innerHTML = "<p>Arquivo PDF não especificado.</p>";
-    throw new Error("Nenhum PDF foi passado na URL");
+    throw new Error("PDF não especificado");
 }
-
 const pdfPath = `../livro/livros-pdf/${decodeURIComponent(pdfFile)}`;
+const storageKey = `pdfReader-${pdfFile}`;
 
+// Seleciona todos os elementos, incluindo os novos de mobile
 const elements = {
+    mainContent: document.getElementById('main-content'),
     leftCanvas: document.getElementById('leftPageCanvas'),
     rightCanvas: document.getElementById('rightPageCanvas'),
-    leftPageWrapper: document.getElementById('left-page-wrapper'),
     rightPageWrapper: document.getElementById('right-page-wrapper'),
     btnExp: document.querySelector('#btn-exp'),
     menuLateral: document.querySelector('.menu-lateral'),
-    flipbookContainer: document.querySelector('.flipbook-container'),
-    buttonLeft: document.querySelector('.button-left'),
-    buttonRight: document.querySelector('.button-right'),
     zoomInBtn: document.getElementById('zoom-in'),
     zoomOutBtn: document.getElementById('zoom-out'),
     themeBtn: document.getElementById('theme-btn'),
     themeIconContainer: document.getElementById('theme-icon-container'),
-    highlightBtn: document.getElementById('highlight-btn'),
     annotateBtn: document.getElementById('annotate-btn'),
-    bookmarkBtn: document.getElementById('bookmark-btn'),
     viewAnnotationsBtn: document.getElementById('view-annotations-btn'),
     bookmarkIconLeft: document.getElementById('bookmark-icon-left'),
     bookmarkIconRight: document.getElementById('bookmark-icon-right'),
     noteModal: document.getElementById('note-modal'),
+    noteModalTitle: document.getElementById('note-modal-title'),
     noteInput: document.getElementById('note-input'),
     noteSaveBtn: document.getElementById('note-save'),
     noteCancelBtn: document.getElementById('note-cancel'),
-    noteTooltip: document.getElementById('note-tooltip'),
     annotationsPanel: document.getElementById('annotations-panel'),
     closeAnnotationsBtn: document.getElementById('close-annotations-btn'),
     annotationsList: document.getElementById('annotations-list'),
+    annotationSearchInput: document.getElementById('annotation-search-input'),
     annotationActionModal: document.getElementById('annotation-action-modal'),
     annotationCloseBtn: document.getElementById('annotation-close'),
-    annotationGotoBtn: document.getElementById('annotation-goto'),
     annotationEditBtn: document.getElementById('annotation-edit'),
     annotationDeleteBtn: document.getElementById('annotation-delete'),
     alertModal: document.getElementById('alert-modal'),
     alertMessage: document.getElementById('alert-message'),
     alertOkBtn: document.getElementById('alert-ok'),
+    pageIndicator: document.getElementById('page-indicator'),
+
+    // Novos elementos para mobile
+    mobileZoomInBtn: document.getElementById('mobile-zoom-in'),
+    mobileZoomOutBtn: document.getElementById('mobile-zoom-out'),
+    mobileThemeBtn: document.getElementById('mobile-theme-btn'),
+    mobileAnnotateBtn: document.getElementById('mobile-annotate-btn'),
+    mobileViewAnnotationsBtn: document.getElementById('mobile-view-annotations-btn')
 };
 
 const leftCtx = elements.leftCanvas.getContext('2d');
 const rightCtx = elements.rightCanvas.getContext('2d');
-
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.worker.min.js';
 
-let state = {
+const state = {
     pdfDoc: null,
     currentPage: 1,
     scale: 0.8,
-    highlightsByPage: {},
+    MIN_SCALE: 0.5,
+    annotations: [],
     bookmarkedPages: new Set(),
-    tempSelection: null,
     editingAnnotation: null,
+    activeAnnotationId: null
 };
 
-function renderPage(num, canvas, ctx, wrapper) {
+// Função que lê o CSS para saber o estado atual do layout
+function isSinglePageView() {
+    return window.getComputedStyle(elements.rightPageWrapper).display === 'none';
+}
+
+async function renderPage(num, canvas, ctx, customScale) {
     if (!state.pdfDoc || num < 1 || num > state.pdfDoc.numPages) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        const oldTextLayer = wrapper.querySelector(".textLayer");
-        if (oldTextLayer) oldTextLayer.remove();
+        canvas.style.width = '0px';
+        canvas.style.height = '0px';
         return;
     }
-
-    state.pdfDoc.getPage(num).then(async (page) => {
-        const viewport = page.getViewport({ scale: state.scale });
-        const outputScale = window.devicePixelRatio || 1;
-
-        canvas.width = Math.floor(viewport.width * outputScale);
-        canvas.height = Math.floor(viewport.height * outputScale);
-        canvas.style.width = `${viewport.width}px`;
-        canvas.style.height = `${viewport.height}px`;
-
-        const transform = [outputScale, 0, 0, outputScale, 0, 0];
-        const renderContext = { canvasContext: ctx, viewport, transform };
-        
-        await page.render(renderContext).promise;
-        
-        const oldTextLayer = wrapper.querySelector(".textLayer");
-        if (oldTextLayer) oldTextLayer.remove();
-
-        const textLayerDiv = document.createElement("div");
-        textLayerDiv.className = "textLayer";
-        wrapper.appendChild(textLayerDiv);
-
-        const textContent = await page.getTextContent();
-        pdfjsLib.renderTextLayer({
-            textContent,
-            container: textLayerDiv,
-            viewport,
-            textDivs: [],
-            enhanceTextSelection: true,
-        });
-        
-        const oldHighlightLayer = wrapper.querySelector(".highlight-layer");
-        if (oldHighlightLayer) oldHighlightLayer.remove();
-        
-        const highlightLayerDiv = document.createElement("div");
-        highlightLayerDiv.className = "highlight-layer";
-        wrapper.appendChild(highlightLayerDiv);
-
-        drawHighlights(num, highlightLayerDiv);
-        updateBookmarkUI(num, (num % 2 !== 0) ? elements.bookmarkIconLeft : elements.bookmarkIconRight);
-    });
+    const page = await state.pdfDoc.getPage(num);
+    const scaleToUse = customScale || state.scale;
+    const viewport = page.getViewport({ scale: scaleToUse });
+    const outputScale = window.devicePixelRatio || 1;
+    canvas.width = Math.floor(viewport.width * outputScale);
+    canvas.height = Math.floor(viewport.height * outputScale);
+    canvas.style.width = `${viewport.width}px`;
+    canvas.style.height = `${viewport.height}px`;
+    const transform = outputScale !== 1 ? [outputScale, 0, 0, outputScale, 0, 0] : null;
+    await page.render({ canvasContext: ctx, viewport, transform }).promise;
 }
 
-function renderDoublePages() {
-    const leftPageNum = state.currentPage;
-    const rightPageNum = state.currentPage + 1;
-
-    renderPage(leftPageNum, elements.leftCanvas, leftCtx, elements.leftPageWrapper);
-    renderPage(rightPageNum, elements.rightCanvas, rightCtx, elements.rightPageWrapper);
-}
-
-function drawHighlights(pageNum, highlightLayer) {
-    const highlights = state.highlightsByPage[pageNum] || [];
-    highlights.forEach(h => {
-        h.rects.forEach(rect => {
-            const div = document.createElement('div');
-            div.className = h.note ? 'highlight-box annotation-box' : 'highlight-box';
-            div.style.left = `${rect.x * state.scale}px`;
-            div.style.top = `${rect.y * state.scale}px`;
-            div.style.width = `${rect.width * state.scale}px`;
-            div.style.height = `${rect.height * state.scale}px`;
-            highlightLayer.appendChild(div);
-        });
-    });
-}
-
-function updateBookmarkUI(pageNum, iconElement) {
-    if (state.bookmarkedPages.has(pageNum)) {
-        iconElement.style.display = 'block';
+async function renderBook() {
+    if (!state.pdfDoc) return;
+    if (isSinglePageView()) {
+        await renderPage(state.currentPage, elements.leftCanvas, leftCtx, state.scale);
     } else {
-        iconElement.style.display = 'none';
+        const pageNumL = state.currentPage;
+        const pageNumR = state.currentPage + 1;
+        if (pageNumR > state.pdfDoc.numPages) {
+            await renderPage(pageNumL, elements.leftCanvas, leftCtx, state.scale);
+            await renderPage(0, elements.rightCanvas, rightCtx);
+        } else {
+            const pageL = await state.pdfDoc.getPage(pageNumL);
+            const pageR = await state.pdfDoc.getPage(pageNumR);
+            const vpL = pageL.getViewport({ scale: 1 });
+            const vpR = pageR.getViewport({ scale: 1 });
+            const maxH = Math.max(vpL.height, vpR.height);
+            await renderPage(pageNumL, elements.leftCanvas, leftCtx, state.scale * (maxH / vpL.height));
+            await renderPage(pageNumR, elements.rightCanvas, rightCtx, state.scale * (maxH / vpR.height));
+        }
+    }
+    updateUI();
+}
+
+function updateUI() {
+    const singlePage = isSinglePageView();
+    const totalPages = state.pdfDoc.numPages;
+    // Indicador de Página
+    if (singlePage) {
+        elements.pageIndicator.textContent = `Página ${state.currentPage} de ${totalPages}`;
+    } else {
+        const endPage = Math.min(state.currentPage + 1, totalPages);
+        elements.pageIndicator.textContent = (state.currentPage === endPage)
+            ? `Página ${state.currentPage} de ${totalPages}`
+            : `Páginas ${state.currentPage}-${endPage} de ${totalPages}`;
+    }
+    // Botões de Navegação
+    document.querySelector('.button-left').style.visibility = (state.currentPage > 1) ? 'visible' : 'hidden';
+    const isLastPage = singlePage ? (state.currentPage >= totalPages) : (state.currentPage + 1 >= totalPages);
+    document.querySelector('.button-right').style.visibility = isLastPage ? 'hidden' : 'visible';
+    // Marcadores
+    elements.bookmarkIconLeft.classList.toggle('bookmarked', state.bookmarkedPages.has(state.currentPage));
+    if (!singlePage) {
+        elements.bookmarkIconRight.classList.toggle('bookmarked', state.bookmarkedPages.has(state.currentPage + 1));
     }
 }
 
-function nextPages() {
-    if (state.currentPage + 2 <= state.pdfDoc.numPages) {
-        state.currentPage += 2;
-        renderDoublePages();
+function navigate(direction) {
+    const step = isSinglePageView() ? 1 : 2;
+    const newPage = state.currentPage + (direction * step);
+    if (newPage >= 1 && newPage <= state.pdfDoc.numPages) {
+        state.currentPage = newPage;
+        renderBook();
     }
 }
 
-function prevPages() {
-    if (state.currentPage - 2 >= 1) {
-        state.currentPage -= 2;
-        renderDoublePages();
+function changeZoom(delta) {
+    let newScale = state.scale + delta;
+    if (delta > 0 && elements.leftCanvas.style.height && parseFloat(elements.leftCanvas.style.height) > 0) {
+        const canvasHeight = parseFloat(elements.leftCanvas.style.height);
+        const pageHeight = canvasHeight / state.scale;
+        const availableHeight = elements.mainContent.clientHeight - 60;
+        if (pageHeight > 0) newScale = Math.min(newScale, availableHeight / pageHeight);
     }
+    state.scale = Math.max(state.MIN_SCALE, newScale);
+    renderBook();
 }
 
-pdfjsLib.getDocument(pdfPath).promise.then(function (pdfDoc_) {
+// Carrega o PDF
+pdfjsLib.getDocument(pdfPath).promise.then(pdfDoc_ => {
     state.pdfDoc = pdfDoc_;
-    renderDoublePages();
+    loadData();
+    renderBook();
+}).catch(err => {
+    console.error("Erro ao carregar PDF:", err);
+    document.getElementById('main-content').innerHTML = "<p style='color:red; text-align:center;'>Erro ao carregar o PDF.</p>";
 });
 
-// --- Lógica da Interface ---
-
-// Menu Lateral
-elements.btnExp.addEventListener('click', function(){
-    elements.menuLateral.classList.toggle('expandir');
-    elements.flipbookContainer.classList.toggle('expandir');
-});
+// === Event Listeners ===
 
 // Navegação
-elements.buttonLeft.addEventListener('click', prevPages);
-elements.buttonRight.addEventListener('click', nextPages);
+document.querySelector('.button-left').addEventListener('click', () => navigate(-1));
+document.querySelector('.button-right').addEventListener('click', () => navigate(1));
 
-// Zoom
-elements.zoomInBtn.addEventListener('click', () => { state.scale += 0.1; renderDoublePages(); });
-elements.zoomOutBtn.addEventListener('click', () => { if(state.scale > 0.3) { state.scale -= 0.1; renderDoublePages(); } });
+// Zoom (desktop)
+elements.zoomInBtn?.addEventListener('click', () => changeZoom(0.1));
+elements.zoomOutBtn?.addEventListener('click', () => changeZoom(-0.1));
 
-// Temas
-const modos = ["modo-claro", "modo-noturno", "modo-sepia"];
-let indiceModo = 0;
-function aplicarModo(modo) {
-    document.body.classList.remove(...modos);
-    document.body.classList.add(modo);
-    const icon = elements.themeIconContainer.querySelector('i');
-    if (modo === "modo-claro") icon.className = "bi bi-brightness-high-fill";
-    else if (modo === "modo-noturno") icon.className = "bi bi-moon-fill";
-    else icon.className = "bi bi-circle-square";
-    localStorage.setItem("modoAtual", modo);
-}
-elements.themeBtn.addEventListener("click", () => {
+// Zoom (mobile)
+elements.mobileZoomInBtn?.addEventListener('click', () => changeZoom(0.1));
+elements.mobileZoomOutBtn?.addEventListener('click', () => changeZoom(-0.1));
+
+// Tema (desktop)
+elements.themeBtn?.addEventListener("click", () => {
     indiceModo = (indiceModo + 1) % modos.length;
     aplicarModo(modos[indiceModo]);
 });
-window.addEventListener("DOMContentLoaded", () => {
-    const modoSalvo = localStorage.getItem("modoAtual");
-    if (modoSalvo && modos.includes(modoSalvo)) {
-        indiceModo = modos.indexOf(modoSalvo);
-        aplicarModo(modoSalvo);
-    } else {
-        aplicarModo(modos[0]);
-    }
+
+// Tema (mobile)
+elements.mobileThemeBtn?.addEventListener("click", () => {
+    indiceModo = (indiceModo + 1) % modos.length;
+    aplicarModo(modos[indiceModo]);
 });
 
-// Alerta
-function showAlert(message) {
-    elements.alertMessage.textContent = message;
-    elements.alertModal.style.display = 'flex';
-}
-elements.alertOkBtn.addEventListener('click', () => elements.alertModal.style.display = 'none');
-
-// Lógica de Marcação/Anotação
-function getSelectionDetails(pageWrapper, pageNum) {
-    const selection = window.getSelection();
-    if (selection.isCollapsed) return null;
-
-    const wrapperRect = pageWrapper.getBoundingClientRect();
-    let isSelectionOnPage = false;
-    
-    const selectionRects = Array.from(selection.getRangeAt(0).getClientRects()).map(r => {
-        if (r.top >= wrapperRect.top && r.bottom <= wrapperRect.bottom) {
-            isSelectionOnPage = true;
-        }
-        return {
-            x: (r.left - wrapperRect.left) / state.scale,
-            y: (r.top - wrapperRect.top) / state.scale,
-            width: r.width / state.scale,
-            height: r.height / state.scale,
-        };
-    });
-
-    if (!isSelectionOnPage) return null;
-
-    return { pageNum, rects: selectionRects, text: selection.toString() };
-}
-
-function applyAction(type) {
-    const leftSelection = getSelectionDetails(elements.leftPageWrapper, state.currentPage);
-    const rightSelection = getSelectionDetails(elements.rightPageWrapper, state.currentPage + 1);
-    const selection = leftSelection || rightSelection;
-
-    if (!selection) return;
-
-    state.tempSelection = selection;
-
-    if (type === 'highlight') saveHighlights();
-    else if (type === 'annotate') {
-        state.editingAnnotation = null;
-        elements.noteInput.value = '';
-        elements.noteModal.style.display = 'flex';
-        elements.noteInput.focus();
-    }
-}
-
-function saveHighlights() {
-    const pageNum = state.editingAnnotation ? state.editingAnnotation.pageNum : state.tempSelection.pageNum;
-    if (!state.highlightsByPage[pageNum]) state.highlightsByPage[pageNum] = [];
-    const pageHighlights = state.highlightsByPage[pageNum];
-
-    if (state.editingAnnotation) {
-        state.editingAnnotation.note = elements.noteInput.value.trim();
-    } else {
-        pageHighlights.push({
-            id: Date.now(),
-            rects: state.tempSelection.rects,
-            note: state.tempSelection.note || null,
-            snippet: state.tempSelection.text,
-            timestamp: state.tempSelection.note ? new Date().toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' }) : null,
-        });
-    }
-
-    renderDoublePages();
-    if (state.editingAnnotation) renderAnnotationsList();
-    state.tempSelection = null;
+// Anotações (desktop)
+elements.annotateBtn?.addEventListener('click', () => {
     state.editingAnnotation = null;
-    window.getSelection().removeAllRanges();
-}
-
-elements.highlightBtn.addEventListener('click', () => applyAction('highlight'));
-elements.annotateBtn.addEventListener('click', () => applyAction('annotate'));
-elements.noteSaveBtn.addEventListener('click', () => {
-    const noteText = elements.noteInput.value.trim();
-    if (!noteText) return;
-    if (!state.editingAnnotation) state.tempSelection.note = noteText;
-    saveHighlights();
-    elements.noteModal.style.display = 'none';
+    elements.noteInput.value = '';
+    elements.noteModalTitle.textContent = "Adicionar Anotação Pessoal";
+    openModal(elements.noteModal);
 });
-elements.noteCancelBtn.addEventListener('click', () => {
-    elements.noteModal.style.display = 'none';
-    state.tempSelection = null;
-    state.editingAnnotation = null;
-    window.getSelection().removeAllRanges();
-});
-
-// Lógica para Remover Marcações
-function handlePageClick(e, pageWrapper, pageNum) {
-    if (window.getSelection().toString()) return;
-
-    const wrapperRect = pageWrapper.getBoundingClientRect();
-    const clickX = (e.clientX - wrapperRect.left) / state.scale;
-    const clickY = (e.clientY - wrapperRect.top) / state.scale;
-    
-    const highlights = state.highlightsByPage[pageNum] || [];
-    let highlightToDelete = null;
-
-    for (const h of highlights) {
-        for (const rect of h.rects) {
-            if (clickX >= rect.x && clickX <= rect.x + rect.width && clickY >= rect.y && clickY <= rect.y + rect.height) {
-                highlightToDelete = h;
-                break;
-            }
-        }
-        if (highlightToDelete) break;
-    }
-    
-    if (highlightToDelete) {
-        const index = highlights.indexOf(highlightToDelete);
-        highlights.splice(index, 1);
-        renderDoublePages();
-        renderAnnotationsList();
-    }
-}
-elements.leftPageWrapper.addEventListener('click', (e) => handlePageClick(e, elements.leftPageWrapper, state.currentPage));
-elements.rightPageWrapper.addEventListener('click', (e) => handlePageClick(e, elements.rightPageWrapper, state.currentPage + 1));
-
-// Painel de Anotações
-elements.viewAnnotationsBtn.addEventListener('click', () => {
-    renderAnnotationsList();
+elements.viewAnnotationsBtn?.addEventListener('click', () => {
+    renderAnnotationsPanel();
     elements.annotationsPanel.classList.add('open');
 });
-elements.closeAnnotationsBtn.addEventListener('click', () => {
-    elements.annotationsPanel.classList.remove('open');
+
+// Anotações (mobile)
+elements.mobileAnnotateBtn?.addEventListener('click', () => {
+    state.editingAnnotation = null;
+    elements.noteInput.value = '';
+    elements.noteModalTitle.textContent = "Adicionar Anotação Pessoal";
+    openModal(elements.noteModal);
+});
+elements.mobileViewAnnotationsBtn?.addEventListener('click', () => {
+    renderAnnotationsPanel();
+    elements.annotationsPanel.classList.add('open');
 });
 
-function showAnnotationActions(anno, pageNum) {
-    state.editingAnnotation = anno;
-    state.editingAnnotation.pageNum = pageNum;
-    const modal = elements.annotationActionModal;
-    modal.querySelector('blockquote').textContent = anno.snippet;
-    modal.querySelector('p').textContent = anno.note;
-    modal.style.display = 'flex';
+// Menu lateral (só em desktop)
+if (window.innerWidth > 991) {
+    elements.btnExp?.addEventListener('click', () => {
+        elements.menuLateral.classList.toggle('expandir');
+    });
 }
 
-elements.annotationGotoBtn.onclick = () => {
-    const page = state.editingAnnotation.pageNum;
-    state.currentPage = (page % 2 === 0) ? page - 1 : page;
-    renderDoublePages();
-    elements.annotationActionModal.style.display = 'none';
-    elements.annotationsPanel.classList.remove('open');
-};
-elements.annotationEditBtn.onclick = () => {
-    elements.annotationActionModal.style.display = 'none';
-    elements.noteInput.value = state.editingAnnotation.note;
-    elements.noteModal.style.display = 'flex';
-    elements.noteInput.focus();
-};
-elements.annotationDeleteBtn.onclick = () => {
-    const pageNum = state.editingAnnotation.pageNum;
-    const highlights = state.highlightsByPage[pageNum];
-    const index = highlights.findIndex(h => h.id === state.editingAnnotation.id);
-    if (index > -1) {
-        highlights.splice(index, 1);
-        renderDoublePages();
-        renderAnnotationsList();
-    }
-    elements.annotationActionModal.style.display = 'none';
-};
-elements.annotationCloseBtn.onclick = () => elements.annotationActionModal.style.display = 'none';
-
-// Bookmark
-elements.bookmarkBtn.addEventListener('click', () => {
-    const pageToBookmark = state.currentPage; // Marca a página da esquerda
-    if (state.bookmarkedPages.has(pageToBookmark)) {
-        state.bookmarkedPages.delete(pageToBookmark);
-    } else {
-        state.bookmarkedPages.add(pageToBookmark);
-    }
-    updateBookmarkUI(pageToBookmark, elements.bookmarkIconLeft);
-
-    const otherPage = state.currentPage + 1; // Marca a página da direita
-    if(otherPage <= state.pdfDoc.numPages) {
-         if (state.bookmarkedPages.has(otherPage)) {
-            state.bookmarkedPages.delete(otherPage);
-        } else {
-            state.bookmarkedPages.add(otherPage);
-        }
-        updateBookmarkUI(otherPage, elements.bookmarkIconRight);
-    }
+// Teclado
+document.addEventListener('keydown', e => {
+    if (document.querySelector('.modal[style*="display: flex"]')) return;
+    if (e.key === 'ArrowLeft') navigate(-1);
+    else if (e.key === 'ArrowRight') navigate(1);
+    else if (e.key === '+' || e.key === '=') { e.preventDefault(); changeZoom(0.1); }
+    else if (e.key === '-' || e.key === '_') { e.preventDefault(); changeZoom(-0.1); }
 });
 
+// Redimensionar
+window.addEventListener('resize', renderBook);
 
-// Tooltip
-function handleTooltip(e, pageWrapper, pageNum) {
-     if (elements.noteModal.style.display === 'flex' || elements.annotationActionModal.style.display === 'flex') {
-        elements.noteTooltip.style.display = 'none';
+// === Funções Auxiliares ===
+
+function openModal(modal) { modal.style.display = 'flex'; }
+function closeModal(modal) { modal.style.display = 'none'; }
+
+function showAlert(message) {
+    elements.alertMessage.textContent = message;
+    openModal(elements.alertModal);
+}
+
+elements.alertOkBtn?.addEventListener('click', () => closeModal(elements.alertModal));
+
+// Salvar anotação
+elements.noteSaveBtn?.addEventListener('click', () => {
+    const noteText = elements.noteInput.value.trim();
+    if (!noteText) {
+        showAlert("A anotação não pode estar vazia.");
         return;
     }
-    const wrapperRect = pageWrapper.getBoundingClientRect();
-    const mouseX = e.clientX - wrapperRect.left;
-    const mouseY = e.clientY - wrapperRect.top;
-    
-    const highlights = state.highlightsByPage[pageNum] || [];
-    let foundHighlight = null;
-
-    for (const h of highlights) {
-        if (!h.note) continue;
-        for (const rect of h.rects) {
-            const scaledRect = { x: rect.x * state.scale, y: rect.y * state.scale, width: rect.width * state.scale, height: rect.height * state.scale };
-            if (mouseX >= scaledRect.x && mouseX <= scaledRect.x + scaledRect.width && mouseY >= scaledRect.y && mouseY <= scaledRect.y + scaledRect.height) {
-                foundHighlight = h;
-                break;
-            }
-        }
-        if (foundHighlight) break;
-    }
-    
-    if (foundHighlight) {
-        elements.noteTooltip.textContent = foundHighlight.note;
-        elements.noteTooltip.style.display = 'block';
-        elements.noteTooltip.style.left = `${e.pageX + 10}px`;
-        elements.noteTooltip.style.top = `${e.pageY + 10}px`;
+    if (state.editingAnnotation) {
+        state.editingAnnotation.note = noteText;
     } else {
-        elements.noteTooltip.style.display = 'none';
+        state.annotations.push({ id: Date.now(), note: noteText, date: new Date() });
     }
+    saveData();
+    renderAnnotationsPanel();
+    closeModal(elements.noteModal);
+    state.editingAnnotation = null;
+});
+
+elements.noteCancelBtn?.addEventListener('click', () => {
+    closeModal(elements.noteModal);
+    state.editingAnnotation = null;
+});
+
+// Painel de anotações
+elements.closeAnnotationsBtn?.addEventListener('click', () => {
+    elements.annotationsPanel.classList.remove('open');
+});
+
+elements.annotationSearchInput?.addEventListener('input', e => {
+    renderAnnotationsPanel(e.target.value);
+});
+
+function renderAnnotationsPanel(searchTerm = '') {
+    elements.annotationsList.innerHTML = '';
+    const searchLower = searchTerm.toLowerCase();
+    const filteredAnnotations = state.annotations.filter(annotation =>
+        annotation.note.toLowerCase().includes(searchLower)
+    );
+    filteredAnnotations.slice().reverse().forEach(annotation => {
+        const item = document.createElement('div');
+        item.className = 'annotation-item';
+        item.dataset.annotationId = annotation.id;
+        const formattedDate = new Date(annotation.date).toLocaleString('pt-BR');
+        item.innerHTML = `<div class="text-xs"><span>${formattedDate}</span></div><p>${annotation.note}</p>`;
+        item.addEventListener('click', () => {
+            state.activeAnnotationId = annotation.id;
+            elements.annotationActionModal.querySelector('.modal-note-text').textContent = annotation.note;
+            openModal(elements.annotationActionModal);
+        });
+        elements.annotationsList.appendChild(item);
+    });
 }
 
-elements.leftPageWrapper.addEventListener('mousemove', (e) => handleTooltip(e, elements.leftPageWrapper, state.currentPage));
-elements.rightPageWrapper.addEventListener('mousemove', (e) => handleTooltip(e, elements.rightPageWrapper, state.currentPage + 1));
-elements.leftPageWrapper.addEventListener('mouseleave', () => elements.noteTooltip.style.display = 'none');
-elements.rightPageWrapper.addEventListener('mouseleave', () => elements.noteTooltip.style.display = 'none');
+elements.annotationCloseBtn?.addEventListener('click', () => closeModal(elements.annotationActionModal));
+elements.annotationEditBtn?.addEventListener('click', () => {
+    const annotation = findAnnotationById(state.activeAnnotationId);
+    if (!annotation) return;
+    state.editingAnnotation = annotation;
+    elements.noteModalTitle.textContent = "Editar Anotação";
+    elements.noteInput.value = annotation.note;
+    closeModal(elements.annotationActionModal);
+    openModal(elements.noteModal);
+});
+elements.annotationDeleteBtn?.addEventListener('click', () => {
+    if (confirm("Tem certeza que deseja excluir esta anotação?")) {
+        state.annotations = state.annotations.filter(ann => ann.id !== state.activeAnnotationId);
+        saveData();
+        renderAnnotationsPanel();
+        closeModal(elements.annotationActionModal);
+    }
+});
+
+function findAnnotationById(id) {
+    return state.annotations.find(ann => ann.id === id);
+}
+
+// Bookmarks
+function toggleBookmark(pageNum, iconElement) {
+    if (state.bookmarkedPages.has(pageNum)) {
+        state.bookmarkedPages.delete(pageNum);
+    } else {
+        state.bookmarkedPages.add(pageNum);
+    }
+    iconElement.classList.add('animate-pop');
+    setTimeout(() => iconElement.classList.remove('animate-pop'), 300);
+    updateUI();
+    saveData();
+}
+
+elements.bookmarkIconLeft?.addEventListener('click', () => toggleBookmark(state.currentPage, elements.bookmarkIconLeft));
+elements.bookmarkIconRight?.addEventListener('click', () => {
+    if (state.currentPage + 1 <= state.pdfDoc.numPages) {
+        toggleBookmark(state.currentPage + 1, elements.bookmarkIconRight);
+    }
+});
+// Temas - apenas uma lista e um índice
+const modos = ["modo-claro", "modo-noturno", "modo-sepia"];
+let indiceModo = 0;
+
+// Função única que aplica o modo e atualiza TODOS os ícones
+function aplicarModo(modo) {
+    // Aplica a classe no body
+    document.body.className = '';
+    document.body.classList.add(modo);
+
+    // Atualiza o ícone do menu lateral (desktop)
+    const iconDesktop = elements.themeIconContainer?.querySelector('i');
+    if (iconDesktop) {
+        if (modo === "modo-claro") iconDesktop.className = "bi bi-brightness-high-fill";
+        else if (modo === "modo-noturno") iconDesktop.className = "bi bi-moon-fill";
+        else iconDesktop.className = "bi bi-circle-square";
+    }
+
+    // Atualiza o ícone da barra mobile (se existir)
+    const iconMobile = elements.mobileThemeBtn?.querySelector('i');
+    if (iconMobile) {
+        if (modo === "modo-claro") iconMobile.className = "bi bi-brightness-high-fill";
+        else if (modo === "modo-noturno") iconMobile.className = "bi bi-moon-fill";
+        else iconMobile.className = "bi bi-circle-square";
+    }
+
+    // Salva no localStorage
+    localStorage.setItem("themeMode", modo);
+}
+// Carregar dados
+function saveData() {
+    const data = {
+        annotations: state.annotations,
+        bookmarkedPages: Array.from(state.bookmarkedPages)
+    };
+    localStorage.setItem(storageKey, JSON.stringify(data));
+}
+
+function loadData() {
+    const savedData = localStorage.getItem(storageKey);
+    if (savedData) {
+        const data = JSON.parse(savedData);
+        state.annotations = data.annotations || [];
+        state.bookmarkedPages = new Set(data.bookmarkedPages || []);
+    }
+    const modoSalvo = localStorage.getItem("themeMode") || "modo-claro";
+    indiceModo = modos.indexOf(modoSalvo);
+    aplicarModo(modoSalvo);
+}

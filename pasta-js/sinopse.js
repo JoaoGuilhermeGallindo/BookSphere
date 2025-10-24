@@ -51,7 +51,7 @@ const livros = {
     autor: "José de Alencar",
     paginas: "44 Páginas - PDF",
     paginas2: "86 Páginas - ONLINE",
-    capa: "../Capas/AAlmaDoLazaro.jpg",
+    capa: "../Capas/ACarne.jpg",
     sinopse: `A Alma do Lázaro aborda temas de espiritualidade, redenção e reflexão sobre a vida e a morte, acompanhando a jornada de Lázaro em busca de compreensão. A narrativa mescla elementos místicos e filosóficos, explorando dilemas internos, virtudes humanas e o poder da fé e da esperança. Apesar do autor ser desconhecido, a obra oferece uma experiência introspectiva e transformadora, convidando o leitor a refletir sobre moralidade, propósito e transcendência.`,
     pdf: "AAlmaDoLazaro.pdf",
   },

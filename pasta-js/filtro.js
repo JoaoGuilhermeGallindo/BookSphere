@@ -38,7 +38,7 @@ const data = [
         id: "alma-do-lazaro",
         titulo: "A Alma do Lázaro",
         autor: "José de Alencar",
-        capa: "../Capas/AAlmaDoLazaro.jpg",
+        capa: "../Capas/AAlmadoLazaro.jpg",
         genero: "Romance"
     },
     {

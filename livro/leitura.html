@@ -20,11 +20,11 @@
             <div id="mobile-zoom-in" class="toolbar-btn" title="Aumentar Zoom"><i class="bi bi-plus-lg"></i></div>
             <div id="mobile-zoom-out" class="toolbar-btn" title="Diminuir Zoom"><i class="bi bi-dash-lg"></i></div>
             <div id="mobile-theme-btn" class="toolbar-btn" title="Mudar Modo de Leitura"><i
-                    class="bi bi-brightness-high-fill"></i></div>
+                class="bi bi-brightness-high-fill"></i></div>
             <div id="mobile-annotate-btn" class="toolbar-btn" title="Adicionar Anotação Pessoal"><i
-                    class="bi bi-pencil"></i></div>
+                class="bi bi-pencil"></i></div>
             <div id="mobile-view-annotations-btn" class="toolbar-btn" title="Ver Anotações"><i
-                    class="bi bi-journal-text"></i></div>
+                class="bi bi-journal-text"></i></div>
         </div>
 
         <div class="btn-expandir"><i id="btn-exp" class="bi bi-list"></i></div>
@@ -32,30 +32,31 @@
         <ul>
             <li class="item-menu">
                 <div id="zoom-in" class="itens" title="Aumentar Zoom"><span class="icon"><i
-                            class="bi bi-plus-lg"></i></span><span class="txt-link">Aumentar o zoom</span></div>
+                class="bi bi-plus-lg"></i></span><span class="txt-link">Aumentar o zoom</span></div>
             </li>
             <li class="item-menu">
                 <div id="zoom-out" class="itens" title="Diminuir Zoom"><span class="icon"><i
-                            class="bi bi-dash-lg"></i></span><span class="txt-link">Diminuir o zoom</span></div>
+                class="bi bi-dash-lg"></i></span><span class="txt-link">Diminuir o zoom</span></div>
             </li>
             <li class="item-menu">
                 <div id="theme-btn" class="itens" title="Mudar Modo de Leitura"><span id="theme-icon-container"
-                        class="icon"><i class="bi bi-brightness-high-fill"></i></span><span class="txt-link">Modo de
-                        leitura</span></div>
+                class="icon"><i class="bi bi-brightness-high-fill"></i></span><span class="txt-link">Modo de
+                leitura</span></div>
             </li>
             <li class="item-menu">
                 <div id="annotate-btn" class="itens" title="Adicionar Anotação Pessoal"><span class="icon"><i
-                            class="bi bi-pencil"></i></span><span class="txt-link">Anotação Pessoal</span></div>
+                class="bi bi-pencil"></i></span><span class="txt-link">Anotação Pessoal</span></div>
             </li>
             <li class="item-menu">
                 <div id="view-annotations-btn" class="itens" title="Ver Anotações"><span class="icon"><i
-                            class="bi bi-journal-text"></i></span><span class="txt-link">Ver Anotações</span></div>
+                class="bi bi-journal-text"></i></span><span class="txt-link">Ver Anotações</span></div>
             </li>
         </ul>
     </nav>
     <main id="main-content">
         <button class="button-left"><i class="bi bi-arrow-left-circle-fill"></i></button>
         <div class="flipbook-container">
+
             <div class="page-container">
                 <div id="left-page-wrapper" class="page-wrapper"><canvas id="leftPageCanvas"></canvas></div>
                 <div id="bookmark-icon-left" class="bookmark-icon left"><i class="bi bi-bookmark-fill"></i></div>
@@ -67,14 +68,23 @@
 
             <button class="button-right"><i class="bi bi-arrow-right-circle-fill"></i></button>
             <div id="page-indicator"></div>
+
+            <div class="page-controls">
+                <button class="button-left2"><i class="bi bi-arrow-left-circle-fill"></i></button>
+                <div id="page-indicator2"></div>
+                <button class="button-right2"><i class="bi bi-arrow-right-circle-fill"></i></button>
+            </div>
+            
+
+            
         </div>
     </main>
     <div id="note-modal" class="modal">
         <div class="modal-content">
             <h3 id="note-modal-title" class="modal-title">Adicionar Anotação Pessoal</h3><textarea id="note-input"
-                class="modal-textarea" placeholder="Digite sua anotação pessoal aqui..."></textarea>
+            class="modal-textarea" placeholder="Digite sua anotação pessoal aqui..."></textarea>
             <div class="modal-actions"><button id="note-cancel" class="modal-btn-secondary">Cancelar</button><button
-                    id="note-save" class="modal-btn-primary">Salvar</button></div>
+            id="note-save" class="modal-btn-primary">Salvar</button></div>
         </div>
     </div>
     <div id="annotation-action-modal" class="modal">
@@ -82,21 +92,21 @@
             <h3 class="modal-title">Sua Anotação</h3>
             <p class="modal-note-text"></p>
             <div class="modal-actions space-between"><button id="annotation-edit"
-                    class="modal-btn-yellow">Editar</button><button id="annotation-delete"
-                    class="modal-btn-red">Excluir</button></div>
+            class="modal-btn-yellow">Editar</button><button id="annotation-delete"
+            class="modal-btn-red">Excluir</button></div>
         </div>
     </div>
     <div id="alert-modal" class="modal">
         <div class="modal-content text-center">
-            <h3 class="modal-title">Aviso</h3>
-            <p id="alert-message" class="modal-text"></p><button id="alert-ok" class="modal-btn-primary">OK</button>
+        <h3 class="modal-title">Aviso</h3>
+        <p id="alert-message" class="modal-text"></p><button id="alert-ok" class="modal-btn-primary">OK</button>
         </div>
     </div>
     <div id="annotations-panel" class="annotations-panel-class">
         <div class="annotations-panel-header">
             <div class="header-top-row">
-                <h3 class="annotations-panel-title">Anotações Pessoais</h3><button id="close-annotations-btn"
-                    title="Fechar" class="close-annotations-btn-class"><i class="bi bi-x-lg"></i></button>
+            <h3 class="annotations-panel-title">Anotações Pessoais</h3><button id="close-annotations-btn"
+            title="Fechar" class="close-annotations-btn-class"><i class="bi bi-x-lg"></i></button>
             </div><input type="search" id="annotation-search-input" placeholder="Pesquisar anotações...">
         </div>
         <div id="annotations-list" class="annotations-list-class"></div>

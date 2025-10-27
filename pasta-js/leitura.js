@@ -126,8 +126,10 @@ function updateUI() {
     }
     // Botões de Navegação
     document.querySelector('.button-left').style.visibility = (state.currentPage > 1) ? 'visible' : 'hidden';
+    document.querySelector('.button-left2').style.visibility = (state.currentPage > 1) ? 'visible' : 'hidden';
     const isLastPage = singlePage ? (state.currentPage >= totalPages) : (state.currentPage + 1 >= totalPages);
     document.querySelector('.button-right').style.visibility = isLastPage ? 'hidden' : 'visible';
+    document.querySelector('.button-right2').style.visibility = isLastPage ? 'hidden' : 'visible';
     // Marcadores
     elements.bookmarkIconLeft.classList.toggle('bookmarked', state.bookmarkedPages.has(state.currentPage));
     if (!singlePage) {
@@ -171,6 +173,8 @@ pdfjsLib.getDocument(pdfPath).promise.then(pdfDoc_ => {
 // Navegação
 document.querySelector('.button-left').addEventListener('click', () => navigate(-1));
 document.querySelector('.button-right').addEventListener('click', () => navigate(1));
+document.querySelector('.button-left2').addEventListener('click', () => navigate(-1));
+document.querySelector('.button-right2').addEventListener('click', () => navigate(1));
 
 // Zoom (desktop)
 elements.zoomInBtn?.addEventListener('click', () => changeZoom(0.1));

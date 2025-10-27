@@ -174,13 +174,13 @@ const livros = {
   "cidade-e-asserras-": {
     titulo: "A Cidade e as Serras",
     autor: "Eça de Queirós",
-    paginas: "79 Páginas - PDF",
+    paginas: "79 Páginas - PDF",  
     paginas2: "296 Páginas - ONLINE",
     capa: "../Capas/ACidadeEasSerras.jpg",
     sinopse:
       "Romance da última fase de Eça de Queirós, publicado em 1901, um ano após a morte do escritor. Nele são narradas as diferenças entre a vida rural e a urbana por meio da figura de Jacinto, fidalgo português que mora em Paris em meio a um aparato técnico e moderno que, segundo ele, traduz o homem civilizado, mas que não lhe dá satisfação e felicidade, as quais, para espanto de Jacinto, serão encontradas durante uma viagem à província natal, em meio à vida simples e campesina das serras portuguesas.",
     pdf: "ACidadeEasSerras.pdf",
-  },
+  },  
   "adao-e-eva": {
     titulo: "Adão e Eva",
     autor: "Machado de Assis",
@@ -304,7 +304,7 @@ const livros = {
     paginas2: "199  Páginas - ONLINE",
     capa: "../Capas/MemoriasPostumasdeBrasCubas.jpg",
     sinopse: `Publicado em 1881, Memórias Póstumas de Brás Cubas revolucionou a literatura brasileira ao inaugurar a fase realista de Machado de Assis. O romance é narrado por Brás Cubas, um defunto-autor que, do além, escreve suas memórias sem compromisso com a moral ou convenções. Com humor ácido e estilo fragmentado, ele revisita sua vida, suas ambições frustradas, amores e fracassos. O tom irônico e a quebra de expectativas fazem da obra uma crítica à sociedade do século XIX, expondo vaidades, hipocrisias e desigualdades. A liberdade narrativa permite que Machado explore reflexões filosóficas, digressões e diálogos com o leitor, criando um texto moderno e inovador para sua época. Brás Cubas é um narrador que diverte, provoca e desconstrói ilusões.Memórias Póstumas é considerado um marco não apenas da literatura brasileira, mas também mundial, por antecipar técnicas narrativas que influenciariam o modernismo. Sua mistura de sarcasmo, introspecção e crítica social continua a fascinar leitores e estudiosos até hoje.`,
-    pdf: "MemoriasPostumasdeBrasCubas.pdf",
+    pdf: "MemoriasPostumasDeBrasCubas.pdf",
   },
   mensagem: {
     titulo: "Mensagem",

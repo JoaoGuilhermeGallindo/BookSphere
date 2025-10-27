@@ -126,7 +126,7 @@ const livros = {
     titulo: "Iracema",
     autor: "José de Alencar",
     paginas: "120 Páginas - PDF",
-    paginas2: "415 Páginas - ONLINE",
+    paginas2: "75 Páginas - ONLINE",
     capa: "../Capas/Iracema.jpg",
     sinopse: `Publicado em 1865, Iracema é um dos romances indianistas de José de Alencar e se tornou um dos símbolos da literatura romântica brasileira. A obra narra o amor entre Iracema, a virgem tabajara de lábios de mel, e Martim, um colonizador português. Dessa união nasce Moacir, o “filho da dor”, que simboliza o nascimento do povo brasileiro a partir da fusão entre indígenas e europeus.O romance é marcado pela linguagem poética, repleta de metáforas e descrições líricas da natureza. O Ceará natal de Alencar é transformado em palco de um mito fundacional que mistura história, lenda e imaginação literária. A paisagem é personificada e ganha papel central, funcionando como reflexo do destino das personagens e da formação de uma nova identidade. Iracema transcende o simples romance para se tornar um mito da nacionalidade. O livro consagra José de Alencar como um dos maiores representantes do romantismo brasileiro e permanece como leitura obrigatória para compreender as origens literárias e culturais da ideia de Brasil.`,
     pdf: "Iracema.pdf",

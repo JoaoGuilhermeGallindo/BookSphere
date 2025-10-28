@@ -201,6 +201,8 @@ function changeZoom(delta) {
 // --- SUBSTITUA PELO BLOCO ABAIXO ---
 
 // Carrega o PDF (agora em uma função async auto-executável)
+// --- SUBSTITUA O BLOCO INTEIRO (ETAPA 3.5) POR ESTE ---
+
 (async function loadPdfAndProgress() {
     try {
         const pdfDoc_ = await pdfjsLib.getDocument(pdfPath).promise;
@@ -209,33 +211,47 @@ function changeZoom(delta) {
         // 1. Carrega dados locais (anotações, e marcador salvo no localStorage)
         loadData();
 
+        let savedPage = null;
+
         if (IS_LOGGED_IN) {
             // 2. Se estiver logado, busca o progresso do DB
             try {
-                // Pela sua estrutura de pastas, 'progress_handler.php' parece correto.
                 const response = await fetch(`progress_handler.php?action=load&book_id=${encodeURIComponent(PDF_BOOK_ID)}`);
                 const data = await response.json();
 
-                if (data.status === 'success' && data.page > 1) {
-                    // Se encontrou, define a página atual para a página salva no DB
-                    state.currentPage = parseInt(data.page, 10);
-                    // Também define o 'bookmarkedPage' para que o ícone fique amarelo
-                    state.bookmarkedPage = state.currentPage;
-                    S
+                if (data.status === 'success' && data.page > 0) {
+                    savedPage = parseInt(data.page, 10);
                 }
-                // Se 'not_found' ou 'error', ele simplesmente usará a página 1 (ou a do localStorage)
             } catch (e) {
                 console.error("Erro ao carregar progresso do DB. Usando dados locais.", e);
-                // Se falhar, usa o que foi carregado do localStorage
-                if (state.bookmarkedPage) {
-                    state.currentPage = state.bookmarkedPage;
+            }
+        }
+
+        // Se não encontrou no DB, usa o do localStorage (se houver)
+        if (!savedPage && state.bookmarkedPage) {
+            savedPage = state.bookmarkedPage;
+        }
+
+        // 3. SE TEMOS UMA PÁGINA SALVA (DO DB OU LOCALSTORAGE)
+        if (savedPage) {
+            // Define o marcador para a página exata que foi salva
+            state.bookmarkedPage = savedPage;
+
+            // Agora, calcula a página de INÍCIO (a da esquerda)
+            let pageToLoad = savedPage;
+
+            // isSinglePageView() ainda não funciona, pois o renderBook não rodou.
+            // Vamos checar o CSS "raw" (igual a função faz)
+            const singleView = window.getComputedStyle(elements.rightPageWrapper).display === 'none';
+
+            if (!singleView && savedPage > 1) {
+                // Se estamos em página dupla E a página salva é PAR (direita)
+                if (savedPage % 2 === 0) {
+                    pageToLoad = savedPage - 1; // Carrega a página anterior (esquerda)
                 }
             }
-        } else {
-            // 3. Se não estiver logado, usa o marcador salvo no localStorage (se houver)
-            if (state.bookmarkedPage) {
-                state.currentPage = state.bookmarkedPage;
-            }
+            // Se for ímpar (esquerda) ou página única, pageToLoad = savedPage (correto)
+            state.currentPage = pageToLoad;
         }
 
         // 4. Finalmente, renderiza o livro na página correta

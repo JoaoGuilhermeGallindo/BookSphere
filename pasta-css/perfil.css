@@ -4,21 +4,162 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
-/* Container principal */
+/* Container principal (agora é só um container) */
 .profile-container {
-  display: flex;
-  justify-content: center;
-  margin: 60px auto;
-  padding: 0 20px;
-  margin-bottom: 170px;
-  margin-top: 190px;
-
+    max-width: 1200px; /* Limita a largura no desktop */
+    margin: 60px auto;
+    padding: 0 20px;
+    margin-bottom: 100px; /* Espaço antes do rodapé */
+    margin-top: 150px;  /* Espaço depois do cabeçalho */
 }
 
-/* Sidebar de perfil */
-.profile-sidebar {
-  flex: 1;
-  width: 100%;
+/* 1. O NOVO CARD DE PERFIL NO TOPO */
+.profile-header-card {
+    /* Mágica pra centralizar tudo! */
+    display: flex;
+    flex-direction: column; /* Um item embaixo do outro */
+    align-items: center;    /* Tudo alinhado no centro */
+    
+    width: 100%;
+    margin-bottom: 60px; /* Espaço grande antes das estantes */
+}
+
+/* O Avatar (círculo da foto) */
+.profile-avatar-wrapper {
+    width: 170px;
+    height: 170px;
+    margin-bottom: 1.2rem;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #5c9adb;
+}
+
+#profile-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Nomes */
+#user-name {
+    font-size: 1.6rem;
+    margin: 0;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+#user-username {
+    font-size: 1rem;
+    color: var(--secondary-color);
+    margin-top: 4px;
+}
+
+/* * AQUI O PULO DO GATO (Alinhamento do Tempo de Leitura) 
+ * A gente colocou nome e tempo num 'flex' e alinhou no centro
+*/
+.leitura-stats {
+    text-align: center; /* ALINHADO! */
+    margin-top: 25px;
+}
+
+.tempo-leitura-label {
+    font-size: 0.8rem;
+    color: var(--secondary-color);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.tempo-leitura-valor {
+    font-size: 1.6rem;
+    color: var(--text-color);
+    font-weight: 600;
+    margin: 4px 0 0 0;
+}
+
+
+/* 2. ESTANTES DE LIVROS (Progresso e Concluídos) */
+.book-section {
+    width: 100%;
+    margin-bottom: 40px; /* Espaço entre as seções */
+}
+
+.book-section h2 {
+    /* O título ("PROGRESSO...", "CONCLUÍDOS...") */
+    font-size: 1.5rem;
+    color: var(--text-color);
+    text-align: left; /* Alinhado à esquerda da grade */
+    border-bottom: 2px solid #5c9adb; /* Uma linha azul bonita */
+    padding-bottom: 10px;
+    margin-bottom: 30px; /* Espaço antes da grade */
+}
+
+/* 3. A "GRADE" DE LIVROS (Onde a mágica do Grid acontece) */
+.book-grid {
+    display: grid;
+    /* * Isso é CSS Grid moderno! 
+     * Ele cria colunas de 180px automaticamente
+     * e preenche o espaço que sobrar. É responsivo!
+    */
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 25px; /* Espaço entre os livros */
+}
+
+/* O "CARD" DE CADA LIVRO */
+.book-item {
+    background-color: var(--card-background);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.book-item:hover {
+    transform: translateY(-5px); /* Efeito de levantar */
+}
+
+.book-cover {
+    width: 100%;
+    /* Proporção 2:3 (capa de livro padrão) */
+    aspect-ratio: 2 / 3; 
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.book-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0;
+    /* Evita que o título quebre em 50 linhas */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* A BARRA DE PROGRESSO (só pro de progresso) */
+.progress-bar-container {
+    width: 100%;
+    height: 8px;
+    background-color: #e0e0e0; /* Fundo cinza */
+    border-radius: 4px;
+    margin: 10px 0 5px 0;
+    overflow: hidden; /* Esconde o que sobrar da barra */
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #5c9adb; /* A cor azul */
+    border-radius: 4px;
+}
+
+.progress-percentage {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--secondary-color);
 }
 
 /* Avatar */

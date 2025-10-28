@@ -7,6 +7,10 @@ if (!pdfFile) {
 }
 const pdfPath = `../livro/livros-pdf/${decodeURIComponent(pdfFile)}`;
 const storageKey = `pdfReader-${pdfFile}`;
+// Pega o status de login do atributo data-* que definimos no HTML
+const IS_LOGGED_IN = document.body.dataset.isLoggedIn === 'true';
+// O 'pdfFile' que você já tem será nosso 'book_id'
+const PDF_BOOK_ID = decodeURIComponent(pdfFile);
 
 // Seleciona todos os elementos, incluindo os novos de mobile
 const elements = {
@@ -62,7 +66,7 @@ const state = {
     scale: 0.8,
     MIN_SCALE: 0.5,
     annotations: [],
-    bookmarkedPages: new Set(),
+    bookmarkedPage: null, // Alterado de bookmarkedPages: new Set()
     editingAnnotation: null,
     activeAnnotationId: null
 };
@@ -119,14 +123,14 @@ function updateUI() {
     const totalPages = state.pdfDoc.numPages;
     // Indicador de Página
     if (singlePage) {
-        elements.pageIndicator.textContent = `Página ${state.currentPage} de ${totalPages}`;
-        elements.pageIndicator2.textContent = `Página ${state.currentPage} de ${totalPages}`;
+        elements.pageIndicator.textContent = `Página ${state.currentPage}`;
+        elements.pageIndicator2.textContent = `Página ${state.currentPage}`;
     } else {
         const endPage = Math.min(state.currentPage + 1, totalPages);
         elements.pageIndicator.textContent = (state.currentPage === endPage)
 
-            ? `Página ${state.currentPage} de ${totalPages}`
-            : `Páginas ${state.currentPage}-${endPage} de ${totalPages}`;
+            ? `Página ${state.currentPage}`
+            : `Páginas ${state.currentPage}-${endPage}`;
     }
     // Botões de Navegação
     document.querySelector('.button-left').style.visibility = (state.currentPage > 1) ? 'visible' : 'hidden';
@@ -135,9 +139,13 @@ function updateUI() {
     document.querySelector('.button-right').style.visibility = isLastPage ? 'hidden' : 'visible';
     document.querySelector('.button-right2').style.visibility = isLastPage ? 'hidden' : 'visible';
     // Marcadores
-    elements.bookmarkIconLeft.classList.toggle('bookmarked', state.bookmarkedPages.has(state.currentPage));
+    // Marcadores
+    elements.bookmarkIconLeft.classList.toggle('bookmarked', state.bookmarkedPage === state.currentPage);
     if (!singlePage) {
-        elements.bookmarkIconRight.classList.toggle('bookmarked', state.bookmarkedPages.has(state.currentPage + 1));
+        elements.bookmarkIconRight.classList.toggle('bookmarked', state.bookmarkedPage === (state.currentPage + 1));
+    } else {
+        // Garante que o ícone direito não fique marcado na visualização de página única
+        elements.bookmarkIconRight.classList.remove('bookmarked');
     }
 }
 
@@ -190,14 +198,54 @@ function changeZoom(delta) {
 
 
 // Carrega o PDF
-pdfjsLib.getDocument(pdfPath).promise.then(pdfDoc_ => {
-    state.pdfDoc = pdfDoc_;
-    loadData();
-    renderBook();
-}).catch(err => {
-    console.error("Erro ao carregar PDF:", err);
-    document.getElementById('main-content').innerHTML = "<p style='color:red; text-align:center;'>Erro ao carregar o PDF.</p>";
-});
+// --- SUBSTITUA PELO BLOCO ABAIXO ---
+
+// Carrega o PDF (agora em uma função async auto-executável)
+(async function loadPdfAndProgress() {
+    try {
+        const pdfDoc_ = await pdfjsLib.getDocument(pdfPath).promise;
+        state.pdfDoc = pdfDoc_;
+
+        // 1. Carrega dados locais (anotações, e marcador salvo no localStorage)
+        loadData();
+
+        if (IS_LOGGED_IN) {
+            // 2. Se estiver logado, busca o progresso do DB
+            try {
+                // Pela sua estrutura de pastas, 'progress_handler.php' parece correto.
+                const response = await fetch(`progress_handler.php?action=load&book_id=${encodeURIComponent(PDF_BOOK_ID)}`);
+                const data = await response.json();
+
+                if (data.status === 'success' && data.page > 1) {
+                    // Se encontrou, define a página atual para a página salva no DB
+                    state.currentPage = parseInt(data.page, 10);
+                    // Também define o 'bookmarkedPage' para que o ícone fique amarelo
+                    state.bookmarkedPage = state.currentPage;
+                    S
+                }
+                // Se 'not_found' ou 'error', ele simplesmente usará a página 1 (ou a do localStorage)
+            } catch (e) {
+                console.error("Erro ao carregar progresso do DB. Usando dados locais.", e);
+                // Se falhar, usa o que foi carregado do localStorage
+                if (state.bookmarkedPage) {
+                    state.currentPage = state.bookmarkedPage;
+                }
+            }
+        } else {
+            // 3. Se não estiver logado, usa o marcador salvo no localStorage (se houver)
+            if (state.bookmarkedPage) {
+                state.currentPage = state.bookmarkedPage;
+            }
+        }
+
+        // 4. Finalmente, renderiza o livro na página correta
+        renderBook();
+
+    } catch (err) {
+        console.error("Erro ao carregar PDF:", err);
+        document.getElementById('main-content').innerHTML = "<p style='color:red; text-align:center;'>Erro ao carregar o PDF.</p>";
+    }
+})();
 
 // === Event Listeners ===
 
@@ -271,6 +319,36 @@ document.addEventListener('keydown', e => {
 window.addEventListener('resize', renderBook);
 
 // === Funções Auxiliares ===
+
+async function saveProgressToDB(pageNumber) {
+    // Só tenta salvar no DB se o usuário estiver logado
+    if (!IS_LOGGED_IN) {
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('action', 'save');
+    formData.append('book_id', PDF_BOOK_ID);
+    formData.append('page', pageNumber);
+
+    try {
+        // ATENÇÃO: Verifique se o caminho 'progress_handler.php' está correto
+        // Pela sua estrutura de pastas, parece estar correto.
+        const response = await fetch('progress_handler.php', {
+            method: 'POST',
+            body: formData
+        });
+        const data = await response.json();
+        if (data.status === 'success') {
+            console.log('Progresso salvo no banco de dados.');
+        } else {
+            console.error('Falha ao salvar progresso no DB:', data.message);
+        }
+    } catch (error) {
+        console.error('Erro de rede ao salvar progresso:', error);
+    }
+}
+
 
 function openModal(modal) { modal.style.display = 'flex'; }
 function closeModal(modal) { modal.style.display = 'none'; }
@@ -359,16 +437,26 @@ function findAnnotationById(id) {
 }
 
 // Bookmarks
+// --- SUBSTITUA PELA VERSÃO ABAIXO ---
 function toggleBookmark(pageNum, iconElement) {
-    if (state.bookmarkedPages.has(pageNum)) {
-        state.bookmarkedPages.delete(pageNum);
+    if (state.bookmarkedPage === pageNum) {
+        // Usuário está desmarcando a página
+        state.bookmarkedPage = null;
+        // Opcional: Você pode salvar a página 1 aqui para que ele volte ao início
+        // saveProgressToDB(1);
+
     } else {
-        state.bookmarkedPages.add(pageNum);
+        // Usuário está MARCANDO uma nova página
+        state.bookmarkedPage = pageNum;
+        // !!! AQUI ESTÁ A MUDANÇA !!!
+        // Salva a página marcada no banco de dados (se estiver logado)
+        saveProgressToDB(pageNum);
     }
+
     iconElement.classList.add('animate-pop');
     setTimeout(() => iconElement.classList.remove('animate-pop'), 300);
     updateUI();
-    saveData();
+    saveData(); // Continua salvando no localStorage (para anotações)
 }
 
 elements.bookmarkIconLeft?.addEventListener('click', () => toggleBookmark(state.currentPage, elements.bookmarkIconLeft));
@@ -410,18 +498,18 @@ function aplicarModo(modo) {
 function saveData() {
     const data = {
         annotations: state.annotations,
-        bookmarkedPages: Array.from(state.bookmarkedPages)
+        bookmarkedPage: state.bookmarkedPage // Alterado
     };
     localStorage.setItem(storageKey, JSON.stringify(data));
 }
-
 function loadData() {
     const savedData = localStorage.getItem(storageKey);
     if (savedData) {
         const data = JSON.parse(savedData);
         state.annotations = data.annotations || [];
-        state.bookmarkedPages = new Set(data.bookmarkedPages || []);
+        state.bookmarkedPage = data.bookmarkedPage || null; // Alterado
     }
+    // ... (resto da função)
     const modoSalvo = localStorage.getItem("themeMode") || "modo-claro";
     indiceModo = modos.indexOf(modoSalvo);
     aplicarModo(modoSalvo);

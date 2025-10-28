@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -12,7 +13,7 @@
 
 </head>
 
-<body>
+<body data-is-logged-in="<?php echo isset($_SESSION['usuario']) ? 'true' : 'false'; ?>">
     <nav class="menu-lateral">
 
         <!-- ⬇️ NOVA BARRA DE FERRAMENTAS MOBILE (visível apenas em mobile) ⬇️ -->
@@ -85,18 +86,13 @@
                 <div id="right-page-wrapper" class="page-wrapper"><canvas id="rightPageCanvas"></canvas></div>
                 <div id="bookmark-icon-right" class="bookmark-icon right"><i class="bi bi-bookmark-fill"></i></div>
             </div>
-
             <button class="button-right"><i class="bi bi-arrow-right-circle-fill"></i></button>
             <div id="page-indicator"></div>
-
             <div class="page-controls">
                 <button class="button-left2"><i class="bi bi-arrow-left-circle-fill"></i></button>
                 <div id="page-indicator2"></div>
                 <button class="button-right2"><i class="bi bi-arrow-right-circle-fill"></i></button>
             </div>
-
-
-
         </div>
     </main>
     <div id="note-modal" class="modal">

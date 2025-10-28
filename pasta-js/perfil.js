@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
     } catch (erro) {
-        alert('Você precisa estar logado para ver o perfil.');
-        window.location.href = '../pasta-html/login.html';
+     
     }
 });

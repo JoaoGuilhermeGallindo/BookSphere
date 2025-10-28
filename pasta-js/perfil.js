@@ -223,33 +223,26 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
     } catch (erro) {
-        // Se ocorrer erro (normalmente usuário não logado), mostra mensagem curta e redireciona para login
-        // Usamos location.replace para não deixar o perfil em histórico (opção solicitada)
+        // Se ocorrer erro (normalmente usuário não logado), mostra modal com spinner e redireciona para login
         try {
-            const center = document.querySelector('.profile-center');
-            if (center) {
-                // cria um elemento de mensagem simples
-                const msg = document.createElement('div');
-                msg.style.padding = '20px';
-                msg.style.textAlign = 'center';
-                msg.style.fontWeight = '600';
-                msg.textContent = 'Você precisa entrar para acessar o perfil. Redirecionando...';
-                // limpa e insere mensagem
-                center.innerHTML = '';
-                center.appendChild(msg);
+            const modal = document.getElementById('login-modal');
+            const redirectDelay = 500; // tempo em ms antes de redirecionar (ajustável)
+            if (modal) {
+                modal.removeAttribute('hidden');
+                // Mantém foco para acessibilidade
+                const firstFocusable = modal.querySelector('button, [href], input, [tabindex]');
+                if (firstFocusable) firstFocusable.focus();
             }
 
-            // espera 500ms para melhor UX, depois substitui a localização (sem histórico)
             setTimeout(() => {
                 try {
                     window.location.replace('../pasta-html/login.html');
                 } catch (e) {
-                    // se replace falhar, tenta href
                     window.location.href = '../pasta-html/login.html';
                 }
-            }, 500);
+            }, redirectDelay);
         } catch (e) {
-            // fallback simples: tenta redirecionar imediatamente
+            // fallback: redireciona imediatamente
             try { window.location.replace('../pasta-html/login.html'); } catch (er) { window.location.href = '../pasta-html/login.html'; }
         }
     }

@@ -31,7 +31,7 @@ try {
 try {
     $username_from_session = $_SESSION['usuario'];
     
-    $stmt_user = $conn->prepare("SELECT id FROM users WHERE usuario = :username");
+    $stmt_user = $conn->prepare("SELECT user_id FROM users WHERE usuario = :username");
     $stmt_user->execute(['username' => $username_from_session]);
     $user = $stmt_user->fetch(PDO::FETCH_ASSOC);
 
@@ -41,7 +41,7 @@ try {
     }
     
     // Este é o ID que usaremos (ex: 1, 2, 3...)
-    $user_id = $user['id']; 
+    $user_id = $user['user_id']; 
 
 } catch (PDOException $e) {
     echo json_encode(['status' => 'error', 'message' => 'Erro ao buscar ID do usuário: ' . $e->getMessage()]);

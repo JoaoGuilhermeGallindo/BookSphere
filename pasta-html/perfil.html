@@ -140,6 +140,18 @@
     <script src="../pasta-js/menuPerfil.js"></script>
     <script src="../pasta-js/usersedit.js"></script>
 
+    <!-- Modal de login usado quando usuário não está autenticado -->
+    <div id="login-modal" class="login-modal" role="dialog" aria-modal="true" aria-labelledby="login-modal-title" aria-describedby="login-modal-desc" hidden>
+        <div class="login-modal-content">
+            <div class="spinner" aria-hidden="true"></div>
+            <h3 id="login-modal-title">Você precisa entrar para acessar o perfil</h3>
+            <p id="login-modal-desc">Redirecionando para a tela de login...</p>
+        </div>
+    </div>
+
+    <!-- Container para toasts (mensagens rápidas) -->
+    <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
 </body>
 
 </html>

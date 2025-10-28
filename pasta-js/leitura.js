@@ -41,6 +41,7 @@ const elements = {
     alertMessage: document.getElementById('alert-message'),
     alertOkBtn: document.getElementById('alert-ok'),
     pageIndicator: document.getElementById('page-indicator'),
+    mobileViewProgressBtn: document.getElementById('mobileViewProgressBtn'),
 
     // Novos elementos para mobile
     mobileZoomInBtn: document.getElementById('mobile-zoom-in'),
@@ -395,3 +396,16 @@ function loadData() {
     indiceModo = modos.indexOf(modoSalvo);
     aplicarModo(modoSalvo);
 }
+
+
+/////////////////////////////////////////////////------Salvar Progresso------------///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+document.getElementById("mobileViewProgressBtn").addEventListener("click", () => {
+    document.getElementById("progressPopup").style.display = "block";
+    carregarProgresso();
+  });
+
+
+
+
+
+

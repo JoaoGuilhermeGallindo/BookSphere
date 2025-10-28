@@ -289,3 +289,92 @@ body {
   }
 
 }
+
+/* ===== Novas regras para layout de 3 colunas (perfil + estantes) ===== */
+.profile-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr 320px;
+  gap: 30px;
+  align-items: start;
+  width: 100%;
+}
+
+.books-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.books-scroll {
+  /* Limita a altura a exibir 3 linhas de cards e permite scroll vertical */
+  max-height: 760px; /* valor pensado para ~3 linhas de 4 cards */
+  overflow-y: auto;
+  padding-right: 8px; /* espaço para scrollbar */
+}
+
+.profile-center {
+  display: flex;
+  justify-content: center;
+}
+
+.profile-header-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--card-background);
+  border-radius: 10px;
+  padding: 30px 20px;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* sempre 4 colunas como pediu */
+  gap: 18px;
+  align-items: start;
+}
+
+.book-item {
+  padding: 8px;
+}
+
+.book-cover {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 6px;
+  position: relative;
+}
+
+.book-title {
+  font-size: 0.85rem;
+  margin-top: 8px;
+}
+
+.progress-bar-container { margin-bottom: 6px; }
+
+.concluded-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  padding: 6px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.book-item .cover-wrapper { position: relative; }
+
+/* Responsivo: em telas pequenas, empilha as colunas */
+@media (max-width: 1000px) {
+  .profile-layout { grid-template-columns: 1fr; }
+  .book-grid { grid-template-columns: repeat(3, 1fr); }
+  .books-column { order: 2; }
+  .profile-center { order: 1; margin-bottom: 20px; }
+}
+
+@media (max-width: 600px) {
+  .book-grid { grid-template-columns: repeat(2, 1fr); }
+}

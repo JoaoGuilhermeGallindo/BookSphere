@@ -60,16 +60,41 @@
     </ul>
 
     <main class="profile-container">
-        <aside class="profile-sidebar">
-            <div class="profile-card">
-                <div class="profile-avatar-wrapper">
-                    <img id="profile-avatar" src="./pasta-php/uploads"
-                        alt="Foto de perfil">
+        <!-- Novo layout: coluna esquerda (progresso) | centro (perfil) | direita (concluídos) -->
+        <div class="profile-layout">
+            <div class="books-column books-left">
+                <div class="book-section">
+                    <h2>Livros em progresso</h2>
+                    <div id="inprogress-scroll" class="books-scroll">
+                        <div id="inprogress-grid" class="book-grid"></div>
+                    </div>
                 </div>
-                <h2 id="user-name">Nome do Usuário</h2>
-                <p id="user-username">@username</p>
             </div>
-        </aside>
+
+            <div class="profile-center">
+                <div class="profile-header-card">
+                    <div class="profile-avatar-wrapper">
+                        <img id="profile-avatar" src="../IMAGENS/SemFoto.jpg" alt="Foto de perfil">
+                    </div>
+                    <h2 id="user-name">Nome do Usuário</h2>
+                    <p id="user-username">@username</p>
+
+                    <div class="leitura-stats">
+                        <p class="tempo-leitura-label">Tempo de leitura estimado</p>
+                        <p id="tempo-leitura" class="tempo-leitura-valor">0h 0m</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="books-column books-right">
+                <div class="book-section">
+                    <h2>Livros concluidos</h2>
+                    <div id="concluded-scroll" class="books-scroll">
+                        <div id="concluded-grid" class="book-grid"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <div class="fim">
@@ -110,6 +135,7 @@
         <p>Copyright © BookSphere ™ 2025</p>
     </div>
     <script src="../pasta-js/personalizacao.js"></script>
+    <script src="../pasta-js/sinopse.js"></script>
     <script src="../pasta-js/perfil.js"></script>
     <script src="../pasta-js/menuPerfil.js"></script>
     <script src="../pasta-js/usersedit.js"></script>

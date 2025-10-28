@@ -216,7 +216,7 @@ function changeZoom(delta) {
         if (IS_LOGGED_IN) {
             // 2. Se estiver logado, busca o progresso do DB
             try {
-                const response = await fetch(`progress_handler.php?action=load&book_id=${encodeURIComponent(PDF_BOOK_ID)}`);
+                const response = await fetch(`../pasta-php/progress_handler.php?action=load&book_id=${encodeURIComponent(PDF_BOOK_ID)}`);
                 const data = await response.json();
 
                 if (data.status === 'success' && data.page > 0) {
@@ -350,7 +350,7 @@ async function saveProgressToDB(pageNumber) {
     try {
         // ATENÇÃO: Verifique se o caminho 'progress_handler.php' está correto
         // Pela sua estrutura de pastas, parece estar correto.
-        const response = await fetch('progress_handler.php', {
+        const response = await fetch('../pasta-php/progress_handler.php', {
             method: 'POST',
             body: formData
         });

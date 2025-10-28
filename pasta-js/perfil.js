@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const headerAvatar = document.querySelector('.profile-img img'); // <-- imagem do cabeçalho
 
         if (dados.imagem && dados.imagem.trim() !== '') {
-            const caminhoImagem = '../pasta-php/imagens-usuarios/' + dados.imagem + '?v=' + new Date().getTime();
+            const caminhoImagem = '../pasta-php/uploads/' + dados.imagem + '?v=' + new Date().getTime();
             avatar.src = caminhoImagem;
             headerAvatar.src = caminhoImagem; // <-- atualiza o cabeçalho também
         } else {

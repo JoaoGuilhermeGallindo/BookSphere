@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const caminhoImagem =
             dados.imagem && dados.imagem.trim() !== ''
-                ? '../pasta-php/imagens-usuarios/' + dados.imagem + '?v=' + new Date().getTime()
+                ? '../pasta-php/uploads/' + dados.imagem + '?v=' + new Date().getTime()
                 : '../IMAGENS/SemFoto.jpg';
 
         if (headerAvatar) headerAvatar.src = caminhoImagem;

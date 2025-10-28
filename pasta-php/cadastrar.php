@@ -35,7 +35,7 @@ $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
 $imagem_nome = null;
 
 if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
-    $pasta = "imagens-usuarios/";
+    $pasta = "uploads/";
     $extensao = pathinfo($_FILES['imagem']['name'], PATHINFO_EXTENSION);
     $imagem_nome = uniqid("user_", true) . "." . strtolower($extensao);
     $caminho_final = $pasta . $imagem_nome;

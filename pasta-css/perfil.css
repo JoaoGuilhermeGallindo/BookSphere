@@ -1,23 +1,7 @@
-/* Fonte moderna */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-
-:root {
-  --primary-color: #1da1f2;
-  --background-color: #f4f7fa;
-  --card-background: #ffffff;
-  --text-color: #212529;
-  --secondary-color: #6c757d;
-  --border-color: #e0e0e0;
-  --radius: 12px;
-  --shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-}
-
 body {
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
-  background-color: var(--background-color);
-  color: var(--text-color);
 }
 
 /* Container principal */
@@ -26,20 +10,13 @@ body {
   justify-content: center;
   margin: 60px auto;
   padding: 0 20px;
+  margin-top: 90px;
 }
 
 /* Sidebar de perfil */
 .profile-sidebar {
   flex: 1;
   max-width: 320px;
-}
-
-.profile-card {
-  background-color: var(--card-background);
-  border-radius: var(--radius);
-  padding: 2rem;
-  text-align: center;
-  box-shadow: var(--shadow);
 }
 
 /* Avatar */
@@ -50,7 +27,7 @@ body {
   margin: 0 auto 1.2rem auto;
   border-radius: 50%;
   overflow: hidden;
-  border: 4px solid var(--primary-color);
+  border: 4px solid #5c9adb;
 }
 
 #profile-avatar {
@@ -64,7 +41,7 @@ body {
     position: absolute;
     bottom: 6px;
     right: 6px;
-    background-color: var(--primary-color);
+    background-color: blue;
     color: white;
     width: 36px;
     height: 36px;
@@ -83,19 +60,24 @@ body {
     background-color: #0056b3;
 }
 
-
 /* Nome do usuário */
 #user-name {
   font-size: 1.6rem;
   margin: 1rem 0 0.4rem;
   font-weight: 600;
   color: var(--text-color);
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
 
 /* Username */
 #user-username {
   font-size: 1rem;
   color: var(--secondary-color);
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
 
 /* Seção de estatísticas ao lado direito */

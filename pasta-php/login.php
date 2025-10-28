@@ -1,11 +1,10 @@
 <?php
 session_start(); // Inicia a sessão
 
-// Configuração do banco de dados MySQL (Hostinger)
-$servername = "localhost"; // continua sendo localhost no servidor da Hostinger
-$username   = "u831223978_root"; // usuário MySQL que aparece no painel
-$password   = "BookSphere1"; // senha que você definiu ao criar o banco
-$dbname     = "u831223978_bancousers"; // nome completo do banco de dados
+$servername = "srv791.hstgr.io"; 
+$username   = "u831223978_root";
+$password   = "BookSphere1";
+$dbname     = "u831223978_bancousers";
 
 // Conexão
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -37,6 +36,7 @@ if (password_verify($senha, $user['senha'])) {
     // Salva dados do usuário na sessão
     $_SESSION['usuario'] = $user['usuario'];
     $_SESSION['nome']    = $user['nome']; // Certifique-se de que existe um campo 'nome'
+    $_SESSION['imagem']  = $user['imagem'];
 
     echo "sucesso";
 } else {

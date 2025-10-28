@@ -75,7 +75,7 @@ img {
 .card-login {
     width: 100%;
     max-width: 420px;
-    padding: 30px 40px;
+    padding: 20px 40px;
     border-radius: 15px;
 
     /* === O EFEITO GLASSMORPHISM === */
@@ -120,6 +120,20 @@ img {
 .textfield input::placeholder {
     color: #eee;
 }
+
+.form-group {
+    width: 100%;
+    margin: 8px 0;
+}
+
+.form-group label {
+    display: block;
+    color: #fff;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+
 
 .btn-login {
     width: 100%;

@@ -13,29 +13,29 @@
 </head>
 
 <body>
-   <div class="cabeçario">
-    <img class="logo-cabeçario" src="../LOGOS/Logo-fundo transparente-recortado.png" alt="Logo do Site"
-        onclick="window.location.href='../pasta-html/index.html'">
+    <div class="cabeçario">
+        <img class="logo-cabeçario" src="../LOGOS/Logo-fundo transparente-recortado.png" alt="Logo do Site"
+            onclick="window.location.href='../pasta-html/index.html'">
 
-    <a href="../pasta-html/livros.html" class="btn-biblioteca">Acessar Biblioteca</a>
+        <a href="../pasta-html/livros.html" class="btn-biblioteca">Acessar Biblioteca</a>
 
-    <div class="botoesNaLateralDireita">
-        <button id="btn-modo-leitura"></button>
-        <div class="profile-dropdown">
-            <div class="profile-dropdown-btn">
-                <div class="profile-img">
-                    <img src="../IMAGENS/SemFoto.jpg" alt="">
+        <div class="botoesNaLateralDireita">
+            <button id="btn-modo-leitura"></button>
+            <div class="profile-dropdown">
+                <div class="profile-dropdown-btn">
+                    <div class="profile-img">
+                        <img src="../IMAGENS/SemFoto.jpg" alt="">
+                    </div>
+                    <span style="display: none;" id="profile-nome" class="profile-nome"
+                        onclick="window.location.href='../pasta-html/login.html'" style="cursor:pointer;">
+                        Logar
+                    </span>
+                    <i id="setinha" class="fa-solid fa-angle-down" onclick="toggle()" style="cursor:pointer;"></i>
+
                 </div>
-                <span style="display: none;" id="profile-nome" class="profile-nome"
-                    onclick="window.location.href='../pasta-html/login.html'" style="cursor:pointer;">
-                    Logar
-                </span>
-                <i id="setinha" class="fa-solid fa-angle-down" onclick="toggle()" style="cursor:pointer;"></i>
-
             </div>
         </div>
     </div>
-</div>
     <ul class="profile-dropdown-list">
         <li class="profile-dropdown-list-item">
             <a href="../pasta-html/perfil.html">
@@ -63,11 +63,8 @@
         <aside class="profile-sidebar">
             <div class="profile-card">
                 <div class="profile-avatar-wrapper">
-                    <img id="profile-avatar" src="../pasta-php/getAvatar.php" alt="Avatar do Usuário">
-                    <label for="avatar-upload" class="avatar-upload-btn" title="Mudar foto de perfil">
-                        <i class="fas fa-camera"></i>
-                    </label>
-                    <input type="file" id="avatar-upload" name="avatar" accept="image/*" style="display: none;">
+                    <img id="profile-avatar" src="./pasta-php/imagens-usuarios"
+                        alt="Foto de perfil">
                 </div>
                 <h2 id="user-name">Nome do Usuário</h2>
                 <p id="user-username">@username</p>

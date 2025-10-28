@@ -560,6 +560,10 @@
         transform: translateX(0);
     }
 
+    #mobile-zoom-in {
+        margin-left: 10px;
+    }
+
     #main-content {
         height: calc(100% - 56px);
         width: 100%;
@@ -585,8 +589,9 @@
         position: relative;
         padding: 0 10px;
         box-sizing: border-box;
-        margin-top: 100px;
-        margin-right: 16px;
+        margin-top: 60px;
+        margin-right: 1px;
+        margin-left: 1px;
     }
 
 

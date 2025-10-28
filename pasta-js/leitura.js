@@ -41,6 +41,7 @@ const elements = {
     alertMessage: document.getElementById('alert-message'),
     alertOkBtn: document.getElementById('alert-ok'),
     pageIndicator: document.getElementById('page-indicator'),
+    pageIndicator2: document.getElementById('page-indicator2'),
     mobileViewProgressBtn: document.getElementById('mobileViewProgressBtn'),
 
     // Novos elementos para mobile
@@ -119,9 +120,11 @@ function updateUI() {
     // Indicador de Página
     if (singlePage) {
         elements.pageIndicator.textContent = `Página ${state.currentPage} de ${totalPages}`;
+        elements.pageIndicator2.textContent = `Página ${state.currentPage} de ${totalPages}`;
     } else {
         const endPage = Math.min(state.currentPage + 1, totalPages);
         elements.pageIndicator.textContent = (state.currentPage === endPage)
+
             ? `Página ${state.currentPage} de ${totalPages}`
             : `Páginas ${state.currentPage}-${endPage} de ${totalPages}`;
     }
@@ -147,17 +150,44 @@ function navigate(direction) {
     }
 }
 
+let dynamicMaxScale = 1.0; // variável global (inicie com zoom padrão)
+
 function changeZoom(delta) {
     let newScale = state.scale + delta;
-    if (delta > 0 && elements.leftCanvas.style.height && parseFloat(elements.leftCanvas.style.height) > 0) {
-        const canvasHeight = parseFloat(elements.leftCanvas.style.height);
-        const pageHeight = canvasHeight / state.scale;
-        const availableHeight = elements.mainContent.clientHeight - 60;
-        if (pageHeight > 0) newScale = Math.min(newScale, availableHeight / pageHeight);
+    const MAX_SCALE_DESKTOP = 3.0;
+    const MAX_SCALE_MOBILE = 2.2;
+    const isMobile = window.innerWidth <= 768;
+    const MAX_SCALE = isMobile ? MAX_SCALE_MOBILE : MAX_SCALE_DESKTOP;
+    const marginBottom = isMobile ? 180 : 100;
+
+    if (delta > 0) {
+        const mainRect = elements.mainContent.getBoundingClientRect();
+        const indicatorRect = document.querySelector('.page-controls')?.getBoundingClientRect();
+        const bottomLimit = indicatorRect ? (indicatorRect.top - mainRect.top) : mainRect.height;
+        const availableHeight = bottomLimit - marginBottom;
+
+        if (elements.leftCanvas.style.height && parseFloat(elements.leftCanvas.style.height) > 0) {
+            const canvasHeight = parseFloat(elements.leftCanvas.style.height);
+            const pageHeight = canvasHeight / state.scale;
+            if (pageHeight > 0) {
+                const heightLimit = availableHeight / pageHeight;
+                dynamicMaxScale = Math.max(dynamicMaxScale, heightLimit); // mantém o maior limite
+            }
+        }
     }
-    state.scale = Math.max(state.MIN_SCALE, newScale);
+
+    // aplica o maior limite possível, mas sem passar do máximo absoluto
+    const maxAllowedScale = Math.min(dynamicMaxScale, MAX_SCALE);
+    newScale = Math.max(state.MIN_SCALE, Math.min(newScale, maxAllowedScale));
+
+    state.scale = newScale;
     renderBook();
 }
+
+
+
+
+
 
 // Carrega o PDF
 pdfjsLib.getDocument(pdfPath).promise.then(pdfDoc_ => {
@@ -402,7 +432,7 @@ function loadData() {
 document.getElementById("mobileViewProgressBtn").addEventListener("click", () => {
     document.getElementById("progressPopup").style.display = "block";
     carregarProgresso();
-  });
+});
 
 
 

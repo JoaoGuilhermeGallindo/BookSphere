@@ -32,7 +32,42 @@ try {
     if ($user) {
         $user_id = $user['id'];
 
-        // busca todos progressos do usuário
+        // Se for POST e ação de salvar progresso, processa a requisição
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $input = json_decode(file_get_contents('php://input'), true);
+            if (is_array($input) && isset($input['action']) && $input['action'] === 'save_progress') {
+                $book_identifier = trim($input['book_identifier'] ?? '');
+                $last_page = intval($input['last_page'] ?? 0);
+
+                if ($book_identifier === '' || $last_page < 0) {
+                    http_response_code(400);
+                    echo json_encode(['erro' => 'Dados inválidos para salvar progresso.']);
+                    exit;
+                }
+
+                // Verifica se já existe registro
+                $stmtCheck = $conn->prepare("SELECT id FROM user_reading_progress WHERE user_id = :uid AND book_identifier = :bid LIMIT 1");
+                $stmtCheck->execute(['uid' => $user_id, 'bid' => $book_identifier]);
+                $existing = $stmtCheck->fetch(PDO::FETCH_ASSOC);
+
+                if ($existing) {
+                    $stmtUpd = $conn->prepare("UPDATE user_reading_progress SET last_page = :lp WHERE id = :id");
+                    $stmtUpd->execute(['lp' => $last_page, 'id' => $existing['id']]);
+                } else {
+                    $stmtIns = $conn->prepare("INSERT INTO user_reading_progress (user_id, book_identifier, last_page) VALUES (:uid, :bid, :lp)");
+                    $stmtIns->execute(['uid' => $user_id, 'bid' => $book_identifier, 'lp' => $last_page]);
+                }
+
+                // Retorna o novo estado do registro
+                $stmt3 = $conn->prepare("SELECT book_identifier, last_page FROM user_reading_progress WHERE user_id = :uid");
+                $stmt3->execute(['uid' => $user_id]);
+                $allProgress = $stmt3->fetchAll(PDO::FETCH_ASSOC);
+                echo json_encode(['ok' => true, 'progress' => $allProgress]);
+                exit;
+            }
+        }
+
+        // busca todos progressos do usuário (GET)
         $stmt2 = $conn->prepare("SELECT book_identifier, last_page FROM user_reading_progress WHERE user_id = :uid");
         $stmt2->execute(['uid' => $user_id]);
         $progress = $stmt2->fetchAll(PDO::FETCH_ASSOC);

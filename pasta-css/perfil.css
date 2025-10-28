@@ -162,6 +162,35 @@ body {
     color: var(--secondary-color);
 }
 
+.progress-edit-wrap {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.progress-input {
+  width: 60px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+}
+
+.progress-save-btn {
+  background: #5c9adb;
+  color: #fff;
+  border: none;
+  padding: 6px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-save-btn i { font-size: 0.9rem; }
+
 /* Avatar */
 .profile-avatar-wrapper {
   position: relative;

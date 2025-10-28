@@ -193,10 +193,6 @@ function changeZoom(delta) {
 }
 
 
-
-
-
-
 // Carrega o PDF
 // --- SUBSTITUA PELO BLOCO ABAIXO ---
 

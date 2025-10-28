@@ -543,7 +543,7 @@ btn.addEventListener('click', () => {
 });
 
 document.getElementById("btn-Ler").addEventListener("click", () => {
-  window.location.href = `../livro/leitura.html?pdf=${encodeURIComponent(
+  window.location.href = `../livro/leitura.php?pdf=${encodeURIComponent(
     livro.pdf
   )}`;
 });

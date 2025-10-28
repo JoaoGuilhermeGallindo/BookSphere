@@ -76,14 +76,18 @@ document.addEventListener('DOMContentLoaded', async () => {
             else inProgress.push(item);
         });
 
-        // calcula tempo estimado: soma de páginas lidas * 1 minuto
-        let totalMinutes = 0;
-        inProgress.forEach(b => totalMinutes += b.lastPage);
-        concluded.forEach(b => totalMinutes += b.totalPages);
+        // Função para recalcular tempo total de leitura (1 minuto por página)
+        function recalcTempo() {
+            let totalMinutesLocal = 0;
+            inProgress.forEach(b => totalMinutesLocal += Number(b.lastPage || 0));
+            concluded.forEach(b => totalMinutesLocal += Number(b.totalPages || 0));
+            const hoursLocal = Math.floor(totalMinutesLocal / 60);
+            const minutesLocal = totalMinutesLocal % 60;
+            if (leituraContainer) leituraContainer.textContent = `${hoursLocal}h ${minutesLocal}m`;
+        }
 
-        const hours = Math.floor(totalMinutes / 60);
-        const minutes = totalMinutes % 60;
-        if (leituraContainer) leituraContainer.textContent = `${hours}h ${minutes}m`;
+        // calcula tempo inicial
+        recalcTempo();
 
         // Renderiza os cards nas colunas
         function createBookCard(book, isConcluded) {
@@ -113,6 +117,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             item.appendChild(coverWrapper);
 
             if (!isConcluded) {
+                // Barra de progresso
                 const barCont = document.createElement('div');
                 barCont.className = 'progress-bar-container';
                 const bar = document.createElement('div');
@@ -126,6 +131,76 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 item.appendChild(barCont);
                 item.appendChild(perc);
+
+                // Campo de edição do progresso (apenas para usuários logados)
+                const editWrap = document.createElement('div');
+                editWrap.className = 'progress-edit-wrap';
+
+                const input = document.createElement('input');
+                input.type = 'number';
+                input.min = 0;
+                input.max = book.totalPages;
+                input.value = book.lastPage;
+                input.className = 'progress-input';
+                input.title = 'Atualizar página lida (máx ' + book.totalPages + ')';
+
+                const saveBtn = document.createElement('button');
+                saveBtn.className = 'progress-save-btn';
+                saveBtn.type = 'button';
+                saveBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i>';
+
+                editWrap.appendChild(input);
+                editWrap.appendChild(saveBtn);
+                item.appendChild(editWrap);
+
+                // Handler de salvar progresso
+                saveBtn.addEventListener('click', async () => {
+                    const newPage = parseInt(input.value || '0', 10);
+                    if (isNaN(newPage) || newPage < 0) return alert('Informe um número válido de páginas.');
+                    const payload = { action: 'save_progress', book_identifier: book.pdf, last_page: newPage };
+                    try {
+                        const res = await fetch('../pasta-php/getUsers.php', {
+                            method: 'POST',
+                            credentials: 'include',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+                        if (!res.ok) {
+                            const t = await res.json().catch(() => ({}));
+                            return alert(t.erro || 'Falha ao salvar progresso.');
+                        }
+                        const updated = await res.json();
+                        // Atualiza valores locais e UI
+                        book.lastPage = newPage;
+                        book.percentage = Math.min(100, Math.round((book.lastPage / book.totalPages) * 100));
+                        bar.style.width = book.percentage + '%';
+                        perc.textContent = book.percentage + '%';
+
+                        // Se concluiu, mover para a coluna concluídos
+                        if (book.percentage >= 100) {
+                            // remove do grid atual
+                            if (item.parentNode) item.parentNode.removeChild(item);
+                            // atualiza arrays de estado: remove de inProgress e adiciona em concluded
+                            const idx = inProgress.findIndex(x => x.pdf === book.pdf);
+                            if (idx !== -1) inProgress.splice(idx, 1);
+                            if (!concluded.find(x => x.pdf === book.pdf)) concluded.push(book);
+                            // cria o card de concluído e adiciona
+                            const concludedCard = createBookCard(book, true);
+                            outGrid.appendChild(concludedCard);
+                        } else {
+                            // apenas atualiza o objeto em inProgress
+                            const idx2 = inProgress.findIndex(x => x.pdf === book.pdf);
+                            if (idx2 !== -1) inProgress[idx2].lastPage = book.lastPage;
+                            inProgress[idx2].percentage = book.percentage;
+                        }
+
+                        // Recalcula tempo total
+                        recalcTempo();
+                    } catch (e) {
+                        console.error(e);
+                        alert('Erro ao salvar progresso.');
+                    }
+                });
             }
 
             item.appendChild(title);
@@ -148,6 +223,34 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
     } catch (erro) {
-     
+        // Se ocorrer erro (normalmente usuário não logado), mostra mensagem curta e redireciona para login
+        // Usamos location.replace para não deixar o perfil em histórico (opção solicitada)
+        try {
+            const center = document.querySelector('.profile-center');
+            if (center) {
+                // cria um elemento de mensagem simples
+                const msg = document.createElement('div');
+                msg.style.padding = '20px';
+                msg.style.textAlign = 'center';
+                msg.style.fontWeight = '600';
+                msg.textContent = 'Você precisa entrar para acessar o perfil. Redirecionando...';
+                // limpa e insere mensagem
+                center.innerHTML = '';
+                center.appendChild(msg);
+            }
+
+            // espera 500ms para melhor UX, depois substitui a localização (sem histórico)
+            setTimeout(() => {
+                try {
+                    window.location.replace('../pasta-html/login.html');
+                } catch (e) {
+                    // se replace falhar, tenta href
+                    window.location.href = '../pasta-html/login.html';
+                }
+            }, 500);
+        } catch (e) {
+            // fallback simples: tenta redirecionar imediatamente
+            try { window.location.replace('../pasta-html/login.html'); } catch (er) { window.location.href = '../pasta-html/login.html'; }
+        }
     }
 });

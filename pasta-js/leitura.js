@@ -455,7 +455,7 @@ function toggleBookmark(pageNum, iconElement) {
         // Usuário está desmarcando a página
         state.bookmarkedPage = null;
         // Opcional: Você pode salvar a página 1 aqui para que ele volte ao início
-        // saveProgressToDB(1);
+        saveProgressToDB(1);
 
     } else {
         // Usuário está MARCANDO uma nova página

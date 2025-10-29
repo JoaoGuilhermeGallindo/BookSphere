@@ -38,6 +38,9 @@ try {
             if (is_array($input) && isset($input['action']) && $input['action'] === 'save_progress') {
                 $book_identifier = trim($input['book_identifier'] ?? '');
                 $last_page = intval($input['last_page'] ?? 0);
+                // se informado, limita last_page ao total de páginas informado pelo cliente
+                $total_pages = isset($input['total_pages']) ? intval($input['total_pages']) : 0;
+                if ($total_pages > 0 && $last_page > $total_pages) $last_page = $total_pages;
 
                 if ($book_identifier === '' || $last_page < 0) {
                     http_response_code(400);

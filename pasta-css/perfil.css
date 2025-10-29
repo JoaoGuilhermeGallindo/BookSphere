@@ -230,6 +230,119 @@ body {
 
 @keyframes spin { to { transform: rotate(360deg); } }
 
+/* Toasts (mensagens breves) */
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 10000;
+}
+
+.toast {
+  min-width: 240px;
+  max-width: 360px;
+  background: #fff;
+  padding: 12px 14px;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  transform: translateY(-8px);
+  opacity: 0;
+  animation: toast-in 300ms ease forwards;
+}
+
+.toast.success { border-left: 4px solid #28a745; }
+.toast.error { border-left: 4px solid #e55353; }
+
+.toast .t-icon { width: 36px; height: 36px; display:flex; align-items:center; justify-content:center; }
+.toast .t-body { flex: 1; font-size: 0.95rem; color: #222; }
+
+@keyframes toast-in { to { transform: translateY(0); opacity: 1; } }
+
+/* estilo do botão salvar (mais profissional) */
+.progress-save-btn {
+  background: linear-gradient(180deg,#3f8ad6,#1f6fbf);
+  color: #fff;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+  box-shadow: 0 6px 18px rgba(31,111,191,0.12);
+}
+
+.progress-save-btn:active { transform: translateY(1px) scale(.995); }
+.progress-save-btn[disabled] { opacity: 0.6; cursor: default; box-shadow: none; }
+
+/* Spinner pequeno dentro do botão (quando salvando) */
+.progress-save-btn.saving { position: relative; color: rgba(255,255,255,0.9); }
+.progress-save-btn.saving::after {
+  content: '';
+  position: absolute;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.45);
+  border-top-color: #fff;
+  right: 10px; top: 50%; transform: translateY(-50%);
+  animation: spin 0.8s linear infinite;
+}
+
+/* cards com transição mais sutil */
+.book-item {
+  padding: 10px;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.book-item:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
+
+/* modal com transição */
+.login-modal { opacity: 0; transition: opacity .18s ease; }
+.login-modal[hidden] { display: none; opacity: 0; }
+.login-modal:not([hidden]) { opacity: 1; }
+
+/* Professional book card layout */
+.book-item.professional { display:flex; flex-direction:column; background: linear-gradient(180deg,#fff,#fbfdff); border-radius:8px; padding:8px; }
+.cover-wrapper.professional { position: relative; overflow: hidden; border-radius:6px; }
+.cover-wrapper.professional .book-cover { width:100%; height:220px; object-fit:cover; display:block; }
+.percentage-badge { position:absolute; top:10px; left:10px; background: rgba(0,0,0,0.7); color:#fff; padding:6px 8px; border-radius:20px; font-weight:700; font-size:0.85rem; }
+.concluded-badge.professional { position:absolute; top:10px; right:10px; background: #28a745; color:#fff; padding:6px 8px; border-radius:8px; display:flex; align-items:center; justify-content:center; }
+.book-info { padding:10px 6px 6px; }
+.book-meta { color:#6b7280; font-size:0.85rem; margin-top:6px; }
+
+.progress-bar-container.professional { height:10px; background:#e6eefc; border-radius:6px; overflow:hidden; margin:8px 6px; }
+.progress-bar.professional { height:100%; background: linear-gradient(90deg,#3f8ad6,#1f6fbf); }
+
+.progress-controls { display:flex; gap:8px; align-items:center; padding:6px; }
+.progress-input.professional { width:70px; padding:8px; border-radius:6px; border:1px solid #d1d5db; }
+
+/* ensure concluded cards look slightly different */
+.book-item.professional .concluded-badge svg { display:block; }
+
+
+/* botão primário do modal */
+.btn-primary {
+  background: linear-gradient(180deg,#2563eb,#1e40af);
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 14px;
+  box-shadow: 0 8px 24px rgba(30,64,175,0.12);
+}
+.login-modal-actions { display:flex; justify-content:center; }
+
+.btn-primary:active { transform: translateY(1px); }
+.btn-primary:focus { outline: 3px solid rgba(37,99,235,0.18); }
+
 /* Avatar */
 .profile-avatar-wrapper {
   position: relative;

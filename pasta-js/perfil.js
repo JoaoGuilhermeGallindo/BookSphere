@@ -89,13 +89,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         // calcula tempo inicial
         recalcTempo();
 
-        // Renderiza os cards nas colunas
+        // Renderiza os cards nas colunas (layout mais profissional)
         function createBookCard(book, isConcluded) {
             const item = document.createElement('div');
-            item.className = 'book-item';
+            item.className = 'book-item professional';
 
+            // Cover + overlay
             const coverWrapper = document.createElement('div');
-            coverWrapper.className = 'cover-wrapper';
+            coverWrapper.className = 'cover-wrapper professional';
 
             const img = document.createElement('img');
             img.className = 'book-cover';
@@ -103,61 +104,79 @@ document.addEventListener('DOMContentLoaded', async () => {
             img.alt = book.title;
             coverWrapper.appendChild(img);
 
-            if (isConcluded) {
-                const badge = document.createElement('div');
-                badge.className = 'concluded-badge';
-                badge.innerHTML = '<i class="fa-solid fa-check"></i>';
-                coverWrapper.appendChild(badge);
+            // percentage badge (for in-progress)
+            if (!isConcluded) {
+                const pctBadge = document.createElement('div');
+                pctBadge.className = 'percentage-badge';
+                pctBadge.textContent = book.percentage + '%';
+                coverWrapper.appendChild(pctBadge);
+            } else {
+                const conclBadge = document.createElement('div');
+                conclBadge.className = 'concluded-badge professional';
+                conclBadge.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 16.17l-3.59-3.59L4 14l5 5 11-11-1.41-1.42L9 16.17z" fill="#fff"/></svg>';
+                coverWrapper.appendChild(conclBadge);
             }
 
+            // Title and meta area
+            const info = document.createElement('div');
+            info.className = 'book-info';
             const title = document.createElement('p');
             title.className = 'book-title';
             title.textContent = book.title;
+            const meta = document.createElement('div');
+            meta.className = 'book-meta';
+            meta.textContent = `${book.lastPage} / ${book.totalPages} páginas`;
+            info.appendChild(title);
+            info.appendChild(meta);
 
             item.appendChild(coverWrapper);
+            item.appendChild(info);
 
             if (!isConcluded) {
-                // Barra de progresso
+                // Progress bar and editable control
                 const barCont = document.createElement('div');
-                barCont.className = 'progress-bar-container';
+                barCont.className = 'progress-bar-container professional';
                 const bar = document.createElement('div');
-                bar.className = 'progress-bar';
+                bar.className = 'progress-bar professional';
                 bar.style.width = book.percentage + '%';
                 barCont.appendChild(bar);
 
-                const perc = document.createElement('div');
-                perc.className = 'progress-percentage';
-                perc.textContent = book.percentage + '%';
-
-                item.appendChild(barCont);
-                item.appendChild(perc);
-
-                // Campo de edição do progresso (apenas para usuários logados)
-                const editWrap = document.createElement('div');
-                editWrap.className = 'progress-edit-wrap';
+                const controls = document.createElement('div');
+                controls.className = 'progress-controls';
 
                 const input = document.createElement('input');
                 input.type = 'number';
                 input.min = 0;
                 input.max = book.totalPages;
                 input.value = book.lastPage;
-                input.className = 'progress-input';
+                input.className = 'progress-input professional';
                 input.title = 'Atualizar página lida (máx ' + book.totalPages + ')';
 
                 const saveBtn = document.createElement('button');
-                saveBtn.className = 'progress-save-btn';
+                saveBtn.className = 'progress-save-btn professional';
                 saveBtn.type = 'button';
                 saveBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i>';
 
-                editWrap.appendChild(input);
-                editWrap.appendChild(saveBtn);
-                item.appendChild(editWrap);
+                controls.appendChild(input);
+                controls.appendChild(saveBtn);
 
-                // Handler de salvar progresso
+                item.appendChild(barCont);
+                item.appendChild(controls);
+
+                // Handler de salvar progresso (envia totalPages também para consistência)
                 saveBtn.addEventListener('click', async () => {
                     const newPage = parseInt(input.value || '0', 10);
-                    if (isNaN(newPage) || newPage < 0) return alert('Informe um número válido de páginas.');
-                    const payload = { action: 'save_progress', book_identifier: book.pdf, last_page: newPage };
+                    if (isNaN(newPage) || newPage < 0) return showToast('Informe um número válido de páginas.', 'error');
+
+                    // Cap newPage to totalPages
+                    const capped = Math.min(newPage, Number(book.totalPages || 0));
+
+                    const payload = { action: 'save_progress', book_identifier: book.pdf, last_page: capped, total_pages: book.totalPages };
+
+                    // UX: desabilita botão e mostra spinner pequeno
+                    saveBtn.disabled = true;
+                    saveBtn.classList.add('saving');
+
                     try {
                         const res = await fetch('../pasta-php/getUsers.php', {
                             method: 'POST',
@@ -165,50 +184,64 @@ document.addEventListener('DOMContentLoaded', async () => {
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify(payload)
                         });
+
                         if (!res.ok) {
                             const t = await res.json().catch(() => ({}));
-                            return alert(t.erro || 'Falha ao salvar progresso.');
+                            showToast(t.erro || 'Falha ao salvar progresso.', 'error');
+                            return;
                         }
+
                         const updated = await res.json();
+
                         // Atualiza valores locais e UI
-                        book.lastPage = newPage;
+                        book.lastPage = capped;
                         book.percentage = Math.min(100, Math.round((book.lastPage / book.totalPages) * 100));
                         bar.style.width = book.percentage + '%';
-                        perc.textContent = book.percentage + '%';
+                        // update badge and meta
+                        const badge = coverWrapper.querySelector('.percentage-badge');
+                        if (badge) badge.textContent = book.percentage + '%';
+                        meta.textContent = `${book.lastPage} / ${book.totalPages} páginas`;
 
                         // Se concluiu, mover para a coluna concluídos
                         if (book.percentage >= 100) {
                             // remove do grid atual
                             if (item.parentNode) item.parentNode.removeChild(item);
-                            // atualiza arrays de estado: remove de inProgress e adiciona em concluded
+                            // atualiza arrays de estado
                             const idx = inProgress.findIndex(x => x.pdf === book.pdf);
                             if (idx !== -1) inProgress.splice(idx, 1);
                             if (!concluded.find(x => x.pdf === book.pdf)) concluded.push(book);
-                            // cria o card de concluído e adiciona
+                            // cria o card de concluído e adiciona (com badge)
                             const concludedCard = createBookCard(book, true);
                             outGrid.appendChild(concludedCard);
                         } else {
-                            // apenas atualiza o objeto em inProgress
+                            // atualiza objeto em inProgress
                             const idx2 = inProgress.findIndex(x => x.pdf === book.pdf);
-                            if (idx2 !== -1) inProgress[idx2].lastPage = book.lastPage;
-                            inProgress[idx2].percentage = book.percentage;
+                            if (idx2 !== -1) { inProgress[idx2].lastPage = book.lastPage; inProgress[idx2].percentage = book.percentage; }
                         }
 
-                        // Recalcula tempo total
                         recalcTempo();
+                        showToast('Progresso salvo com sucesso.', 'success');
+
                     } catch (e) {
                         console.error(e);
-                        alert('Erro ao salvar progresso.');
+                        showToast('Erro ao salvar progresso.', 'error');
+                    } finally {
+                        // reabilita botão
+                        saveBtn.disabled = false;
+                        saveBtn.classList.remove('saving');
                     }
                 });
             }
 
-            item.appendChild(title);
             return item;
         }
 
         const inGrid = document.getElementById('inprogress-grid');
         const outGrid = document.getElementById('concluded-grid');
+
+        // Ordena listas para exibição mais coerente (maior progresso primeiro)
+        inProgress.sort((a,b) => (b.percentage || 0) - (a.percentage || 0));
+        concluded.sort((a,b) => (b.lastPage || 0) - (a.lastPage || 0));
 
         if (inGrid) {
             if (inProgress.length === 0) inGrid.innerHTML = '<p>Sem livros em progresso.</p>';
@@ -222,16 +255,59 @@ document.addEventListener('DOMContentLoaded', async () => {
             else concluded.forEach(b => outGrid.appendChild(createBookCard(b, true)));
         }
 
+        // Função de toasts simples (sucesso / erro)
+        function showToast(message, type = 'success', timeout = 3200) {
+            try {
+                const container = document.getElementById('toast-container');
+                if (!container) return alert(message);
+                const toast = document.createElement('div');
+                toast.className = 'toast ' + (type === 'error' ? 'error' : 'success');
+                toast.setAttribute('role', 'status');
+
+                const icon = document.createElement('div');
+                icon.className = 't-icon';
+                // SVG icons inline (crisp for TCC presentation)
+                const svgError = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.001 10h2v5h-2z" fill="#e55353"/><path d="M11 16h2v2h-2z" fill="#e55353"/><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zM4 12a8 8 0 1016 0A8 8 0 004 12z" fill="#e55353"/></svg>';
+                const svgOk = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 16.17l-3.59-3.59L4 14l5 5 11-11-1.41-1.42L9 16.17z" fill="#28a745"/></svg>';
+                icon.innerHTML = type === 'error' ? svgError : svgOk;
+
+                const body = document.createElement('div');
+                body.className = 't-body';
+                body.textContent = message;
+
+                toast.appendChild(icon);
+                toast.appendChild(body);
+                container.appendChild(toast);
+
+                setTimeout(() => {
+                    toast.style.transition = 'opacity 220ms ease, transform 220ms ease';
+                    toast.style.opacity = '0';
+                    toast.style.transform = 'translateY(-6px)';
+                    setTimeout(() => container.removeChild(toast), 240);
+                }, timeout);
+            } catch (e) {
+                console.error('Toast error', e);
+                alert(message);
+            }
+        }
+
     } catch (erro) {
         // Se ocorrer erro (normalmente usuário não logado), mostra modal com spinner e redireciona para login
         try {
             const modal = document.getElementById('login-modal');
-            const redirectDelay = 500; // tempo em ms antes de redirecionar (ajustável)
+            const loginNowBtn = document.getElementById('login-now');
+            const redirectDelay = 800; // tempo em ms antes de redirecionar (ajustável para TCC)
             if (modal) {
                 modal.removeAttribute('hidden');
-                // Mantém foco para acessibilidade
-                const firstFocusable = modal.querySelector('button, [href], input, [tabindex]');
-                if (firstFocusable) firstFocusable.focus();
+                // Tenta dar foco para o botão 'Ir agora' para acessibilidade
+                if (loginNowBtn) loginNowBtn.focus();
+
+                // handler do botão para permitir redirecionamento imediato
+                if (loginNowBtn) {
+                    loginNowBtn.addEventListener('click', () => {
+                        try { window.location.replace('../pasta-html/login.html'); } catch (e) { window.location.href = '../pasta-html/login.html'; }
+                    });
+                }
             }
 
             setTimeout(() => {

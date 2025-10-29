@@ -204,7 +204,8 @@
  }
 
  .button-left {
-     margin-right: 12px
+     margin-right: 12px;
+     margin-bottom: 42px;
  }
 
  .button-right {
@@ -615,7 +616,7 @@
 
      /* Indicador padrão do livro (não usado aqui, apenas mantém compatibilidade) */
      #page-indicator {
-        display: none;
+         display: none;
      }
 
      /* ===== BARRA DE FERRAMENTAS MOBILE ===== */
@@ -810,4 +811,24 @@
 
  .popup-content button:hover {
      background-color: #0056b3;
+ }
+
+ /*
+=====================================================
+ HACK PARA PRESERVAR CORES DE MANGÁS E HQs
+=====================================================
+ Isto desativa o filtro de cor (inversão/sépia)
+ aplicado aos elementos <canvas> QUANDO o body
+ tiver uma classe de gênero específica.
+*/
+
+ .modo-noturno.genre-manga canvas,
+ .modo-noturno.genre-história-em-quadrinhos canvas,
+ .modo-sepia.genre-manga canvas,
+ .modo-sepia.genre-história-em-quadrinhos canvas {
+     /* * Remove qualquer filtro aplicado pela regra .modo-noturno,
+     * fazendo a página do livro voltar ao normal.
+     * O !important é necessário para garantir a sobreposição.
+    */
+     filter: none !important;
  }

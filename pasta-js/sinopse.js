@@ -498,7 +498,49 @@ const livros = {
     capa: "../Capas/DragonBallUm.webp",
     sinopse: "Son Goku é um pequeno órfão de coração puro, mas com uma tremenda força. Depois de viver tanto tempo isolado da civilização, ele recebe a inesperada visita de uma garota! Bulma lhe propõe uma parceria para buscar as sete Esferas do Dragão, que, quando reunidas, são capazes de realizar qualquer desejo! Perigos e adversários não faltarão no caminho dessa dupla inusitada, e os mais variados personagens marcarão presença nesta aventura cheia de humor!",
     pdf: "DragonBallUm.pdf",
+    genero: "História em Quadrinhos"
   },
+  "dragon-ball-dois": {
+    titulo: "Dragon Ball Vol. 2",
+    autor: "Akira Toriyama",
+    paginas: "197 Páginas - PDF",
+    paginas2: "197 Páginas - ONLINE",
+    capa: "../Capas/DragonBallDois.jpg",
+    sinopse: "Depois de passar tantos apuros, Goku, Bulma e seus companheiros seguem sua jornada e já conseguiram cinco das sete Esferas do Dragão!A sexta esfera já foi localizada, mas precisarão novamente da ajuda do Mestre Kame! E logo eles descobrirão também que há outros interessados na dádiva do Rei Dragão Sheng Long.",
+    pdf: "DragonBallDois.pdf",
+    genero: "História em Quadrinhos"
+  },
+  "invencível-sessenta": {
+    titulo: "Invencível Vol. 60",
+    autor: "Robert Kirkman",
+    paginas: "34 Páginas - PDF",
+    paginas2: "34 Páginas - ONLINE",
+    capa: "../Capas/Invencivel60.jpg",
+    sinopse: "A Vingança de Angstrom Levy. Após ser desfigurado por Mark em um confronto anterior, Angstrom Levy sobreviveu e usou seus poderes para viajar por dimensões e tratar seus ferimentos. No volume 60, ele retorna com um plano de vingança contra Mark. Usando sua tecnologia, Angstrom libera dezesseis versões malignas de Mark Grayson, recrutadas em diferentes dimensões, com a missão de causar o máximo de destruição possível.",
+    pdf: "Invencível60.pdf",
+    genero: "História em Quadrinhos"
+  },
+  "invencível-sessentaeum": {
+    titulo: "Invencível Vol. 61",
+    autor: "Robert Kirkman",
+    paginas: "22 Páginas - PDF",
+    paginas2: "22 Páginas - ONLINE",
+    capa: "../Capas/Invencivel61.jpg",
+    sinopse: "Após a devastadora invasão que acabou com cidades inteiras e deixou muitos heróis mortos ou hospitalizados, Mark Grayson (Invincible) vê-se sozinho no meio de um mundo em ruínas, encarregado de ajudar na reconstrução enquanto carrega culpa e dúvidas sobre o que aconteceu. Durante esse momento frágil, surge um novo e formidável inimigo: Conquest, um guerreiro Viltrumita que desafia Mark não apenas fisicamente, mas em seu papel como herói e como parte de algo maior.Mark então precisa decidir se continuará como salvador, se assumirá suas responsabilidades e como lidará com as consequências de ações que talvez nem tenha tomado diretamente — enquanto uma ameaça maior se aproxima.",
+    pdf: "Invencível61.pdf",
+    genero: "História em Quadrinhos"
+  },
+
+  "deadpool-mata-o-universo-marvel-edição1": {
+    titulo: "Deadpool Mata o Universo Marvel Edição 1",
+    autor: "Cullen Bunn ",
+    paginas: "24 Páginas - PDF",
+    paginas2: "24 Páginas - ONLINE",
+    capa: "../Capas/DeadPoolMataOUniversoMarvelUm.jpg",
+    sinopse: "A PIADA ACABOU! E se tudo o que você acha engraçado no Deadpool fosse, na verdade, perturbador? E se ele decidisse matar todo mundo do Universo Marvel? E se ele fizesse mesmo isso? Seria ENGRAÇADO para você? O Mercenário Tagarela joga tudo para o alto e coloca cada herói Marvel em sua mira neste gibi de terror sem igual! ",
+    pdf: "Deadpool Kills the Marvel Universe - 2012 (Marvel) - 001.pdf",
+    genero: "História em Quadrinhos"
+  }
 
 };
 
@@ -553,9 +595,11 @@ btn.addEventListener('click', () => {
 });
 
 document.getElementById("btn-Ler").addEventListener("click", () => {
-  window.location.href = `../livro/leitura.php?pdf=${encodeURIComponent(
-    livro.pdf
-  )}`;
+  // Assumindo que a variável 'livro.genero' existe (ex: "Manga", "Literatura", etc.)
+  const pdf = livro.pdf;
+  const genre = livro.genero; // <-- Pegue o gênero do objeto 'livro'
+
+  window.location.href = `../livro/leitura.php?pdf=${encodeURIComponent(pdf)}&genre=${encodeURIComponent(genre)}`;
 });
 
 const btnDownload = document.getElementById("btn-download");

@@ -354,14 +354,35 @@ const data = [
         titulo: "Dragon Ball Vol. 1",
         autor: "Akira Toriyama",
         capa: "../Capas/DragonBallUm.webp",
-        genero: "Manga"
+        genero: "Mangá"
     },
-       {
+    {
         id: "dragon-ball-dois",
         titulo: "Dragon Ball Vol. 2",
         autor: "Akira Toriyama",
         capa: "../Capas/DragonBallDois.jpg",
-        genero: "Manga"
+        genero: "Mangá"
+    },
+    {
+        id: "invencível-sessenta",
+        titulo: "Invencível Vol. 60",
+        autor: "Robert Kirkman",
+        capa: "../Capas/Invencivel60.jpg",
+        genero: "História em Quadrinhos"
+    },
+    {
+        id: "invencível-sessentaeum",
+        titulo: "Invencível Vol. 61",
+        autor: "Robert Kirkman",
+        capa: "../Capas/Invencivel61.jpg",
+        genero: "História em Quadrinhos"
+    },
+    {
+        id: "deadpool-mata-o-universo-marvel-edição1",
+        titulo: "Deadpool Mata o Universo Marvel Edição 1",
+        autor: "Cullen Bunn ",
+        capa: "../Capas/DeadPoolMataOUniversoMarvelUm.jpg",
+        genero: "História em Quadrinhos"
     }
 ];
 

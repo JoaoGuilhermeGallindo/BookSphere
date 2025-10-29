@@ -1,6 +1,10 @@
 // Setup de elementos
 const params = new URLSearchParams(window.location.search);
 const pdfFile = params.get("pdf");
+const bookGenre = params.get("genre") || 'default'; // Pega o gênero da URL
+// Converte o gênero para um nome de classe CSS (ex: "história-em-quadrinhos")
+const genreClass = `genre-${bookGenre.toLowerCase().replace(/ /g, '-')}`;
+document.body.classList.add(genreClass); // Adiciona a classe ao body na hora
 if (!pdfFile) {
     document.body.innerHTML = "<p>Arquivo PDF não especificado.</p>";
     throw new Error("PDF não especificado");
@@ -186,11 +190,35 @@ function changeZoom(delta) {
 
     // aplica o maior limite possível, mas sem passar do máximo absoluto
     const maxAllowedScale = Math.min(dynamicMaxScale, MAX_SCALE);
-    newScale = Math.max(state.MIN_SCALE, Math.min(newScale, maxAllowedScale));
+
+    // --- LÓGICA DE ZOOM MÍNIMO (CORREÇÃO COM ACENTOS) ---
+    let currentMinScale = state.MIN_SCALE; // Padrão é 0.5
+
+    // Pega o gênero e normaliza COMPLETAMENTE
+    // 1. toLowerCase() -> "história em quadrinhos"
+    // 2. replace() -> "história em quadrinhos" (sem hífens)
+    // 3. normalize().replace() -> "historia em quadrinhos" (SEM ACENTOS)
+    const genre = bookGenre.toLowerCase()
+        .replace(/-/g, ' ')
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+
+    // ADICIONE ESTE CONSOLE.LOG PARA TESTAR
+    console.log("Gênero normalizado para zoom:", genre);
+
+    // Agora a comparação vai funcionar
+    if (genre === 'manga' || genre === 'historia em quadrinhos') {
+        // Se for HQ ou Mangá, permite zoom out "infinito"
+        currentMinScale = 0.1;
+    }
+
+    newScale = Math.max(currentMinScale, Math.min(newScale, maxAllowedScale));
+    // --- FIM DA LÓGICA CORRIGIDA ---
 
     state.scale = newScale;
     renderBook();
 }
+
 
 
 // Carrega o PDF
@@ -484,9 +512,9 @@ let indiceModo = 0;
 // Função única que aplica o modo e atualiza TODOS os ícones
 function aplicarModo(modo) {
     // Aplica a classe no body
-    document.body.className = '';
-    document.body.classList.add(modo);
-
+    document.body.className = genreClass; // <-- CORREÇÃO AQUI
+    document.body.classList.add(modo);     // Adiciona o modo
+    //... (resto da função)
     // Atualiza o ícone do menu lateral (desktop)
     const iconDesktop = elements.themeIconContainer?.querySelector('i');
     if (iconDesktop) {

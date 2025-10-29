@@ -3,7 +3,8 @@ session_start();
 // Verifica sessão básica
 if (!isset($_SESSION['usuario']) || !isset($_SESSION['nome'])) {
     http_response_code(401);
-    echo json_encode(['erro' => 'Usuário não está logado.']);
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode(['erro' => 'Usuário não está logado.'], JSON_UNESCAPED_UNICODE);
     exit;
 }
 
@@ -34,9 +35,17 @@ try {
 
         // Se for POST e ação de salvar progresso, processa a requisição
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $input = json_decode(file_get_contents('php://input'), true);
-            if (is_array($input) && isset($input['action']) && $input['action'] === 'save_progress') {
-                $book_identifier = trim($input['book_identifier'] ?? '');
+            header('Content-Type: application/json; charset=utf-8');
+            $raw = file_get_contents('php://input');
+            $input = json_decode($raw, true);
+            if (!is_array($input)) {
+                http_response_code(400);
+                echo json_encode(['erro' => 'JSON inválido.'], JSON_UNESCAPED_UNICODE);
+                exit;
+            }
+
+            if (isset($input['action']) && $input['action'] === 'save_progress') {
+                $book_identifier = trim(substr($input['book_identifier'] ?? '', 0, 255)); // limitar tamanho
                 $last_page = intval($input['last_page'] ?? 0);
                 // se informado, limita last_page ao total de páginas informado pelo cliente
                 $total_pages = isset($input['total_pages']) ? intval($input['total_pages']) : 0;
@@ -44,7 +53,7 @@ try {
 
                 if ($book_identifier === '' || $last_page < 0) {
                     http_response_code(400);
-                    echo json_encode(['erro' => 'Dados inválidos para salvar progresso.']);
+                    echo json_encode(['erro' => 'Dados inválidos para salvar progresso.'], JSON_UNESCAPED_UNICODE);
                     exit;
                 }
 
@@ -65,9 +74,13 @@ try {
                 $stmt3 = $conn->prepare("SELECT book_identifier, last_page FROM user_reading_progress WHERE user_id = :uid");
                 $stmt3->execute(['uid' => $user_id]);
                 $allProgress = $stmt3->fetchAll(PDO::FETCH_ASSOC);
-                echo json_encode(['ok' => true, 'progress' => $allProgress]);
+                echo json_encode(['ok' => true, 'progress' => $allProgress], JSON_UNESCAPED_UNICODE);
                 exit;
             }
+            // se chegou aqui, ação inválida
+            http_response_code(400);
+            echo json_encode(['erro' => 'Ação inválida.'], JSON_UNESCAPED_UNICODE);
+            exit;
         }
 
         // busca todos progressos do usuário (GET)

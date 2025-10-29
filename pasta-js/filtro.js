@@ -348,6 +348,20 @@ const data = [
         autor: "José Saramago",
         capa: "../Capas/EsteMundoDaInjusticaGlobalizada.jpg",
         genero: "Ensaio"
+    },
+    {
+        id: "dragon-ball-um",
+        titulo: "Dragon Ball Vol. 1",
+        autor: "Akira Toriyama",
+        capa: "../Capas/DragonBallUm.webp",
+        genero: "Manga"
+    },
+       {
+        id: "dragon-ball-dois",
+        titulo: "Dragon Ball Vol. 2",
+        autor: "Akira Toriyama",
+        capa: "../Capas/DragonBallDois.jpg",
+        genero: "Manga"
     }
 ];
 

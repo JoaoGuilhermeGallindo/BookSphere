@@ -174,13 +174,13 @@ const livros = {
   "cidade-e-asserras-": {
     titulo: "A Cidade e as Serras",
     autor: "Eça de Queirós",
-    paginas: "79 Páginas - PDF",  
+    paginas: "79 Páginas - PDF",
     paginas2: "296 Páginas - ONLINE",
     capa: "../Capas/ACidadeEasSerras.jpg",
     sinopse:
       "Romance da última fase de Eça de Queirós, publicado em 1901, um ano após a morte do escritor. Nele são narradas as diferenças entre a vida rural e a urbana por meio da figura de Jacinto, fidalgo português que mora em Paris em meio a um aparato técnico e moderno que, segundo ele, traduz o homem civilizado, mas que não lhe dá satisfação e felicidade, as quais, para espanto de Jacinto, serão encontradas durante uma viagem à província natal, em meio à vida simples e campesina das serras portuguesas.",
     pdf: "ACidadeEasSerras.pdf",
-  },  
+  },
   "adao-e-eva": {
     titulo: "Adão e Eva",
     autor: "Machado de Assis",
@@ -490,6 +490,16 @@ const livros = {
     sinopse: `A viuvinha é a história curiosa de um homem que simula sua morte para não sucumbir à vergonha de uma situação financeira desastrada. Publicado em 1857, é o terceiro livro de José de Alencar. Como Senhora, Lucíola e Cinco minutos, A viuvinha se inclui entre os romances urbanos escritos pelo autor, que nos dão uma riquíssima descrição da vida na corte, a vida burguesa do Rio de Janeiro de meados do século XIX, seus costumes, modas e tipos característicos.`,
     pdf: "AViuvinha.pdf",
   },
+  "dragon-ball-um": {
+    titulo: "Dragon Ball Vol. 1",
+    autor: "Akira Toriyama",
+    paginas: "196 Páginas - PDF",
+    paginas2: "196 Páginas - ONLINE",
+    capa: "../Capas/DragonBallUm.webp",
+    sinopse: "Son Goku é um pequeno órfão de coração puro, mas com uma tremenda força. Depois de viver tanto tempo isolado da civilização, ele recebe a inesperada visita de uma garota! Bulma lhe propõe uma parceria para buscar as sete Esferas do Dragão, que, quando reunidas, são capazes de realizar qualquer desejo! Perigos e adversários não faltarão no caminho dessa dupla inusitada, e os mais variados personagens marcarão presença nesta aventura cheia de humor!",
+    pdf: "DragonBallUm.pdf",
+  },
+
 };
 
 document.addEventListener("DOMContentLoaded", () => {

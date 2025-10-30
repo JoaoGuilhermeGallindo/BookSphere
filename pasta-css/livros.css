@@ -3,6 +3,12 @@
 
 }
 
+/* Esconde a imagem padrão somente quando estiver logado */
+body.logado .profile-img img[src*="SemFoto.jpg"] {
+  display: none;
+}
+
+
 .breadcrumb {
   font-family: Arial, sans-serif;
   font-size: 14px;
@@ -211,31 +217,32 @@ body.modo-noturno .menu-lateral button {
   .livros-lista {
     grid-template-columns: repeat(4, 200px);
   }
+
   .input-container {
-  position: absolute;
-  left: 270px;
-  
-}
+    position: absolute;
+    left: 270px;
 
-.input-container i {
-  position: absolute;
-  top: 50%;
-  left: 10px;
-  transform: translateY(-50%);
-  color: #666;
-  font-size: 14px;
-  margin-top: 21px;
-}
+  }
 
-.input-container input {
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  outline: none;
-  /* largura mínima inicial */
-  transition: width 0.2s ease;
-  /* animação suave */
-  margin-top: 43px;
-}
+  .input-container i {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #666;
+    font-size: 14px;
+    margin-top: 21px;
+  }
+
+  .input-container input {
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+    /* largura mínima inicial */
+    transition: width 0.2s ease;
+    /* animação suave */
+    margin-top: 43px;
+  }
 }
 
 @media (max-width: 992px) {
@@ -375,6 +382,3 @@ body.modo-noturno .menu-lateral button {
   color: #666;
   font-size: 14px;
 }
-
-
-

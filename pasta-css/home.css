@@ -502,6 +502,11 @@ h2 {
     text-decoration: underline;
 }
 
+/* Esconde a imagem padrão somente quando estiver logado */
+body.logado .profile-img img[src*="SemFoto.jpg"] {
+  display: none;
+}
+
 .fim-direita {
     flex: 1;
     display: flex;

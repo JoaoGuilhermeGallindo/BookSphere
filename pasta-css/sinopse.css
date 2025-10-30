@@ -7,6 +7,11 @@
   margin-bottom: 150px;
 }
 
+/* Esconde a imagem padrão somente quando estiver logado */
+body.logado .profile-img img[src*="SemFoto.jpg"] {
+  display: none;
+}
+
 .conteudo>.sinopse,
 .conteudo>.botoes {
   margin-top: 2rem;

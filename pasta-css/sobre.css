@@ -10,6 +10,11 @@
     margin-top: 85px;
 }
 
+/* Esconde a imagem padrão somente quando estiver logado */
+body.logado .profile-img img[src*="SemFoto.jpg"] {
+  display: none;
+}
+
 body.modo-noturno .sobre {
     border: 2px solid white;
 }

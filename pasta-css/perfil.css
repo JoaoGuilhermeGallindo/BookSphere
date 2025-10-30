@@ -4,6 +4,11 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
+/* Esconde a imagem padrão somente quando estiver logado */
+body.logado .profile-img img[src*="SemFoto.jpg"] {
+  display: none;
+}
+
 /* Container principal (agora é só um container) */
 .profile-container {
     max-width: 1200px; /* Limita a largura no desktop */

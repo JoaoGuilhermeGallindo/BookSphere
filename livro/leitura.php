@@ -26,22 +26,8 @@
                     class="bi bi-pencil"></i></div>
             <div id="mobile-view-annotations-btn" class="toolbar-btn" title="Ver Anotações"><i
                     class="bi bi-journal-text"></i></div>
-            <div id="mobile-view-progress-btn" class="toolbar-btn" title="Pro">
-                <i class="bi bi-arrow-clockwise"></i>
-            </div>
         </div>
-        <!-- POPUP -->
-        <div id="progressPopup" class="popup">
-            <div class="popup-content">
-                <h3>Salvar Progresso de Leitura</h3>
-                <label for="paginaAtual">Digite a página onde parou:</label>
-                <input type="number" id="paginaAtual" min="1" placeholder="Ex: 120">
-                <button id="salvarProgressoBtn">Salvar</button>
-                <button id="fecharPopup">Fechar</button>
-                <hr>
-                <p id="resultadoProgresso"></p>
-            </div>
-        </div>
+      
         <div class="btn-expandir"><i id="btn-exp" class="bi bi-list"></i></div>
 
         <ul>
@@ -65,12 +51,6 @@
             <li class="item-menu">
                 <div id="view-annotations-btn" class="itens" title="Ver Anotações"><span class="icon"><i
                             class="bi bi-journal-text"></i></span><span class="txt-link">Ver Anotações</span></div>
-            </li>
-            <li class="item-menu">
-                <div id="mobileViewProgressBtn" class="itens" title="Progresso"><span class="icon"><i
-                            class="bi bi-arrow-clockwise"></i></span><span class="txt-link">Salvar Progresso</span>
-                </div>
-                </div>
             </li>
         </ul>
     </nav>

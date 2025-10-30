@@ -581,10 +581,6 @@
          display: none;
      }
 
-     #mobile-view-progress-btn {
-         margin-right: 20px;
-     }
-
      #main-content {
          height: calc(100% - 56px);
          width: 100%;
@@ -632,6 +628,16 @@
          width: 100%;
          position: fixed;
      }
+
+     /*
+ * TRUQUE PARA FORÇAR O AGRUPAMENTO COM SPACE-AROUND:
+ * Dizemos ao primeiro item para "comer" todo o espaço à sua esquerda
+ * e ao último item para "comer" todo o espaço à sua direita.
+*/
+     .mobile-toolbar #mobile-zoom-in {
+         margin-left: -17px;
+     }
+
 
      .modo-noturno .mobile-toolbar {
          background-color: #000;

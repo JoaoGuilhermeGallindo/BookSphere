@@ -58,21 +58,38 @@ $action = $_REQUEST['action'] ?? ''; // Pega a ação (save ou load)
 if ($action === 'save' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $book_id = $_POST['book_id'] ?? null;
     $page = $_POST['page'] ?? null;
+    // --- NOVAS VARIÁVEIS ---
+    $total_pages = $_POST['total_pages'] ?? 0;
+    $book_title = $_POST['book_title'] ?? 'Título Desconhecido';
+    $book_cover = $_POST['book_cover'] ?? '../IMAGENS/SemFoto.jpg';
+    $book_genre = $_POST['book_genre'] ?? 'default';
 
     if (!$book_id || !$page) {
         echo json_encode(['status' => 'error', 'message' => 'Parâmetros ausentes']);
         exit;
     }
 
-    $sql = "INSERT INTO user_reading_progress (user_id, book_identifier, last_page) 
-            VALUES (:user_id, :book_id, :page)
-            ON DUPLICATE KEY UPDATE last_page = :page";
+    // --- SQL ATUALIZADO ---
+    $sql = "INSERT INTO user_reading_progress 
+                (user_id, book_identifier, last_page, total_pages, book_title, book_cover, book_genre) 
+            VALUES 
+                (:user_id, :book_id, :page, :total_pages, :book_title, :book_cover, :book_genre)
+            ON DUPLICATE KEY UPDATE 
+                last_page = :page, 
+                total_pages = :total_pages, 
+                book_title = :book_title, 
+                book_cover = :book_cover,
+                book_genre = :book_genre";
     
     $stmt = $conn->prepare($sql);
     $stmt->execute([
-        'user_id' => $user_id, // Usando o ID numérico que encontramos
+        'user_id' => $user_id,
         'book_id' => $book_id, 
-        'page' => $page
+        'page' => $page,
+        'total_pages' => $total_pages,
+        'book_title' => $book_title,
+        'book_cover' => $book_cover,
+        'book_genre' => $book_genre
     ]);
 
     echo json_encode(['status' => 'success', 'message' => 'Progresso salvo']);

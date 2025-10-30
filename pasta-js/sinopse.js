@@ -594,12 +594,24 @@ btn.addEventListener('click', () => {
   }, 2100);
 });
 
-document.getElementById("btn-Ler").addEventListener("click", () => {
-  // Assumindo que a variável 'livro.genero' existe (ex: "Manga", "Literatura", etc.)
-  const pdf = livro.pdf;
-  const genre = livro.genero; // <-- Pegue o gênero do objeto 'livro'
+// Este código deve estar na sua página de 'livros.html' ou 'livros.js'
+// ... (seu código que define o objeto 'livro') ...
 
-  window.location.href = `../livro/leitura.php?pdf=${encodeURIComponent(pdf)}&genre=${encodeURIComponent(genre)}`;
+// Assumindo que seu objeto 'livro' tem:
+// livro.pdf (ex: "A-Carteira.pdf")
+// livro.genero (ex: "Literatura")
+// livro.titulo (ex: "A Carteira")
+// livro.capa (ex: "../Capas/A-Carteira.jpg")
+
+document.getElementById("btn-Ler").addEventListener("click", () => {
+  // Nós vamos passar TODOS os dados do livro pela URL
+  const params = new URLSearchParams();
+  params.set('pdf', livro.pdf);
+  params.set('genre', livro.genero);
+  params.set('title', livro.titulo); // <-- NOVO
+  params.set('cover', livro.capa);   // <-- NOVO
+
+  window.location.href = `../livro/leitura.php?${params.toString()}`;
 });
 
 const btnDownload = document.getElementById("btn-download");

@@ -1,9 +1,12 @@
 // Setup de elementos
 const params = new URLSearchParams(window.location.search);
 const pdfFile = params.get("pdf");
-const bookGenre = params.get("genre") || 'default'; // Pega o gênero da URL
+const bookGenre = params.get("genre") || 'default';
+const bookTitle = params.get("title") || 'Título Desconhecido'; // <-- NOVO
+const bookCover = params.get("cover") || '../IMAGENS/SemFoto.jpg'; // <-- NOVO
 // Converte o gênero para um nome de classe CSS (ex: "história-em-quadrinhos")
 const genreClass = `genre-${bookGenre.toLowerCase().replace(/ /g, '-')}`;
+// ... (resto do seu código)
 document.body.classList.add(genreClass); // Adiciona a classe ao body na hora
 if (!pdfFile) {
     document.body.innerHTML = "<p>Arquivo PDF não especificado.</p>";
@@ -370,11 +373,14 @@ async function saveProgressToDB(pageNumber) {
     formData.append('action', 'save');
     formData.append('book_id', PDF_BOOK_ID);
     formData.append('page', pageNumber);
+    formData.append('total_pages', state.pdfDoc.numPages); // <-- NOVO
+    formData.append('book_title', bookTitle);  // <-- NOVO
+    formData.append('book_cover', bookCover); // <-- NOVO
+    formData.append('book_genre', bookGenre); // <-- NOVO
 
     try {
-        // ATENÇÃO: Verifique se o caminho 'progress_handler.php' está correto
-        // Pela sua estrutura de pastas, parece estar correto.
         const response = await fetch('../pasta-php/progress_handler.php', {
+            // ... (resto da função)
             method: 'POST',
             body: formData
         });
@@ -479,10 +485,17 @@ function findAnnotationById(id) {
 // Bookmarks
 // --- SUBSTITUA PELA VERSÃO ABAIXO ---
 function toggleBookmark(pageNum, iconElement) {
+    // --- ADICIONE ESTA VERIFICAÇÃO ---
+    if (!IS_LOGGED_IN) {
+        // Usa a sua função de alerta existente
+        showAlert("É preciso estar logado para salvar seu progresso.");
+        return; // Impede que o resto da função execute
+    }
+    // --- FIM DA VERIFICAÇÃO ---
+
     if (state.bookmarkedPage === pageNum) {
         // Usuário está desmarcando a página
         state.bookmarkedPage = null;
-        // Opcional: Você pode salvar a página 1 aqui para que ele volte ao início
         saveProgressToDB(1);
 
     } else {
@@ -535,20 +548,35 @@ function aplicarModo(modo) {
     localStorage.setItem("themeMode", modo);
 }
 // Carregar dados
+// Carregar dados
 function saveData() {
     const data = {
-        annotations: state.annotations,
-        bookmarkedPage: state.bookmarkedPage // Alterado
+        annotations: state.annotations
+        // bookmarkedPage será adicionada apenas se logado
     };
+
+    // Só salva a página marcada no localStorage se estiver logado
+    // (Isso age como um cache local para o DB)
+    if (IS_LOGGED_IN) {
+        data.bookmarkedPage = state.bookmarkedPage;
+    }
+
     localStorage.setItem(storageKey, JSON.stringify(data));
 }
 function loadData() {
     const savedData = localStorage.getItem(storageKey);
     if (savedData) {
         const data = JSON.parse(savedData);
-        state.annotations = data.annotations || [];
-        state.bookmarkedPage = data.bookmarkedPage || null; // Alterado
+        state.annotations = data.annotations || []; // Anotações sempre carregam
+
+        // Só carrega a página marcada do localStorage se estiver logado
+        if (IS_LOGGED_IN) {
+            state.bookmarkedPage = data.bookmarkedPage || null;
+        } else {
+            state.bookmarkedPage = null; // Garante que está nulo se não logado
+        }
     }
+    // ... (resto da função)
     // ... (resto da função)
     const modoSalvo = localStorage.getItem("themeMode") || "modo-claro";
     indiceModo = modos.indexOf(modoSalvo);

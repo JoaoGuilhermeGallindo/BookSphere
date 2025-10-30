@@ -231,6 +231,10 @@ h1 {
 
 @media (max-width: 768px) {
 
+  /* Esconde a imagem padrão somente quando estiver logado */
+  body.logado .profile-img img[src*="SemFoto.jpg"] {
+    display: none;
+  }
 
   .container {
     display: flex;

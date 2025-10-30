@@ -12,7 +12,7 @@
 
 /* Esconde a imagem padrão somente quando estiver logado */
 body.logado .profile-img img[src*="SemFoto.jpg"] {
-  display: none;
+    display: none;
 }
 
 body.modo-noturno .sobre {
@@ -45,12 +45,12 @@ body.modo-sepia .sobre {
     margin-bottom: 15px;
 }
 
-  .sobre .Texto h2{
-        display: flex;
-        text-align: justify;
-        font-size: 23px;
-        margin: 0;
-    }
+.sobre .Texto h2 {
+    display: flex;
+    text-align: justify;
+    font-size: 23px;
+    margin: 0;
+}
 
 
 .sobre .foto {
@@ -74,7 +74,12 @@ body.modo-sepia .sobre {
         margin-top: 85px;
     }
 
-    .sobre .Texto h2{
+    /* Esconde a imagem padrão somente quando estiver logado */
+    body.logado .profile-img img[src*="SemFoto.jpg"] {
+        display: none;
+    }
+
+    .sobre .Texto h2 {
         display: flex;
         text-align: justify;
         font-size: 18px;

@@ -11,160 +11,176 @@ body.logado .profile-img img[src*="SemFoto.jpg"] {
 
 /* Container principal (agora é só um container) */
 .profile-container {
-    max-width: 1200px; /* Limita a largura no desktop */
-    margin: 60px auto;
-    padding: 0 20px;
-    margin-bottom: 100px; /* Espaço antes do rodapé */
-    margin-top: 150px;  /* Espaço depois do cabeçalho */
+  max-width: 1200px;
+  /* Limita a largura no desktop */
+  margin: 60px auto;
+  padding: 0 20px;
+  margin-bottom: 100px;
+  /* Espaço antes do rodapé */
+  margin-top: 150px;
+  /* Espaço depois do cabeçalho */
 }
 
 /* 1. O NOVO CARD DE PERFIL NO TOPO */
 .profile-header-card {
-    /* Mágica pra centralizar tudo! */
-    display: flex;
-    flex-direction: column; /* Um item embaixo do outro */
-    align-items: center;    /* Tudo alinhado no centro */
-    
-    width: 100%;
-    margin-bottom: 60px; /* Espaço grande antes das estantes */
+  /* Mágica pra centralizar tudo! */
+  display: flex;
+  flex-direction: column;
+  /* Um item embaixo do outro */
+  align-items: center;
+  /* Tudo alinhado no centro */
+
+  width: 100%;
+  margin-bottom: 60px;
+  /* Espaço grande antes das estantes */
 }
 
 /* O Avatar (círculo da foto) */
 .profile-avatar-wrapper {
-    width: 170px;
-    height: 170px;
-    margin-bottom: 1.2rem;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 4px solid #5c9adb;
+  width: 170px;
+  height: 170px;
+  margin-bottom: 1.2rem;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid #5c9adb;
 }
 
 #profile-avatar {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* Nomes */
 #user-name {
-    font-size: 1.6rem;
-    margin: 0;
-    font-weight: 600;
-    color: var(--text-color);
+  font-size: 1.6rem;
+  margin: 0;
+  font-weight: 600;
+  color: var(--text-color);
 }
 
 #user-username {
-    font-size: 1rem;
-    color: var(--secondary-color);
-    margin-top: 4px;
+  font-size: 1rem;
+  color: var(--secondary-color);
+  margin-top: 4px;
 }
 
 /* * AQUI O PULO DO GATO (Alinhamento do Tempo de Leitura) 
  * A gente colocou nome e tempo num 'flex' e alinhou no centro
 */
 .leitura-stats {
-    text-align: center; /* ALINHADO! */
-    margin-top: 25px;
+  text-align: center;
+  /* ALINHADO! */
+  margin-top: 25px;
 }
 
 .tempo-leitura-label {
-    font-size: 0.8rem;
-    color: var(--secondary-color);
-    font-weight: 600;
-    text-transform: uppercase;
-    margin: 0;
+  font-size: 0.8rem;
+  color: var(--secondary-color);
+  font-weight: 600;
+  text-transform: uppercase;
+  margin: 0;
 }
 
 .tempo-leitura-valor {
-    font-size: 1.6rem;
-    color: var(--text-color);
-    font-weight: 600;
-    margin: 4px 0 0 0;
+  font-size: 1.6rem;
+  color: var(--text-color);
+  font-weight: 600;
+  margin: 4px 0 0 0;
 }
 
 
 /* 2. ESTANTES DE LIVROS (Progresso e Concluídos) */
 .book-section {
-    width: 100%;
-    margin-bottom: 40px; /* Espaço entre as seções */
+  width: 100%;
+  margin-bottom: 40px;
+  /* Espaço entre as seções */
 }
 
 .book-section h2 {
-    /* O título ("PROGRESSO...", "CONCLUÍDOS...") */
-    font-size: 1.5rem;
-    color: var(--text-color);
-    text-align: left; /* Alinhado à esquerda da grade */
-    border-bottom: 2px solid #5c9adb; /* Uma linha azul bonita */
-    padding-bottom: 10px;
-    margin-bottom: 30px; /* Espaço antes da grade */
+  /* O título ("PROGRESSO...", "CONCLUÍDOS...") */
+  font-size: 1.5rem;
+  color: var(--text-color);
+  text-align: left;
+  /* Alinhado à esquerda da grade */
+  border-bottom: 2px solid #5c9adb;
+  /* Uma linha azul bonita */
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+  /* Espaço antes da grade */
 }
 
 /* 3. A "GRADE" DE LIVROS (Onde a mágica do Grid acontece) */
 .book-grid {
-    display: grid;
-    /* * Isso é CSS Grid moderno! 
+  display: grid;
+  /* * Isso é CSS Grid moderno! 
      * Ele cria colunas de 180px automaticamente
      * e preenche o espaço que sobrar. É responsivo!
     */
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 25px; /* Espaço entre os livros */
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 25px;
+  /* Espaço entre os livros */
 }
 
 /* O "CARD" DE CADA LIVRO */
 .book-item {
-    background-color: var(--card-background);
-    border-radius: 8px;
-    box-shadow: var(--shadow);
-    padding: 15px;
-    text-align: center;
-    transition: transform 0.2s ease;
+  background-color: var(--card-background);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.2s ease;
 }
 
 .book-item:hover {
-    transform: translateY(-5px); /* Efeito de levantar */
+  transform: translateY(-5px);
+  /* Efeito de levantar */
 }
 
 .book-cover {
-    width: 100%;
-    /* Proporção 2:3 (capa de livro padrão) */
-    aspect-ratio: 2 / 3; 
-    object-fit: cover;
-    border-radius: 4px;
-    margin-bottom: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  /* Proporção 2:3 (capa de livro padrão) */
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .book-title {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--text-color);
-    margin: 0;
-    /* Evita que o título quebre em 50 linhas */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0;
+  /* Evita que o título quebre em 50 linhas */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* A BARRA DE PROGRESSO (só pro de progresso) */
 .progress-bar-container {
-    width: 100%;
-    height: 8px;
-    background-color: #e0e0e0; /* Fundo cinza */
-    border-radius: 4px;
-    margin: 10px 0 5px 0;
-    overflow: hidden; /* Esconde o que sobrar da barra */
+  width: 100%;
+  height: 8px;
+  background-color: #e0e0e0;
+  /* Fundo cinza */
+  border-radius: 4px;
+  margin: 10px 0 5px 0;
+  overflow: hidden;
+  /* Esconde o que sobrar da barra */
 }
 
 .progress-bar {
-    height: 100%;
-    background-color: #5c9adb; /* A cor azul */
-    border-radius: 4px;
+  height: 100%;
+  background-color: #5c9adb;
+  /* A cor azul */
+  border-radius: 4px;
 }
 
 .progress-percentage {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--secondary-color);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--secondary-color);
 }
 
 .progress-edit-wrap {
@@ -194,7 +210,9 @@ body.logado .profile-img img[src*="SemFoto.jpg"] {
   justify-content: center;
 }
 
-.progress-save-btn i { font-size: 0.9rem; }
+.progress-save-btn i {
+  font-size: 0.9rem;
+}
 
 /* Modal de redirecionamento para login */
 .login-modal {
@@ -203,24 +221,34 @@ body.logado .profile-img img[src*="SemFoto.jpg"] {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0,0,0,0.45);
+  background: rgba(0, 0, 0, 0.45);
   z-index: 9999;
 }
 
-.login-modal[hidden] { display: none; }
+.login-modal[hidden] {
+  display: none;
+}
 
 .login-modal-content {
   background: #fff;
   padding: 24px 28px;
   border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   width: 320px;
   max-width: calc(100% - 40px);
   text-align: center;
 }
 
-.login-modal-content h3 { margin: 8px 0 6px; font-size: 1.05rem; }
-.login-modal-content p { margin: 0; color: #666; font-size: 0.95rem; }
+.login-modal-content h3 {
+  margin: 8px 0 6px;
+  font-size: 1.05rem;
+}
+
+.login-modal-content p {
+  margin: 0;
+  color: #666;
+  font-size: 0.95rem;
+}
 
 /* Spinner simples */
 .spinner {
@@ -228,12 +256,16 @@ body.logado .profile-img img[src*="SemFoto.jpg"] {
   height: 48px;
   margin: 0 auto 12px auto;
   border-radius: 50%;
-  border: 4px solid rgba(0,0,0,0.08);
+  border: 4px solid rgba(0, 0, 0, 0.08);
   border-top-color: #5c9adb;
   animation: spin 1s linear infinite;
 }
 
-@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 /* Toasts (mensagens breves) */
 .toast-container {
@@ -252,7 +284,7 @@ body.logado .profile-img img[src*="SemFoto.jpg"] {
   background: #fff;
   padding: 12px 14px;
   border-radius: 8px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
   display: flex;
   gap: 10px;
   align-items: center;
@@ -261,17 +293,38 @@ body.logado .profile-img img[src*="SemFoto.jpg"] {
   animation: toast-in 300ms ease forwards;
 }
 
-.toast.success { border-left: 4px solid #28a745; }
-.toast.error { border-left: 4px solid #e55353; }
+.toast.success {
+  border-left: 4px solid #28a745;
+}
 
-.toast .t-icon { width: 36px; height: 36px; display:flex; align-items:center; justify-content:center; }
-.toast .t-body { flex: 1; font-size: 0.95rem; color: #222; }
+.toast.error {
+  border-left: 4px solid #e55353;
+}
 
-@keyframes toast-in { to { transform: translateY(0); opacity: 1; } }
+.toast .t-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toast .t-body {
+  flex: 1;
+  font-size: 0.95rem;
+  color: #222;
+}
+
+@keyframes toast-in {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 
 /* estilo do botão salvar (mais profissional) */
 .progress-save-btn {
-  background: linear-gradient(180deg,#3f8ad6,#1f6fbf);
+  background: linear-gradient(180deg, #3f8ad6, #1f6fbf);
   color: #fff;
   border: none;
   padding: 8px 10px;
@@ -281,22 +334,36 @@ body.logado .profile-img img[src*="SemFoto.jpg"] {
   align-items: center;
   justify-content: center;
   transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
-  box-shadow: 0 6px 18px rgba(31,111,191,0.12);
+  box-shadow: 0 6px 18px rgba(31, 111, 191, 0.12);
 }
 
-.progress-save-btn:active { transform: translateY(1px) scale(.995); }
-.progress-save-btn[disabled] { opacity: 0.6; cursor: default; box-shadow: none; }
+.progress-save-btn:active {
+  transform: translateY(1px) scale(.995);
+}
+
+.progress-save-btn[disabled] {
+  opacity: 0.6;
+  cursor: default;
+  box-shadow: none;
+}
 
 /* Spinner pequeno dentro do botão (quando salvando) */
-.progress-save-btn.saving { position: relative; color: rgba(255,255,255,0.9); }
+.progress-save-btn.saving {
+  position: relative;
+  color: rgba(255, 255, 255, 0.9);
+}
+
 .progress-save-btn.saving::after {
   content: '';
   position: absolute;
-  width: 14px; height: 14px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  border: 2px solid rgba(255,255,255,0.45);
+  border: 2px solid rgba(255, 255, 255, 0.45);
   border-top-color: #fff;
-  right: 10px; top: 50%; transform: translateY(-50%);
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
   animation: spin 0.8s linear infinite;
 }
 
@@ -305,35 +372,120 @@ body.logado .profile-img img[src*="SemFoto.jpg"] {
   padding: 10px;
   transition: transform .18s ease, box-shadow .18s ease;
 }
-.book-item:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
+
+.book-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
 
 /* modal com transição */
-.login-modal { opacity: 0; transition: opacity .18s ease; }
-.login-modal[hidden] { display: none; opacity: 0; }
-.login-modal:not([hidden]) { opacity: 1; }
+.login-modal {
+  opacity: 0;
+  transition: opacity .18s ease;
+}
+
+.login-modal[hidden] {
+  display: none;
+  opacity: 0;
+}
+
+.login-modal:not([hidden]) {
+  opacity: 1;
+}
 
 /* Professional book card layout */
-.book-item.professional { display:flex; flex-direction:column; background: linear-gradient(180deg,#fff,#fbfdff); border-radius:8px; padding:8px; }
-.cover-wrapper.professional { position: relative; overflow: hidden; border-radius:6px; }
-.cover-wrapper.professional .book-cover { width:100%; height:220px; object-fit:cover; display:block; }
-.percentage-badge { position:absolute; top:10px; left:10px; background: rgba(0,0,0,0.7); color:#fff; padding:6px 8px; border-radius:20px; font-weight:700; font-size:0.85rem; }
-.concluded-badge.professional { position:absolute; top:10px; right:10px; background: #28a745; color:#fff; padding:6px 8px; border-radius:8px; display:flex; align-items:center; justify-content:center; }
-.book-info { padding:10px 6px 6px; }
-.book-meta { color:#6b7280; font-size:0.85rem; margin-top:6px; }
+.book-item.professional {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #fff, #fbfdff);
+  border-radius: 8px;
+  padding: 8px;
+}
 
-.progress-bar-container.professional { height:10px; background:#e6eefc; border-radius:6px; overflow:hidden; margin:8px 6px; }
-.progress-bar.professional { height:100%; background: linear-gradient(90deg,#3f8ad6,#1f6fbf); }
+.cover-wrapper.professional {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+}
 
-.progress-controls { display:flex; gap:8px; align-items:center; padding:6px; }
-.progress-input.professional { width:70px; padding:8px; border-radius:6px; border:1px solid #d1d5db; }
+.cover-wrapper.professional .book-cover {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.percentage-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 6px 8px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.concluded-badge.professional {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #28a745;
+  color: #fff;
+  padding: 6px 8px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.book-info {
+  padding: 10px 6px 6px;
+}
+
+.book-meta {
+  color: #6b7280;
+  font-size: 0.85rem;
+  margin-top: 6px;
+}
+
+.progress-bar-container.professional {
+  height: 10px;
+  background: #e6eefc;
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 8px 6px;
+}
+
+.progress-bar.professional {
+  height: 100%;
+  background: linear-gradient(90deg, #3f8ad6, #1f6fbf);
+}
+
+.progress-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 6px;
+}
+
+.progress-input.professional {
+  width: 70px;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+}
 
 /* ensure concluded cards look slightly different */
-.book-item.professional .concluded-badge svg { display:block; }
+.book-item.professional .concluded-badge svg {
+  display: block;
+}
 
 
 /* botão primário do modal */
 .btn-primary {
-  background: linear-gradient(180deg,#2563eb,#1e40af);
+  background: linear-gradient(180deg, #2563eb, #1e40af);
   color: #fff;
   border: none;
   padding: 10px 14px;
@@ -341,12 +493,21 @@ body.logado .profile-img img[src*="SemFoto.jpg"] {
   cursor: pointer;
   font-weight: 600;
   margin-top: 14px;
-  box-shadow: 0 8px 24px rgba(30,64,175,0.12);
+  box-shadow: 0 8px 24px rgba(30, 64, 175, 0.12);
 }
-.login-modal-actions { display:flex; justify-content:center; }
 
-.btn-primary:active { transform: translateY(1px); }
-.btn-primary:focus { outline: 3px solid rgba(37,99,235,0.18); }
+.login-modal-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+.btn-primary:focus {
+  outline: 3px solid rgba(37, 99, 235, 0.18);
+}
 
 /* Avatar */
 .profile-avatar-wrapper {
@@ -464,6 +625,11 @@ body.logado .profile-img img[src*="SemFoto.jpg"] {
 
 @media (max-width: 768px) {
 
+  /* Esconde a imagem padrão somente quando estiver logado */
+  body.logado .profile-img img[src*="SemFoto.jpg"] {
+    display: none;
+  }
+
   #user-name {
     font-size: 1.1rem;
     margin: 1rem 0 0.4rem;
@@ -492,9 +658,11 @@ body.logado .profile-img img[src*="SemFoto.jpg"] {
 
 .books-scroll {
   /* Limita a altura a exibir 3 linhas de cards e permite scroll vertical */
-  max-height: 760px; /* valor pensado para ~3 linhas de 4 cards */
+  max-height: 760px;
+  /* valor pensado para ~3 linhas de 4 cards */
   overflow-y: auto;
-  padding-right: 8px; /* espaço para scrollbar */
+  padding-right: 8px;
+  /* espaço para scrollbar */
 }
 
 .profile-center {
@@ -514,7 +682,8 @@ body.logado .profile-img img[src*="SemFoto.jpg"] {
 
 .book-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* sempre 4 colunas como pediu */
+  grid-template-columns: repeat(4, 1fr);
+  /* sempre 4 colunas como pediu */
   gap: 18px;
   align-items: start;
 }
@@ -536,13 +705,15 @@ body.logado .profile-img img[src*="SemFoto.jpg"] {
   margin-top: 8px;
 }
 
-.progress-bar-container { margin-bottom: 6px; }
+.progress-bar-container {
+  margin-bottom: 6px;
+}
 
 .concluded-badge {
   position: absolute;
   top: 8px;
   right: 8px;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   color: #fff;
   padding: 6px;
   border-radius: 50%;
@@ -551,16 +722,37 @@ body.logado .profile-img img[src*="SemFoto.jpg"] {
   justify-content: center;
 }
 
-.book-item .cover-wrapper { position: relative; }
+.book-item .cover-wrapper {
+  position: relative;
+}
 
 /* Responsivo: em telas pequenas, empilha as colunas */
 @media (max-width: 1000px) {
-  .profile-layout { grid-template-columns: 1fr; }
-  .book-grid { grid-template-columns: repeat(3, 1fr); }
-  .books-column { order: 2; }
-  .profile-center { order: 1; margin-bottom: 20px; }
+  .profile-layout {
+    grid-template-columns: 1fr;
+  }
+
+  /* Esconde a imagem padrão somente quando estiver logado */
+  body.logado .profile-img img[src*="SemFoto.jpg"] {
+    display: none;
+  }
+
+  .book-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .books-column {
+    order: 2;
+  }
+
+  .profile-center {
+    order: 1;
+    margin-bottom: 20px;
+  }
 }
 
 @media (max-width: 600px) {
-  .book-grid { grid-template-columns: repeat(2, 1fr); }
+  .book-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

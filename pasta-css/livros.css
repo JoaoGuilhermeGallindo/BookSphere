@@ -218,6 +218,11 @@ body.modo-noturno .menu-lateral button {
     grid-template-columns: repeat(4, 200px);
   }
 
+  /* Esconde a imagem padrão somente quando estiver logado */
+  body.logado .profile-img img[src*="SemFoto.jpg"] {
+    display: none;
+  }
+
   .input-container {
     position: absolute;
     left: 270px;
@@ -246,6 +251,11 @@ body.modo-noturno .menu-lateral button {
 }
 
 @media (max-width: 992px) {
+
+  /* Esconde a imagem padrão somente quando estiver logado */
+  body.logado .profile-img img[src*="SemFoto.jpg"] {
+    display: none;
+  }
 
   body {
     padding-top: 0;

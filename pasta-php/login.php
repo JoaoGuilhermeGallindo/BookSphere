@@ -37,6 +37,7 @@ if (password_verify($senha, $user['senha'])) {
     $_SESSION['usuario'] = $user['usuario'];
     $_SESSION['nome']    = $user['nome']; // Certifique-se de que existe um campo 'nome'
     $_SESSION['imagem']  = $user['imagem'];
+    $_SESSION['reader_theme'] = $user['reader_theme'];
 
     echo "sucesso";
 } else {

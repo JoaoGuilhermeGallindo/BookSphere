@@ -169,30 +169,7 @@ let dynamicMaxScale = 1.0; // variável global (inicie com zoom padrão)
 
 function changeZoom(delta) {
     let newScale = state.scale + delta;
-    const MAX_SCALE_DESKTOP = 3.0;
-    const MAX_SCALE_MOBILE = 2.2;
-    const isMobile = window.innerWidth <= 768;
-    const MAX_SCALE = isMobile ? MAX_SCALE_MOBILE : MAX_SCALE_DESKTOP;
-    const marginBottom = isMobile ? 180 : 100;
-
-    if (delta > 0) {
-        const mainRect = elements.mainContent.getBoundingClientRect();
-        const indicatorRect = document.querySelector('.page-controls')?.getBoundingClientRect();
-        const bottomLimit = indicatorRect ? (indicatorRect.top - mainRect.top) : mainRect.height;
-        const availableHeight = bottomLimit - marginBottom;
-
-        if (elements.leftCanvas.style.height && parseFloat(elements.leftCanvas.style.height) > 0) {
-            const canvasHeight = parseFloat(elements.leftCanvas.style.height);
-            const pageHeight = canvasHeight / state.scale;
-            if (pageHeight > 0) {
-                const heightLimit = availableHeight / pageHeight;
-                dynamicMaxScale = Math.max(dynamicMaxScale, heightLimit); // mantém o maior limite
-            }
-        }
-    }
-
-    // aplica o maior limite possível, mas sem passar do máximo absoluto
-    const maxAllowedScale = Math.min(dynamicMaxScale, MAX_SCALE);
+    
 
     // --- LÓGICA DE ZOOM MÍNIMO (CORREÇÃO COM ACENTOS) ---
     let currentMinScale = state.MIN_SCALE; // Padrão é 0.5
@@ -215,7 +192,7 @@ function changeZoom(delta) {
         currentMinScale = 0.1;
     }
 
-    newScale = Math.max(currentMinScale, Math.min(newScale, maxAllowedScale));
+    newScale = Math.max(currentMinScale, newScale);
     // --- FIM DA LÓGICA CORRIGIDA ---
 
     state.scale = newScale;
@@ -235,8 +212,8 @@ function changeZoom(delta) {
         const pdfDoc_ = await pdfjsLib.getDocument(pdfPath).promise;
         state.pdfDoc = pdfDoc_;
 
-        // 1. Carrega dados locais (anotações, e marcador salvo no localStorage)
         loadData();
+        await loadNotesFromDB(); // <-- ADICIONE ESTA LINHA
 
         let savedPage = null;
 
@@ -255,9 +232,9 @@ function changeZoom(delta) {
         }
 
         // Se não encontrou no DB, usa o do localStorage (se houver)
-        if (!savedPage && state.bookmarkedPage) {
-            savedPage = state.bookmarkedPage;
-        }
+       // if (!savedPage && state.bookmarkedPage) {
+        //    savedPage = state.bookmarkedPage;
+       // }
 
         // 3. SE TEMOS UMA PÁGINA SALVA (DO DB OU LOCALSTORAGE)
         if (savedPage) {
@@ -292,6 +269,20 @@ function changeZoom(delta) {
 
 // === Event Listeners ===
 
+// Tema (desktop)
+elements.themeBtn?.addEventListener("click", () => {
+    if (!IS_LOGGED_IN) { showAlert("Faça login para mudar o tema."); return; } // <-- ADICIONE
+    indiceModo = (indiceModo + 1) % modos.length;
+    aplicarModo(modos[indiceModo]);
+});
+
+// Tema (mobile)
+elements.mobileThemeBtn?.addEventListener("click", () => {
+    if (!IS_LOGGED_IN) { showAlert("Faça login para mudar o tema."); return; } // <-- ADICIONE
+    indiceModo = (indiceModo + 1) % modos.length;
+    aplicarModo(modos[indiceModo]);
+});
+
 // Navegação
 document.querySelector('.button-left').addEventListener('click', () => navigate(-1));
 document.querySelector('.button-right').addEventListener('click', () => navigate(1));
@@ -306,38 +297,34 @@ elements.zoomOutBtn?.addEventListener('click', () => changeZoom(-0.1));
 elements.mobileZoomInBtn?.addEventListener('click', () => changeZoom(0.1));
 elements.mobileZoomOutBtn?.addEventListener('click', () => changeZoom(-0.1));
 
-// Tema (desktop)
-elements.themeBtn?.addEventListener("click", () => {
-    indiceModo = (indiceModo + 1) % modos.length;
-    aplicarModo(modos[indiceModo]);
-});
-
-// Tema (mobile)
-elements.mobileThemeBtn?.addEventListener("click", () => {
-    indiceModo = (indiceModo + 1) % modos.length;
-    aplicarModo(modos[indiceModo]);
-});
-
 // Anotações (desktop)
 elements.annotateBtn?.addEventListener('click', () => {
+    if (!IS_LOGGED_IN) { showAlert("É preciso estar logado para criar anotações."); return; }
     state.editingAnnotation = null;
     elements.noteInput.value = '';
+    // --- CORREÇÃO (LINHAS FALTANTES) ---
     elements.noteModalTitle.textContent = "Adicionar Anotação Pessoal";
     openModal(elements.noteModal);
+    // --- FIM DA CORREÇÃO ---
 });
 elements.viewAnnotationsBtn?.addEventListener('click', () => {
+    if (!IS_LOGGED_IN) { showAlert("É preciso estar logado para ver anotações."); return; } // <-- ADICIONE AQUI
     renderAnnotationsPanel();
     elements.annotationsPanel.classList.add('open');
 });
 
 // Anotações (mobile)
 elements.mobileAnnotateBtn?.addEventListener('click', () => {
+    if (!IS_LOGGED_IN) { showAlert("É preciso estar logado para criar anotações."); return; }
     state.editingAnnotation = null;
     elements.noteInput.value = '';
+    // --- CORREÇÃO (LINHAS FALTANTES) ---
     elements.noteModalTitle.textContent = "Adicionar Anotação Pessoal";
     openModal(elements.noteModal);
+    // --- FIM DA CORREÇÃO ---
 });
 elements.mobileViewAnnotationsBtn?.addEventListener('click', () => {
+    if (!IS_LOGGED_IN) { showAlert("É preciso estar logado para ver anotações."); return; } // <-- ADICIONE AQUI
     renderAnnotationsPanel();
     elements.annotationsPanel.classList.add('open');
 });
@@ -362,6 +349,100 @@ document.addEventListener('keydown', e => {
 window.addEventListener('resize', renderBook);
 
 // === Funções Auxiliares ===
+
+// === NOVA FUNÇÃO PARA SALVAR O TEMA DO LEITOR NO DB ===
+async function saveReaderThemeToDB(theme) {
+    // Só salva no DB se o usuário estiver logado
+    if (!IS_LOGGED_IN) return;
+
+    const formData = new FormData();
+    formData.append('action', 'save_reader_theme'); // <-- Ação que criamos no PHP
+    formData.append('theme', theme);
+
+    try {
+        await fetch('../pasta-php/progress_handler.php', {
+            method: 'POST', body: formData
+        });
+    } catch (e) {
+        console.error('Falha ao salvar tema do leitor', e);
+    }
+}
+
+
+async function loadNotesFromDB() {
+    if (!IS_LOGGED_IN) return; // Só carrega se logado
+
+    try {
+        const response = await fetch(`../pasta-php/progress_handler.php?action=load_notes&book_id=${encodeURIComponent(PDF_BOOK_ID)}`);
+        const result = await response.json();
+
+        if (result.status === 'success') {
+            // Converte os dados do DB para o formato que 'state.annotations' espera
+            state.annotations = result.data.map(note => ({
+                id: note.id, // ID do banco de dados
+                note: note.note_text,
+                date: note.created_at
+            }));
+        } else {
+            console.error('Falha ao carregar anotações:', result.message);
+        }
+    } catch (error) {
+        console.error('Erro de rede ao carregar anotações:', error);
+    }
+}
+
+async function saveNoteToDB(noteText) {
+    const formData = new FormData();
+    formData.append('action', 'save_note');
+    formData.append('book_id', PDF_BOOK_ID);
+    formData.append('note_text', noteText);
+
+    try {
+        const response = await fetch('../pasta-php/progress_handler.php', {
+            method: 'POST',
+            body: formData
+        });
+        const data = await response.json();
+        if (data.status === 'success') {
+            return data.new_note_id; // Retorna o ID do novo B
+        }
+        return null;
+    } catch (error) {
+        console.error('Erro de rede ao salvar anotação:', error);
+        return null;
+    }
+}
+
+async function editNoteInDB(noteId, noteText) {
+    const formData = new FormData();
+    formData.append('action', 'edit_note');
+    formData.append('note_id', noteId);
+    formData.append('note_text', noteText);
+
+    try {
+        await fetch('../pasta-php/progress_handler.php', {
+            method: 'POST',
+            body: formData
+        });
+    } catch (error) {
+        console.error('Erro de rede ao editar anotação:', error);
+    }
+}
+
+async function deleteNoteFromDB(noteId) {
+    const formData = new FormData();
+    formData.append('action', 'delete_note');
+    formData.append('note_id', noteId);
+
+    try {
+        await fetch('../pasta-php/progress_handler.php', {
+            method: 'POST',
+            body: formData
+        });
+    } catch (error) {
+        console.error('Erro de rede ao excluir anotação:', error);
+    }
+}
 
 async function saveProgressToDB(pageNumber) {
     // Só tenta salvar no DB se o usuário estiver logado
@@ -407,21 +488,37 @@ function showAlert(message) {
 elements.alertOkBtn?.addEventListener('click', () => closeModal(elements.alertModal));
 
 // Salvar anotação
-elements.noteSaveBtn?.addEventListener('click', () => {
+// Salvar anotação (AGORA COM BANCO DE DADOS)
+elements.noteSaveBtn?.addEventListener('click', async () => {
     const noteText = elements.noteInput.value.trim();
     if (!noteText) {
         showAlert("A anotação não pode estar vazia.");
         return;
     }
-    if (state.editingAnnotation) {
-        state.editingAnnotation.note = noteText;
-    } else {
-        state.annotations.push({ id: Date.now(), note: noteText, date: new Date() });
+
+    try {
+        if (state.editingAnnotation) {
+            // --- MODO DE EDIÇÃO ---
+            await editNoteInDB(state.editingAnnotation.id, noteText);
+            // Atualiza o estado local
+            state.editingAnnotation.note = noteText;
+        } else {
+            // --- MODO DE CRIAÇÃO ---
+            const newNoteId = await saveNoteToDB(noteText);
+            if (newNoteId) {
+                // Adiciona ao início da lista no estado local
+                state.annotations.unshift({ id: newNoteId, note: noteText, date: new Date() });
+            }
+        }
+
+        renderAnnotationsPanel();
+        closeModal(elements.noteModal);
+        state.editingAnnotation = null;
+
+    } catch (error) {
+        console.error("Erro ao salvar anotação:", error);
+        showAlert("Não foi possível salvar a anotação.");
     }
-    saveData();
-    renderAnnotationsPanel();
-    closeModal(elements.noteModal);
-    state.editingAnnotation = null;
 });
 
 elements.noteCancelBtn?.addEventListener('click', () => {
@@ -469,12 +566,22 @@ elements.annotationEditBtn?.addEventListener('click', () => {
     closeModal(elements.annotationActionModal);
     openModal(elements.noteModal);
 });
-elements.annotationDeleteBtn?.addEventListener('click', () => {
+// Excluir anotação (AGORA COM BANCO DE DADOS)
+elements.annotationDeleteBtn?.addEventListener('click', async () => {
     if (confirm("Tem certeza que deseja excluir esta anotação?")) {
-        state.annotations = state.annotations.filter(ann => ann.id !== state.activeAnnotationId);
-        saveData();
-        renderAnnotationsPanel();
-        closeModal(elements.annotationActionModal);
+        try {
+            await deleteNoteFromDB(state.activeAnnotationId);
+
+            // Atualiza o estado local
+            state.annotations = state.annotations.filter(ann => ann.id !== state.activeAnnotationId);
+
+            renderAnnotationsPanel();
+            closeModal(elements.annotationActionModal);
+
+        } catch (error) {
+            console.error("Erro ao excluir anotação:", error);
+            showAlert("Não foi possível excluir a anotação.");
+        }
     }
 });
 
@@ -523,11 +630,12 @@ const modos = ["modo-claro", "modo-noturno", "modo-sepia"];
 let indiceModo = 0;
 
 // Função única que aplica o modo e atualiza TODOS os ícones
+// Função única que aplica o modo e atualiza TODOS os ícones
 function aplicarModo(modo) {
     // Aplica a classe no body
-    document.body.className = genreClass; // <-- CORREÇÃO AQUI
-    document.body.classList.add(modo);     // Adiciona o modo
-    //... (resto da função)
+    document.body.className = genreClass; // Mantém a classe de gênero
+    document.body.classList.add(modo);     // Adiciona o modo
+
     // Atualiza o ícone do menu lateral (desktop)
     const iconDesktop = elements.themeIconContainer?.querySelector('i');
     if (iconDesktop) {
@@ -544,15 +652,15 @@ function aplicarModo(modo) {
         else iconMobile.className = "bi bi-circle-square";
     }
 
-    // Salva no localStorage
-    localStorage.setItem("themeMode", modo);
+    // Salva no banco de dados (se logado)
+    saveReaderThemeToDB(modo);
 }
+
+
 // Carregar dados
 // Carregar dados
 function saveData() {
     const data = {
-        annotations: state.annotations
-        // bookmarkedPage será adicionada apenas se logado
     };
 
     // Só salva a página marcada no localStorage se estiver logado
@@ -567,22 +675,42 @@ function loadData() {
     const savedData = localStorage.getItem(storageKey);
     if (savedData) {
         const data = JSON.parse(savedData);
-        state.annotations = data.annotations || []; // Anotações sempre carregam
+        state.annotations = []; // Anotações são carregadas do DB
 
-        // Só carrega a página marcada do localStorage se estiver logado
-        if (IS_LOGGED_IN) {
+        // --- CORREÇÃO ---
+        // SÓ carregamos do localStorage se o usuário NÃO ESTIVER LOGADO
+        // (o que agora está desabilitado, mas a lógica está correta)
+        if (!IS_LOGGED_IN) {
             state.bookmarkedPage = data.bookmarkedPage || null;
         } else {
-            state.bookmarkedPage = null; // Garante que está nulo se não logado
+            // Se está logado, IGNORA o localStorage. O DB é a única verdade.
+            state.bookmarkedPage = null;
         }
     }
-    // ... (resto da função)
-    // ... (resto da função)
-    const modoSalvo = localStorage.getItem("themeMode") || "modo-claro";
-    indiceModo = modos.indexOf(modoSalvo);
-    aplicarModo(modoSalvo);
-}
 
+    // --- CORREÇÃO DO CARREGAMENTO DO TEMA ---
+    // O TEMA JÁ FOI CARREGADO PELO PHP NO <body>
+    // Nós só precisamos definir o 'indiceModo' e ATUALIZAR OS ÍCONES
+    let modoSalvo = 'modo-claro';
+    if (document.body.classList.contains('modo-noturno')) modoSalvo = 'modo-noturno';
+    if (document.body.classList.contains('modo-sepia')) modoSalvo = 'modo-sepia';
+
+    indiceModo = modos.indexOf(modoSalvo);
+
+    // Atualiza os ícones para corresponderem ao tema carregado
+    const iconDesktop = elements.themeIconContainer?.querySelector('i');
+    if (iconDesktop) {
+        if (modoSalvo === "modo-claro") iconDesktop.className = "bi bi-brightness-high-fill";
+        else if (modoSalvo === "modo-noturno") iconDesktop.className = "bi bi-moon-fill";
+        else iconDesktop.className = "bi bi-circle-square";
+    }
+    const iconMobile = elements.mobileThemeBtn?.querySelector('i');
+    if (iconMobile) {
+        if (modoSalvo === "modo-claro") iconMobile.className = "bi bi-brightness-high-fill";
+        else if (modoSalvo === "modo-noturno") iconMobile.className = "bi bi-moon-fill";
+        else iconMobile.className = "bi bi-circle-square";
+    }
+}
 
 /////////////////////////////////////////////////------Salvar Progresso------------///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 document.getElementById("mobileViewProgressBtn").addEventListener("click", () => {

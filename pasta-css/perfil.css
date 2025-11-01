@@ -328,14 +328,14 @@ body {
   }
 
   .profile-header-card {
-    max-width: 768px;
+    margin-right: 12px;
   }
 
   .profile-center {
     display: flex;
     justify-content: center;
     margin-top: 50px;
-    margin-right: 5px;
+    margin-right: 15px;
     width: 100%;
   }
 
@@ -363,7 +363,7 @@ body {
     margin-bottom: 10px;
   }
 
-    .book-section1 h2 {
+  .book-section1 h2 {
     margin-bottom: 30PX;
     right: 50px;
     position: relative;

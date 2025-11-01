@@ -488,7 +488,7 @@ function toggleBookmark(pageNum, iconElement) {
     // --- ADICIONE ESTA VERIFICAÇÃO ---
     if (!IS_LOGGED_IN) {
         // Usa a sua função de alerta existente
-        showAlert("É preciso estar logado para salvar seu progresso.");
+        showAlert("É preciso estar logado para marcar a página.");
         return; // Impede que o resto da função execute
     }
     // --- FIM DA VERIFICAÇÃO ---

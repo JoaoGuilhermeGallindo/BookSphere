@@ -307,9 +307,38 @@ body {
 /* ===========================================
    5. Responsividade
    =========================================== */
+@media (max-width: 400px) {
+  .book-section1 h2 {
+    margin-bottom: 20PX;
+  }
 
-/* Telas de tablet/menores */
-@media (max-width: 1000px) {
+  .book-section2 h2 {
+    margin-bottom: 10PX;
+  }
+
+  #user-name {
+    font-size: 0.8rem;
+    margin: 1rem 0 0.4rem;
+  }
+
+  /* Ajusta o grid de livros para 2 colunas */
+  #inprogress-grid,
+  #concluded-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .profile-header-card {
+    max-width: 768px;
+  }
+
+  .profile-center {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    margin-right: 5px;
+    width: 100%;
+  }
+
   .profile-layout {
     grid-template-columns: 1fr;
     /* Empilha as colunas */
@@ -331,24 +360,83 @@ body {
   .profile-center {
     order: 1;
     /* Card do perfil vai para cima */
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+  }
+
+    .book-section1 h2 {
+    margin-bottom: 30PX;
+    right: 50px;
+    position: relative;
+    font-size: 17px;
+  }
+
+  .book-section2 h2 {
+    margin-bottom: 30PX;
+    right: 40px;
+    position: relative;
+    font-size: 17px;
   }
 }
 
-/* Telas de celular */
-@media (max-width: 600px) {
+@media (min-width: 400px) and (max-width: 768px) {
+  .book-section1 h2 {
+    margin-bottom: 30PX;
+    right: 45px;
+    position: relative;
+    font-size: 21px;
+  }
+
+  .book-section2 h2 {
+    margin-bottom: 30PX;
+    right: 30px;
+    position: relative;
+    font-size: 21px;
+  }
+
+  #user-name {
+    font-size: 1.0rem;
+    margin: 1rem 0 0.4rem;
+  }
 
   /* Ajusta o grid de livros para 2 colunas */
   #inprogress-grid,
   #concluded-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-}
 
-/* Ajuste fino de fonte em telas pequenas */
-@media (max-width: 768px) {
-  #user-name {
-    font-size: 1.1rem;
-    margin: 1rem 0 0.4rem;
+  .profile-header-card {
+    margin-right: 5px;
+  }
+
+  .profile-center {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    margin-right: 5px;
+    width: 100%;
+  }
+
+  .profile-layout {
+    grid-template-columns: 1fr;
+    /* Empilha as colunas */
+  }
+
+  /* Ajusta o grid de livros para 3 colunas */
+  #inprogress-grid,
+  #concluded-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    justify-content: unset;
+    /* Deixa preencher */
+  }
+
+  .books-column {
+    order: 2;
+    /* Colunas de livros vão para baixo */
+  }
+
+  .profile-center {
+    order: 1;
+    /* Card do perfil vai para cima */
+    margin-bottom: 10px;
   }
 }

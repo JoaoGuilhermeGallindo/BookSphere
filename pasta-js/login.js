@@ -40,5 +40,42 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    boxMsg.style.display = 'none';  // <- Inicialmente oculta
+    
+    // 1. Seleciona os elementos
+    const senhaInput = document.getElementById('senha');
+    const toggleSenha = document.getElementById('toggleSenha');
+
+    const confirmarInput = document.getElementById('confirmar_senha');
+    const toggleConfirmar = document.getElementById('toggleConfirmar');
+
+    // Função auxiliar para alternar um campo
+    function togglePasswordVisibility(input, icon) {
+        // Verifica o tipo do input
+        const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+        input.setAttribute('type', type);
+
+        // Muda o ícone
+        if (type === 'password') {
+            // Se for senha, mostra o ícone de "riscado"
+            icon.classList.remove('bi-eye');
+            icon.classList.add('bi-eye-slash');
+        } else {
+            // Se for texto, mostra o ícone de "olho aberto"
+            icon.classList.remove('bi-eye-slash');
+            icon.classList.add('bi-eye');
+        }
+    }
+
+    // 2. Adiciona o evento de clique para o primeiro ícone
+    toggleSenha.addEventListener('click', () => {
+        togglePasswordVisibility(senhaInput, toggleSenha);
+    });
+
+    // 3. Adiciona o evento de clique para o segundo ícone
+    toggleConfirmar.addEventListener('click', () => {
+        togglePasswordVisibility(confirmarInput, toggleConfirmar);
+    });
+    // --- FIM DA NOVA FUNCIONALIDADE ---
+});
+
 });

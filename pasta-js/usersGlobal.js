@@ -1,11 +1,20 @@
-document.addEventListener('DOMContentLoaded', async () => {
+// =================================================================
+// SCRIPT GLOBAL DE USUÁRIO - CORRIGIDO PARA O CACHE (BFCache)
+// =================================================================
+
+// 1. Crie a função principal que carrega os dados
+async function loadGlobalUserData() {
+  // Pega os elementos (incluindo os que faltavam)
   const headerAvatar = document.querySelector('.profile-img img');
   const profileAvatar = document.getElementById('profile-avatar');
+  const profileImgContainer = document.querySelector('.profile-img');
+  const profileNomeEl = document.getElementById('profile-nome');
+  const setinha = document.getElementById('setinha');
 
-  if (!headerAvatar) return; // segurança
-
-  // Começa invisível
-  headerAvatar.style.opacity = '0';
+  // Esconde os elementos para evitar o "piscar"
+  if (profileNomeEl) profileNomeEl.style.visibility = 'hidden';
+  if (setinha) setinha.style.visibility = 'hidden';
+  if (profileImgContainer) profileImgContainer.style.visibility = 'hidden';
 
   try {
     const resposta = await fetch('../pasta-php/getUsers.php', {
@@ -15,69 +24,55 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!resposta.ok) throw new Error('Usuário não logado');
     const dados = await resposta.json();
 
-    // --- LÓGICA DE NOMES CORRIGIDA ---
+    // Adiciona a classe ao body para o CSS saber que está logado
+    document.body.classList.add('logado');
 
-    // 1. Pega o nome de usuário original (para o perfil)
-    const rawUsername = dados.usuario; // ex: "Gallindo"
-
-    // 2. Cria uma versão truncada (para o cabeçalho)
-    let headerUsername = rawUsername; // Por padrão, é o nome completo
-    if (rawUsername.length >= 8) {
-      headerUsername = rawUsername.substring(0, 6) + '...'; // ex: "Gallin..."
+    // --- LÓGICA DE NOMES ---
+    const rawUsername = dados.usuario;
+    let headerUsername = rawUsername;
+    if (rawUsername.length > 8) {
+      headerUsername = rawUsername.substring(0, 8) + '...';
     }
-    // --- FIM DA LÓGICA ---
 
-    // --- ATUALIZA OS ELEMENTOS CORRETOS ---
-
-    // Elementos da PÁGINA DE PERFIL (usarão nomes completos)
+    // --- ATUALIZA OS ELEMENTOS ---
     const nome = document.getElementById('user-name');
     const username = document.getElementById('user-username');
-    if (nome) nome.textContent = dados.nome; // Nome completo (ex: João Guilherme...)
-    if (username) username.textContent = '@' + rawUsername; // @username (ex: @Gallindo)
-
-    // Elemento do CABEÇALHO (usará o nome truncado)
-    const profileNome = document.getElementById('profile-nome');
-    if (profileNome) profileNome.textContent = headerUsername; // Nome do cabeçalho (ex: Gallin...)
+    if (nome) nome.textContent = dados.nome;
+    if (username) username.textContent = '@' + rawUsername;
+    if (profileNomeEl) profileNomeEl.textContent = headerUsername;
 
     // --- ATUALIZA AS IMAGENS ---
-    // (O código duplicado e com erro foi removido daqui)
+    const caminhoImagem =
+      dados.imagem && dados.imagem.trim() !== ''
+        ? '../pasta-php/uploads/' + dados.imagem + '?v=' + new Date().getTime()
+        : '../IMAGENS/SemFoto.jpg';
 
-    // Atualiza imagem do perfil, se o usuário tiver uma imagem personalizada
-    if (dados.imagem && dados.imagem.trim() !== '') {
-      const caminhoImagem = '../pasta-php/uploads/' + dados.imagem + '?v=' + new Date().getTime();
-      // Assumindo que 'headerAvatar' e 'profileAvatar' estão definidos no topo do seu script
-      if (headerAvatar) headerAvatar.src = caminhoImagem;
-      if (profileAvatar) profileAvatar.src = caminhoImagem;
-    }
-
-    // Quando a imagem carregar (ou se já estiver em cache)
-    const mostrarImagem = () => {
-      // Certifique-se de que headerAvatar está definido
-      if (headerAvatar) headerAvatar.style.opacity = '1';
-    };
-
-    if (headerAvatar && headerAvatar.complete) {
-      mostrarImagem();
-    } else if (headerAvatar) {
-      headerAvatar.addEventListener('load', mostrarImagem);
-      headerAvatar.addEventListener('error', mostrarImagem);
-    }
+    if (headerAvatar) headerAvatar.src = caminhoImagem;
+    if (profileAvatar) profileAvatar.src = caminhoImagem;
 
   } catch (erro) {
-    console.warn('Usuário não logado ou erro ao carregar perfil:', erro);
-
-    // ❌ Remove a classe se não estiver logado
+    // --- LÓGICA DE VISITANTE ---
     document.body.classList.remove('logado');
-
-    // Mostra a imagem padrão (SemFoto.jpg)
-    if (headerAvatar) headerAvatar.style.opacity = '1';
-
-    // Lógica para Visitante (botão "Logar")
-    const profileNome = document.getElementById('profile-nome');
-    if (profileNome) {
-      profileNome.textContent = 'Logar';
-      profileNome.setAttribute('onclick', "window.location.href='../pasta-html/login.html'");
-      profileNome.style.cursor = 'pointer';
+    if (profileNomeEl) {
+      profileNomeEl.textContent = 'Logar';
+      profileNomeEl.setAttribute('onclick', "window.location.href='../pasta-html/login.html'");
+      profileNomeEl.style.cursor = 'pointer';
     }
+  } finally {
+    // Mostra tudo, logado ou não
+    if (profileImgContainer) profileImgContainer.style.visibility = 'visible';
+    if (profileNomeEl) profileNomeEl.style.visibility = 'visible';
+    if (setinha) setinha.style.visibility = 'visible';
+  }
+}
+
+// 2. Chame a função no 'DOMContentLoaded' (para o primeiro carregamento da página)
+document.addEventListener('DOMContentLoaded', loadGlobalUserData);
+
+// 3. Chame a função no 'pageshow' (para carregamentos do cache ao "Voltar")
+window.addEventListener('pageshow', function (event) {
+  // event.persisted é true quando a página é carregada do cache
+  if (event.persisted) {
+    loadGlobalUserData();
   }
 });

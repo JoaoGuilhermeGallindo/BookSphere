@@ -18,6 +18,14 @@ if ($conn->connect_error) {
 $usuario = $_POST['usuario'] ?? '';
 $senha   = $_POST['senha'] ?? '';
 
+// --- NOVA VALIDAÇÃO DE LIMITE NO SERVIDOR ---
+// (usamos mb_strlen para contar caracteres multibyte, como "ç", corretamente)
+if (mb_strlen($usuario, 'UTF-8') > 30) {
+    echo "Usuário muito longo";
+    exit;
+}
+// --- FIM DA VALIDAÇÃO ---
+
 // Preparar e executar a consulta
 $stmt = $conn->prepare("SELECT * FROM users WHERE usuario = ?");
 $stmt->bind_param("s", $usuario);

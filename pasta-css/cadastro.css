@@ -121,19 +121,89 @@ img {
     color: #eee;
 }
 
-.form-group {
-    width: 100%;
-    margin: 8px 0;
-}
+/* ============================================= */
+/* Estilos para o PREVIEW DE IMAGEM (Profissional) */
+/* ============================================= */
 
-.form-group label {
+.profile-pic-uploader {
     display: block;
-    color: #fff;
-    margin-bottom: 5px;
-    font-size: 14px;
+    width: 120px;       /* Tamanho proporcional */
+    height: 120px;
+    margin: 25px auto;  /* Centraliza no formulário */
+    border-radius: 50%;
+    
+    /* Borda sólida e sutil é mais profissional que pontilhada */
+    border: 2px solid #514869; 
+    
+    background-color: #2f2841; 
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    
+    /* Sombra mais suave para um look "clean" */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
+    
+    /* Transição mais rápida e suave */
+    transition: all 0.2s ease-in-out;
 }
 
+.profile-pic-uploader:hover {
+    border-color: #7a6f9b;
+    
+    /* Efeito de escala ao invés de "pular" */
+    transform: scale(1.05); 
+    
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
 
+/* O ícone e texto que aparecem por padrão */
+.upload-prompt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: #f0f0f0;
+    text-align: center;
+    padding: 10px;
+    transition: opacity 0.3s ease;
+}
+
+.upload-prompt i {
+    font-size: 2.5rem; /* Ícone ajustado */
+    color: #7a6f9b;
+    opacity: 0.7; /* Mais sutil */
+}
+
+.upload-prompt span {
+    font-size: 0.8rem;
+    font-weight: 500; /* Menos "bold", mais refinado */
+    margin-top: 8px;
+    opacity: 0.6; /* Mais sutil */
+}
+
+/* No seu 'cadastro.css' */
+
+#image-preview {
+    display: none; 
+    width: 100%;
+    height: 100%;
+    
+    /* =============================================
+     * ✅ CORREÇÃO 1: Mude de 'contain' DE VOLTA PARA 'cover'
+     * =============================================
+     * Isso vai preencher o círculo, mas vai cortar.
+    */
+    object-fit: cover; 
+    
+    /* O JS vai controlar o alinhamento (object-position) */
+    object-position: center center; 
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+}
 
 .btn-login {
     width: 100%;
@@ -224,7 +294,7 @@ img {
     position: absolute;
     right: 15px;
     /* Distância da direita */
-    bottom: 15px;
+    bottom: 9px;
     /* Alinha com o input (ajuste se necessário) */
     cursor: pointer;
     color: #afafaf;

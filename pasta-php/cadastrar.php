@@ -20,6 +20,14 @@ $usuario   = $_POST['usuario'] ?? '';
 $senha     = $_POST['senha'] ?? '';
 $confirmar = $_POST['confirmar_senha'] ?? '';
 
+// --- NOVA VALIDAÇÃO DE LIMITE NO SERVIDOR ---
+// (usamos mb_strlen para contar caracteres multibyte, como "ç" e "ã", corretamente)
+if (mb_strlen($nome, 'UTF-8') > 100) {
+    echo "nome_muito_longo";
+    exit;
+}
+// --- FIM DA VALIDAÇÃO ---
+
 // Verifica se senha e confirmação conferem
 if ($senha !== $confirmar) {
     echo "senhas_diferentes";

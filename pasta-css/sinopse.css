@@ -2,9 +2,17 @@
   display: flex;
   gap: 20px;
   max-width: 1200px;
-  margin: auto;
-  margin-top: 120px;
-  margin-bottom: 150px;
+  
+  /* =======================================
+   * ✅ CORREÇÃO 1: Centralização da Página
+   * =======================================
+   * Substituímos as 3 linhas abaixo para
+   * garantir a centralização (auto) nas laterais.
+   * margin: auto;
+   * margin-top: 120px;
+   * margin-bottom: 150px;
+  */
+  margin: 120px auto 150px;
 }
 
 /* Esconde a imagem padrão somente quando estiver logado */
@@ -142,6 +150,7 @@ h1 {
   color: black;
   border: 2px solid #256aebfd;
   transition: background-color 0.3s ease;
+  margin-right: 15px;
 }
 
 #btn-Ler:hover {
@@ -297,7 +306,13 @@ h1 {
   }
 
   .botoes {
-    margin-bottom: -100px;
+    /* =======================================
+     * ✅ CORREÇÃO 2: Bug do Clique no Botão
+     * =======================================
+     * Alterado de -100px para 0 para impedir
+     * que outros elementos fiquem sobre os botões.
+    */
+    margin-bottom: 0;
   }
 
   #btn-download {
@@ -323,11 +338,4 @@ h1 {
     width: 180px;
 
   }
-
-  #btn-Ler {
-    margin-right: 15px;
-  }
-
-
-
 }

@@ -8,28 +8,9 @@ body.logado .profile-img img[src*="SemFoto.jpg"] {
   display: none;
 }
 
-
-.breadcrumb {
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  margin: 20px 0;
-  position: relative;
-  top: 50px;
-  left: 103px;
-  z-index: 9999;
-  white-space: nowrap;
-  width: 138px;
-}
-
-.breadcrumb span {
-  font-weight: bold;
-  color: #333;
-  text-transform: uppercase;
-}
-
-
 body.modo-noturno .menu-lateral {
   background: black;
+  border-right: 2px solid white;
 }
 
 body.modo-sepia .menu-lateral {
@@ -51,15 +32,16 @@ body.modo-noturno .menu-lateral button {
 }
 
 .menu-lateral {
-  width: 220px;
+  width: 287px;
   background: #000;
   padding: 20px;
-  border-right: 1px solid white;
+  border-right: 11px solid white;
   text-align: center;
   margin-top: 26px;
   bottom: auto;
   height: auto;
   color: white;
+  margin-right: 41px;
 }
 
 #generoSelecionadoTexto {
@@ -70,7 +52,7 @@ body.modo-noturno .menu-lateral button {
   margin-bottom: 15px;
   font-size: 18px;
   color: #365BA3;
-  margin-right: 20px;
+  margin-right: 10px;
 
 }
 
@@ -91,7 +73,7 @@ body.modo-noturno .menu-lateral button {
   cursor: pointer;
   font-size: 15px;
   color: black;
-  margin-right: 20px;
+  margin-right: 10px;
 
 }
 
@@ -99,7 +81,8 @@ body.modo-noturno .menu-lateral button {
 .livrossection {
   flex: 1;
   position: relative;
-  right: 56px;
+  right: 19.5px;
+  bottom: 40px;
 }
 
 .livrossection.modo-noturno {

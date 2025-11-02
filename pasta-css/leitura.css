@@ -216,7 +216,7 @@
 
  .button-left {
      margin-right: 12px;
-     margin-bottom: 42px;
+     margin-bottom: 9px;
  }
 
  .button-right {
@@ -819,6 +819,17 @@
          margin-top: 56px;
          padding-bottom: 60px;
 
+     }
+
+     /*         CORREÇÃO DO PAINEL DE ANOTAÇÕES NO MOBILE
+        Empurra o painel para baixo (56px) para não ficar
+        atrás da barra de ferramentas superior.
+     */
+     .annotations-panel-class {
+         top: 56px;
+         /* Inicia 56px abaixo do topo */
+         height: calc(100% - 56px);
+         /* Reduz a altura para caber */
      }
  }
 

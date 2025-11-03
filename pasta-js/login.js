@@ -44,14 +44,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     window.history.go(-1);
 
                 }, 2000); // Espera 3 segundos
-
             }
             else if (texto.includes('Usuário muito longo')) {
                 mostrarMensagem('O usuário não pode ter mais de 30 caracteres.', 'red');
             } else {
                 mostrarMensagem(`${texto}`, 'red');
-            }d
-        } catch (erro) {
+            }
+        }
+        catch (erro) {
+            // ISSO VAI MOSTRAR O ERRO REAL NO CONSOLE (F12)
+            console.error("Erro detalhado do fetch:", erro);
+
             mostrarMensagem('Erro de comunicação com o servidor.', 'red');
         }
     });

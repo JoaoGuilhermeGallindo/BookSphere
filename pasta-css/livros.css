@@ -256,9 +256,9 @@ body.modo-noturno .menu-lateral button {
   .menu-lateral {
     width: 100%;
     margin-top: 10px;
-    margin-bottom: -40px;
+    margin-bottom: 25px;
     border-right: none;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 11px solid #a92828;
   }
 
   .livrossection {

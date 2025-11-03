@@ -272,7 +272,7 @@ body.modo-noturno .menu-lateral button {
 
   body.modo-claro .menu-lateral {
     border-right: none;
-    border-bottom: 1px solid black;
+    border-bottom: 2px solid black;
   }
 
   .livrossection {

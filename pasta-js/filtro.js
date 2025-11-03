@@ -175,17 +175,17 @@ const data = [
         genero: "Conto"
     },
     {
-        id: "dom-quixote-volume2",
-        titulo: "Dom Quixote",
+        id: "dom-quixote-volume1",
+        titulo: "Dom Quixote Vol. 1",
         autor: "Miguel de Cervantes",
-        capa: "../Capas/DomQuixoteVolumeII.jpg",
+        capa: "../Capas/DomQuixoteVolumeI.jpg",
         genero: "Clássico"
     },
     {
-        id: "dom-quixote-volume1",
-        titulo: "Dom Quixote",
+        id: "dom-quixote-volume2",
+        titulo: "Dom Quixote Vol. 2",
         autor: "Miguel de Cervantes",
-        capa: "../Capas/DomQuixoteVolumeI.jpg",
+        capa: "../Capas/DomQuixoteVolumeII.jpg",
         genero: "Clássico"
     },
     {
@@ -364,6 +364,62 @@ const data = [
         genero: "Mangá"
     },
     {
+        id: "dragon-ball-três",
+        titulo: "Dragon Ball Vol. 3",
+        autor: "Akira Toriyama",
+        capa: "../Capas/DragonBallTrês.jpg",
+        genero: "Mangá"
+    },
+    {
+        id: "dragon-ball-quatro",
+        titulo: "Dragon Ball Vol. 4",
+        autor: "Akira Toriyama",
+        capa: "../Capas/DragonBallQuatro.jpg",
+        genero: "Mangá"
+    },
+    {
+        id: "dragon-ball-cinco",
+        titulo: "Dragon Ball Vol. 5",
+        autor: "Akira Toriyama",
+        capa: "../Capas/DragonBallCinco.webp",
+        genero: "Mangá"
+    },
+    {
+        id: "Jujutsu-Kaisen-edicao1 ",
+        titulo: "Jujutsu Kaisen Vol. 1",
+        autor: "Gege Akutami",
+        capa: "../Capas/JujutsuKaisenVolume1.jpg",
+        genero: "Mangá"
+    },
+    {
+        id: "Jujutsu-Kaisen-edicao2 ",
+        titulo: "Jujutsu Kaisen Vol. 2",
+        autor: "Gege Akutami",
+        capa: "../Capas/JujutsuKaisenVolume2.jpg",
+        genero: "Mangá"
+    },
+    {
+        id: "Jujutsu-Kaisen-edicao3 ",
+        titulo: "Jujutsu Kaisen Vol. 3",
+        autor: "Gege Akutami",
+        capa: "../Capas/JujutsuKaisenVolume3.jpg",
+        genero: "Mangá"
+    },
+    {
+        id: "Jujutsu-Kaisen-edicao4 ",
+        titulo: "Jujutsu Kaisen Vol. 4",
+        autor: "Gege Akutami",
+        capa: "../Capas/JujutsuKaisenVolume4.jpg",
+        genero: "Mangá"
+    },
+    {
+        id: "Jujutsu-Kaisen-edicao1 ",
+        titulo: "Jujutsu Kaisen Vol. 5",
+        autor: "Gege Akutami",
+        capa: "../Capas/JujutsuKaisenVolume5.jpg",
+        genero: "Mangá"
+    },
+    {
         id: "invencível-sessenta",
         titulo: "Invencível Vol. 60",
         autor: "Robert Kirkman",
@@ -379,11 +435,25 @@ const data = [
     },
     {
         id: "deadpool-mata-o-universo-marvel-edição1",
-        titulo: "Deadpool Mata o Universo Marvel Edição 1",
+        titulo: "Deadpool Mata o Universo Marvel Vol. 1",
         autor: "Cullen Bunn ",
         capa: "../Capas/DeadPoolMataOUniversoMarvelUm.jpg",
         genero: "História em Quadrinhos"
-    }
+    },
+    {
+        id: "DeathNoteVol01",
+        titulo: "Death Note Vol. 1",
+        autor: "Tsugumi Ohba",
+        capa: "../Capas/DeathNoteVol01.jpg",
+        genero: "Mangá"
+    },
+    {
+        id: "DeathNoteVol01",
+        titulo: "Death Note Vol. 2",
+        autor: "Tsugumi Ohba",
+        capa: "../Capas/DeathNoteVol02.jpg",
+        genero: "Mangá"
+    },
 ];
 
 const livrossection = document.querySelector(".livros-lista");

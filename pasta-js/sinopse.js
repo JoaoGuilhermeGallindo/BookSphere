@@ -239,7 +239,7 @@ const livros = {
     pdf: "ACartomante.pdf",
   },
   "dom-quixote-volume2": {
-    titulo: "Dom Quixote Volume II",
+    titulo: "Dom Quixote Vol. 2",
     autor: "Miguel de Cervantes",
     paginas: "309 Páginas - PDF",
     paginas2: "193 Páginas - ONLINE",
@@ -249,7 +249,7 @@ const livros = {
     pdf: "DomQuixoteVolumeII.pdf",
   },
   "dom-quixote-volume1": {
-    titulo: "Dom Quixote Volume I",
+    titulo: "Dom Quixote Vol. 1",
     autor: "Miguel de Cervantes",
     paginas: "308 Páginas - PDF",
     paginas2: "183 Páginas - ONLINE",
@@ -498,7 +498,7 @@ const livros = {
     capa: "../Capas/DragonBallUm.webp",
     sinopse: "Son Goku é um pequeno órfão de coração puro, mas com uma tremenda força. Depois de viver tanto tempo isolado da civilização, ele recebe a inesperada visita de uma garota! Bulma lhe propõe uma parceria para buscar as sete Esferas do Dragão, que, quando reunidas, são capazes de realizar qualquer desejo! Perigos e adversários não faltarão no caminho dessa dupla inusitada, e os mais variados personagens marcarão presença nesta aventura cheia de humor!",
     pdf: "DragonBallUm.pdf",
-    genero: "História em Quadrinhos"
+    genero: "Mangá"
   },
   "dragon-ball-dois": {
     titulo: "Dragon Ball Vol. 2",
@@ -508,7 +508,37 @@ const livros = {
     capa: "../Capas/DragonBallDois.jpg",
     sinopse: "Depois de passar tantos apuros, Goku, Bulma e seus companheiros seguem sua jornada e já conseguiram cinco das sete Esferas do Dragão!A sexta esfera já foi localizada, mas precisarão novamente da ajuda do Mestre Kame! E logo eles descobrirão também que há outros interessados na dádiva do Rei Dragão Sheng Long.",
     pdf: "DragonBallDois.pdf",
-    genero: "História em Quadrinhos"
+    genero: "Mangá"
+  },
+  "dragon-ball-três": {
+    titulo: "Dragon Ball Vol. 3",
+    autor: "Akira Toriyama",
+    paginas: "196 Páginas - PDF",
+    paginas2: "196 Páginas - ONLINE",
+    capa: "../Capas/DragonBallTrês.jpg",
+    sinopse: "O treinamento do mestre Mutenroshi é mais rigoroso do que Son Goku e Kulilin esperavam. E para testar os conhecimentos adquiridos, os garotos se inscrevem no incrível Torneio das Artes Marciais, onde competirão pelo título de maior lutador do mundo contra adversários muito peculiares. Um homem que nunca tomou banho, uma linda garota dissimulada, um resiliente guerreiro de uma terra árida e um poderoso ancião que lembra muito um conhecido pervertido são apenas alguns dos lutadores que separam Goku e Kulilin da grande final. ",
+    pdf: "DragonBallTrês.pdf",
+    genero: "Mangá"
+  },
+  "dragon-ball-quatro": {
+    titulo: "Dragon Ball Vol. 4",
+    autor: "Akira Toriyama",
+    paginas: "196 Páginas - PDF",
+    paginas2: "196 Páginas - ONLINE",
+    capa: "../Capas/DragonBallQuatro.jpg",
+    sinopse: "A grande final do Torneio de Artes Marciais se aproxima. Goku, candidato ao título, usará tudo o que aprendeu como discípulo de Mutenroshi, e seu vigor e entusiasmo o conduzirão em uma batalha que surpreenderá a todos. E quem será o misterioso Jackie Chun, que parece conhecer tanto sobre Goku e seus amigos? E ainda neste volume, começa uma nova aventura em busca das Esferas do Dragão. Son Goku se deparará com agentes da organização Red Ribbon, o Exército da Aliança Vermelha, que também estão reunindo as Esferas. Então a missão de Goku o levará a invadir a Muscle Tower, uma base militar cheia de poderosos adversários.",
+    pdf: "DragonBallQuatro.pdf",
+    genero: "Mangá"
+  },
+  "dragon-ball-cinco": {
+    titulo: "Dragon Ball Vol. 5",
+    autor: "Akira Toriyama",
+    paginas: "196 Páginas - PDF",
+    paginas2: "196 Páginas - ONLINE",
+    capa: "../Capas/DragonBallCinco.webp",
+    sinopse: "Mesmo depois de mostrar um excelente desempenho na grande final do Torneio de Artes Marciais, Son Goku foi derrotado pelo misterioso Jackei Chun. Convencido de que ainda tem muito o que aprender, Goku parte novamente à procura das Esferas do Dragão. Porém, nessa aventura ele encontrará os terríveis agentes da organização Red Ribbon! Ao invadir a Muscle Tower, reduto do General White, ele terá que enfrentar inimigos poderosos para avançar em direção ao topo. E ainda neste volume, Goku contará com a ajuda de velhos amigos para enfrentar o temível General Blue!",
+    pdf: "DragonBallCinco.pdf",
+    genero: "Mangá"
   },
   "invencível-sessenta": {
     titulo: "Invencível Vol. 60",
@@ -532,7 +562,7 @@ const livros = {
   },
 
   "deadpool-mata-o-universo-marvel-edição1": {
-    titulo: "Deadpool Mata o Universo Marvel Edição 1",
+    titulo: "Deadpool Mata o Universo Marvel Vol. 1",
     autor: "Cullen Bunn ",
     paginas: "24 Páginas - PDF",
     paginas2: "24 Páginas - ONLINE",
@@ -540,8 +570,130 @@ const livros = {
     sinopse: "A PIADA ACABOU! E se tudo o que você acha engraçado no Deadpool fosse, na verdade, perturbador? E se ele decidisse matar todo mundo do Universo Marvel? E se ele fizesse mesmo isso? Seria ENGRAÇADO para você? O Mercenário Tagarela joga tudo para o alto e coloca cada herói Marvel em sua mira neste gibi de terror sem igual! ",
     pdf: "Deadpool Kills the Marvel Universe - 2012 (Marvel) - 001.pdf",
     genero: "História em Quadrinhos"
-  }
+  },
+  "Jujutsu-Kaisen-edicao1": {
+    titulo: "Jujutsu Kaisen Vol. 1",
+    autor: "Gege Akutami",
+    paginas: "174 Páginas - PDF",
+    paginas2: "174 Páginas - ONLINE",
+    capa: "../Capas/JujutsuKaisenVolume1.jpg",
+    sinopse: "Yuuji Itadori, um colegial com força física incomum, se junta ao Clube de Ocultismo. Eles acabam libertando uma Maldição poderosa ao abrir um objeto selado. Para salvar seus amigos, Itadori engole o objeto — um dedo de Ryomen Sukuna — e se torna o hospedeiro do temido Rei das Maldições. Agora, ele entra para a Escola Jujutsu com a sentença de morte de ser executado após encontrar todos os dedos de Sukuna.",
+    pdf: "JujutsuKaisenVolume1.pdf",
+    genero: "Mangá"
+  },
+  "Jujutsu-Kaisen-edicao2": {
+    titulo: "Jujutsu Kaisen Vol. 2",
+    autor: "Gege Akutami",
+    paginas: "168 Páginas - PDF",
+    paginas2: "168 Páginas - ONLINE",
+    capa: "../Capas/JujutsuKaisenVolume2.jpg",
+    sinopse: 'Itadori, Megumi e Nobara são enviados para resgatar pessoas de um reformatório onde surgiu um "Útero Amaldiçoado". No local, eles se deparam com um Espírito Amaldiçoado de Nível Especial, muito além de suas capacidades. Para tentar sobreviver, Itadori troca de lugar com Sukuna, mas o Rei das Maldições aproveita a situação, arrancando o coração de Itadori para mantê-lo refém em seu próprio corpo.',
+    pdf: "JujutsuKaisenVolume2.pdf",
+    genero: "Mangá"
+  },
+  "Jujutsu-Kaisen-edicao3": {
+    titulo: "Jujutsu Kaisen Vol. 3",
+    autor: "Gege Akutami",
+    paginas: "173 Páginas - PDF",
+    paginas2: "173 Páginas - ONLINE",
+    capa: "../Capas/JujutsuKaisenVolume3.jpg",
+    sinopse: "Enquanto Megumi e Nobara encontram os alunos da escola rival de Kyoto, Aoi Toudou e Mai Zenin, Itadori (que todos acreditam estar morto) continua seu treinamento intensivo com Satoru Gojo. Ele é então enviado para uma missão prática com o feiticeiro de Grau 1, Kento Nanami. Juntos, eles investigam uma série de assassinatos horríveis causados por Maldições transfiguradas, o que os leva a um confronto direto com a sinistra Maldição Mahito.",
+    pdf: "JujutsuKaisenVolume3.pdf",
+    genero: "Mangá"
+  },
+  "Jujutsu-Kaisen-edicao4": {
+    titulo: "Jujutsu Kaisen Vol. 4",
+    autor: "Gege Akutami",
+    paginas: "168 Páginas - PDF",
+    paginas2: "168 Páginas - ONLINE",
+    capa: "../Capas/JujutsuKaisenVolume4.jpg",
+    sinopse: "Itadori e o feiticeiro Kento Nanami continuam a caçar a maldição Mahito. A investigação leva Itadori a Junpei Yoshikawa, um estudante que sofre bullying e que se aliou perigosamente a Mahito. Itadori tenta salvar Junpei, mas Mahito o atrai para uma armadilha cruel, transfigurando Junpei tragicamente na frente de Itadori. Isso força Itadori e Nanami a uma batalha desesperada contra Mahito, que revela sua terrível técnica.",
+    pdf: "JujutsuKaisenVolume4.pdf",
+    genero: "Mangá"
+  },
+  "Jujutsu-Kaisen-edicao5": {
+    titulo: "Jujutsu Kaisen Vol. 5",
+    autor: "Gege Akutami",
+    paginas: "172 Páginas - PDF",
+    paginas2: "172 Páginas - ONLINE",
+    capa: "../Capas/JujutsuKaisenVolume5.jpg",
+    sinopse: "Itadori retorna triunfante (e para a surpresa de todos) bem a tempo do início do Evento de Intercâmbio com a escola-irmã de Kyoto. A primeira prova é uma competição em equipe, mas os alunos de Kyoto têm ordens secretas para matar Itadori. O poderoso Aoi Toudou imediatamente ataca a equipe de Tóquio e isola Itadori para um confronto direto, testando a força e as convicções do receptáculo de Sukuna.",
+    pdf: "JujutsuKaisenVolume5.pdf",
+    genero: "Mangá"
+  },
 
+  "DeathNoteVol01": {
+    titulo: "Death Note Vol. 1",
+    autor: "Tsugumi Ohba",
+    paginas: "203 Páginas - PDF",
+    paginas2: "203 Páginas - ONLINE",
+    capa: "../Capas/DeathNoteVol01.jpg",
+    sinopse: 'Light Yagami, um estudante genial, encontra um caderno sobrenatural chamado "Death Note", que permite matar qualquer pessoa cujo nome seja escrito nele. Ele decide usá-lo para eliminar criminosos e criar um mundo perfeito, adotando o pseudônimo "Kira". No entanto, suas ações atraem a atenção do maior detetive do mundo, conhecido apenas como "L", que jura capturá-lo. Inicia-se assim um jogo mortal de gato e rato entre os dois.',
+    pdf: "DeathNoteVol01.pdf",
+    genero: "Mangá"
+  },
+  "DeathNoteVol02": {
+    titulo: "Death Note Vol. 2",
+    autor: "Tsugumi Ohba",
+    paginas: "195 Páginas - PDF",
+    paginas2: "195 Páginas - ONLINE",
+    capa: "../Capas/DeathNoteVol02.jpg",
+    sinopse: 'A caçada de L se intensifica. O detetive instala câmeras e escutas secretas na casa de seus principais suspeitos, incluindo a família Yagami. Light agora enfrenta seu maior desafio: ele precisa descobrir uma forma de continuar executando criminosos como "Kira" e se comunicar com o shinigami Ryuk sem ser pego pela vigilância 24 horas por dia de L, que observa todos os seus movimentos.',
+    pdf: "DeathNoteVol02.pdf",
+    genero: "Mangá"
+  },
+  "DeathNoteVol03": {
+    titulo: "Death Note Volume.3",
+    autor: "Tsugumi Ohba",
+    paginas: "185 Páginas - PDF",
+    paginas2: "185 Páginas - ONLINE",
+    capa: "../Capas/DeathNoteVol03.jpg",
+    sinopse: 'A tensão aumenta com o surgimento de um "Segundo Kira" (Misa Amane), que possui seus próprios olhos de Shinigami e uma admiração fanática pelo Kira original. Light tenta usar essa nova aliada a seu favor para descobrir a verdadeira identidade de L. Ao mesmo tempo, L consegue encurralar Light, levando-o a tomar uma decisão drástica: renunciar temporariamente à posse do Death Note, perdendo todas as suas memórias como Kira para tentar provar sua inocência.',
+    pdf: "DeathNoteVol03.pdf",
+    genero: "Mangá"
+  },
+  "DeathNoteVol04": {
+    titulo: "Death Note Volume.4",
+    autor: "Tsugumi Ohba",
+    paginas: "191 Páginas - PDF",
+    paginas2: "191 Páginas - ONLINE",
+    capa: "../Capas/DeathNoteVol04.jpg",
+    sinopse: 'L e Light (que renunciou ao Death Note e perdeu suas memórias como Kira) agora trabalham juntos na força-tarefa para encontrar o novo Kira. A investigação os leva à poderosa Corporação Yotsuba. Eles descobrem que um grupo de executivos da empresa está usando o caderno para matar concorrentes e aumentar seus lucros. O plano agora é identificar qual dos membros do grupo é o Kira e como capturá-lo em flagrante.',
+    pdf: "DeathNoteVol04.pdf",
+    genero: "Mangá"
+  },
+  "DeathNoteVol05": {
+    titulo: "Death Note Volume.5",
+    autor: "Tsugumi Ohba",
+    paginas: "192 Páginas - PDF",
+    paginas2: "192 Páginas - ONLINE",
+    capa: "../Capas/DeathNoteVol05.jpg",
+    sinopse: 'Para provar sua inocência e a de Misa Amane, Light executa seu plano mais arriscado: ele renuncia à posse do Death Note, apagando completamente suas memórias de ser o Kira. Misa também renuncia ao seu caderno. Enquanto os dois estão confinados, as mortes de criminosos recomeçam, deixando L perplexo. O Death Note agora está nas mãos de um terceiro Kira (Higuchi, da Corporação Yotsuba), e L, desconfiado, decide libertar Light para que ele se junte à investigação.',
+    pdf: "DeathNoteVol05.pdf",
+    genero: "Mangá"
+  },
+  "HarryPotterEAPedraFilosofal": {
+    titulo: "Harry Potter e a Pedra Filosofal",
+    autor: "J.K.Rowling",
+    paginas: "274 Páginas - PDF",
+    paginas2: "274 Páginas - ONLINE",
+    capa: "../Capas/HarryPotterEAPedraFilosofal.jpg",
+    sinopse: '',
+    pdf: "HarryPotterEAPedraFilosofal.pdf",
+    genero: "Aventura"
+  },
+  //Modelo
+  "---": {
+    titulo: "",
+    autor: "",
+    paginas: "--- Páginas - PDF",
+    paginas2: "--- Páginas - ONLINE",
+    capa: "../Capas/---.jpg",
+    sinopse: '',
+    pdf: "---.pdf",
+    genero: "---"
+  },
+//
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -609,16 +761,36 @@ document.getElementById("btn-Ler").addEventListener("click", () => {
   params.set('pdf', livro.pdf);
   params.set('genre', livro.genero);
   params.set('title', livro.titulo); // <-- NOVO
-  params.set('cover', livro.capa);   // <-- NOVO
+  params.set('cover', livro.capa); // <-- NOVO
 
   window.location.href = `../livro/leitura.php?${params.toString()}`;
 });
 
+// ... (seu código do botão "Ler" está correto, pode deixar como está) ...
+
 const btnDownload = document.getElementById("btn-download");
 
 btnDownload.addEventListener("click", () => {
-  const pdfPath = `../livro/livros-pdf-padrao/${livro.pdf}`; // caminho relativo a sinopse.html
+  // 1. Define o caminho PADRÃO
+  let folderPath = '../livro/livros-pdf-padrao/';
 
+  // 2. Pega o gênero e "normaliza" (tira acentos e maiúsculas)
+  const genre = livro.genero.toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+  // ex: "História em Quadrinhos" -> "historia em quadrinhos"
+  // ex: "Mangá" -> "manga"
+
+  // 3. Verifica se o gênero normalizado é um dos casos especiais
+  if (genre === 'manga' || genre === 'historia em quadrinhos') {
+    // 4. Se for, muda o caminho para a pasta principal de PDFs
+    folderPath = '../livro/livros-pdf/';
+  }
+
+  // 5. Constrói o caminho final
+  const pdfPath = `${folderPath}${livro.pdf}`;
+
+  // O resto do seu código de download continua igual
   const a = document.createElement("a");
   a.href = pdfPath;
   a.setAttribute("download", livro.pdf);

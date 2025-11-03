@@ -101,6 +101,16 @@
                     class="modal-btn-red">Excluir</button></div>
         </div>
     </div>
+    <div id="confirm-delete-modal" class="modal">
+    <div class="modal-content text-center">
+        <h3 class="modal-title">Confirmar Exclusão</h3>
+        <p class="modal-text">Tem certeza que deseja excluir esta anotação permanentemente?</p>
+        <div class="modal-actions">
+            <button id="confirm-cancel-btn" class="modal-btn-secondary">Cancelar</button>
+            <button id="confirm-delete-btn" class="modal-btn-red">Excluir</button>
+        </div>
+    </div>
+</div>
     <div id="alert-modal" class="modal">
         <div class="modal-content text-center">
             <h3 class="modal-title">Aviso</h3>

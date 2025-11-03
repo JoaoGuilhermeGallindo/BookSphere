@@ -10,7 +10,7 @@ body.logado .profile-img img[src*="SemFoto.jpg"] {
 
 body.modo-noturno .menu-lateral {
   background: black;
-  border-right: 2px solid white;
+  border-right: 1px solid white;
 }
 
 body.modo-sepia .menu-lateral {
@@ -35,7 +35,7 @@ body.modo-noturno .menu-lateral button {
   width: 287px;
   background: #000;
   padding: 20px;
-  border-right: 11px solid white;
+  border-right: 2px solid white;
   text-align: center;
   margin-top: 26px;
   bottom: auto;
@@ -256,9 +256,23 @@ body.modo-noturno .menu-lateral button {
   .menu-lateral {
     width: 100%;
     margin-top: 10px;
-    margin-bottom: 25px;
+    margin-bottom: 40px;
     border-right: none;
-    border-bottom: 11px solid #a92828;
+  }
+
+  body.modo-noturno .menu-lateral {
+    border-right: none;
+    border-bottom: 2px solid white;
+  }
+
+  body.modo-sepia .menu-lateral {
+    border-right: none;
+    border-bottom: 1px solid black;
+  }
+
+  body.modo-claro .menu-lateral {
+    border-right: none;
+    border-bottom: 1px solid black;
   }
 
   .livrossection {
@@ -328,14 +342,6 @@ body.modo-noturno .menu-lateral button {
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-top: auto;
-
-  }
-
-
-  .breadcrumb {
-    left: 20px;
-    top: 20px;
-    width: auto;
 
   }
 

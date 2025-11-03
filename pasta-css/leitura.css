@@ -24,7 +24,7 @@
      margin: 0;
      font-family: sans-serif;
      transition: background-color .3s, color .3s;
-     overflow: hidden
+     overflow: hidden;
  }
 
  body.modo-noturno {
@@ -99,12 +99,19 @@
 
  #main-content {
      width: 100%;
-     /* Ocupa o resto do espaço */
      height: 100%;
      position: relative;
      display: flex;
-     align-items: center;
-     justify-content: center;
+     /* MUDANÇA 1: Permite scroll vertical E horizontal */
+     overflow: auto;
+     /* MUDANÇA 2: Alinha ao topo-esquerdo (necessário para o scroll) */
+     align-items: flex-start;
+     justify-content: flex-start;
+     /* --- ADICIONE ESTAS DUAS LINHAS --- */
+     box-sizing: border-box;
+     /* Garante que o padding não quebre o layout */
+     padding-bottom: 30px;
+     /* Adiciona 30px de espaço no fim do scroll */
  }
 
  .btn-expandir {
@@ -171,7 +178,11 @@
      justify-content: center;
      align-items: flex-start;
      gap: 0;
-     margin-bottom: 40px;
+     margin: auto;
+     /* <-- MUDANÇA AQUI */
+     flex-shrink: 0;
+     /* Garante que o container não encolha */
+     position: relative;
  }
 
  .page-container {
@@ -205,7 +216,7 @@
 
  .button-left {
      margin-right: 12px;
-     margin-bottom: 42px;
+     margin-bottom: 9px;
  }
 
  .button-right {
@@ -221,7 +232,7 @@
  #page-indicator {
      position: absolute;
      /* Mantém como absoluto para controle preciso */
-     bottom: 10px;
+     bottom: -30px;
      left: 50%;
      transform: translateX(-50%);
      background-color: var(--page-indicator-bg);
@@ -231,7 +242,7 @@
      font-size: 14px;
      pointer-events: none;
      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-     z-index: 1;
+     z-index: 10;
      /* Define um z-index baixo para ficar atrás das páginas */
  }
 
@@ -303,13 +314,21 @@
  }
 
  .modal-content {
-     background: var(--modal-bg);
-     color: var(--modal-text);
-     padding: 20px;
+     background-color: var(--modal-bg);
+     color: var(--text-color);
+     padding: 30px;
+     border-radius: 12px;
+     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
      width: 90%;
-     max-width: 400px;
-     border-radius: 8px;
-     position: relative
+     max-width: 500px;
+     box-sizing: border-box;
+
+     /* NOVAS PROPRIEDADES PARA FLEXBOX */
+     display: flex;
+     flex-direction: column;
+     /* Organiza os itens em coluna */
+     gap: 20px;
+     /* Espaçamento entre os itens (título, input, botões) */
  }
 
  .text-center {
@@ -317,9 +336,12 @@
  }
 
  .modal-title {
-     font-size: 1.25rem;
-     font-weight: bold;
-     margin-bottom: 1rem
+     font-size: 1.5em;
+     font-weight: 600;
+     text-align: center;
+     /* CENTRALIZA O TEXTO */
+     margin: 0;
+     /* Remove a margem superior/inferior para o gap do flexbox funcionar */
  }
 
  .modal-text {
@@ -328,18 +350,34 @@
 
  .modal-textarea {
      width: 100%;
-     height: 100px;
-     border: 1px solid var(--modal-textarea-border);
-     border-radius: 4px;
-     padding: 8px;
-     background-color: var(--modal-textarea-bg);
-     color: var(--modal-text);
-     box-sizing: border-box
+     min-height: 100px;
+     max-height: 200px;
+     /* Limite máximo de altura antes do scroll */
+     padding: 10px;
+     border: 2px solid black;
+     border-radius: 8px;
+     background-color: var(--input-bg);
+     color: var(--text-color);
+     font-size: 1em;
+     resize: vertical;
+     /* Permite redimensionar verticalmente pelo usuário */
+     box-sizing: border-box;
+     /* NOVAS PROPRIEDADES PARA SCROLL E FLEXIBILIDADE */
+     overflow-y: auto;
+     /* Adiciona barra de rolagem vertical quando o conteúdo excede a altura */
+     flex-grow: 1;
+     /* Permite que o textarea cresça para ocupar espaço disponível */
  }
 
  .modal-actions {
-     margin-top: 1rem;
-     text-align: right
+     display: flex;
+     justify-content: space-evenly;
+     /* Distribui os botões com espaço igual */
+     /* Ou use 'justify-content: space-between;' se preferir que fiquem nas pontas */
+     gap: 10px;
+     /* Mantém o espaçamento mínimo entre eles */
+     margin-top: 0;
+     /* O gap do flexbox do pai já cuida do espaçamento */
  }
 
  .modal-actions.space-between {
@@ -585,11 +623,14 @@
          height: calc(100% - 56px);
          width: 100%;
          margin-left: 0;
-         padding-top: 10px;
+         padding-top: 20px;
          display: flex;
-         justify-content: center;
          align-items: flex-start;
+         justify-content: flex-start;
          box-sizing: border-box;
+         overflow: auto;
+
+
      }
 
      #right-page-wrapper {
@@ -602,6 +643,9 @@
          justify-content: center;
          align-items: center;
          gap: 20px;
+         /* <-- MUDANÇA AQUI */
+         flex-shrink: 0;
+         /* Garante que o container não encolha */
          position: relative;
      }
 
@@ -673,11 +717,11 @@
          align-items: center;
          justify-content: center;
          gap: 16px;
-         position: fixed !important;
-         bottom: 20px;
+         position: absolute !important;
+         bottom: -50px;
          left: 50%;
          transform: translateX(-50%);
-         z-index: 2100;
+         z-index: 10;
          background: none;
          pointer-events: none;
      }
@@ -759,6 +803,7 @@
          transform-origin: center center;
          margin: 0 auto;
          margin-top: 70px;
+         position: relative;
      }
 
      nav.menu-lateral,
@@ -773,7 +818,18 @@
      #main-content {
          margin-top: 56px;
          padding-bottom: 60px;
-         overflow: hidden;
+
+     }
+
+     /*         CORREÇÃO DO PAINEL DE ANOTAÇÕES NO MOBILE
+        Empurra o painel para baixo (56px) para não ficar
+        atrás da barra de ferramentas superior.
+     */
+     .annotations-panel-class {
+         top: 56px;
+         /* Inicia 56px abaixo do topo */
+         height: calc(100% - 56px);
+         /* Reduz a altura para caber */
      }
  }
 

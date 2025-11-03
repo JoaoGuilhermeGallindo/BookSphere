@@ -215,3 +215,31 @@ body.modo-sepia {
         width: 90%;
     }
 }
+
+/* --- ESTILOS PARA O ÍCONE DE MOSTRAR/OCULTAR SENHA --- */
+
+/* 1. Torna o contêiner 'textfield' um pai de referência */
+.textfield {
+    position: relative;
+}
+
+/* 2. Estiliza o ícone do olho (ícones da Bootstrap) */
+.textfield i.bi {
+    position: absolute;
+    right: 15px;
+    /* Distância da direita */
+    bottom: 10px;
+    /* Alinha com o input (ajuste se necessário) */
+    cursor: pointer;
+    color: #afafaf;
+    /* Cor cinza-claro, boa para fundo escuro */
+    font-size: 1.2rem;
+}
+
+/* 3. Adiciona espaço no input para o texto não ir para baixo do ícone */
+.textfield input {
+    /* Garante que o padding não quebre o layout */
+    box-sizing: border-box;
+    /* Adiciona espaço à direita dentro do input */
+    padding-right: 45px !important;
+}

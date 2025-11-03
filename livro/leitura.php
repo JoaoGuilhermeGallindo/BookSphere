@@ -1,4 +1,13 @@
-<?php session_start(); ?>
+<?php
+    session_start();
+    // 1. Define o tema padrão (para visitantes)
+    $reader_theme = 'modo-claro'; 
+
+    // 2. Se o usuário estiver logado, busca o TEMA DO LEITOR da sessão
+    if (isset($_SESSION['reader_theme'])) {
+        $reader_theme = $_SESSION['reader_theme'];
+    }
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -13,7 +22,7 @@
 
 </head>
 
-<body data-is-logged-in="<?php echo isset($_SESSION['usuario']) ? 'true' : 'false'; ?>">
+<body class="<?php echo $reader_theme; ?>" data-is-logged-in="<?php echo isset($_SESSION['usuario']) ? 'true' : 'false'; ?>">
     <nav class="menu-lateral">
 
         <!-- ⬇️ NOVA BARRA DE FERRAMENTAS MOBILE (visível apenas em mobile) ⬇️ -->
@@ -55,9 +64,9 @@
         </ul>
     </nav>
     <main id="main-content">
-        <button class="button-left"><i class="bi bi-arrow-left-circle-fill"></i></button>
+       
         <div class="flipbook-container">
-
+ <button class="button-left"><i class="bi bi-arrow-left-circle-fill"></i></button>
             <div class="page-container">
                 <div id="left-page-wrapper" class="page-wrapper"><canvas id="leftPageCanvas"></canvas></div>
                 <div id="bookmark-icon-left" class="bookmark-icon left"><i class="bi bi-bookmark-fill"></i></div>

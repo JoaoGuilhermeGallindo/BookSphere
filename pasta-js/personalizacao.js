@@ -39,7 +39,6 @@ function aplicarModo(modo) {
             </svg>
         `;
     }
-
     // Salva no localStorage
     localStorage.setItem("modoAtual", modo);
 }

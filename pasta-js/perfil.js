@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = '../pasta-html/login.html'; // Redireciona para o login
         });
     }
-
+    
     // Função principal para carregar o perfil
     async function loadProfileData() {
         try {

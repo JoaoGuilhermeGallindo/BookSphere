@@ -1,58 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="LOGOS/Favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="../pasta-css/cadastro.css">
     <link rel="shortcut icon" href="../LOGOS/Favicon.png" type="image/x-icon">
-    <title>Cadastro</title>
+    <link rel="stylesheet" href="../pasta-css/cadastro.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <title>BookSphere | Cadastro</title>
 </head>
 
 <body>
 
-    <button id="btn-modo-leitura"></button>
+    <button id="btn-modo-leitura" aria-label="Alternar modo claro/escuro"></button>
 
-    <div class="main-login">
-
+    <main class="main-login">
         <div class="right-login">
-
-            <div class="card-login">
-                <img src="../LOGOS/Logo-fundo transparente-recortado.png">
-               <form id="formCadastro" action="../pasta-php/cadastrar.php" method="POST" enctype="multipart/form-data">
-
+            <section class="card-login">
+                
+                <img src="../LOGOS/Logo-fundo transparente-recortado.png" alt="Logo da BookSphere">
+                
+                <form id="formCadastro" action="../pasta-php/cadastrar.php" method="POST" enctype="multipart/form-data">
 
                     <div class="textfield">
                         <label for="nome">Nome completo</label>
-                        <input type="text" id="nome" name="nome" placeholder="Digite o seu nome" required>
+                        <input type="text" id="nome" name="nome" placeholder="Digite o seu nome" required maxlength="100" autocomplete="name">
                     </div>
 
                     <div class="textfield">
                         <label for="email">E-mail</label>
-                        <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
+                        <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required autocomplete="email">
                     </div>
 
                     <div class="textfield">
                         <label for="usuario">Usuário</label>
-                        <input type="text" id="usuario" name="usuario" placeholder="Digite seu usuário" required>
+                        <input type="text" id="usuario" name="usuario" placeholder="Digite seu usuário" required autocomplete="username">
                     </div>
 
                     <div class="textfield">
                         <label for="senha">Senha</label>
-                        <input type="password" id="senha" name="senha" placeholder="Digite a senha" required>
+                        <input type="password" id="senha" name="senha" placeholder="Digite a senha" required autocomplete="new-password">
+                        <i class="bi bi-eye-slash" id="toggleSenha" style="cursor: pointer;"></i>
                     </div>
 
                     <div class="textfield">
-                        <label for="confirmar-senha">Confirmar senha</label>
+                        <label for="confirmar_senha">Confirmar senha</label> 
                         <input type="password" id="confirmar_senha" name="confirmar_senha"
-                            placeholder="Confirme a senha" required>
+                            placeholder="Confirme a senha" required autocomplete="new-password">
+                        <i class="bi bi-eye-slash" id="toggleConfirmar" style="cursor: pointer;"></i>
                     </div>
+                    
+                    <input type="file" id="imagem" name="imagem" accept="image/*" style="display: none;">
 
-                    <div class="form-group">
-                        <label for="imagem">Imagem</label>
-                        <input type="file" name="imagem" class="form-control" accept="imagem/*">
-                    </div>
+                    <label for="imagem" class="profile-pic-uploader">
+                        <div class="upload-prompt">
+                            <i class="bi bi-camera-fill"></i>
+                            <span>Adicionar Foto</span>
+                        </div>
+                        <img id="image-preview" src="#" alt="Preview da Imagem">
+                    </label>
 
                     <div class="signup-text">
                         Já tem conta? <a href="login.html">Faça login na sua conta</a>.
@@ -60,14 +66,15 @@
 
                     <button type="submit" class="btn-login">Cadastre-se</button>
 
-                    <div class="box-msg">
-                        <p id="mensagem"></p>
+                    <div class="box-msg" role="alert">
+                        <p id="mensagem" aria-live="polite"></p>
                     </div>
 
                 </form>
-            </div>
+            </section>
         </div>
-    </div>
+    </main>
+    
     <script src="../pasta-js/cadastro.js"></script>
     <script src="../pasta-js/personalizacao.js"></script>
 </body>

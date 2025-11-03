@@ -120,6 +120,125 @@ if ($action === 'load' && $_SERVER['REQUEST_METHOD'] === 'GET') {
     exit;
 }
 
+// ===================================
+// AÇÃO: CARREGAR ANOTAÇÕES (LOAD_NOTES)
+// ===================================
+if ($action === 'load_notes' && $_SERVER['REQUEST_METHOD'] === 'GET') {
+    $book_id = $_GET['book_id'] ?? null;
+
+    if (!$book_id) {
+        echo json_encode(['status' => 'error', 'message' => 'Identificador do livro ausente']);
+        exit;
+    }
+
+    $sql = "SELECT id, note_text, created_at FROM user_annotations 
+            WHERE user_id = :user_id AND book_identifier = :book_id 
+            ORDER BY created_at DESC";
+            
+    $stmt = $conn->prepare($sql);
+    $stmt->execute(['user_id' => $user_id, 'book_id' => $book_id]);
+    $notes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    echo json_encode(['status' => 'success', 'data' => $notes]);
+    exit;
+}
+
+// ===================================
+// AÇÃO: SALVAR ANOTAÇÃO (SAVE_NOTE)
+// ===================================
+if ($action === 'save_note' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+    $book_id = $_POST['book_id'] ?? null;
+    $note_text = $_POST['note_text'] ?? null;
+
+    if (!$book_id || !$note_text) {
+        echo json_encode(['status' => 'error', 'message' => 'Dados da anotação ausentes']);
+        exit;
+    }
+
+    $sql = "INSERT INTO user_annotations (user_id, book_identifier, note_text) 
+            VALUES (:user_id, :book_id, :note_text)";
+    
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([
+        'user_id' => $user_id,
+        'book_id' => $book_id,
+        'note_text' => $note_text
+    ]);
+
+    // Retorna o ID da anotação que acabamos de criar
+    echo json_encode(['status' => 'success', 'new_note_id' => $conn->lastInsertId()]);
+    exit;
+}
+
+// ===================================
+// AÇÃO: EDITAR ANOTAÇÃO (EDIT_NOTE)
+// ===================================
+if ($action === 'edit_note' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+    $note_id = $_POST['note_id'] ?? null;
+    $note_text = $_POST['note_text'] ?? null;
+
+    if (!$note_id || !$note_text) {
+        echo json_encode(['status' => 'error', 'message' => 'Dados da anotação ausentes']);
+        exit;
+    }
+
+    // A checagem 'user_id = :user_id' é crucial para segurança
+    $sql = "UPDATE user_annotations SET note_text = :note_text 
+            WHERE id = :note_id AND user_id = :user_id";
+    
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([
+        'note_text' => $note_text,
+        'note_id' => $note_id,
+        'user_id' => $user_id
+    ]);
+
+    echo json_encode(['status' => 'success']);
+    exit;
+}
+
+// ===================================
+// AÇÃO: EXCLUIR ANOTAÇÃO (DELETE_NOTE)
+// ===================================
+if ($action === 'delete_note' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+    $note_id = $_POST['note_id'] ?? null;
+
+    if (!$note_id) {
+        echo json_encode(['status' => 'error', 'message' => 'ID da anotação ausente']);
+        exit;
+    }
+
+    // A checagem 'user_id = :user_id' é crucial para segurança
+    $sql = "DELETE FROM user_annotations WHERE id = :note_id AND user_id = :user_id";
+    
+    $stmt = $conn->prepare($sql);
+    $stmt->execute(['note_id' => $note_id, 'user_id' => $user_id]);
+
+    echo json_encode(['status' => 'success']);
+    exit;
+}
+// ===================================
+// AÇÃO: SALVAR TEMA DO LEITOR (SAVE_READER_THEME)
+// ===================================
+if ($action === 'save_reader_theme' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+    $theme = $_POST['theme'] ?? 'modo-claro';
+
+    // Lista de temas permitidos
+    if (!in_array($theme, ['modo-claro', 'modo-noturno', 'modo-sepia'])) {
+        $theme = 'modo-claro';
+    }
+
+    // Atualiza o banco de dados
+    $sql = "UPDATE users SET reader_theme = :theme WHERE user_id = :user_id";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute(['theme' => $theme, 'user_id' => $user_id]);
+
+    // Atualiza a sessão imediatamente
+    $_SESSION['reader_theme'] = $theme;
+
+    echo json_encode(['status' => 'success', 'message' => 'Tema do leitor salvo']);
+    exit;
+}
 // Se nenhuma ação válida for fornecida
 echo json_encode(['status' => 'error', 'message' => 'Ação inválida']);
 ?>

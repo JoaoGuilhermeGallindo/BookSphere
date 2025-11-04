@@ -444,15 +444,15 @@ const displayData = (livros) => {
 
   livros.forEach((e) => {
     livrossection.innerHTML += `
-            <article class="livro-card">
-                <img src="${e.capa}" alt="${e.titulo}" />
-                <h3>${e.titulo}</h3>
-                <p>${e.autor}</p>
-                                <button onclick="location.href='sinopse.html?id=${e.id}'">
-                    BAIXAR OU LER ONLINE
-                </button>
-            </article>
-        `;
+<article class="livro-card">
+<img src="${e.capa}" alt="${e.titulo}" />
+<h3>${e.titulo}</h3>
+<p>${e.autor}</p>
+<button onclick="location.href='sinopse.html?id=${e.id}'">
+BAIXAR OU LER ONLINE
+</button>
+</article>
+ `;
   });
 };
 

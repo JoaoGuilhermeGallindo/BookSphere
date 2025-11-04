@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     mostrarMensagem("Usuário cadastrado com sucesso!", CORES.sucesso);
                     form.reset();
                     setTimeout(() => {
-                        window.history.go(-2); // Volta 2 páginas
+                        window.history.go(-1); // Volta 1 página
                     }, 3000); 
 
                 } else if (texto.includes("senhas_diferentes")) {

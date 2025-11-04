@@ -87,7 +87,7 @@ h2 {
 
 .form textarea {
   min-height: 13rem;
-  resize: vertical;
+  resize: none;
 }
 
 .form input:hover,

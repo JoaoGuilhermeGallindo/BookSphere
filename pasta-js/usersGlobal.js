@@ -1,10 +1,10 @@
 // =================================================================
-// SCRIPT GLOBAL DE USUÁRIO - CORRIGIDO PARA O CACHE (BFCache)
+// SCRIPT GLOBAL DE USUÁRIO - CORRIGIDO (COM PAGESHOW E ONCLICK)
 // =================================================================
 
 // 1. Crie a função principal que carrega os dados
 async function loadGlobalUserData() {
-  // Pega os elementos (incluindo os que faltavam)
+  // Pega os elementos
   const headerAvatar = document.querySelector('.profile-img img');
   const profileAvatar = document.getElementById('profile-avatar');
   const profileImgContainer = document.querySelector('.profile-img');
@@ -17,6 +17,7 @@ async function loadGlobalUserData() {
   if (profileImgContainer) profileImgContainer.style.visibility = 'hidden';
 
   try {
+    // ... (SEU BLOCO 'TRY' CONTINUA EXATAMENTE IGUAL) ...
     const resposta = await fetch('../pasta-php/getUsers.php', {
       credentials: 'include'
     });
@@ -24,7 +25,6 @@ async function loadGlobalUserData() {
     if (!resposta.ok) throw new Error('Usuário não logado');
     const dados = await resposta.json();
 
-    // Adiciona a classe ao body para o CSS saber que está logado
     document.body.classList.add('logado');
 
     // --- LÓGICA DE NOMES ---
@@ -34,12 +34,18 @@ async function loadGlobalUserData() {
       headerUsername = rawUsername.substring(0, 8) + '...';
     }
 
-    // --- ATUALIZA OS ELEMENTOS ---
+    // --- ATUALIZA OS ELEMENTOS (PERFIL) ---
     const nome = document.getElementById('user-name');
     const username = document.getElementById('user-username');
     if (nome) nome.textContent = dados.nome;
     if (username) username.textContent = '@' + rawUsername;
-    if (profileNomeEl) profileNomeEl.textContent = headerUsername;
+
+    // --- ATUALIZA O CABEÇALHO (COM A CORREÇÃO DO ONCLICK) ---
+    if (profileNomeEl) {
+      profileNomeEl.textContent = headerUsername;
+      profileNomeEl.removeAttribute('onclick');
+      profileNomeEl.style.cursor = 'default';
+    }
 
     // --- ATUALIZA AS IMAGENS ---
     const caminhoImagem =
@@ -51,13 +57,27 @@ async function loadGlobalUserData() {
     if (profileAvatar) profileAvatar.src = caminhoImagem;
 
   } catch (erro) {
-    // --- LÓGICA DE VISITANTE ---
+    // --- LÓGICA DE VISITANTE (AGORA CORRIGIDA) ---
     document.body.classList.remove('logado');
+
+    // Atualiza o NOME para "Logar"
     if (profileNomeEl) {
       profileNomeEl.textContent = 'Logar';
       profileNomeEl.setAttribute('onclick', "window.location.href='../pasta-html/login.html'");
       profileNomeEl.style.cursor = 'pointer';
     }
+
+    // ===================================
+    // ✅ CORREÇÃO ADICIONADA AQUI
+    // ===================================
+    // Define a IMAGEM de volta para o padrão "SemFoto"
+    const defaultAvatar = '../IMAGENS/SemFoto.jpg';
+    if (headerAvatar) headerAvatar.src = defaultAvatar;
+    if (profileAvatar) profileAvatar.src = defaultAvatar;
+    // ===================================
+    // FIM DA CORREÇÃO
+    // ===================================
+
   } finally {
     // Mostra tudo, logado ou não
     if (profileImgContainer) profileImgContainer.style.visibility = 'visible';

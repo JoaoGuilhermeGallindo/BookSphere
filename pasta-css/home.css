@@ -407,7 +407,7 @@ h2 {
 
 .livros-wrapper {
     display: flex;
-    animation: rolar 130s linear infinite;
+    animation: rolar 240s linear infinite;
     /* velocidade aqui */
     gap: 20px;
 }
@@ -418,7 +418,7 @@ h2 {
     }
 
     100% {
-        transform: translateX(-60%);
+        transform: translateX(-100%);
     }
 
     /* move metade porque repetimos a lista */
@@ -492,14 +492,6 @@ h2 {
     font-weight: bold;
     text-align: justify;
     text-decoration: none;
-}
-
-.fim-direita a:hover {
-    text-decoration: underline;
-}
-
-.fim-direita #sobre:hover {
-    text-decoration: underline;
 }
 
 /* Esconde a imagem padrão somente quando estiver logado */
@@ -608,8 +600,6 @@ body.logado .profile-img img[src*="SemFoto.jpg"] {
 
 }
 
-
-
 body.modo-noturno .fim {
     background-color: rgb(48, 46, 46);
 }
@@ -632,6 +622,85 @@ body.modo-sepia .footer-copy {
 
 body.modo-sepia .linha-horizontal {
     background-color: #6e4c31;
+}
+
+/* ===========================================
+   MODAL DE AVISO GLOBAL (para login, etc.)
+   Estilizado para parecer com o seu exemplo
+   =========================================== */
+
+/* O fundo escuro */
+.global-modal {
+    position: fixed;
+    z-index: 9999;
+    /* Tem que estar no topo de tudo */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+    /* Impede cliques quando escondido */
+}
+
+/* Classe para mostrar o modal (usa 'hidden' do HTML) */
+.global-modal:not([hidden]) {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* O card branco */
+.global-modal-content {
+    background-color: #fff;
+    color: #333;
+    padding: 25px 30px;
+    border-radius: 12px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.global-modal-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.global-modal-text {
+    font-size: 1rem;
+    margin-bottom: 25px;
+}
+
+.global-modal-btn {
+    background: linear-gradient(180deg, #2563eb, #1e40af);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: 100%;
+    /* Faz o botão OK ocupar a largura */
+}
+
+/* --- Adaptação para seus temas --- */
+body.modo-noturno .global-modal-content {
+    background-color: #2a2a2e;
+    color: #f0f0f0;
+}
+
+body.modo-sepia .global-modal-content {
+    background-color: #fbf0d9;
+    color: #5b4636;
 }
 
 @media (max-width: 399px) {

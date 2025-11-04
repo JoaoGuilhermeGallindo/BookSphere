@@ -54,7 +54,9 @@ const elements = {
     pageIndicator: document.getElementById('page-indicator'),
     pageIndicator2: document.getElementById('page-indicator2'),
     mobileViewProgressBtn: document.getElementById('mobileViewProgressBtn'),
-
+    confirmDeleteModal: document.getElementById('confirm-delete-modal'),
+    confirmDeleteBtn: document.getElementById('confirm-delete-btn'),
+    confirmCancelBtn: document.getElementById('confirm-cancel-btn'),
     // Novos elementos para mobile
     mobileZoomInBtn: document.getElementById('mobile-zoom-in'),
     mobileZoomOutBtn: document.getElementById('mobile-zoom-out'),
@@ -169,7 +171,7 @@ let dynamicMaxScale = 1.0; // variável global (inicie com zoom padrão)
 
 function changeZoom(delta) {
     let newScale = state.scale + delta;
-    
+
 
     // --- LÓGICA DE ZOOM MÍNIMO (CORREÇÃO COM ACENTOS) ---
     let currentMinScale = state.MIN_SCALE; // Padrão é 0.5
@@ -232,9 +234,9 @@ function changeZoom(delta) {
         }
 
         // Se não encontrou no DB, usa o do localStorage (se houver)
-       // if (!savedPage && state.bookmarkedPage) {
+        // if (!savedPage && state.bookmarkedPage) {
         //    savedPage = state.bookmarkedPage;
-       // }
+        // }
 
         // 3. SE TEMOS UMA PÁGINA SALVA (DO DB OU LOCALSTORAGE)
         if (savedPage) {
@@ -268,6 +270,42 @@ function changeZoom(delta) {
 })();
 
 // === Event Listeners ===
+
+/**
+ * Mostra um modal de confirmação customizado.
+ * Retorna uma Promise que resolve 'true' se confirmado, 'false' se cancelado.
+ */
+function showConfirm(message) {
+    return new Promise((resolve) => {
+        // Define a mensagem de confirmação
+        const modalText = elements.confirmDeleteModal.querySelector('.modal-text');
+        if (modalText) modalText.textContent = message;
+
+        openModal(elements.confirmDeleteModal);
+
+        // Função para quando o usuário confirmar
+        const onConfirm = () => {
+            closeModal(elements.confirmDeleteModal);
+            resolve(true);
+            // Remove os listeners para não acumular
+            elements.confirmDeleteBtn.removeEventListener('click', onConfirm);
+            elements.confirmCancelBtn.removeEventListener('click', onCancel);
+        };
+
+        // Função para quando o usuário cancelar
+        const onCancel = () => {
+            closeModal(elements.confirmDeleteModal);
+            resolve(false);
+            // Remove os listeners para não acumular
+            elements.confirmDeleteBtn.removeEventListener('click', onConfirm);
+            elements.confirmCancelBtn.removeEventListener('click', onCancel);
+        };
+
+        // Adiciona os listeners
+        elements.confirmDeleteBtn.addEventListener('click', onConfirm);
+        elements.confirmCancelBtn.addEventListener('click', onCancel);
+    });
+}
 
 // Tema (desktop)
 elements.themeBtn?.addEventListener("click", () => {
@@ -566,9 +604,16 @@ elements.annotationEditBtn?.addEventListener('click', () => {
     closeModal(elements.annotationActionModal);
     openModal(elements.noteModal);
 });
-// Excluir anotação (AGORA COM BANCO DE DADOS)
+// Excluir anotação (AGORA COM MODAL CUSTOMIZADO)
 elements.annotationDeleteBtn?.addEventListener('click', async () => {
-    if (confirm("Tem certeza que deseja excluir esta anotação?")) {
+    // 1. Fecha o modal de "Sua Anotação"
+    closeModal(elements.annotationActionModal);
+
+    // 2. Chama o novo modal de confirmação e espera a resposta
+    const confirmed = await showConfirm("Tem certeza que deseja excluir esta anotação permanentemente?");
+
+    // 3. Se o usuário clicou "Excluir" (confirmed === true)
+    if (confirmed) {
         try {
             await deleteNoteFromDB(state.activeAnnotationId);
 
@@ -576,13 +621,15 @@ elements.annotationDeleteBtn?.addEventListener('click', async () => {
             state.annotations = state.annotations.filter(ann => ann.id !== state.activeAnnotationId);
 
             renderAnnotationsPanel();
-            closeModal(elements.annotationActionModal);
+            // O modal 'confirmDeleteModal' já foi fechado pela função showConfirm
 
         } catch (error) {
             console.error("Erro ao excluir anotação:", error);
+            // Usa o modal de alerta existente para o erro
             showAlert("Não foi possível excluir a anotação.");
         }
     }
+    // 4. Se 'confirmed' for 'false', a função 'showConfirm' já fechou o modal e não fazemos nada.
 });
 
 function findAnnotationById(id) {

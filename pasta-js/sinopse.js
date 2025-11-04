@@ -629,14 +629,14 @@ document.getElementById("btn-Ler").addEventListener("click", () => {
   params.set('title', livro.titulo); // <-- NOVO
   params.set('cover', livro.capa); // <-- NOVO
 
-  window.location.href = `../livro/leitura.php?${params.toString()}`;
+  window.location.href = `../pasta-php/leitura.php?${params.toString()}`;
 });
 
 const btnDownload = document.getElementById("btn-download");
 
 btnDownload.addEventListener("click", () => {
   // 1. Define o caminho PADRÃO
-  let folderPath = '../livro/livros-pdf-padrao/';
+  let folderPath = '../LIVROS-PDF-DOWNLOAD/';
 
   //2. O caminho final
   const pdfPath = `${folderPath}${livro.pdf}`;

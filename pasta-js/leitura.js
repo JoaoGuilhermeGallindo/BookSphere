@@ -12,7 +12,7 @@ if (!pdfFile) {
   document.body.innerHTML = "<p>Arquivo PDF não especificado.</p>";
   throw new Error("PDF não especificado");
 }
-const pdfPath = `../livro/livros-pdf/${decodeURIComponent(pdfFile)}`;
+const pdfPath = `../LIVROS-PDF-LEITURA/${decodeURIComponent(pdfFile)}`;
 const storageKey = `pdfReader-${pdfFile}`;
 // Pega o status de login do atributo data-* que definimos no HTML
 const IS_LOGGED_IN = document.body.dataset.isLoggedIn === "true";

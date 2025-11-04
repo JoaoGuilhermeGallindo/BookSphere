@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 params.set('cover', card.dataset.cover);
 
                 // Redireciona para o leitor com todos os dados
-                window.location.href = `../livro/leitura.php?${params.toString()}`;
+                window.location.href = `../pasta-php/leitura.php?${params.toString()}`;
             });
         });
     }

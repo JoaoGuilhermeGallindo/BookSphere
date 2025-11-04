@@ -448,7 +448,7 @@ const displayData = (livros) => {
                 <img src="${e.capa}" alt="${e.titulo}" />
                 <h3>${e.titulo}</h3>
                 <p>${e.autor}</p>
-                <button onclick="location.href='../livro/sinopse.html?id=${e.id}'">
+                <button onclick="location.href='../pasta-html/sinopse.html?id=${e.id}'">
                     BAIXAR OU LER ONLINE
                 </button>
             </article>

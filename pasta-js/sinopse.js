@@ -480,17 +480,96 @@ const livros = {
     sinopse: `"Este mundo da injustiça globalizada" é um texto escrito e lido por José Saramago na cerimônia de encerramento do Fórum Social Mundial em 2002. Na ocasião, o autor lusitano mais conhecido pelo seu best-seller "Ensaio sobre a cegueira", comenta sobre as questões sociais, econômicas e políticas que permeiam a sociedade capitalista.`,
     pdf: "EsteMundoDaInjusticaGlobalizada.pdf",
   },
-
   "a-viuvinha": {
     titulo: "A Viuvinha",
     autor: "José de Alencar",
     paginas: "33 Páginas - PDF",
-    paginas2: "788 Páginas - ONLINE",
+    paginas2: "80 Páginas - ONLINE",
     capa: "../Capas/AViuvinha.jpg",
     sinopse: `A viuvinha é a história curiosa de um homem que simula sua morte para não sucumbir à vergonha de uma situação financeira desastrada. Publicado em 1857, é o terceiro livro de José de Alencar. Como Senhora, Lucíola e Cinco minutos, A viuvinha se inclui entre os romances urbanos escritos pelo autor, que nos dão uma riquíssima descrição da vida na corte, a vida burguesa do Rio de Janeiro de meados do século XIX, seus costumes, modas e tipos característicos.`,
     pdf: "AViuvinha.pdf",
   },
- 
+  "a-metamorfose": {
+    titulo: "A Metamorfose",
+    autor: "Franz Kafka",
+    paginas: "34 Páginas - PDF",
+    paginas2: "92 Páginas - ONLINE",
+    capa: "../Capas/AMetamorfose.jpg",
+    sinopse: "A Metamorfose narra a história do caixeiro-viajante Gregor Samsa, que um dia acorda transformado em um inseto monstruoso. A obra explora o absurdo da sua nova condição, a reação de sua família e sua subsequente alienação e isolamento.",
+    pdf: "AMetamorfose.pdf",
+  },
+  "fausto": {
+    titulo: "Fausto",
+    autor: "Johann Wolfgang von Goethe",
+    paginas: "404 Páginas - PDF",
+    paginas2: "404 Páginas - ONLINE",
+    capa: "../Capas/Fausto.jpg",
+    sinopse: "Uma das maiores obras da literatura, Fausto é uma peça trágica que conta a história de Heinrich Faust, um erudito que, frustrado com os limites do conhecimento humano, faz um pacto com o demônio Mefistófeles. Em troca de sua alma, ele recebe juventude, poder e a realização de todos os seus desejos.",
+    pdf: "Fausto.pdf",
+  },
+  "candido": {
+    titulo: "Cândido, ou O Otimismo",
+    autor: "Voltaire",
+    paginas: "68 Páginas - PDF",
+    paginas2: "68 Páginas - ONLINE",
+    capa: "../Capas/Candido.jpg",
+    sinopse: "Uma sátira filosófica que critica o otimismo de Leibniz. O jovem Cândido é ensinado por seu tutor, Pangloss, que 'tudo vai pelo melhor no melhor dos mundos possíveis'. Após ser expulso de seu castelo, Cândido embarca em uma série de desventuras desastrosas ao redor do mundo, que testam brutalmente sua fé no otimismo.",
+    pdf: "Candido.pdf",
+  },
+  "viagens-de-gulliver": {
+    titulo: "Viagens de Gulliver",
+    autor: "Jonathan Swift",
+    paginas: "403 Páginas - PDF",
+    paginas2: "403 Páginas - ONLINE",
+    capa: "../Capas/ViagensDeGulliver.jpg",
+    sinopse: "Uma sátira da natureza humana e da sociedade. O cirurgião Lemuel Gulliver faz quatro viagens extraordinárias. Ele visita Lilliput, onde os habitantes são minúsculos; Brobdingnag, uma terra de gigantes; a ilha flutuante de Laputa; e, finalmente, a terra dos Houyhnhnms, cavalos racionais que governam os repulsivos Yahoos.",
+    pdf: "ViagensDeGulliver.pdf",
+  },
+  "iliada": {
+    titulo: "Ilíada",
+    autor: "Homero",
+    paginas: "407 Páginas - PDF",
+    paginas2: "407 Páginas - ONLINE",
+    capa: "../Capas/Iliada.jpg",
+    sinopse: "O poema épico fundamental da Grécia Antiga. Focando nas últimas semanas da Guerra de Troia, a Ilíada narra a fúria do herói grego Aquiles contra seu comandante, Agamenon. A obra explora temas de glória, honra, destino e a trágica intervenção dos deuses olímpicos nos assuntos dos mortais.",
+    pdf: "Iliada.pdf",
+  },
+  "odisseia": {
+    titulo: "Odisséia",
+    autor: "Homero",
+    paginas: "267 Páginas - PDF",
+    paginas2: "164 Páginas - ONLINE",
+    capa: "../Capas/Odisseia.jpg",
+    sinopse: "A continuação da Ilíada. Este poema épico foca em Odisseu (ou Ulisses), rei de Ítaca, e sua longa e perigosa jornada de dez anos para voltar para casa após a queda de Troia. Enquanto ele enfrenta ciclopes, sereias e deuses vingativos, sua esposa Penélope e seu filho Telêmaco tentam afastar os pretendentes que tomaram conta de seu palácio.",
+    pdf: "Odisseia.pdf",
+  },
+  "o-enfermeiro": {
+    titulo: "O Enfermeiro",
+    autor: "Machado de Assis",
+    paginas: "7 Páginas - PDF",
+    paginas2: "20 Páginas - ONLINE",
+    capa: "../Capas/OEnfermeiro.jpg",
+    sinopse: "Neste conto sombrio e irônico, o enfermeiro Procópio é contratado para cuidar de um coronel ranzinza e abusivo. A relação entre os dois se torna um jogo de poder psicológico que testa os limites da paciência e da moralidade, levando a um final surpreendente e moralmente ambíguo.",
+    pdf: "OEnfermeiro.pdf",
+  },
+  "conto-de-escola": {
+    titulo: "Conto de Escola",
+    autor: "Machado de Assis",
+    paginas: "7 Páginas - PDF",
+    paginas2: "18 Páginas - ONLINE",
+    capa: "../Capas/ContoDeEscola.jpg",
+    sinopse: "Uma narrativa sobre a infância e a perda da inocência. Pilar, um garoto com dificuldades na escola, é ajudado por Raimundo, o 'imperador' da classe. A história explora a corrupção, a delação e as complexas hierarquias sociais que existem até mesmo entre crianças.",
+    pdf: "ContoDeEscola.pdf",
+  },
+  "o-homem-que-sabia-javanes": {
+    titulo: "O Homem que Sabia Javanês",
+    autor: "Afonso Henriques de Lima Barreto",
+    paginas: "68 Páginas - PDF",
+    paginas2: "181 Páginas - ONLINE",
+    capa: "../Capas/OHomemQueSabiaJavanes.jpg",
+    sinopse: "Uma sátira afiada à burocracia e à valorização de aparências. Castelo, desempregado, decide fingir que sabe Javanês para conseguir um emprego no consulado. Ele engana a todos e se torna um 'especialista' respeitado, provando que, na sociedade da época, a impostura muitas vezes vale mais que o conhecimento real.",
+    pdf: "OHomemQueSabiaJavanes.pdf",
+  },
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -543,27 +622,15 @@ btn.addEventListener('click', () => {
   }, 2100);
 });
 
-// Este código deve estar na sua página de 'livros.html' ou 'livros.js'
-// ... (seu código que define o objeto 'livro') ...
-
-// Assumindo que seu objeto 'livro' tem:
-// livro.pdf (ex: "A-Carteira.pdf")
-// livro.genero (ex: "Literatura")
-// livro.titulo (ex: "A Carteira")
-// livro.capa (ex: "../Capas/A-Carteira.jpg")
-
 document.getElementById("btn-Ler").addEventListener("click", () => {
   // Nós vamos passar TODOS os dados do livro pela URL
   const params = new URLSearchParams();
   params.set('pdf', livro.pdf);
-  params.set('genre', livro.genero);
   params.set('title', livro.titulo); // <-- NOVO
   params.set('cover', livro.capa); // <-- NOVO
 
   window.location.href = `../livro/leitura.php?${params.toString()}`;
 });
-
-// ... (seu código do botão "Ler" está correto, pode deixar como está) ...
 
 const btnDownload = document.getElementById("btn-download");
 
@@ -571,23 +638,10 @@ btnDownload.addEventListener("click", () => {
   // 1. Define o caminho PADRÃO
   let folderPath = '../livro/livros-pdf-padrao/';
 
-  // 2. Pega o gênero e "normaliza" (tira acentos e maiúsculas)
-  const genre = livro.genero.toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
-  // ex: "História em Quadrinhos" -> "historia em quadrinhos"
-  // ex: "Mangá" -> "manga"
-
-  // 3. Verifica se o gênero normalizado é um dos casos especiais
-  if (genre === 'manga' || genre === 'historia em quadrinhos') {
-    // 4. Se for, muda o caminho para a pasta principal de PDFs
-    folderPath = '../livro/livros-pdf/';
-  }
-
-  // 5. Constrói o caminho final
+  //2. O caminho final
   const pdfPath = `${folderPath}${livro.pdf}`;
 
-  // O resto do seu código de download continua igual
+  // 3. O resto do código de download
   const a = document.createElement("a");
   a.href = pdfPath;
   a.setAttribute("download", livro.pdf);

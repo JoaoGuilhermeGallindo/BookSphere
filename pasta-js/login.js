@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Em vez de redirecionar, volta 1 página
                     window.history.go(-1);
 
-                }, 2000); // Espera 3 segundos
+                }, 2000); // Espera 2 segundos
             }
             else if (texto.includes('Usuário muito longo')) {
                 mostrarMensagem('O usuário não pode ter mais de 30 caracteres.', 'red');
@@ -96,5 +96,19 @@ if (toggleConfirmar) {
     });
 }
 
+//
+// ✅ FUNÇÃO CORRIGIDA ABAIXO
+//
+function iniciarResetSenha() {
+    // 1. Pega o valor do campo de usuário (CORRIGIDO)
+    var usuario = document.getElementById('usuario').value;
 
-
+    // 2. Verifica se o usuário digitou algo
+    if (usuario.trim() === "") {
+        alert("Por favor, digite seu nome de usuário no campo 'Usuário' antes de clicar em 'Esqueceu a senha?'.");
+    } else {
+        // 3. Redireciona para o script que envia o e-mail
+        //    (Note o caminho para a pasta-php)
+        window.location.href = 'pasta-php/enviar-codigo-auto.php?usuario=' + encodeURIComponent(usuario);
+    }
+}

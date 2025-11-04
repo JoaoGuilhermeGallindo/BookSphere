@@ -871,26 +871,8 @@
      cursor: pointer;
  }
 
- .popup-content button:hover {
+ .popup-content button:hover {      
      background-color: #0056b3;
  }
 
- /*
-=====================================================
- HACK PARA PRESERVAR CORES DE MANGÁS E HQs
-=====================================================
- Isto desativa o filtro de cor (inversão/sépia)
- aplicado aos elementos <canvas> QUANDO o body
- tiver uma classe de gênero específica.
-*/
-
- .modo-noturno.genre-mangá canvas,
- .modo-noturno.genre-história-em-quadrinhos canvas,
- .modo-sepia.genre-mangá canvas,
- .modo-sepia.genre-história-em-quadrinhos canvas {
-     /* * Remove qualquer filtro aplicado pela regra .modo-noturno,
-     * fazendo a página do livro voltar ao normal.
-     * O !important é necessário para garantir a sobreposição.
-    */
-     filter: none !important;
- }
+ 

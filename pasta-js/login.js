@@ -38,17 +38,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 setTimeout(() => {
                     // =============================================
-                    // ✅ CORREÇÃO APLICADA AQUI
+                    // ✅ LÓGICA DE REDIRECIONAMENTO INTELIGENTE
                     // =============================================
-                    // Em vez de redirecionar, volta 1 página
-                    window.history.go(-1);
+                    const fromRecovery = sessionStorage.getItem('fromRecovery');
+
+                    if (fromRecovery === 'true') {
+                        // 1. Se veio da recuperação, limpa a bandeira
+                        sessionStorage.removeItem('fromRecovery');
+                        // 2. Volta 2 páginas (login.html -> recuperar.html -> página anterior)
+                        window.history.go(-2);
+                    } else {
+                        // 3. Se for um login normal, volta 1 página
+                        window.history.go(-1);
+                    }
 
                 }, 2000); // Espera 2 segundos
-            }
-            else if (texto.includes('Usuário muito longo')) {
-                mostrarMensagem('O usuário não pode ter mais de 30 caracteres.', 'red');
-            } else {
-                mostrarMensagem(`${texto}`, 'red');
             }
         }
         catch (erro) {

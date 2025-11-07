@@ -5,11 +5,10 @@
  */
 
 // 1. Credenciais do Banco (Baseado nas suas imagens)
-$host = '127.0.0.1'; // ou 'localhost'. Mantenha assim.
-$db   = 'u831223978_bancoosers'; // O nome do seu banco
-$user = 'u831223978_bancoosers'; // O seu usuário do banco
-$pass = 'SUA_SENHA_DO_BANCO_DE_DADOS'; // <-- ADICIONE SUA SENHA AQUI
-$charset = 'utf8mb4';
+$servername = "srv791.hstgr.io"; 
+$username   = "u831223978_root";
+$password   = "BookSphere1";
+$dbname     = "u831223978_bancousers";
 
 // 2. String de Conexão (DSN)
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";

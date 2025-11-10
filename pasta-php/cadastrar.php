@@ -1,45 +1,33 @@
 <?php
-// Configuração do banco de dados MySQL (Hostinger)
-$servername = "srv791.hstgr.io";
-$username   = "u831223978_root";
-$password   = "BookSphere1";
-$dbname     = "u831223978_bancousers";
+// 1. Incluir o arquivo de conexão PDO
+// Ele já cria a variável $pdo e trata o erro inicial de conexão.
+require_once 'conexao.php'; // (Ajuste o caminho se necessário)
 
-// Criar conexão
-$conn = new mysqli($servername, $username, $password, $dbname);
+// 2. Remover a conexão antiga (mysqli)
+// (Todo o bloco $servername, $username, $conn = new mysqli... foi removido)
 
-// Verificar conexão
-if ($conn->connect_error) {
-    die("erro_sql: " . $conn->connect_error);
-}
-
-// Receber os dados do formulário
+// 3. Receber os dados do formulário (sem alterações)
 $nome      = $_POST['nome'] ?? '';
 $email     = $_POST['email'] ?? '';
 $usuario   = $_POST['usuario'] ?? '';
 $senha     = $_POST['senha'] ?? '';
 $confirmar = $_POST['confirmar_senha'] ?? '';
 
-// --- NOVA VALIDAÇÃO DE LIMITE NO SERVIDOR ---
-// (usamos mb_strlen para contar caracteres multibyte, como "ç" e "ã", corretamente)
+// 4. Validações (sem alterações)
 if (mb_strlen($nome, 'UTF-8') > 100) {
     echo "nome_muito_longo";
     exit;
 }
-// --- FIM DA VALIDAÇÃO ---
 
-// Verifica se senha e confirmação conferem
 if ($senha !== $confirmar) {
     echo "senhas_diferentes";
     exit;
 }
 
-// Criptografar senha
+// 5. Criptografar senha (sem alterações)
 $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
 
-// =====================
-// Upload da imagem
-// =====================
+// 6. Upload da imagem (sem alterações)
 $imagem_nome = null;
 
 if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
@@ -48,34 +36,63 @@ if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
     $imagem_nome = uniqid("user_", true) . "." . strtolower($extensao);
     $caminho_final = $pasta . $imagem_nome;
 
-    // Verifica se a pasta existe
     if (!is_dir($pasta)) {
         mkdir($pasta, 0755, true);
     }
 
-    // Move o arquivo
     if (!move_uploaded_file($_FILES['imagem']['tmp_name'], $caminho_final)) {
         echo "erro_upload";
         exit;
     }
 } else {
+    // Se não houver imagem, o 'sucesso' nunca será alcançado
+    // Considere se isso é obrigatório ou não.
+    // Se for opcional, remova este bloco 'else' e deixe $imagem_nome ser null.
+    // Se for obrigatório, esta lógica está correta.
     echo "nenhuma_imagem";
     exit;
 }
 
-// =====================
-// Inserir no banco
-// =====================
-$stmt = $conn->prepare("INSERT INTO users (nome, email, usuario, senha, imagem) VALUES (?, ?, ?, ?, ?)");
-$stmt->bind_param("sssss", $nome, $email, $usuario, $senhaHash, $imagem_nome);
+// ============================================
+// 7. Inserir no banco (Convertido para PDO)
+// ============================================
 
-if ($stmt->execute()) {
+// A sintaxe do PDO é um pouco diferente.
+// Usamos '?' como placeholders.
+$sql = "INSERT INTO users (nome, email, usuario, senha, imagem) VALUES (?, ?, ?, ?, ?)";
+
+// Usamos try...catch para capturar erros de SQL
+// (já que o conexao.php ativou PDO::ERRMODE_EXCEPTION)
+try {
+    // Prepara a consulta usando o $pdo (do conexao.php)
+    $stmt = $pdo->prepare($sql);
+    
+    // Executa a consulta passando os valores em um array.
+    // A ordem DEVE corresponder aos '?' na query.
+    // Não é necessário $stmt->bind_param("sssss")
+    $stmt->execute([$nome, $email, $usuario, $senhaHash, $imagem_nome]);
+
     echo "sucesso";
-} else {
-    echo "erro_sql: " . $stmt->error;
+
+} catch (PDOException $e) {
+    
+    // BÔNUS: Detectar se o e-mail ou usuário já existe
+    // O código 23000 é para violação de chave única (UNIQUE)
+    if ($e->getCode() == 23000) {
+        if (strpos($e->getMessage(), 'email') !== false) {
+            echo "email_duplicado"; // Supondo que 'email' é UNIQUE
+        } elseif (strpos($e->getMessage(), 'usuario') !== false) {
+            echo "usuario_duplicado"; // Supondo que 'usuario' é UNIQUE
+        } else {
+            echo "erro_duplicado"; // Erro genérico de duplicidade
+        }
+    } else {
+        // Outro erro de SQL
+        echo "erro_sql: " . $e->getMessage();
+    }
 }
 
-// Fechar
-$stmt->close();
-$conn->close();
+// 8. Fechar conexão (não é necessário em PDO)
+// Em PDO, $stmt->close() e $conn->close() não são usados.
+// A conexão fecha automaticamente quando o script termina.
 ?>

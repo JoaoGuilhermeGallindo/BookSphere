@@ -4,16 +4,18 @@
  * Local: pasta-php/conexao.php
  */
 
-// 1. Credenciais do Banco (Baseado nas suas imagens)
-$servername = "srv791.hstgr.io"; 
+// 1. Credenciais do Banco
+$servername = "srv791.hstgr.io";
 $username   = "u831223978_root";
 $password   = "BookSphere1";
 $dbname     = "u831223978_bancousers";
+$charset    = "utf8mb4"; // Boa prática definir o charset
 
-// 2. String de Conexão (DSN)
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+// 2. String de Conexão (DSN) - CORRIGIDO
+//    (Usando as variáveis definidas acima, e não $host ou $db)
+$dsn = "mysql:host=$servername;dbname=$dbname;charset=$charset";
 
-// 3. Opções do PDO (para configurar como o PHP lida com o banco)
+// 3. Opções do PDO
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, // Mostra erros
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,       // Retorna dados como array
@@ -22,9 +24,11 @@ $options = [
 
 // 4. Tentar a conexão
 try {
-     $pdo = new PDO($dsn, $user, $pass, $options);
+     // CORRIGIDO: Usando $username e $password
+     $pdo = new PDO($dsn, $username, $password, $options);
 } catch (\PDOException $e) {
      // Se falhar, mostra o erro
-     throw new \PDOException($e->getMessage(), (int)$e->getCode());
+     // Em produção, você talvez queira logar isso em vez de mostrar
+     die("erro_sql: " . $e->getMessage());
 }
 ?>

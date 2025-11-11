@@ -2,6 +2,7 @@
 /*
  * ARQUIVO DE CONEXÃO COM O BANCO DE DADOS
  * Local: pasta-php/conexao.php
+ * ✅ CORRIGIDO PARA RETORNAR ERROS EM JSON
  */
 
 // 1. Credenciais do Banco
@@ -9,24 +10,38 @@ $servername = "srv791.hstgr.io";
 $username = "u831223978_root";
 $password = "BookSphere1";
 $dbname = "u831223978_bancousers";
-$charset = "utf8mb4"; // Boa prática definir o charset
+$charset = "utf8mb4";
 
 // 2. String de Conexão (DSN)
 $dsn = "mysql:host=$servername;dbname=$dbname;charset=$charset";
 
 // 3. Opções do PDO
 $options = [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, // Mostra erros
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, // Retorna dados como array
-    PDO::ATTR_EMULATE_PREPARES => false, // Usa preparações reais
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES => false,
 ];
 
 // 4. Tentar a conexão
 try {
     $pdo = new PDO($dsn, $username, $password, $options);
 } catch (\PDOException $e) {
-    // Se falhar, mostra o erro
-    // Em produção, você talvez queira logar isso em vez de mostrar
-    die("erro_sql: "." ".$e->getMessage());
+    
+    // ===================================
+    // ✅ CORREÇÃO APLICADA AQUI
+    // ===================================
+    // Se a conexão falhar, não use 'die()'.
+    // Envie uma resposta JSON padronizada.
+    
+    header('Content-Type: application/json');
+    http_response_code(500); // Erro de Servidor
+    
+    echo json_encode([
+        'status' => 'error', 
+        'message' => 'Falha na conexão com o banco de dados: ' . $e->getMessage()
+    ]);
+    
+    exit; // Pare a execução do script
+    // ===================================
 }
 ?>

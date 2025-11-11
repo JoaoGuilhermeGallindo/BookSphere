@@ -42,7 +42,7 @@ try {
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($user) {
-        $user_id = $user['id']; // <-- Atenção: Mudei 'id' para 'user_id'
+        $user_id = $user['user_id']; // <-- Atenção: Mudei 'id' para 'user_id'
 
         // Se for POST e ação de salvar progresso, processa a requisição
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

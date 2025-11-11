@@ -1,5 +1,5 @@
 const livros = {
-  "divina-comedia": {
+  "a-divina-comedia": {
     titulo: "A Divina Comédia",
     autor: "Dante Alighieri",
     paginas: "788 Páginas - PDF",
@@ -66,7 +66,7 @@ const livros = {
     sinopse: `A Bela Madame Vargas explora as relações humanas e as intrigas da sociedade portuguesa, centrando-se na vida da protagonista. Camilo Castelo Branco desenvolve os conflitos emocionais de Madame Vargas, abordando amor, moralidade e expectativas sociais da época. A obra é representativa do romantismo português, combinando realismo e lirismo, e oferece um retrato vívido da sociedade do século XIX.`,
     pdf: "ABelaMadameVargas.pdf",
   },
-  "brasileira-de-prazins": {
+  "a-brasileira-de-prazins": {
     titulo: "A Brasileira de Prazins",
     autor: "Camilo Castelo Branco",
     paginas: "63 Páginas - PDF",
@@ -84,28 +84,25 @@ const livros = {
     sinopse: `A Dama das Camélias narra a trágica história de amor entre Marguerite Gautier e Armand Duval, explorando paixão, sociedade e moralidade. O romance descreve o sofrimento da cortesã parisiense e o impacto do preconceito social em seu destino. Considerado um clássico do romantismo francês, o livro inspirou adaptações teatrais, óperas e filmes, sendo referência mundial da literatura.`,
     pdf: "ADamaDasCamelias.pdf",
   },
-  "escrava-isaura": {
+  "a-escrava-isaura": {
     titulo: "A Escrava Isaura",
     autor: "Bernardo Guimarães",
     paginas: "87 Páginas - PDF",
     paginas2: "312 Páginas - ONLINE",
     capa: "../Capas/AEscravaIsaura.jpg",
-    sinopse: `A Escrava Isaura é um romance abolicionista que retrata a vida da jovem Isaura, uma escrava branca que busca liberdade no Brasil do século XIX.
-        O livro aborda injustiças, preconceitos e sofrimentos da escravidão, destacando coragem, bondade e esperança da protagonista.
-        Considerada emblemática da literatura brasileira, a obra combina crítica social, drama e romance, sendo um marco contra a escravidão.`,
+    sinopse: `A Escrava Isaura é um romance abolicionista que retrata a vida da jovem Isaura, uma escrava branca que busca liberdade no Brasil do século XIX. O livro aborda injustiças, preconceitos e sofrimentos da escravidão, destacando coragem, bondade e esperança da protagonista. Considerada emblemática da literatura brasileira, a obra combina crítica social, drama e romance, sendo um marco contra a escravidão.`,
     pdf: "AEscravaIsaura.pdf",
   },
-  "esfinge-sem-segredo": {
+  "a-esfinge-sem-segredo": {
     titulo: "A Esfinge sem Segredo",
     autor: "Oscar Wilde",
     paginas: "9 Páginas - PDF",
     paginas2: "13 Páginas - ONLINE",
     capa: "../Capas/AEsfingeSemSegredo.jpg",
-    sinopse: `A Esfinge sem Segredo é um conto que explora mistério, intriga e psicologia das relações humanas, com personagens sofisticados da alta sociedade.
-        O enredo revela segredos e atitudes moralmente ambíguas, mantendo o leitor envolvido do início ao fim. O conto evidencia o estilo irônico e refinado de Wilde, mostrando como aparências sociais contrastam com a verdadeira natureza humana.`,
+    sinopse: `A Esfinge sem Segredo é um conto que explora mistério, intriga e psicologia das relações humanas, com personagens sofisticados da alta sociedade. O enredo revela segredos e atitudes moralmente ambíguas, mantendo o leitor envolvido do início ao fim. O conto evidencia o estilo irônico e refinado de Wilde, mostrando como aparências sociais contrastam com a verdadeira natureza humana.`,
     pdf: "AEsfingeSemSegredo.pdf",
   },
-  "harpa-do-crente": {
+  "a-harpa-do-crente": {
     titulo: "A Harpa do Crente",
     autor: "Alexandre Herculano",
     paginas: "70 Páginas - PDF",
@@ -114,7 +111,7 @@ const livros = {
     sinopse: `A Harpa do Crente é uma coletânea de hinos evangélicos tradicionais, reunindo canções de louvor e adoração. Os hinos abordam fé, esperança e gratidão, incentivando a prática espiritual e o crescimento pessoal. A obra é referência na música sacra evangélica, oferecendo instrumentos para culto e reflexão cristã.`,
     pdf: "AHarpaDoCrente.pdf",
   },
-  "igreja-do-diabo": {
+  "a-igreja-do-diabo": {
     titulo: "A Igreja do Diabo",
     autor: "Machado de Assis",
     paginas: "6 Páginas - PDF",
@@ -132,7 +129,7 @@ const livros = {
     sinopse: `Publicado em 1865, Iracema é um dos romances indianistas de José de Alencar e se tornou um dos símbolos da literatura romântica brasileira. A obra narra o amor entre Iracema, a virgem tabajara de lábios de mel, e Martim, um colonizador português. Dessa união nasce Moacir, o “filho da dor”, que simboliza o nascimento do povo brasileiro a partir da fusão entre indígenas e europeus.O romance é marcado pela linguagem poética, repleta de metáforas e descrições líricas da natureza. O Ceará natal de Alencar é transformado em palco de um mito fundacional que mistura história, lenda e imaginação literária. A paisagem é personificada e ganha papel central, funcionando como reflexo do destino das personagens e da formação de uma nova identidade. Iracema transcende o simples romance para se tornar um mito da nacionalidade. O livro consagra José de Alencar como um dos maiores representantes do romantismo brasileiro e permanece como leitura obrigatória para compreender as origens literárias e culturais da ideia de Brasil.`,
     pdf: "Iracema.pdf",
   },
-  "mulher-de-preto": {
+  "a-mulher-de-preto": {
     titulo: "A Mulher de Preto",
     autor: "Machado de Assis",
     paginas: "29 Páginas - PDF",
@@ -142,7 +139,7 @@ const livros = {
       "Em A Mulher de Preto de Machado de Assis, o jovem e idealista Dr. Estêvão apaixona-se pela misteriosa Madalena, que ele conhece em uma sociedade e se apresenta como viúva. No entanto, ele descobre que ela é casada com seu amigo, o deputado Meneses, e está envolvida em um caso extraconjugal. Estêvão, dividido entre a paixão e a lealdade, atua como mediador e consegue reatar o casal, que parte juntos, enquanto ele se retira para Minas Gerais.",
     pdf: "AMulherDePreto.pdf",
   },
-  "pata-da-gazela": {
+  "a-pata-da-gazela": {
     titulo: "A Pata da Gazela",
     autor: "José de Alencar",
     paginas: "63 Páginas - PDF",
@@ -152,7 +149,7 @@ const livros = {
       "A Pata da Gazela, de José de Alencar, é um romance do século XIX que satiriza a sociedade carioca através de um triângulo amoroso envolvendo Horácio, Leopoldo e a rica Amélia. Horácio apaixona-se por um pé pequeno e delicado que cai de Amélia, mas Leopoldo, ao ver o que ele pensa ser um pé disforme, apaixona-se pela alma da jovem. A história, inspirada em Cinderela e O Leão Amoroso, critica o amor superficial pela aparência, mostrando que o amor verdadeiro deve ser guiado pela essência e não pela beleza externa. ",
     pdf: "APataDaGazela.pdf",
   },
-  utopia: {
+  "a-utopia": {
     titulo: "A Utopia",
     autor: "Thomás Morus",
     paginas: "62 Páginas - PDF",
@@ -162,7 +159,7 @@ const livros = {
       'A sinopse de Utopia, de Thomás Morus — forma alatinada pelo qual Thomas More é literariamente conhecido — descreve uma ilha imaginária, fundada na razão e na justiça, como um contraste à sociedade inglesa da época, que era marcada pela desigualdade e pela violência. O livro apresenta uma sociedade sem propriedade privada, com igualdade social, liberdade religiosa e um governo escolhido pelo voto popular, onde todos os bens são partilhados. Através de um diálogo com o personagem Rafael Hitlodeu, More critica os problemas do seu tempo, propondo um modelo social ideal, livre de conflitos e vícios, que se tornou a origem do termo "utopia".',
     pdf: "AUtopia.pdf",
   },
-  "carta-de-pero-vaz": {
+  "a-carta-de-pero-vaz": {
     titulo: "A Carta de Pero Vaz de Caminha",
     autor: "Pero Vaz de Caminha",
     paginas: "11 Páginas - PDF",
@@ -172,7 +169,7 @@ const livros = {
       "Considerada a primeiríssima obra da literatura brasileira e um dos principais documentos históricos que explicam a gênese deste país chamado Brasil, A carta de Pero Vaz de Caminha é um texto que deve ser lido e relido por todas as gerações de brasileiros. Neste texto, Pero Vaz de Caminha – o escrivão da expedição desbravadora de Pedro Álvares Cabral que no ano de 1500 descobriu o Brasil – relata o que vê ao aportar nas terras do Novo Mundo: índios semi-nus, flora e fauna esplendorosas e toda uma geografia e civilização que seria desvendada aos poucos nos próximos séculos. Os primeiros contatos dos europeus com os nativos brasileiros, as tentativas de troca de mercadorias, o comportamento desinibido dos índios, isto e muito mais é narrado com surpreendente agilidade estilística por Pero Vaz.",
     pdf: "ACartaDePeroVazDeCaminha.pdf",
   },
-  "cidade-e-asserras-": {
+  "a-cidade-e-as-serras": {
     titulo: "A Cidade e as Serras",
     autor: "Eça de Queirós",
     paginas: "79 Páginas - PDF",
@@ -192,7 +189,7 @@ const livros = {
       "No tempo do Brasil colonial, o Sr. Juiz dispara uma conversa: quem será mais curioso, o homem ou a mulher? E assim, quem foi responsável pela perda do paraíso, Adão ou Eva?Temos então o refinamento do mestre Machado propondo uma nova versão para a história da criação do mundo. E fica, para os leitores, uma reflexão sobre as atitudes do ser humano.",
     pdf: "AdaoEEva.pdf",
   },
-  moreninha: {
+  "a-moreninha": {
     titulo: "A Moreninha",
     autor: "Joaquim Manuel de Macedo",
     paginas: "100 Páginas - PDF",
@@ -201,7 +198,7 @@ const livros = {
     sinopse: `Publicado em 1844, A Moreninha é considerado o primeiro romance romântico brasileiro e marcou a estreia literária de Joaquim Manuel de Macedo. A trama acompanha a história de Augusto, estudante de medicina, que aposta com seus colegas que jamais se apaixonaria. Durante uma visita a uma ilha, ele conhece Carolina, a jovem “moreninha” que transforma completamente sua vida. A narrativa é leve e envolvente, com descrições do cotidiano carioca do século XIX e diálogos que revelam costumes e valores da juventude da época. O romance também traz o mistério de uma promessa de amor feita na infância, que se entrelaça ao destino dos personagens e confere à obra um ar de encantamento. Com grande sucesso desde sua publicação, A Moreninha se consolidou como um clássico da literatura nacional, responsável por popularizar o romance no Brasil. Sua simplicidade e frescor continuam a conquistar leitores, sendo leitura obrigatória para quem deseja conhecer as origens do romantismo brasileiro.`,
     pdf: "AMoreninha.pdf",
   },
-  tempestade: {
+  "a-tempestade": {
     titulo: "A Tempestade",
     autor: "William Shakespeare",
     paginas: "56 Páginas - PDF",
@@ -229,7 +226,7 @@ const livros = {
     sinopse: `Vozes d’Africa é uma das obras mais emblemáticas de Castro Alves, publicada em 1888, reunindo poemas engajados no combate à escravidão e à opressão. O autor denuncia injustiças e exalta a liberdade, buscando sensibilizar a sociedade brasileira para a causa abolicionista.Com linguagem vigorosa e imagética, os poemas exploram sentimentos de revolta, empatia e esperança, refletindo a vida dos escravos e a luta por dignidade. Castro Alves utiliza versos épicos e líricos, combinando técnica poética e comprometimento social. A obra consolidou Castro Alves como o “Poeta dos Escravos” e permanece referência fundamental para estudar a literatura engajada do Brasil. Vozes d’Africa demonstra como a poesia pode atuar como instrumento de crítica social e reflexão ética.`,
     pdf: "VozesDAfrica.pdf",
   },
-  cartomante: {
+  "a-cartomante": {
     titulo: "A Cartomante",
     autor: "Machado de Assis",
     paginas: "7 Páginas - PDF",
@@ -316,7 +313,7 @@ const livros = {
     sinopse: `Mensagem é a única obra em português publicada em vida por Fernando Pessoa, reunindo poemas que exaltam a história e os mitos de Portugal. O livro celebra feitos nacionais e figuras históricas, com forte conteúdo simbólico e patriótico. A obra se divide em três partes principais: "Brasão", "Mar Português" e "O Encoberto", explorando desde a heráldica e símbolos nacionais até a esperança em um futuro glorioso. Pessoa combina erudição, misticismo e poesia lírica para construir uma narrativa poética única. Mensagem é considerada um dos marcos da literatura portuguesa moderna, mostrando a capacidade de Fernando Pessoa de sintetizar história, mito e identidade nacional em versos densos e memoráveis.`,
     pdf: "Mensagem.pdf",
   },
-  mulato: {
+  "o-mulato": {
     titulo: "O Mulato",
     autor: "Aluísio Azevedo",
     paginas: "204 Páginas - PDF",
@@ -453,7 +450,7 @@ const livros = {
     sinopse: `Farsa de Inês Pereira, considerada a peça mais divertida de Gil Vicente, foi apresentada pela primeira vez ao rei D. João III em 1523, no Convento de Tomar. Acusado de plagiar o dramaturgo espanhol Juan del Encina, pediu àqueles que o acusavam um tema para que pudesse provar sua capacidade criadora. Recebeu como desafio o ditado popular: Mais vale asno que me leve que cavalo que me derrube. A temática – o desejo de ascensão da pequena burguesia – está ligada à realidade vivida pela sociedade portuguesa da época. As personagens – tipos sociais – agem de acordo com seus interesses. Queres casar por prazer/ no tempo de agora Inês? Antes casa, em que te pés,/ que não é tempo de escolher. Nesta publicação, adaptada por Cecilia R. Lopes e ilustrada por Lélis, o jovem leitor conhecerá o texto do criador do teatro português e sua riquíssima galeria de tipos humanos que, de uma certa forma, circulam na sociedade contemporânea.`,
     pdf: "FarsaDeInesPereira.pdf",
   },
-  "alegria-da-revolucao": {
+  "a-alegria-da-revolucao": {
     titulo: "A Alegria da Revolução",
     autor: "Ken Knab",
     paginas: "230 Páginas - PDF",
@@ -512,7 +509,7 @@ const livros = {
     titulo: "Cândido, ou O Otimismo",
     autor: "Voltaire",
     paginas: "68 Páginas - PDF",
-    paginas2: "68 Páginas - ONLINE",
+    paginas2: "134 Páginas - ONLINE",
     capa: "../Capas/Candido.jpg",
     sinopse: "Uma sátira filosófica que critica o otimismo de Leibniz. O jovem Cândido é ensinado por seu tutor, Pangloss, que 'tudo vai pelo melhor no melhor dos mundos possíveis'. Após ser expulso de seu castelo, Cândido embarca em uma série de desventuras desastrosas ao redor do mundo, que testam brutalmente sua fé no otimismo.",
     pdf: "Candido.pdf",
@@ -529,8 +526,8 @@ const livros = {
   "iliada": {
     titulo: "Ilíada",
     autor: "Homero",
-    paginas: "407 Páginas - PDF",
-    paginas2: "407 Páginas - ONLINE",
+    paginas: "447 Páginas - PDF",
+    paginas2: "447 Páginas - ONLINE",
     capa: "../Capas/Iliada.jpg",
     sinopse: "O poema épico fundamental da Grécia Antiga. Focando nas últimas semanas da Guerra de Troia, a Ilíada narra a fúria do herói grego Aquiles contra seu comandante, Agamenon. A obra explora temas de glória, honra, destino e a trágica intervenção dos deuses olímpicos nos assuntos dos mortais.",
     pdf: "Iliada.pdf",
@@ -603,7 +600,7 @@ const livros = {
     titulo: "Romeu e Julieta",
     autor: "William Shakespeare",
     paginas: "173 Páginas - PDF",
-    paginas2: " Páginas - ONLINE",
+    paginas2: "173 Páginas - ONLINE",
     capa: "../Capas/Romeu-e-Julieta.webp",
     sinopse: "Uma das tragédias mais famosas de Shakespeare, conta a história de dois jovens apaixonados de famílias rivais em Verona — os Montéquio e os Capuleto. Apesar do ódio entre suas famílias, Romeu e Julieta se casam em segredo. A sequência de mal-entendidos e decisões impulsivas leva a um final trágico, com a morte dos dois amantes, que finalmente une suas famílias pelo luto.",
     pdf: "Romeu-e-Julieta.pdf",
@@ -612,7 +609,7 @@ const livros = {
     titulo: "A Megera Domada",
     autor: "William Shakespeare",
     paginas: "149 Páginas - PDF",
-    paginas2: " Páginas - ONLINE",
+    paginas2: "149 Páginas - ONLINE",
     capa: "../Capas/A-Megera-Domada.jpg",
     sinopse: "Nesta comédia, o rico Baptista quer casar suas filhas, mas impõe que a temperamental Catarina se case antes da doce Bianca. Entra em cena Petruchio, que aceita o desafio de 'domar' Catarina. A peça explora temas de identidade, poder e gênero, com humor e ironia, culminando em uma transformação surpreendente.",
     pdf: "A-Megera-Domada.pdf",
@@ -631,7 +628,7 @@ const livros = {
     titulo: "A Princesa de Babilonia",
     autor: "Voltaire",
     paginas: "46 Páginas - PDF",
-    paginas2: "46 Páginas - ONLINE",
+    paginas2: "92 Páginas - ONLINE",
     capa: "../Capas/APrincesadeBabilonia.jpg",
     sinopse: "A história gira em torno de Formosante, a bela e inteligente filha do rei da Babilônia, que é cortejada por diversos príncipes poderosos. No entanto, ela se apaixona por Amazan, um jovem pastor sábio e corajoso. Juntos, eles embarcam numa jornada repleta de desafios, encontros com criaturas míticas (como a fênix) e reflexões profundas sobre religião, política e moralidade.",
     pdf: "A-Princesa-de-Babilonia.pdf",
@@ -658,7 +655,7 @@ const livros = {
     titulo: "A Tragédia de Hamlet, Príncipe da Dinamarca",
     autor: "William Shakespeare",
     paginas: "192 Páginas - PDF",
-    paginas2: " Páginas - ONLINE",
+    paginas2: "192 Páginas - ONLINE",
     capa: "../Capas/A-Tragedia-de-Hamlet.jpg",
     sinopse: "Após a morte misteriosa de seu pai, Hamlet é visitado por seu fantasma, que revela ter sido assassinado pelo próprio irmão, agora rei. Hamlet busca vingança, mas sua indecisão e dilemas filosóficos o levam a um caminho de loucura, traição e morte. É uma das obras mais profundas de Shakespeare, repleta de reflexões sobre existência, moralidade e destino.",
     pdf: "A-Tragedia-de-Hamlet.pdf",
@@ -667,7 +664,7 @@ const livros = {
     titulo: "Sonho de Uma Noite de Verão",
     autor: "William Shakespeare",
     paginas: "108 Páginas - PDF",
-    paginas2: " Páginas - ONLINE",
+    paginas2: "108 Páginas - ONLINE",
     capa: "../Capas/Sonho-de-Uma-Noite-de-Verao.webp",
     sinopse: "Misturando romance, magia e confusão, esta comédia se passa em uma floresta encantada onde fadas interferem nos amores de quatro jovens atenienses. Paralelamente, um grupo de artesãos ensaia uma peça para o casamento do duque. Com feitiços, transformações e reviravoltas, tudo se resolve em uma noite mágica de reconciliações e celebrações.",
     pdf: "Sonho-de-Uma-Noite-de-Verao.pdf",
@@ -676,7 +673,7 @@ const livros = {
     titulo: "Tudo Bem Quando Termina Bem",
     autor: "William Shakespeare",
     paginas: "170 Páginas - PDF",
-    paginas2: " Páginas - ONLINE",
+    paginas2: "170 Páginas - ONLINE",
     capa: "../Capas/Tudo-Bem-Quando-Termina-Bem.jpg",
     sinopse: "Helena, filha de um médico, ama Bertram, um nobre que a despreza. Com inteligência e coragem, ela cura o rei e ganha o direito de escolher um marido — escolhe Bertram, que foge. Helena então embarca numa jornada para conquistá-lo de verdade, usando astúcia e persistência. A peça mistura comédia e drama, questionando os limites entre mérito, desejo e destino.",
     pdf: "Tudo-Bem-Quando-Termina-Bem.pdf",
@@ -685,7 +682,7 @@ const livros = {
     titulo: "Como e Por Que Sou Romancista",
     autor: "José de Alencar",
     paginas: "18 Páginas - PDF",
-    paginas2: "18 Páginas - ONLINE",
+    paginas2: "48 Páginas - ONLINE",
     capa: "../Capas/ComoePorQueSouRomancista.jpg",
     sinopse: "Como e Por Que Sou Romancista, escrito por José de Alencar em 1873 e publicado postumamente em 1893, é uma obra autobiográfica em que o autor explica sua trajetória literária, suas motivações e o papel que atribui ao romance na formação da identidade nacional brasileira.",
     pdf: "ComoePorQueSouRomancista.pdf",
@@ -740,7 +737,7 @@ const livros = {
     titulo: "Sermão da Sexagésima",
     autor: "Padre Antônio Vieira",
     paginas: "11 Páginas - PDF",
-    paginas2: "11 Páginas - ONLINE",
+    paginas2: "40 Páginas - ONLINE",
     capa: "../Capas/SermaoDaSexagesima.jpg",
     sinopse: "O Sermão da Sexagésima do Padre Antônio Vieira é um famoso sermão sobre a própria arte de pregar, questionando por que a palavra de Deus não estava mais dando frutos e convertendo os fiéis. Usando a Parábola do Semeador como metáfora, Vieira conclui que a culpa não era da semente (a palavra) nem do terreno (os ouvintes), mas sim dos semeadores (os pregadores). Ele critica duramente o estilo Cultista da época, acusando os padres de usarem linguagem rebuscada e exibirem vaidade em vez de focarem na mensagem. Em contraste, Vieira defende o estilo Conceitista, argumentando que um sermão deve ser claro, lógico e focado estritamente no Evangelho para ser eficaz.",
     pdf: "SermaoDaSexagesima.pdf",

@@ -46,7 +46,7 @@ try {
         exit;
     }
     
-    $user_id = $user['id']; 
+    $user_id = $user['user_id']; 
 
     // ===================================
     // DAQUI PARA BAIXO, TUDO FUNCIONA COM O $user_id
@@ -67,20 +67,25 @@ try {
             echo json_encode(['status' => 'error', 'message' => 'Parâmetros ausentes']);
             exit;
         }
-
+// ===================================
+        // ✅ CORREÇÃO SQLSTATE[HY093]
+        // ===================================
+        // Damos nomes únicos aos parâmetros do ON DUPLICATE KEY UPDATE
         $sql = "INSERT INTO user_reading_progress 
                     (user_id, book_identifier, last_page, total_pages, book_title, book_cover, book_genre) 
                 VALUES 
                     (:user_id, :book_id, :page, :total_pages, :book_title, :book_cover, :book_genre)
                 ON DUPLICATE KEY UPDATE 
-                    last_page = :page, 
-                    total_pages = :total_pages, 
-                    book_title = :book_title, 
-                    book_cover = :book_cover,
-                    book_genre = :book_genre,
-                    last_updated = CURRENT_TIMESTAMP"; // Bônus: atualiza o timestamp
+                    last_page = :page_upd, 
+                    total_pages = :total_pages_upd, 
+                    book_title = :book_title_upd, 
+                    book_cover = :book_cover_upd,
+                    book_genre = :book_genre_upd,
+                    last_updated = CURRENT_TIMESTAMP";
         
-        $stmt = $pdo->prepare($sql); // Usando $pdo
+        $stmt = $pdo->prepare($sql);
+
+        // Agora passamos 12 valores em vez de 7
         $stmt->execute([
             'user_id' => $user_id,
             'book_id' => $book_id, 
@@ -88,7 +93,13 @@ try {
             'total_pages' => $total_pages,
             'book_title' => $book_title,
             'book_cover' => $book_cover,
-            'book_genre' => $book_genre
+            'book_genre' => $book_genre,
+            // Adiciona os valores duplicados para a parte UPDATE
+            'page_upd' => $page,
+            'total_pages_upd' => $total_pages,
+            'book_title_upd' => $book_title,
+            'book_cover_upd' => $book_cover,
+            'book_genre_upd' => $book_genre
         ]);
 
         echo json_encode(['status' => 'success', 'message' => 'Progresso salvo']);

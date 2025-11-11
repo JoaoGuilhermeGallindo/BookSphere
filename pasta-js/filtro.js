@@ -35,7 +35,7 @@ const data = [
     genero: "Ensaio",
   },
   {
-    id: "a-cidade-e-asserras-",
+    id: "a-cidade-e-as-serras",
     titulo: "A Cidade e as Serras",
     autor: "Eça de Queirós",
     capa: "../Capas/ACidadeEasSerras.jpg",
@@ -84,7 +84,7 @@ const data = [
     genero: "Ensaio",
   },
   {
-    id: "a-bela-madame-vargas",
+    id: "bela-madame-vargas",
     titulo: "A Bela Madame Vargas",
     autor: "Camilo Castelo Branco",
     capa: "../Capas/ABelaMadameVargas.jpg",

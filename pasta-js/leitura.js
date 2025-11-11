@@ -888,11 +888,3 @@ function loadData() {
     else iconMobile.className = "bi bi-circle-square";
   }
 }
-
-/////////////////////////////////////////////////------Salvar Progresso------------///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-document
-  .getElementById("mobileViewProgressBtn")
-  .addEventListener("click", () => {
-    document.getElementById("progressPopup").style.display = "block";
-    carregarProgresso();
-  });

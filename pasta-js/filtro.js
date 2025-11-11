@@ -374,7 +374,7 @@ const data = [
     id: "quincasborba",
     titulo: "Quincas Borba",
     autor: "Machado de Assis",
-    capa: "../Capas/Quincasborba.jpg",
+    capa: "../Capas/QuincasBorba.jpg",
     genero: "Histórico",
   },
   {

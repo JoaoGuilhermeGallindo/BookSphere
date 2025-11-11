@@ -784,7 +784,7 @@ const livros = {
   "quincasborba": {
     titulo: "Quincas Borba",
     autor: "Machado de Assis",
-    capa: "../Capas/Quincasborba.jpg",
+    capa: "../Capas/QuincasBorba.jpg",
     paginas: "139 Páginas - PDF",
     paginas2: "199 Páginas - ONLINE",
     sinopse: "O romance a ascensão social de Rubião que, após receber toda a herança do filósofo louco Quincas Borba - criador da filosofia humanitas e muda-se para a Corte no final do século XlX. Na viagem de trem rumo à capital, Rubião conhece o casal Sofia e Cristiano Palha, qua percebe estar diante de um ingênuo - e agora rico - provinciano: impressão que também é compartilhada por todos os que estão ao seu redor. As desventuras de Rubião e sua relação com os amigos parasitários dão a tônica da obra, que critica o convívio social e os valores morais e éticos vigentes na época.",

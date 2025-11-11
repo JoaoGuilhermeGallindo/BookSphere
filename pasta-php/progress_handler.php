@@ -46,7 +46,7 @@ try {
         exit;
     }
     
-    $user_id = $user['user_id']; 
+    $user_id = $user['id']; 
 
     // ===================================
     // DAQUI PARA BAIXO, TUDO FUNCIONA COM O $user_id

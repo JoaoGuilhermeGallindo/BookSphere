@@ -418,7 +418,7 @@ const data = [
     autor: "Eça de Queirós",
     capa: "../Capas/ACidadeEasSerras.jpg",
     genero: "Romance",
-  },
+  }, ,
   {
     id: "contos-para-velhos",
     titulo: "Contos para Velhos",
@@ -517,13 +517,13 @@ const data = [
     capa: "../Capas/CapitulosdeHistoriaColonial(1500-1800).jpg",
     genero: "Ensaio",
   },
-  {
-    id: "a-alma-do-lazaro",
-    titulo: "A Alma do Lázaro",
-    autor: "José de Alencar",
-    capa: "../Capas/AAlmadoLazaro.jpg",
-    genero: "Romance",
-  },
+  // {
+  // id: "a-alma-do-lazaro",
+  // titulo: "A Alma do Lázaro",
+  //  autor: "José de Alencar",
+  //  capa: "../Capas/AAlmadoLazaro.jpg",
+  //  genero: "Romance",
+  // },
   {
     id: "como-e-por-que-sou-romancista",
     titulo: "Como e Por Que Sou Romancista",
@@ -546,20 +546,20 @@ const data = [
     capa: "../Capas/AArtePoetica.jpg",
     genero: "Filosofia",
   },
-  {
-    id: "eu-profundo",
-    titulo: "O Eu Profundo e os Outros Eus",
-    autor: "Fernando Pessoa",
-    capa: "../Capas/OEuProfundoEOsOutrosEus.jpg",
-    genero: "Poesia",
-  },
-  {
-    id: "a-dama-das-camelias",
-    titulo: "A Dama das Camélias",
-    autor: "Alexandre Dumas Filho",
-    capa: "../Capas/ADamaDasCamelias.jpg",
-    genero: "Romance",
-  },
+  // {
+  //   id: "eu-profundo",
+  //   titulo: "O Eu Profundo e os Outros Eus",
+  //   autor: "Fernando Pessoa",
+  //   capa: "../Capas/OEuProfundoEOsOutrosEus.jpg",
+  //   genero: "Poesia",
+  // },
+  //{
+  // id: "a-dama-das-camelias",
+  // titulo: "A Dama das Camélias",
+  // autor: "Alexandre Dumas Filho",
+  // capa: "../Capas/ADamaDasCamelias.jpg",
+  //  genero: "Romance",
+  // },
   {
     id: "candido",
     titulo: "Cândido",
@@ -567,6 +567,55 @@ const data = [
     capa: "../Capas/Candido.jpg",
     genero: "Clássico",
   },
+  {
+    id: "TristeFimdePolicarpoQuaresma",
+    titulo: "Triste Fim de Policarpo Quaresma",
+    autor: "Afonso Henriques de Lima Barreto",
+    capa: "../Capas/Triste-Fim-de-Policarpo-Quaresmaa.jpg",
+    genero: "Histórico",
+  },
+  {
+    id: "quincasborba",
+    titulo: "Quincas Borba",
+    autor: "Machado de Assis",
+    capa: "../Capas/Quincasborba.jpg",
+    genero: "Histórico",
+  },
+  {
+    id: "DiarioIntimo",
+    titulo: "Diário Íntimo",
+    autor: "Afonso Henriques de Lima Barreto",
+    capa: "../Capas/Diario-Intimo.jpg",
+    genero: "Histórico",
+  },
+  {
+    id: "bom-crioulo",
+    titulo: "Bom Crioulo",
+    autor: "Adolfo Ferreira Caminha",
+    capa: "../Capas/BomCrioulo.png",
+    genero: "Histórico",
+  },
+  {
+    id: "o-ateneu",
+    titulo: "O Ateneu",
+    autor: "Raul Pompeia",
+    capa: "../Capas/OAteneu.png",
+    genero: "Histórico",
+  },
+  {
+    id: "o-cortiço",
+    titulo: "O Cortiço",
+    autor: "Aluísio de Azevedo",
+    capa: "../Capas/Ocortico.jpg",
+    genero: "Histórico",
+  },
+  {
+    id: "memorias-de-um-sargento-de-milicias",
+    titulo: "Memórias de um Sargento de Milícias",
+    autor: "Manuel Antônio de Almeida",
+    capa: "../Capas/MemoriasdeumSargentodeMilicias.jpg",
+    genero: "Histórico",
+  }
 ];
 
 const livrossection = document.querySelector(".livros-lista");

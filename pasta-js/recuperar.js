@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
         subtituloElemento.textContent = "Digite seu e-mail para recuperar seu usuário.";
     } else {
         // Se a URL não tiver ?tipo=... , é um erro. Volta ao login.
-        window.location.href = 'login.html';
+        window.location.replace('login.html');
         return;
     }
 
@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         try {
             // Chama o arquivo PHP (que criaremos no próximo passo)
-            const resposta = await fetch('pasta-php/verificar-email.php', {
+            const resposta = await fetch('../pasta-php/verificar-email.php', {
                 method: 'POST',
                 body: formData
             });
@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         try {
             // Chama o arquivo PHP que verifica o código
-            const resposta = await fetch('pasta-php/verificar-codigo.php', {
+            const resposta = await fetch('../pasta-php/verificar-codigo.php', {
                 method: 'POST',
                 body: formData
             });
@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 // SUCESSO! Redireciona para a Página 2
                 mostrarMensagem("Código correto! Redirecionando...", 'sucesso');
                 // Passamos o tipo (senha/usuario) e o token de segurança para a próxima página
-                window.location.href = `redefinir.html?tipo=${tipoRecuperacao}&token=${json.token}`;
+                window.location.replace(`redefinir.html?tipo=${tipoRecuperacao}&token=${json.token}`);
             
             } else if (json.status === 'erro_tentativa') {
                 // ERROU (1ª ou 2ª vez)
@@ -172,8 +172,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 inputCodigo.disabled = true;
                 // Redireciona para o login após 5 segundos
                 setTimeout(() => {
-                    window.location.href = 'login.html';
-                }, 5000);
+                   window.location.replace('login.html');
+                }, 3000);
             
             } else {
                 // Outros erros (ex: código expirado, solicitação não encontrada)
@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         try {
             // Chama o PHP de reenvio
-            const resposta = await fetch('pasta-php/reenviar-codigo.php', {
+            const resposta = await fetch('../pasta-php/reenviar-codigo.php', {
                 method: 'POST',
                 body: formData
             });

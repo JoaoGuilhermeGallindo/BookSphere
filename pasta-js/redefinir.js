@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         try {
             // Chama o arquivo PHP final
-            const resposta = await fetch('pasta-php/executar-redefinicao.php', {
+            const resposta = await fetch('../pasta-php/executar-redefinicao.php', {
                 method: 'POST',
                 body: formData
             });
@@ -115,8 +115,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 mostrarMensagem(json.mensagem, 'sucesso');
                 // Redireciona para o login após 3 segundos
                 setTimeout(() => {
-                    window.location.href = 'login.html';
-                }, 3000);
+                 window.location.replace('login.html');
+                }, 2000);
             } else {
                 mostrarMensagem(json.mensagem, 'erro');
             }

@@ -604,7 +604,7 @@ const livros = {
     autor: "William Shakespeare",
     paginas: "173 Páginas - PDF",
     paginas2: " Páginas - ONLINE",
-    capa: "../Capas/Romeu-e-Julieta.jpg",
+    capa: "../Capas/Romeu-e-Julieta.webp",
     sinopse: "Uma das tragédias mais famosas de Shakespeare, conta a história de dois jovens apaixonados de famílias rivais em Verona — os Montéquio e os Capuleto. Apesar do ódio entre suas famílias, Romeu e Julieta se casam em segredo. A sequência de mal-entendidos e decisões impulsivas leva a um final trágico, com a morte dos dois amantes, que finalmente une suas famílias pelo luto.",
     pdf: "Romeu-e-Julieta.pdf",
   },
@@ -656,19 +656,19 @@ const livros = {
   },
   "A-Tragedia-de-Hamlet": {
     titulo: "A Tragédia de Hamlet, Príncipe da Dinamarca",
-    autor: "Sílvio Romero",
+    autor: "William Shakespeare",
     paginas: "192 Páginas - PDF",
     paginas2: " Páginas - ONLINE",
-    capa: "../Capas/A-Tragedia-de-Hamle.png",
+    capa: "../Capas/A-Tragedia-de-Hamlet.jpg",
     sinopse: "Após a morte misteriosa de seu pai, Hamlet é visitado por seu fantasma, que revela ter sido assassinado pelo próprio irmão, agora rei. Hamlet busca vingança, mas sua indecisão e dilemas filosóficos o levam a um caminho de loucura, traição e morte. É uma das obras mais profundas de Shakespeare, repleta de reflexões sobre existência, moralidade e destino.",
-    pdf: "HistoriadaLiteraturaBrasileiraFatoresdaLiteraturaBrasileira.pdf",
+    pdf: "A-Tragedia-de-Hamlet.pdf",
   },
   "Sonho-de-Uma-Noite-de-Verao": {
     titulo: "Sonho de Uma Noite de Verão",
     autor: "William Shakespeare",
     paginas: "108 Páginas - PDF",
     paginas2: " Páginas - ONLINE",
-    capa: "../Capas/Sonho-de-Uma-Noite-de-Verao.png",
+    capa: "../Capas/Sonho-de-Uma-Noite-de-Verao.webp",
     sinopse: "Misturando romance, magia e confusão, esta comédia se passa em uma floresta encantada onde fadas interferem nos amores de quatro jovens atenienses. Paralelamente, um grupo de artesãos ensaia uma peça para o casamento do duque. Com feitiços, transformações e reviravoltas, tudo se resolve em uma noite mágica de reconciliações e celebrações.",
     pdf: "Sonho-de-Uma-Noite-de-Verao.pdf",
   },
@@ -677,11 +677,10 @@ const livros = {
     autor: "William Shakespeare",
     paginas: "170 Páginas - PDF",
     paginas2: " Páginas - ONLINE",
-    capa: "../Capas/Tudo-Bem-Quando-Termina-Bem.png",
+    capa: "../Capas/Tudo-Bem-Quando-Termina-Bem.jpg",
     sinopse: "Helena, filha de um médico, ama Bertram, um nobre que a despreza. Com inteligência e coragem, ela cura o rei e ganha o direito de escolher um marido — escolhe Bertram, que foge. Helena então embarca numa jornada para conquistá-lo de verdade, usando astúcia e persistência. A peça mistura comédia e drama, questionando os limites entre mérito, desejo e destino.",
     pdf: "Tudo-Bem-Quando-Termina-Bem.pdf",
   },
-
   "como-e-por-que-sou-romancista": {
     titulo: "Como e Por Que Sou Romancista",
     autor: "José de Alencar",
@@ -690,16 +689,6 @@ const livros = {
     capa: "../Capas/ComoePorQueSouRomancista.jpg",
     sinopse: "Como e Por Que Sou Romancista, escrito por José de Alencar em 1873 e publicado postumamente em 1893, é uma obra autobiográfica em que o autor explica sua trajetória literária, suas motivações e o papel que atribui ao romance na formação da identidade nacional brasileira.",
     pdf: "ComoePorQueSouRomancista.pdf",
-  },
-
-  "Catarlogo-de-Autores-Brasileiros-Dominio-Publico": {
-    titulo: "História da Literatura Brasileira",
-    autor: "Fundação Biblioteca Nacional",
-    paginas: "45 Páginas - PDF",
-    paginas2: " Páginas - ONLINE",
-    capa: "../Capas/Catarlogo-de-Autores-Brasileiros-Dominio-Publico.png",
-    sinopse: "Uma compilação organizada pela Fundação Biblioteca Nacional que lista autores brasileiros cujas obras estão em domínio público. Serve como referência para pesquisadores, editores e leitores interessados em literatura clássica nacional disponível para uso livre.",
-    pdf: "Catarlogo-de-Autores-Brasileiros-Dominio-Publico.pdf",
   },
   "edipo-rei": {
     titulo: "Édipo Rei",
@@ -719,25 +708,15 @@ const livros = {
     sinopse: "Minha Formação, publicado em 1900 por Joaquim Nabuco, é um livro de memórias em que o autor revisita sua trajetória intelectual, política e diplomática. A obra é considerada um clássico da memorialística brasileira e revela as ideias que moldaram sua atuação como líder abolicionista e pensador liberal.",
     pdf: "MinhaFormacao.pdf",
   },
-  "Obras-Seletas": {
+  "obras-seletas": {
     titulo: "Obras Seletas",
     autor: "Rui Barbosa",
     paginas: " 145 Páginas - PDF",
     paginas2: " Páginas - ONLINE",
-    capa: "../Capas/Obras-Seletas.png",
+    capa: "../Capas/Obras-Seletas.jpg",
     sinopse: "Coletânea dos escritos mais relevantes de Rui Barbosa, abrangendo discursos, ensaios jurídicos, textos políticos e reflexões filosóficas. Revela seu papel como jurista, político e intelectual influente na formação da República e na defesa das liberdades civis.",
     pdf: "Obras-Seletas.pdf",
   },
-  "Camoes": {
-    titulo: "Camões",
-    autor: "Joaquim Nabuco",
-    paginas: " 16 Páginas - PDF",
-    paginas2: " Páginas - ONLINE",
-    capa: "../Capas/Camoess.png",
-    sinopse: "Neste ensaio, Nabuco homenageia Luís de Camões, destacando sua importância para a literatura portuguesa e sua influência cultural. A obra mistura crítica literária e admiração pessoal, revelando o impacto do poeta sobre o pensamento lusófono.",
-    pdf: "Camoes.pdf",
-  },
-
   "a-desobediencia-civil": {
     titulo: "A Desobediência Civil",
     autor: "Henry David Thoreau",
@@ -776,8 +755,16 @@ const livros = {
     sinopse: "Antígona de Sófocles é uma tragédia grega clássica centrada no conflito entre a lei humana e a lei divina. A trama começa após os dois irmãos de Antígona, Etéocles e Polinices, se matarem em batalha pelo trono de Tebas. O novo rei, Creonte, seu tio, honra Etéocles com um enterro de herói, mas decreta que o corpo de Polinices, considerado traidor, seja deixado insepulto, sob pena de morte para quem desobedecer. Antígona, sentindo que seu dever religioso e familiar para com os deuses supera a lei do Estado, desafia Creonte e realiza os ritos funerários para seu irmão. Ela é capturada e, inflexível em sua decisão, Creonte a condena a ser aprisionada viva numa caverna, apesar dos apelos de seu filho Hémon, que é noivo de Antígona. O profeta cego Tirésias alerta Creonte de que sua teimosia e desrespeito aos deuses trarão desgraça sobre sua casa. Aterrorizado, Creonte corre para reverter sua sentença, mas é tarde demais: Antígona enforcou-se, Hémon se mata ao encontrar sua amada morta, e a esposa de Creonte, Eurídice, comete suicídio ao saber da morte do filho. Creonte termina a peça sozinho e devastado, reconhecendo que sua arrogância e tirania destruíram sua família.",
     pdf: "Antigona.pdf",
   },
-
-} 
+  "as-religioes-no-rio": {
+    titulo: "As Religiões no Rio",
+    autor: "João do Rio",
+    capa: "../Capas/AsReligioesNoRio.jpg",
+    paginas: "82 Páginas - PDF",
+    paginas2: "259 Páginas - ONLINE",
+    sinopse: "Publicado inicialmente como reportagem, As religiões no Rio desenvolve um divertido levantamento dos mistérios das crenças no Rio de Janeiro do século XX: o protestantismo, o satanismo, os judeus, os espiritas, os católicos e muito mais. João do Rio, um dos precursores da crônica no Brasil, responsável por elevá-la a categoria de gênero literário, reúne neste livro uma série de entrevistas com personagens de diversas religiões, oferecendo uma obra de caráter histórico e etnográfico, pioneira, singular e atemporal.",
+    pdf: "AsReligioesNoRio.pdf",
+  },
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);

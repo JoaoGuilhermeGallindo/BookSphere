@@ -112,6 +112,13 @@ const data = [
     genero: "Clássico",
   },
   {
+    id: "as-religioes-no-rio",
+    titulo: "As Religiões no Rio",
+    autor: "João do Rio",
+    capa: "../Capas/AsReligioesNoRio.jpg",
+    genero: "Ensaio",
+  },
+  {
     id: "dom-quixote-volume2",
     titulo: "Dom Quixote Vol. 2",
     autor: "Miguel de Cervantes",
@@ -130,6 +137,13 @@ const data = [
     titulo: "Auto da Barca do Inferno",
     autor: "Gil Vicente",
     capa: "../Capas/AutoDaBarcaDoInferno.jpg",
+    genero: "Teatro",
+  },
+  {
+    id: "Tudo-Bem-Quando-Termina-Bem",
+    titulo: "Tudo Bem Quando Termina Bem",
+    autor: "William Shakespeare",
+    capa: "../Capas/Tudo-Bem-Quando-Termina-Bem.jpg",
     genero: "Teatro",
   },
   {
@@ -152,6 +166,13 @@ const data = [
     autor: "Lima Barreto",
     capa: "../Capas/OHomemQueSabiaJavanes.jpg",
     genero: "Conto",
+  },
+  {
+    id: "A-Tragedia-de-Hamlet",
+    titulo: "A Tragédia de Hamlet, Príncipe da Dinamarca",
+    autor: "William Shakespeare",
+    capa: "../Capas/A-Tragedia-de-Hamlet.jpg",
+    genero: "Teatro",
   },
   {
     id: "cancioneiro",
@@ -201,6 +222,13 @@ const data = [
     autor: "Homero",
     capa: "../Capas/Iliada.jpg",
     genero: "Clássico",
+  },
+  {
+    id: "Sonho-de-Uma-Noite-de-Verao",
+    titulo: "Sonho de Uma Noite de Verão",
+    autor: "William Shakespeare",
+    capa: "../Capas/Sonho-de-Uma-Noite-de-Verao.webp",
+    genero: "Teatro",
   },
   {
     id: "a-princesa-da-babilonia",
@@ -264,6 +292,13 @@ const data = [
     autor: "Sófocles",
     capa: "../Capas/EdipoRei.jpg",
     genero: "Filosofia",
+  },
+  {
+    id: "A-Megera-Domada",
+    titulo: "A Megera Domada",
+    autor: "William Shakespeare",
+    capa: "../Capas/A-Megera-Domada.jpg",
+    genero: "Teatro",
   },
   {
     id: "a-carta-de-pero-vaz",
@@ -341,6 +376,13 @@ const data = [
     autor: "Joaquim Manuel de Macedo",
     capa: "../Capas/AMoreninha.jpg",
     genero: "Romance",
+  },
+  {
+    id: "Romeu-e-Julieta",
+    titulo: "Romeu e Julieta",
+    autor: "William Shakespeare",
+    capa: "../Capas/Romeu-e-Julieta.webp",
+    genero: "Teatro",
   },
   {
     id: "o-mulato",

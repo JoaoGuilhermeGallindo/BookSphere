@@ -99,20 +99,3 @@ if (toggleConfirmar) {
         togglePasswordVisibility(confirmarInput, toggleConfirmar);
     });
 }
-
-//
-// ✅ FUNÇÃO CORRIGIDA ABAIXO
-//
-function iniciarResetSenha() {
-    // 1. Pega o valor do campo de usuário (CORRIGIDO)
-    var usuario = document.getElementById('usuario').value;
-
-    // 2. Verifica se o usuário digitou algo
-    if (usuario.trim() === "") {
-        alert("Por favor, digite seu nome de usuário no campo 'Usuário' antes de clicar em 'Esqueceu a senha?'.");
-    } else {
-        // 3. Redireciona para o script que envia o e-mail
-        //    (Note o caminho para a pasta-php)
-        window.location.href = 'pasta-php/enviar-codigo-auto.php?usuario=' + encodeURIComponent(usuario);
-    }
-}

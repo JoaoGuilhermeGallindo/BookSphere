@@ -11,9 +11,9 @@ include 'conexao.php'; // Inclui sua conexão com o banco
 // Inclui o PHPMailer (você precisará ter essa pasta)
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-require 'PHPMailer/src/Exception.php'; // Ajuste o caminho se necessário
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
+require 'PHPMailer/Exception.php'; // Ajuste o caminho se necessário
+require 'PHPMailer/PHPMailer.php';
+require 'PHPMailer/SMTP.php';
 
 // Define que a resposta será em formato JSON
 header('Content-Type: application/json');
@@ -60,13 +60,13 @@ try {
     $mail->isSMTP();
     $mail->Host       = 'smtp.hostinger.com'; // SMTP da Hostinger
     $mail->SMTPAuth   = true;
-    $mail->Username   = 'seu-email@seudominio.com'; // <-- MUDE ISSO
-    $mail->Password   = 'sua-senha-de-email';     // <-- MUDE ISSO
+    $mail->Username   = 'booksphere@booksphere.sbs'; // <-- MUDE ISSO
+    $mail->Password   = 'Pc@18300709';     // <-- MUDE ISSO
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
     $mail->Port       = 465;
     $mail->CharSet    = 'UTF-8';
     
-    $mail->setFrom('nao-responda@booksphere.com', 'Book Sphere'); // E-mail de envio
+    $mail->setFrom('booksphere@booksphere.sbs', 'BookSphere'); // E-mail de envio
     $mail->addAddress($email); // E-mail do usuário
 
     $mail->isHTML(true);

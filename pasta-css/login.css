@@ -93,13 +93,11 @@ body.modo-sepia {
     border-radius: 15px;
     display: flex;
     flex-direction: column;
-
     /* O EFEITO DE VIDRO */
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 }
 
 .card-login h1 {
@@ -210,6 +208,20 @@ body.modo-sepia {
     .card-login {
         width: 90%;
     }
+
+    /* ======================================================
+     ✅ CORREÇÃO APLICADA AQUI
+    ======================================================
+    */
+
+    /* 1. O contêiner dos links (para centralizar em telas pequenas) */
+    .links-container {
+        /* Em vez de 'space-between', centraliza e empilha */
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        /* Adiciona espaço entre os links empilhados */
+    }
 }
 
 /* --- ESTILOS PARA O ÍCONE DE MOSTRAR/OCULTAR SENHA --- */
@@ -248,13 +260,13 @@ body.modo-sepia {
 */
 
 /* Esconde o bloco do código por padrão */
-#bloco_codigo { 
-    display: none; 
-} 
+#bloco_codigo {
+    display: none;
+}
 
 /* Classe que o JS usará para esconder o bloco de email */
-#bloco_email.hidden { 
-    display: none; 
+#bloco_email.hidden {
+    display: none;
 }
 
 /* Estilo da mensagem de status/erro 
@@ -265,12 +277,14 @@ body.modo-sepia {
     margin-top: 10px;
     font-size: 0.9em;
     font-weight: bold;
-    color: #ffcccc; /* Cor padrão de erro */
+    color: #ffcccc;
+    /* Cor padrão de erro */
 }
 
 /* Estilo do cronômetro */
 #cronometro {
-    color: #f0f0f0; /* Cor do texto (ajuste se necessário) */
+    color: #f0f0f0;
+    /* Cor do texto (ajuste se necessário) */
     font-size: 1.1em;
     font-weight: bold;
     margin-top: 15px;
@@ -278,8 +292,8 @@ body.modo-sepia {
 }
 
 /* Classe que o JS usará para esconder o cronômetro */
-#cronometro.hidden { 
-    display: none; 
+#cronometro.hidden {
+    display: none;
 }
 
 /* ======================================================
@@ -295,4 +309,94 @@ body.modo-sepia {
 /* O JS vai usar esta classe para mostrar a caixa */
 .box-msg.show {
     display: block;
+}
+
+/*
+======================================================
+  ESTILOS PARA O BOTÃO DE CADASTRO (LADO A LADO)
+======================================================
+*/
+
+/* 1. O contêiner que alinha os botões */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    /* Coloca um de cada lado */
+    gap: 10px;
+    /* Um pequeno espaço entre eles */
+    margin-top: 15px;
+    /* Mesmo espaçamento do .btn-login antigo */
+}
+
+/* 2. Ajusta o botão de Login original */
+.button-group .btn-login {
+    width: 48%;
+    /* Faz ele ocupar metade do espaço */
+    margin-top: 0;
+    /* Remove a margem que ele tinha */
+}
+
+/* 3. O novo botão "Criar conta" */
+.button-group .btn-secondary {
+    width: 48%;
+    /* Ocupa a outra metade */
+    height: 45px;
+
+    /* Estilo "fantasma" (transparente com borda) */
+    background: transparent;
+    border: 2px solid #fff;
+    /* Borda branca */
+
+    outline: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 16px;
+
+    /* Cor do texto */
+    color: #fff;
+    font-weight: 600;
+}
+
+/* 4. (Opcional) Efeito 'hover' para o novo botão */
+.button-group .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/*
+======================================================
+ ESTILOS PARA LINKS DE RECUPERAÇÃO LADO A LADO
+======================================================
+*/
+
+/* 1. O contêiner que alinha os links */
+.links-container {
+    display: flex;
+    justify-content: space-between;
+    /* Coloca um em cada ponta */
+    width: 100%;
+    margin-top: 20px;
+    /* Mesmo espaçamento do .signup-text */
+    
+    /* Pequeno espaçamento para não colar nas bordas */
+}
+
+#esqueceu-usuario {
+    margin-right: 10px;
+}
+
+#esqueceu-senha {
+    margin-left: 15px;
+}
+
+/* 2. O estilo de cada link */
+.recovery-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* 3. (Opcional) Efeito 'hover' */
+.recovery-link:hover {
+    text-decoration: underline;
 }

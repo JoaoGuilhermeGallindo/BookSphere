@@ -1,5 +1,8 @@
+// Espera o HTML carregar
 document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('formLogin');
+
+    // --- PARTE 1: LÓGICA DE MOSTRAR ERRO ---
+    
     const mensagem = document.getElementById('mensagem');
     const boxMsg = document.querySelector('.box-msg');
 
@@ -7,95 +10,69 @@ document.addEventListener('DOMContentLoaded', () => {
         mensagem.textContent = texto;
         mensagem.style.color = cor;
         if (texto.trim() !== "") {
-            boxMsg.style.display = 'block';  // Mostrar
+            boxMsg.style.display = 'block';
         } else {
-            boxMsg.style.display = 'none';   // Ocultar se vazio
+            boxMsg.style.display = 'none';
         }
     }
 
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
+    // Procura por erros na URL (ex: ?error=wrong_pass)
+    const urlParams = new URLSearchParams(window.location.search);
+    const erro = urlParams.get('error');
 
-        // --- NOVA VALIDAÇÃO DE LIMITE ---
-        const usuarioInput = document.getElementById('usuario');
-        if (usuarioInput.value.length > 30) {
-            mostrarMensagem("O usuário não pode ter mais de 30 caracteres.", 'red');
-            return;
+    if (erro) {
+        // Usa as mensagens do seu login.php
+        if (erro === 'not_found') {
+            mostrarMensagem('Usuário não encontrado.', 'red');
+        } else if (erro === 'wrong_pass') {
+            mostrarMensagem('Senha incorreta.', 'red');
+        } else if (erro === 'long_user') {
+            mostrarMensagem('O usuário não pode ter mais de 30 caracteres.', 'red');
+        } else {
+            mostrarMensagem('Erro no servidor. Tente novamente.', 'red');
         }
-
-        const formData = new FormData(form);
-
-        try {
-            const resposta = await fetch('../pasta-php/login.php', {
-                method: 'POST',
-                body: formData
-            });
-
-            const texto = await resposta.text();
-
-            if (texto.includes('sucesso')) {
-                mostrarMensagem('Login realizado com sucesso!', 'green');
-
-                setTimeout(() => {
-                    // =============================================
-                    // ✅ LÓGICA DE REDIRECIONAMENTO INTELIGENTE
-                    // =============================================
-                    const fromRecovery = sessionStorage.getItem('fromRecovery');
-
-                    if (fromRecovery === 'true') {
-                        // 1. Se veio da recuperação, limpa a bandeira
-                        sessionStorage.removeItem('fromRecovery');
-                        // 2. Volta 2 páginas (login.html -> recuperar.html -> página anterior)
-                        window.history.go(-2);
-                    } else {
-                        // 3. Se for um login normal, volta 1 página
-                        window.history.go(-1);
-                    }
-
-                }, 2000); // Espera 2 segundos
-            }
-        }
-        catch (erro) {
-            // ISSO VAI MOSTRAR O ERRO REAL NO CONSOLE (F12)
-            console.error("Erro detalhado do fetch:", erro);
-
-            mostrarMensagem('Erro de comunicação com o servidor.', 'red');
-        }
-    });
-
-    boxMsg.style.display = 'none';  // <- Inicialmente oculta
-});
-
-// --- LÓGICA DE OCULTAR/MOSTRAR SENHA ---
-
-const senhaInput = document.getElementById('senha');
-const toggleSenha = document.getElementById('toggleSenha');
-const confirmarInput = document.getElementById('confirmar_senha');
-const toggleConfirmar = document.getElementById('toggleConfirmar');
-
-function togglePasswordVisibility(input, icon) {
-    if (!input || !icon) return; // Retorna se os elementos não existirem
-
-    const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
-    input.setAttribute('type', type);
-
-    if (type === 'password') {
-        icon.classList.remove('bi-eye');
-        icon.classList.add('bi-eye-slash');
     } else {
-        icon.classList.remove('bi-eye-slash');
-        icon.classList.add('bi-eye');
+        // Esconde a caixa de msg se não houver erro
+        boxMsg.style.display = 'none';
     }
-}
 
-if (toggleSenha) {
-    toggleSenha.addEventListener('click', () => {
-        togglePasswordVisibility(senhaInput, toggleSenha);
-    });
-}
+    // --- PARTE 2: LÓGICA DE OCULTAR/MOSTRAR SENHA ---
+    // (Esta parte continua igual à que você já tinha)
 
-if (toggleConfirmar) {
-    toggleConfirmar.addEventListener('click', () => {
-        togglePasswordVisibility(confirmarInput, toggleConfirmar);
-    });
-}
+    const senhaInput = document.getElementById('senha');
+    const toggleSenha = document.getElementById('toggleSenha');
+    const confirmarInput = document.getElementById('confirmar_senha');
+    const toggleConfirmar = document.getElementById('toggleConfirmar');
+
+    function togglePasswordVisibility(input, icon) {
+        if (!input || !icon) return;
+
+        const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+        input.setAttribute('type', type);
+
+        if (type === 'password') {
+            icon.classList.remove('bi-eye');
+            icon.classList.add('bi-eye-slash');
+        } else {
+            icon.classList.remove('bi-eye-slash');
+            icon.classList.add('bi-eye');
+        }
+    }
+
+    if (toggleSenha) {
+        toggleSenha.addEventListener('click', () => {
+            togglePasswordVisibility(senhaInput, toggleSenha);
+        });
+    }
+
+    if (toggleConfirmar) {
+        toggleConfirmar.addEventListener('click', () => {
+            togglePasswordVisibility(confirmarInput, toggleConfirmar);
+        });
+    }
+
+    // --- PARTE 3: REMOVENDO O FETCH ---
+    // O 'form.addEventListener("submit", ...)' foi removido.
+    // O formulário agora será enviado da maneira tradicional (HTML puro),
+    // o que permite ao navegador ver o login e oferecer para salvar a senha.
+});

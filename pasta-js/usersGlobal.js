@@ -31,7 +31,7 @@ async function loadGlobalUserData() {
     const rawUsername = dados.usuario;
     let headerUsername = rawUsername;
     if (rawUsername.length > 8) {
-      headerUsername = rawUsername.substring(0, 8) + '...';
+      headerUsername = rawUsername.substring(0, 6) + '...';
     }
 
     // --- ATUALIZA OS ELEMENTOS (PERFIL) ---

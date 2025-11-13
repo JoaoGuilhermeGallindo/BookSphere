@@ -6,7 +6,6 @@
     max-width: 1100px;
     margin: 50px auto;
     padding: 20px;
-    border: 2px solid black;
     margin-top: 85px;
 }
 
@@ -15,7 +14,7 @@ body.logado .profile-img img[src*="SemFoto.jpg"] {
     display: none;
 }
 
-body.modo-noturno .sobre {
+/* body.modo-noturno .sobre {
     border: 2px solid white;
 }
 
@@ -25,7 +24,7 @@ body.modo-claro .sobre {
 
 body.modo-sepia .sobre {
     border: 2px solid #5b4636;
-}
+} */
 
 .sobre .texto {
     flex: 1;
@@ -50,8 +49,8 @@ body.modo-sepia .sobre {
     text-align: justify;
     font-size: 23px;
     margin: 0;
+    margin-bottom: 20px;
 }
-
 
 .sobre .foto {
     flex: 1;
@@ -72,6 +71,7 @@ body.modo-sepia .sobre {
         flex-direction: column;
         text-align: center;
         margin-top: 85px;
+        border: none;
     }
 
     /* Esconde a imagem padrão somente quando estiver logado */

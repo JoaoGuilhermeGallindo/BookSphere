@@ -24,27 +24,31 @@
                 <div class="textfield">
                     <label for="usuario">Usuário</label>
                     <input type="text" id="usuario" name="usuario" placeholder="Digite o seu usuário" required
-                        maxlength="30">
+                        autocomplete="username" maxlength="30">
                 </div>
 
                 <div class="textfield">
                     <label for="senha">Senha</label>
-                    <input type="password" id="senha" name="senha" placeholder="Digite a sua senha" required>
+                    <input type="password" id="senha" name="senha" placeholder="Digite a sua senha" required
+                        autocomplete="current-password">
                     <i class="bi bi-eye-slash" id="toggleSenha"></i>
                 </div>
 
-                <button type="submit" class="btn-login">Login</button>
-
-                <div class="signup-text">
-                    Não tem conta? <a href="cadastro.html">Cadastre-se</a>.
+                <div class="button-group">
+                    <button type="submit" class="btn-login">Login</button>
+                    <button type="button" class="btn-secondary" onclick="window.location.href='cadastro.html'">
+                        Criar conta
+                    </button>
                 </div>
-                <div class="signup-text">
-                    Esqueceu a senha?<a href="#"
-                        onclick="window.location.replace('recuperar.html?tipo=senha'); return false;"> Clique aqui.</a>
-                </div>
-                <div class="signup-text">
-                    Esqueceu o usuário? <a href="#"
-                        onclick="window.location.replace('recuperar.html?tipo=usuario'); return false;"> Clique aqui.</a>
+                <div class="links-container">
+                    <a href="#" class="recovery-link" id="esqueceu-senha"
+                        onclick="window.location.replace('recuperar.html?tipo=senha'); return false;">
+                        Esqueceu a senha?
+                    </a>
+                    <a href="#" class="recovery-link" id="esqueceu-usuario"
+                        onclick="window.location.replace('recuperar.html?tipo=usuario'); return false;">
+                        Esqueceu o usuário?
+                    </a>
                 </div>
 
                 <div class="box-msg">
@@ -55,7 +59,7 @@
         </div>
     </div>
 
-    <script src="../pasta-js/login.js"></script>
+    <script src="../pasta-js/login.js?v=2.0"></script>
     <script src="../pasta-js/personalizacao.js"></script>
 </body>
 

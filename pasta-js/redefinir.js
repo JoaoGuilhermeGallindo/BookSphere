@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Inputs do formulário de senha
     const inputNovaSenha = document.getElementById("nova_senha");
     const inputConfirmaSenha = document.getElementById("confirmar_senha");
-    
+
     // Inputs do formulário de usuário
     const inputNovoUsuario = document.getElementById("novo_usuario");
     const inputConfirmaUsuario = document.getElementById("confirmar_usuario");
@@ -38,16 +38,60 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!token) {
         mostrarMensagem("Token de segurança ausente. Acesso negado.");
         // Desabilita os formulários se não houver token
-        formSenha.innerHTML = ""; 
+        formSenha.innerHTML = "";
         formUsuario.innerHTML = "";
         return;
     }
 
     // --- 4. Funções Auxiliares ---
+    // ===============================================
+    // ✅ LÓGICA DE MOSTRAR/OCULTAR SENHA
+    // ===============================================
+
+    // Seleciona os inputs E ícones da página de redefinição
+    const senhaInput = document.getElementById('nova_senha');
+    const toggleSenha = document.getElementById('toggleSenha');
+    const confirmarInput = document.getElementById('confirmar_senha');
+    const toggleConfirmar = document.getElementById('toggleConfirmar');
+
+    // Função genérica (exatamente igual à do login.js)
+    function togglePasswordVisibility(input, icon) {
+        if (!input || !icon) return; // Retorna se os elementos não existirem
+
+        const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+        input.setAttribute('type', type);
+
+        if (type === 'password') {
+            icon.classList.remove('bi-eye');
+            icon.classList.add('bi-eye-slash');
+        } else {
+            icon.classList.remove('bi-eye-slash');
+            icon.classList.add('bi-eye');
+        }
+    }
+
+    // Adiciona o clique para o PRIMEIRO olho
+    if (toggleSenha) {
+        toggleSenha.addEventListener('click', () => {
+            // Passa o input 'nova_senha' e o ícone 'toggleSenha'
+            togglePasswordVisibility(senhaInput, toggleSenha);
+        });
+    }
+
+    // Adiciona o clique para o SEGUNDO olho
+    if (toggleConfirmar) {
+        toggleConfirmar.addEventListener('click', () => {
+            // Passa o input 'confirmar_senha' e o ícone 'toggleConfirmar'
+            togglePasswordVisibility(confirmarInput, toggleConfirmar);
+        });
+    }
+    // ===============================================
+    // FIM DA LÓGICA
+    // ===============================================
     function mostrarMensagem(texto, tipo = 'erro') {
         msgElemento.textContent = texto;
         msgElemento.style.color = (tipo === 'erro') ? '#ffcccc' : '#ccffcc';
-        
+
         if (texto) {
             msgBox.classList.add('show');
         } else {
@@ -60,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Evento 1: Envio do Formulário de Senha
     formSenha.addEventListener("submit", async (e) => {
         e.preventDefault();
-        
+
         // Validação
         if (inputNovaSenha.value !== inputConfirmaSenha.value) {
             mostrarMensagem("As senhas não coincidem.", 'erro');
@@ -84,11 +128,11 @@ document.addEventListener("DOMContentLoaded", () => {
             mostrarMensagem("Os nomes de usuário não coincidem.", 'erro');
             return;
         }
-         if (inputNovoUsuario.value.length < 3) { // Regra de usuário
+        if (inputNovoUsuario.value.length < 3) { // Regra de usuário
             mostrarMensagem("O usuário deve ter pelo menos 3 caracteres.", 'erro');
             return;
         }
-        
+
         // Se passou na validação, envia para o PHP
         enviarRedefinicao('usuario', inputNovoUsuario.value);
     });
@@ -96,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Função Genérica de Envio (usada por ambos os formulários)
     async function enviarRedefinicao(tipoForm, valor) {
         mostrarMensagem("Salvando...", 'sucesso');
-        
+
         const formData = new FormData();
         formData.append('tipo', tipoForm);   // 'senha' ou 'usuario'
         formData.append('valor', valor);     // A nova senha ou novo usuário
@@ -115,7 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 mostrarMensagem(json.mensagem, 'sucesso');
                 // Redireciona para o login após 3 segundos
                 setTimeout(() => {
-                 window.location.replace('login.html');
+                    window.location.replace('login.html');
                 }, 2000);
             } else {
                 mostrarMensagem(json.mensagem, 'erro');

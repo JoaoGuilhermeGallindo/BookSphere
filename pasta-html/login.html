@@ -5,51 +5,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../LOGOS/Favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="../pasta-css/login.css">
+    <link rel="stylesheet" href="../pasta-css/login-cadastro.css?v=11">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>BookSphere | Login</title>
 </head>
 
 <body>
-
-    <button id="btn-modo-leitura"></button>
-
     <div class="main-login">
 
-        <div class="right-login">
+        <div class="login-container">
+
+            <div class="logo-tab">
+                <img src="../LOGOS/Favicon.png" alt="Logo BookSphere">
+            </div>
+
             <form id="formLogin" class="card-login" action="../pasta-php/login.php" method="POST">
 
-                <Img src="../LOGOS/Logo-fundo transparente-recortado.png">
+                <h1>Bem-vindo!</h1>
 
-                <div class="textfield">
-                    <label for="usuario">Usuário</label>
-                    <input type="text" id="usuario" name="usuario" placeholder="Digite o seu usuário" required
-                        autocomplete="username" maxlength="30">
+                <div class="textfield-floating">
+                    <input type="email" id="email" name="email" required placeholder=" " autocomplete="email">
+                    <label for="email">E-mail</label>
+                    <i class="bi bi-envelope input-icon"></i>
                 </div>
-
-                <div class="textfield">
+                <div class="textfield-floating">
+                    <input type="password" id="senha" name="senha" required placeholder=" ">
                     <label for="senha">Senha</label>
-                    <input type="password" id="senha" name="senha" placeholder="Digite a sua senha" required
-                        autocomplete="current-password">
+                    <i class="bi bi-lock input-icon"></i>
                     <i class="bi bi-eye-slash" id="toggleSenha"></i>
                 </div>
 
-                <div class="button-group">
-                    <button type="submit" class="btn-login">Login</button>
-                    <button type="button" class="btn-secondary" onclick="window.location.href='cadastro.html'">
-                        Criar conta
+                <div class="options-container">
+                    <div class="remember-me">
+                        <input type="checkbox" id="rememberMe" name="rememberMe" class="custom-checkbox" value="on">
+                        <label for="rememberMe"></label>
+                        <span>Lembrar-me</span>
+                    </div>
+                    <div class="help-links">
+                        <a href="recuperar.html?tipo=senha">Esqueceu a senha?</a>
+                    </div>
+                </div>
+
+
+                <button type="submit" class="btn-login">Entrar</button>
+
+                <div class="signup-text">
+                    Não tem conta? <a href="cadastro.html">Cadastre-se</a>
+                </div>
+
+                <div class="social-login-separator">
+                    <hr>
+                    <span>Ou continue com</span>
+                    <hr>
+                </div>
+                <div class="social-login-buttons">
+                    <button type="button" class="btn-social google">
+                        <i class="bi bi-google"></i> Entrar com o Google
                     </button>
+
                 </div>
-                <div class="links-container">
-                    <a href="#" class="recovery-link" id="esqueceu-senha"
-                        onclick="window.location.replace('recuperar.html?tipo=senha'); return false;">
-                        Esqueceu a senha?
-                    </a>
-                    <a href="#" class="recovery-link" id="esqueceu-usuario"
-                        onclick="window.location.replace('recuperar.html?tipo=usuario'); return false;">
-                        Esqueceu o usuário?
-                    </a>
-                </div>
+
 
                 <div class="box-msg">
                     <p id="mensagem"></p>
@@ -59,7 +74,7 @@
         </div>
     </div>
 
-    <script src="../pasta-js/login.js?v=2.0"></script>
+    <script src="../pasta-js/login.js"></script>
     <script src="../pasta-js/personalizacao.js"></script>
 </body>
 

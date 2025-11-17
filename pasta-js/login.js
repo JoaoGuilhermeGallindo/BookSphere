@@ -49,17 +49,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 mostrarMensagem('Login realizado com sucesso!', 'green');
 
                 setTimeout(() => {
-                    // 4. LÓGICA DE REDIRECIONAMENTO INTELIGENTE
-                    const fromRecovery = sessionStorage.getItem('fromRecovery');
+                    // ===================================
+                    // ✅ CORREÇÃO: Redirecionando para home.html
+                    // ===================================
 
-                    if (fromRecovery === 'true') {
-                        sessionStorage.removeItem('fromRecovery');
-                        window.history.go(-2);
-                    } else {
-                        window.history.go(-1);
-                    }
+                    // Limpa a flag de recuperação, se existir
+                    sessionStorage.removeItem('fromRecovery');
+
+                    // Redireciona o usuário para a home.html
+                    // (Ajuste o caminho se 'home.html' não estiver na pasta raiz)
+                    window.location.href = '../pasta-html/home.html';
 
                 }, 2000); // Espera 2 segundos
+
+            } else if (texto.includes('E-mail não encontrado')) {
 
                 // ===================================
                 // ✅ MUDANÇA 2: Checar por "E-mail" não encontrado

@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     form.reset();
                     setTimeout(() => {
                         window.history.go(-1); // Volta 1 página
-                    }, 3000); 
+                    }, 2000); 
 
                 } else if (texto.includes("senhas_diferentes")) {
                     mostrarMensagem("As senhas não conferem (servidor).", CORES.alerta);

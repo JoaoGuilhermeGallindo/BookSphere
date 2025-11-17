@@ -114,3 +114,66 @@ if (toggleConfirmar) {
         togglePasswordVisibility(confirmarInput, toggleConfirmar);
     });
 }
+
+// ====================================================================
+// FUNÇÃO GLOBAL PARA O LOGIN DO GOOGLE
+// ====================================================================
+
+function processarLoginGoogle(response) {
+    // 1. Pega o Token do Google
+    const token = response.credential;
+
+    // 2. Envia para o back-end (PHP) verificar
+    fetch('../pasta-php/login-google.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ token: token })
+    })
+    .then(res => res.json())
+    .then(dados => {
+        if (dados.sucesso) {
+            // ===================================
+            // ✅ LÓGICA DE REDIRECIONAMENTO UNIFICADA
+            // ===================================
+            // (Igual ao login normal)
+            
+            // Tenta mostrar a mensagem de sucesso (opcional)
+            const mensagemEl = document.getElementById('mensagem');
+            const boxMsgEl = document.querySelector('.box-msg');
+            if(mensagemEl && boxMsgEl) {
+                mensagemEl.textContent = "Login com Google realizado!";
+                mensagemEl.style.color = 'green';
+                boxMsgEl.style.display = 'block';
+            }
+
+            // Redireciona
+            setTimeout(() => {
+                const fromRecovery = sessionStorage.getItem('fromRecovery');
+                if (fromRecovery === 'true') {
+                    sessionStorage.removeItem('fromRecovery');
+                    window.history.go(-2);
+                } else {
+                    window.history.go(-1); // Volta para a página anterior
+                }
+            }, 1000); // Espera 1 segundo
+
+        } else {
+            // ERRO (Ex: Email não cadastrado ou erro no banco)
+            const mensagemEl = document.getElementById('mensagem');
+            const boxMsgEl = document.querySelector('.box-msg');
+            if(mensagemEl && boxMsgEl) {
+                mensagemEl.textContent = "Erro Google: " + dados.mensagem;
+                mensagemEl.style.color = 'red';
+                boxMsgEl.style.display = 'block';
+            } else {
+                alert('Erro ao logar com Google: ' + dados.mensagem);
+            }
+        }
+    })
+    .catch(err => {
+        console.error('Erro na requisição Google:', err);
+        alert('Erro de conexão com o servidor. Verifique o console (F12).');
+    });
+}

@@ -446,55 +446,6 @@ body.modo-claro .social-login-separator hr {
     border-top: 1px solid #ddd;
 }
 
-.social-login-buttons {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.btn-social {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 50px;
-    border-radius: 50px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: none;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.btn-social i {
-    margin-right: 10px;
-    font-size: 1.2em;
-}
-
-.btn-social.google {
-    background-color: #ffffff;
-    /* Fundo branco para Google */
-    color: #1f1f1f;
-    /* Texto escuro */
-}
-
-.btn-social.google:hover {
-    background-color: #f1f3f4;
-    transform: translateY(-2px);
-}
-
-.btn-social.facebook {
-    background-color: #1877f2;
-    color: #ffffff;
-}
-
-.btn-social.facebook:hover {
-    background-color: #166fe5;
-    transform: translateY(-2px);
-}
-
 /* --- Caixa de Mensagem (Sem mudança) --- */
 .box-msg {
     /* ... seu estilo .box-msg aqui ... */

@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
             boxMsg.style.display = 'none'; // Ocultar se vazio
         }
     }
-    
+
     // Função simples para validar e-mail (Regex)
     function validarEmail(email) {
         const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
@@ -60,10 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
 
                 }, 2000); // Espera 2 segundos
-                
-            // ===================================
-            // ✅ MUDANÇA 2: Checar por "E-mail" não encontrado
-            // ===================================
+
+                // ===================================
+                // ✅ MUDANÇA 2: Checar por "E-mail" não encontrado
+                // ===================================
             } else if (texto.includes('E-mail não encontrado')) {
                 mostrarMensagem('E-mail não encontrado.', 'red');
             } else if (texto.includes('Senha incorreta')) {
@@ -117,6 +117,7 @@ if (toggleConfirmar) {
 
 // ====================================================================
 // FUNÇÃO GLOBAL PARA O LOGIN DO GOOGLE
+// (Com a correção de redirecionamento para carregar a foto)
 // ====================================================================
 
 function processarLoginGoogle(response) {
@@ -131,49 +132,56 @@ function processarLoginGoogle(response) {
         },
         body: JSON.stringify({ token: token })
     })
-    .then(res => res.json())
-    .then(dados => {
-        if (dados.sucesso) {
-            // ===================================
-            // ✅ LÓGICA DE REDIRECIONAMENTO UNIFICADA
-            // ===================================
-            // (Igual ao login normal)
-            
-            // Tenta mostrar a mensagem de sucesso (opcional)
-            const mensagemEl = document.getElementById('mensagem');
-            const boxMsgEl = document.querySelector('.box-msg');
-            if(mensagemEl && boxMsgEl) {
-                mensagemEl.textContent = "Login com Google realizado!";
-                mensagemEl.style.color = 'green';
-                boxMsgEl.style.display = 'block';
-            }
+        .then(res => res.json())
+        .then(dados => {
+            if (dados.sucesso) {
+                // LOGIN APROVADO!
 
-            // Redireciona
-            setTimeout(() => {
-                const fromRecovery = sessionStorage.getItem('fromRecovery');
-                if (fromRecovery === 'true') {
-                    sessionStorage.removeItem('fromRecovery');
-                    window.history.go(-2);
-                } else {
-                    window.history.go(-1); // Volta para a página anterior
+                // Tenta mostrar a mensagem de sucesso (opcional)
+                const mensagemEl = document.getElementById('mensagem');
+                const boxMsgEl = document.querySelector('.box-msg');
+                if (mensagemEl && boxMsgEl) {
+                    mensagemEl.textContent = "Login com Google realizado!";
+                    mensagemEl.style.color = 'green';
+                    boxMsgEl.style.display = 'block';
                 }
-            }, 1000); // Espera 1 segundo
 
-        } else {
-            // ERRO (Ex: Email não cadastrado ou erro no banco)
-            const mensagemEl = document.getElementById('mensagem');
-            const boxMsgEl = document.querySelector('.box-msg');
-            if(mensagemEl && boxMsgEl) {
-                mensagemEl.textContent = "Erro Google: " + dados.mensagem;
-                mensagemEl.style.color = 'red';
-                boxMsgEl.style.display = 'block';
+                // ===================================
+                // ✅ CORREÇÃO APLICADA AQUI
+                // ===================================
+                // Em vez de window.history.go(-1), nós forçamos um
+                // redirecionamento completo. Isso garante que a nova
+                // foto da sessão seja carregada.
+
+                // Verifica se tem página salva na memória (do livro)
+                const destino = sessionStorage.getItem('voltar_para');
+
+                setTimeout(() => {
+                    if (destino) {
+                        sessionStorage.removeItem('voltar_para'); // Limpa a memória
+                        window.location.href = destino; // Vai para o livro (recarregando)
+                    } else {
+                        // Se não tiver histórico, vai para a home (recarregando)
+                        // (Certifique-se que este é o caminho correto para seu index)
+                        window.location.href = '../index.html';
+                    }
+                }, 1000); // Espera 1 segundo
+
             } else {
-                alert('Erro ao logar com Google: ' + dados.mensagem);
+                // ERRO (Ex: Email não cadastrado ou erro no banco)
+                const mensagemEl = document.getElementById('mensagem');
+                const boxMsgEl = document.querySelector('.box-msg');
+                if (mensagemEl && boxMsgEl) {
+                    mensagemEl.textContent = "Erro Google: " + dados.mensagem;
+                    mensagemEl.style.color = 'red';
+                    boxMsgEl.style.display = 'block';
+                } else {
+                    alert('Erro ao logar com Google: ' + dados.mensagem);
+                }
             }
-        }
-    })
-    .catch(err => {
-        console.error('Erro na requisição Google:', err);
-        alert('Erro de conexão com o servidor. Verifique o console (F12).');
-    });
+        })
+        .catch(err => {
+            console.error('Erro na requisição Google:', err);
+            alert('Erro de conexão com o servidor. Verifique o console (F12).');
+        });
 }

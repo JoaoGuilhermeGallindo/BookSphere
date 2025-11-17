@@ -47,14 +47,41 @@ async function loadGlobalUserData() {
       profileNomeEl.style.cursor = 'default';
     }
 
-    // --- ATUALIZA AS IMAGENS ---
-    const caminhoImagem =
-      dados.imagem && dados.imagem.trim() !== ''
-        ? '../pasta-php/uploads/' + dados.imagem + '?v=' + new Date().getTime()
-        : '../IMAGENS/SemFoto.jpg';
+    // ===================================
+    // ✅ CORREÇÃO: LÓGICA DA FOTO
+    // (Trata tanto a foto local quanto a do Google)
+    // ===================================
 
-    if (headerAvatar) headerAvatar.src = caminhoImagem;
-    if (profileAvatar) profileAvatar.src = caminhoImagem;
+    // Pega a string da imagem do banco (pode ser 'user_...jpg' ou 'https://...')
+    const urlImagemDoBanco = dados.imagem;
+    let caminhoFinal = '../IMAGENS/SemFoto.jpg'; // Imagem padrão
+
+    if (urlImagemDoBanco && urlImagemDoBanco.trim() !== '') {
+
+      // SE a string começar com 'http' (é uma URL do Google)
+      if (urlImagemDoBanco.startsWith('http')) {
+        caminhoFinal = urlImagemDoBanco; // Use a URL diretamente
+
+      } else {
+        // SENÃO (é um 'user_...jpg'), monte o caminho local
+        // Adicionamos o cache buster para a foto local
+        caminhoFinal = `../pasta-php/uploads/${urlImagemDoBanco}?v=${new Date().getTime()}`;
+      }
+    }
+
+    // Aplica a foto no cabeçalho
+    if (headerAvatar) {
+      headerAvatar.src = caminhoFinal;
+      // Fallback (se a imagem quebrar, usa a padrão)
+      headerAvatar.onerror = () => { headerAvatar.src = '../IMAGENS/SemFoto.jpg'; };
+    }
+
+    // Aplica a foto no perfil (se houver)
+    if (profileAvatar) {
+      profileAvatar.src = caminhoFinal;
+      // Fallback
+      profileAvatar.onerror = () => { profileAvatar.src = '../IMAGENS/SemFoto.jpg'; };
+    }
 
   } catch (erro) {
     // --- LÓGICA DE VISITANTE (AGORA CORRIGIDA) ---

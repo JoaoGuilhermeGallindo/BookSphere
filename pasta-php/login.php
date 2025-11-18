@@ -1,27 +1,27 @@
 <?php
 // ===================================
-// LÓGICA "LEMBRAR-ME" (A ORDEM CORRETA)
+// LÓGICA "LEMBRAR-ME" (A ORDEM CORRETA E FINAL)
 // ===================================
 
-// 1. Verifique se "Lembrar-me" foi marcado (veio do FormData do login.js)
+// 1. Define os parâmetros do cookie (ANTES de session_start)
 if (isset($_POST['rememberMe'])) {
-    // Se SIM, define o cookie da sessão para durar 90 dias
-    $tempo_de_vida = 90 * 24 * 60 * 60; // 90 dias
+    // Se SIM (veio do FormData do JS), define 90 dias
+    $tempo_de_vida = 30 * 24 * 60 * 60; // 30 dias
     session_set_cookie_params($tempo_de_vida);
     
 } else {
-    // Se NÃO, força o cookie a expirar quando o navegador fechar (lifetime = 0)
+    // Se NÃO, força o cookie a expirar quando o navegador fechar
     session_set_cookie_params(0);
 }
 
-// 2. INICIA A SESSÃO (SEMPRE DEPOIS de session_set_cookie_params)
+// 2. INICIA A SESSÃO
 session_start();
 // ===================================
 
-// 3. CONEXÃO COM O BANCO (PDO)
-require_once 'conexao.php';
+// 3. CONEXÃO COM O BANCO
+require_once 'conexao.php'; // $pdo
 
-// 4. RECEBER DADOS (do FormData do login.js)
+// 4. RECEBER DADOS
 $email = $_POST['email'] ?? '';
 $senha = $_POST['senha'] ?? '';
 
@@ -33,7 +33,6 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
 // 5. CONSULTA AO BANCO
 try {
-    // Buscar por 'email'
     $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ? LIMIT 1");
     $stmt->execute([$email]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);

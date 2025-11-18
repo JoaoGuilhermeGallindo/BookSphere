@@ -658,12 +658,3 @@ body.modo-claro #subtitulo_recuperacao,
 body.modo-claro #info_codigo {
     color: #555;
 }
-
-
-@media (max-width: 768px) {
-
-    #formLogin2 {
-      
-    }
-
-}

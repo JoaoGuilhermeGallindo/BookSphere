@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('formLogin');
-    const form2 = document.getElementById('formLogin2');
     const mensagem = document.getElementById('mensagem');
     const boxMsg = document.querySelector('.box-msg');
 

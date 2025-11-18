@@ -1,21 +1,36 @@
 <?php
 // ===================================
-// LÓGICA "LEMBRAR-ME" (A ORDEM CORRETA E FINAL)
+// LÓGICA "LEMBRAR-ME" (A ORDEM CORRETA)
 // ===================================
 
 // 1. Define os parâmetros do cookie (ANTES de session_start)
 if (isset($_POST['rememberMe'])) {
-    // Se SIM (veio do FormData do JS), define 90 dias
-    $tempo_de_vida = 30 * 24 * 60 * 60; // 30 dias
+    $tempo_de_vida = 90 * 24 * 60 * 60; // 90 dias
     session_set_cookie_params($tempo_de_vida);
-    
 } else {
-    // Se NÃO, força o cookie a expirar quando o navegador fechar
     session_set_cookie_params(0);
 }
 
 // 2. INICIA A SESSÃO
 session_start();
+
+// ===================================
+// ✅ DEBUG: O "LOGGER"
+// ===================================
+// Este bloco vai escrever TUDO que o JS enviar para um arquivo debug.log
+try {
+    // Converte o array $_POST em uma string legível
+    $post_data = print_r($_POST, true);
+    
+    // Escreve os dados no arquivo (o "a" significa 'append' - adicionar ao final)
+    $log_file = fopen("debug.log", "a");
+    fwrite($log_file, "--- NOVA TENTATIVA ---\n");
+    fwrite($log_file, $post_data . "\n");
+    fclose($log_file);
+
+} catch (Exception $e) {
+    // Se falhar ao escrever o log, não quebre o login
+}
 // ===================================
 
 // 3. CONEXÃO COM O BANCO

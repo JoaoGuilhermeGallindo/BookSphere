@@ -5,12 +5,20 @@
 
 // 1. Define os parâmetros do cookie (ANTES de session_start)
 if (isset($_POST['rememberMe'])) {
-    $tempo_de_vida = 90 * 24 * 60 * 60; // 90 dias
+    
+    // Se o JS enviou 'rememberMe', ele ENTRA AQUI
+    
+    // Vamos parar o script e enviar uma mensagem de teste
+    die("DEBUG: O PHP viu o 'rememberMe: on'");
+    
+    // O código abaixo (90 dias) não será executado neste teste
+    $tempo_de_vida = 90 * 24 * 60 * 60;
     session_set_cookie_params($tempo_de_vida);
+    
 } else {
+    // Se o JS não enviou, ele entra aqui
     session_set_cookie_params(0);
 }
-
 // 2. INICIA A SESSÃO
 session_start();
 

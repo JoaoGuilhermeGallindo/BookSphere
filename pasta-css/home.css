@@ -285,8 +285,9 @@ body.modo-noturno .cabeçario {
 
 .logo-cabeçario {
     display: flex;
-    width: 150px;
+    width: 170px;
     margin-left: 25px;
+    margin-top: 1px;
     height: auto;
     cursor: pointer;
 }
@@ -407,7 +408,7 @@ h2 {
 
 .livros-wrapper {
     display: flex;
-    animation: rolar 240s linear infinite;
+    animation: rolar 60s linear infinite;
     /* velocidade aqui */
     gap: 20px;
 }
@@ -418,7 +419,7 @@ h2 {
     }
 
     100% {
-        transform: translateX(-100%);
+        transform: translateX(-82%);
     }
 
     /* move metade porque repetimos a lista */
@@ -749,8 +750,8 @@ body.modo-sepia .global-modal-content {
 
 
     .logo-cabeçario {
-        width: 100px;
-        margin-left: 0;
+        width: 110px;
+        margin-left: -10px;
     }
 
     body.modo-noturno .btn-biblioteca2 {
@@ -1039,9 +1040,8 @@ body.modo-sepia .global-modal-content {
 
 
     .logo-cabeçario {
-        width: 100px;
-
-        margin-left: 1px;
+        width: 120px;
+        margin-left: -10px;
     }
 
 

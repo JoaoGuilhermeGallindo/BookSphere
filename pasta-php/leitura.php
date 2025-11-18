@@ -22,7 +22,7 @@ session_set_cookie_params($tempo_de_vida);
     <title>Leitura Online</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
     <link rel="stylesheet" href="../pasta-css/leitura.css">
-    <link rel="shortcut icon" href="../LOGOS/Favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../LOGOS/faviconBS.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 </head>

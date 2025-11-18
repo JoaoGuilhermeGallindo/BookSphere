@@ -19,6 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
         return re.test(String(email).toLowerCase());
     }
 
+    // (Dentro do seu login.js)
+    // ... (as funções mostrarMensagem e validarEmail ficam aqui em cima) ...
+
     form.addEventListener('submit', async (e) => {
         // 1. PREVINE O ENVIO TRADICIONAL
         e.preventDefault();
@@ -30,41 +33,45 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Pega TUDO do formulário (incluindo o 'rememberMe' se marcado)
+        // ===================================
+        // ✅ PASSO DE DIAGNÓSTICO
+        // ===================================
+
+        // Pega TUDO do formulário
         const formData = new FormData(form);
+
+        console.log("--- Iniciando Envio ---");
+        console.log("Dados que estão a ser enviados para o login.php:");
+
+        // Este 'for...of' irá imprimir tudo o que o FormData capturou
+        for (var pair of formData.entries()) {
+            console.log(pair[0] + ': ' + pair[1]);
+        }
+
+        console.log("------------------------");
+        // ===================================
 
         try {
             // 2. ENVIA OS DADOS USANDO FETCH
             const resposta = await fetch('../pasta-php/login.php', {
                 method: 'POST',
-                body: formData
+                body: formData // Envia o "envelope"
             });
 
-            // 3. LÊ A RESPOSTA DO PHP COMO TEXTO
+            // ... (o resto do seu código fetch continua igual) ...
             const texto = await resposta.text();
 
-            // ===================================
-            // ✅ CORREÇÃO DO 'ELSE IF'
-            // ===================================
             if (texto.includes('sucesso')) {
                 mostrarMensagem('Login realizado com sucesso!', 'green');
-
                 setTimeout(() => {
-                    // Limpa a flag de recuperação, se existir
-                    sessionStorage.removeItem('fromRecovery');
-
-                    // Redireciona o usuário para a home.html
                     window.location.href = '../pasta-html/home.html';
-
-                }, 2000); // Espera 2 segundos
-
+                }, 2000);
             } else if (texto.includes('E-mail não encontrado')) {
-                mostrarMensagem('E-mail não encontrado.', 'red'); // <-- Bloco corrigido
-
+                mostrarMensagem('E-mail não encontrado.', 'red');
             } else if (texto.includes('Senha incorreta')) {
                 mostrarMensagem('Senha incorreta.', 'red');
             } else {
-                mostrarMensagem(texto, 'red'); // Mostra outros erros (ex: 'E-mail inválido')
+                mostrarMensagem(texto, 'red');
             }
 
         } catch (erro) {

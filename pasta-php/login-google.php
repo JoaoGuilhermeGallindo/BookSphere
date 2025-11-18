@@ -1,4 +1,8 @@
 <?php
+// ===================================
+// LÓGICA "LEMBRAR-ME" (PARA O GOOGLE)
+// ===================================
+
 // 1. Tenta definir os 90 dias (pode falhar)
 $tempo_de_vida = 90 * 24 * 60 * 60; // 90 dias
 session_set_cookie_params($tempo_de_vida);
@@ -13,6 +17,7 @@ setcookie(session_name(), session_id(), time() + $tempo_de_vida, "/");
 // ===================================
 
 header('Content-Type: application/json');
+
 // 1. INCLUI SUA CONEXÃO PDO (a correta)
 require_once 'conexao.php'; // Usa $pdo
 

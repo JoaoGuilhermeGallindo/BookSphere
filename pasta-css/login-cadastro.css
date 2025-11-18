@@ -80,7 +80,7 @@ body.modo-claro {
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
 }
 
 .login-container {
@@ -642,6 +642,7 @@ body.modo-claro .card-login .textfield #toggleConfirmar {
     margin-top: 20px;
     text-align: center;
 }
+
 #cronometro.hidden {
     display: none;
 }
@@ -656,4 +657,13 @@ body.modo-claro #bloco_codigo h3 {
 body.modo-claro #subtitulo_recuperacao,
 body.modo-claro #info_codigo {
     color: #555;
+}
+
+
+@media (max-width: 768px) {
+
+    #formLogin2 {
+        margin-bottom: 220px;
+    }
+
 }

@@ -658,3 +658,47 @@ body.modo-claro #subtitulo_recuperacao,
 body.modo-claro #info_codigo {
     color: #555;
 }
+
+/* ========================================
+ESTILOS EXTRAS PARA O FALE CONOSCO (TEXTAREA)
+========================================
+*/
+
+/* Estiliza a caixa de texto grande */
+.textfield-floating textarea.textarea-input {
+    width: 100%;
+    background: transparent;
+    border: 2px solid #2b2f38; /* Mesma borda dos inputs */
+    border-radius: 8px;
+    padding: 15px 15px 15px 45px; /* Espaço para o ícone */
+    color: #f0f0f0;
+    font-size: 1rem;
+    outline: none;
+    resize: none; /* Impede o usuário de quebrar o layout */
+    height: 120px; /* Altura fixa */
+    font-family: inherit;
+    transition: border-color 0.3s ease;
+}
+
+/* Quando focar na textarea */
+.textfield-floating textarea.textarea-input:focus,
+.textfield-floating textarea.textarea-input:not(:placeholder-shown) {
+    border-color: #00aaff;
+}
+
+/* Ajuste do label flutuante para a textarea */
+.textfield-floating textarea.textarea-input:focus ~ label,
+.textfield-floating textarea.textarea-input:not(:placeholder-shown) ~ label {
+    top: -10px;
+    left: 10px;
+    font-size: 0.85rem;
+    color: #00aaff;
+    background-color: #161b22; /* Fundo do card para cobrir a linha */
+    padding: 0 5px;
+}
+
+/* Ícone da textarea (precisa ficar no topo) */
+.textfield-floating .bi-chat-dots {
+    top: 51px !important; /* Força o ícone a ficar no topo */
+    transform: none !important;
+}

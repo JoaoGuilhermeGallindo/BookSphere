@@ -4,38 +4,60 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BookSphere | Formulário de Contato</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../pasta-css/faleconosco.css" />
+  <title>BookSphere | Fale Conosco</title>
+
   <link rel="shortcut icon" href="../LOGOS/faviconBS.png" type="image/x-icon">
+  <link rel="stylesheet" href="../pasta-css/login-cadastro.css?v=13">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <body>
 
-  <button id="btn-modo-leitura"></button>
+  <div class="main-login">
+    <div class="login-container">
 
-  <h1>Formulário de Contato</h1>
-  <form action="https://formsubmit.co/booksphere@booksphere.sbs" method="POST" class="form">
-    <label for="name">Nome</label>
-    <input type="text" name="name" id="name" required />
-    <label for="email">E-mail</label>
-    <input type="email" name="email" id="email" required />
-    <label for="message">Mensagem</label>
-    <textarea name="message" id="message" required></textarea>
-    <input type="hidden" name="_captcha" value="false" />
-    <input type="hidden" name="_next" value="https://booksphere.sbs/pasta-html/obrigado.html" />
+      <div class="logo-tab">
+        <img src="../LOGOS/faviconBS.png" alt="Logo BookSphere">
+      </div>
 
-    <div class="form-actions">
-      <button id="btn-send" type="submit">
-        <span class="btn-text">Enviar</span>
-        <svg class="plane-icon" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M2 21l21-9L2 3v7l15 2-15 2v7z" fill="currentColor" />
-        </svg>
-      </button>
+      <div class="card-login">
+
+        <form action="https://formsubmit.co/booksphere@booksphere.sbs" method="POST" style="width: 100%;">
+
+          <h1 style="text-align: center; margin-bottom: 10px;">Fale Conosco</h1>
+
+          <p style="text-align: center; margin-bottom: 20px; color: #ccc; font-size: 0.9rem;">
+            Dúvidas ou sugestões? Envie uma mensagem!
+          </p>
+
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_next" value="https://booksphere.sbs/pasta-html/obrigado.html" />
+
+          <div class="textfield-floating">
+            <input type="text" name="name" id="name" required placeholder=" ">
+            <label for="name">Nome</label>
+            <i class="bi bi-person input-icon"></i>
+          </div>
+
+          <div class="textfield-floating">
+            <input type="email" name="email" id="email" required placeholder=" ">
+            <label for="email">E-mail</label>
+            <i class="bi bi-envelope input-icon"></i>
+          </div>
+
+          <div class="textfield-floating">
+            <textarea name="message" id="message" required placeholder=" " class="textarea-input"></textarea>
+            <label for="message">Sua Mensagem</label>
+            <i class="bi bi-chat-dots input-icon" style="top: 20px;"></i>
+          </div>
+
+          <button type="submit" class="btn-login">Enviar Mensagem</button>
+
+        </form>
+      </div>
     </div>
-  </form>
+  </div>
 
-  <script src="../pasta-js/faleconosco.js"></script>
   <script src="../pasta-js/personalizacao.js"></script>
 </body>
 

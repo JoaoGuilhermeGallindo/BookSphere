@@ -22,16 +22,20 @@
 
       <div class="card-login">
 
-        <form action="https://formsubmit.co/booksphere@booksphere.sbs" method="POST" style="width: 100%;">
+        <form action="https://formsubmit.co/booksphere@booksphere.sbs" method="POST" class="form" style="width: 100%;">
 
           <h1 style="text-align: center; margin-bottom: 10px;">Fale Conosco</h1>
-
           <p style="text-align: center; margin-bottom: 20px; color: #ccc; font-size: 0.9rem;">
             Dúvidas ou sugestões? Envie uma mensagem!
           </p>
 
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="hidden" name="_next" value="https://booksphere.sbs/pasta-html/obrigado.html" />
+          <input type="hidden" name="_next" value="https://booksphere.sbs/pasta-html/obrigado.html">
+
+          <input type="hidden" name="_captcha" value="false">
+
+          <input type="hidden" name="_subject" value="Nova mensagem do site BookSphere!">
+
+          <input type="hidden" name="_template" value="table">
 
           <div class="textfield-floating">
             <input type="text" name="name" id="name" required placeholder=" ">
@@ -48,10 +52,14 @@
           <div class="textfield-floating">
             <textarea name="message" id="message" required placeholder=" " class="textarea-input"></textarea>
             <label for="message">Sua Mensagem</label>
-            <i class="bi bi-chat-dots input-icon" style="top: 20px;"></i>
+            <i class="bi bi-chat-dots input-icon" style="top: 40px;"></i>
           </div>
 
           <button type="submit" class="btn-login">Enviar Mensagem</button>
+
+          <div class="signup-text" style="margin-top: 15px;">
+            <a href="home.html">Voltar para a Home</a>
+          </div>
 
         </form>
       </div>

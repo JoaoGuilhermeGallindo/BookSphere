@@ -22,19 +22,16 @@
 
       <div class="card-login">
 
-        <form action="https://formsubmit.co/booksphere@booksphere.sbs" method="POST" class="form" style="width: 100%;">
+        <form id="contactForm" action="https://formsubmit.co/ajax/booksphere@booksphere.sbs" method="POST"
+          style="width: 100%;">
 
           <h1 style="text-align: center; margin-bottom: 10px;">Fale Conosco</h1>
           <p style="text-align: center; margin-bottom: 20px; color: #ccc; font-size: 0.9rem;">
             Dúvidas ou sugestões? Envie uma mensagem!
           </p>
 
-          <input type="hidden" name="_next" value="https://booksphere.sbs/pasta-html/obrigado.html">
-
           <input type="hidden" name="_captcha" value="false">
-
           <input type="hidden" name="_subject" value="Nova mensagem do site BookSphere!">
-
           <input type="hidden" name="_template" value="table">
 
           <div class="textfield-floating">
@@ -55,11 +52,7 @@
             <i class="bi bi-chat-dots input-icon" style="top: 40px;"></i>
           </div>
 
-          <button type="submit" class="btn-login">Enviar Mensagem</button>
-
-          <div class="signup-text" style="margin-top: 15px;">
-            <a href="home.html">Voltar para a Home</a>
-          </div>
+          <button type="submit" id="btnSubmit" class="btn-login">Enviar Mensagem</button>
 
         </form>
       </div>
@@ -67,6 +60,45 @@
   </div>
 
   <script src="../pasta-js/personalizacao.js"></script>
+
+  <script>
+    const form = document.getElementById('contactForm');
+    const btnSubmit = document.getElementById('btnSubmit');
+
+    form.addEventListener('submit', function (e) {
+      // 1. Impede o comportamento padrão (não vai para o site do FormSubmit)
+      e.preventDefault();
+
+      // Muda o texto do botão para dar feedback
+      const textoOriginal = btnSubmit.textContent;
+      btnSubmit.textContent = "Enviando...";
+      btnSubmit.disabled = true;
+      btnSubmit.style.opacity = "0.7";
+
+      // 2. Envia os dados via AJAX (Fetch)
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+        .then(response => {
+          // 3. Se deu certo (ou mesmo se deu erro, queremos redirecionar)
+          // Força a ida para a página de Obrigado
+          window.location.href = "obrigado.html";
+        })
+        .catch(error => {
+          console.error('Erro:', error);
+          // Mesmo com erro de rede, vamos para obrigado ou avisamos
+          alert("Houve um erro ao enviar, tente novamente.");
+          btnSubmit.textContent = textoOriginal;
+          btnSubmit.disabled = false;
+          btnSubmit.style.opacity = "1";
+        });
+    });
+  </script>
+
 </body>
 
 </html>

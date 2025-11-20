@@ -50,8 +50,8 @@ body.modo-noturno .profile-dropdown-btn {
     /* branco no escuro */
 }
 
-body.modo-noturno .profile-dropdown-btn {
-    border: 2px solid black;
+body.modo-sepia .profile-dropdown-btn {
+    border: 2px solid #8d613f;
     /* branco no escuro */
 }
 

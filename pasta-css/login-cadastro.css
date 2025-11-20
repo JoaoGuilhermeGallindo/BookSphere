@@ -668,14 +668,18 @@ ESTILOS EXTRAS PARA O FALE CONOSCO (TEXTAREA)
 .textfield-floating textarea.textarea-input {
     width: 100%;
     background: transparent;
-    border: 2px solid #2b2f38; /* Mesma borda dos inputs */
+    border: 2px solid #2b2f38;
+    /* Mesma borda dos inputs */
     border-radius: 8px;
-    padding: 15px 15px 15px 45px; /* Espaço para o ícone */
+    padding: 15px 15px 15px 45px;
+    /* Espaço para o ícone */
     color: #f0f0f0;
     font-size: 1rem;
     outline: none;
-    resize: none; /* Impede o usuário de quebrar o layout */
-    height: 120px; /* Altura fixa */
+    resize: none;
+    /* Impede o usuário de quebrar o layout */
+    height: 120px;
+    /* Altura fixa */
     font-family: inherit;
     transition: border-color 0.3s ease;
 }
@@ -687,18 +691,254 @@ ESTILOS EXTRAS PARA O FALE CONOSCO (TEXTAREA)
 }
 
 /* Ajuste do label flutuante para a textarea */
-.textfield-floating textarea.textarea-input:focus ~ label,
-.textfield-floating textarea.textarea-input:not(:placeholder-shown) ~ label {
+.textfield-floating textarea.textarea-input:focus~label,
+.textfield-floating textarea.textarea-input:not(:placeholder-shown)~label {
     top: -10px;
     left: 10px;
     font-size: 0.85rem;
     color: #00aaff;
-    background-color: #161b22; /* Fundo do card para cobrir a linha */
+    background-color: #161b22;
+    /* Fundo do card para cobrir a linha */
     padding: 0 5px;
 }
 
 /* Ícone da textarea (precisa ficar no topo) */
 .textfield-floating .bi-chat-dots {
-    top: 51px !important; /* Força o ícone a ficar no topo */
+    top: 51px !important;
+    /* Força o ícone a ficar no topo */
     transform: none !important;
+}
+
+/* =================================================================
+   CORREÇÕES PARA O MODO CLARO (FALE CONOSCO E LOGIN)
+   ================================================================= */
+
+/* 1. Fundo do Card no Modo Claro */
+body.modo-claro .card-login {
+    background-color: #ffffff;
+    /* Fundo branco */
+    border: 1px solid #e0e0e0;
+    /* Borda suave */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    /* Sombra para destacar */
+}
+
+/* 2. Títulos e Subtítulos (O problema principal) */
+body.modo-claro .card-login h1 {
+    color: #2b2f38;
+    /* Título escuro */
+}
+
+body.modo-claro .card-login p {
+    color: #666666 !important;
+    /* Subtítulo (Dúvidas...) cinza escuro */
+}
+
+/* 3. Inputs e Textareas (Texto digitado e Bordas) */
+body.modo-claro .textfield-floating input,
+body.modo-claro .textfield-floating textarea {
+    color: #333333;
+    /* Texto digitado preto */
+    border-color: #cccccc;
+    /* Borda cinza visível */
+}
+
+/* 4. Labels (Os nomes "Nome", "E-mail"...) */
+body.modo-claro .textfield-floating label {
+    color: #666666;
+    /* Label cinza escuro quando em repouso */
+}
+
+/* 5. Ícones dentro dos inputs */
+body.modo-claro .textfield-floating i {
+    color: #666666;
+    /* Ícones cinza escuro */
+}
+
+/* 6. Correção do Fundo do Label Flutuante */
+/* Quando clica, o label sobe. O fundo dele precisa ser branco para tapar a linha */
+body.modo-claro .textfield-floating input:focus~label,
+body.modo-claro .textfield-floating input:not(:placeholder-shown)~label,
+body.modo-claro .textfield-floating textarea:focus~label,
+body.modo-claro .textfield-floating textarea:not(:placeholder-shown)~label {
+    background-color: #ffffff;
+    /* Fundo branco */
+    color: #00aaff;
+    /* Azul padrão */
+}
+
+/* 7. Botão de Enviar no Modo Claro */
+body.modo-claro .btn-login {
+    background-color: #00aaff;
+    color: #fff;
+}
+
+body.modo-claro .btn-login:hover {
+    background-color: #008ecc;
+}
+
+/* =================================================================
+   ADICIONAL: MODO SÉPIA (TEMA DE LEITURA)
+   ================================================================= */
+
+/* 1. Fundo da Página e Corpo */
+body.modo-sepia {
+    background: #f4ecd8;
+    /* Bege suave (fundo principal) */
+    color: #433422;
+    /* Marrom escuro (texto geral) */
+    animation: none;
+    /* Remove animação do fundo */
+}
+
+/* 2. Fundo do Card e Logo */
+body.modo-sepia .card-login {
+    background-color: #fdf6e3;
+    /* Creme claro (fundo do card) */
+    border: 1px solid #d6cbb5;
+    /* Borda bege escuro */
+    box-shadow: 0 4px 15px rgba(67, 52, 34, 0.15);
+    /* Sombra marrom suave */
+}
+
+body.modo-sepia .logo-tab {
+    background: #fdf6e3;
+    border-color: #a0741d;
+    /* Borda dourada/marrom */
+}
+
+/* 3. Títulos e Textos */
+body.modo-sepia .card-login h1 {
+    color: #5b4636;
+    /* Marrom café */
+}
+
+body.modo-sepia .card-login p,
+body.modo-sepia .signup-text,
+body.modo-sepia .social-login-separator {
+    color: #836f54 !important;
+    /* Marrom claro */
+}
+
+body.modo-sepia #mensagem {
+    color: #5b4636;
+}
+
+/* 4. Inputs e Textareas */
+body.modo-sepia .textfield-floating input,
+body.modo-sepia .textfield-floating textarea {
+    background: #eee8d5;
+    /* Bege um pouco mais escuro que o card */
+    color: #433422;
+    /* Texto digitado marrom */
+    border-color: #d3c6aa;
+}
+
+/* Foco no Input */
+body.modo-sepia .textfield-floating input:focus,
+body.modo-sepia .textfield-floating textarea:focus {
+    background: #fdf6e3;
+    border-color: #a0741d;
+    /* Destaque sépia/dourado */
+    box-shadow: inset 0 1px 3px rgba(160, 116, 29, 0.1);
+}
+
+/* 5. Labels (Nomes "Nome", "E-mail") e Ícones */
+body.modo-sepia .textfield-floating label {
+    color: #9ea7a6;
+    /* Cinza quente */
+}
+
+body.modo-sepia .textfield-floating i,
+body.modo-sepia .textfield-floating #toggleSenha,
+body.modo-sepia .textfield-floating #toggleConfirmar,
+body.modo-sepia .card-login .textfield #toggleSenha,
+body.modo-sepia .card-login .textfield #toggleConfirmar {
+    color: #836f54;
+    /* Ícones marrons */
+}
+
+/* 6. Label Flutuante (Quando sobe) */
+/* O fundo precisa ser igual ao do card (#fdf6e3) para cobrir a linha */
+body.modo-sepia .textfield-floating input:focus~label,
+body.modo-sepia .textfield-floating input:not(:placeholder-shown)~label,
+body.modo-sepia .textfield-floating textarea:focus~label,
+body.modo-sepia .textfield-floating textarea:not(:placeholder-shown)~label {
+    background-color: #fdf6e3;
+    color: #a0741d;
+    /* Cor de destaque */
+}
+
+/* 7. Botões e Links */
+body.modo-sepia .btn-login {
+    background: #a0741d;
+    /* Botão Dourado/Marrom */
+    color: #fff;
+}
+
+body.modo-sepia .btn-login:hover {
+    background: #8a6316;
+    filter: brightness(1.05);
+}
+
+body.modo-sepia .signup-text a,
+body.modo-sepia .help-links a {
+    color: #a0741d;
+}
+
+body.modo-sepia .signup-text a::after,
+body.modo-sepia .help-links a::after {
+    background-color: #a0741d;
+}
+
+/* 8. Checkbox "Lembrar-me" */
+body.modo-sepia .remember-me {
+    color: #836f54;
+}
+
+body.modo-sepia .remember-me label {
+    border-color: #a0741d;
+}
+
+body.modo-sepia .custom-checkbox:checked+label {
+    background-color: #a0741d;
+}
+
+body.modo-sepia .remember-me label::after {
+    border-color: #fdf6e3;
+    /* Checkmark cor do card */
+}
+
+/* 9. Linhas Separadoras */
+body.modo-sepia .social-login-separator hr {
+    border-top: 1px solid #d6cbb5;
+}
+
+/* 10. Uploader de Foto (Cadastro) */
+body.modo-sepia .profile-pic-uploader {
+    background-color: #eee8d5;
+    border-color: #a0741d;
+}
+
+body.modo-sepia .upload-prompt {
+    color: #836f54;
+}
+
+body.modo-sepia .upload-prompt i {
+    color: #a0741d;
+}
+
+/* 11. Página de Recuperação (Cronômetro e Textos) */
+body.modo-sepia #titulo_recuperacao,
+body.modo-sepia #bloco_codigo h3 {
+    color: #5b4636;
+}
+
+body.modo-sepia #subtitulo_recuperacao,
+body.modo-sepia #info_codigo {
+    color: #836f54;
+}
+
+body.modo-sepia #cronometro {
+    color: #a0741d;
 }

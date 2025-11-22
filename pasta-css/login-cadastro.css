@@ -942,3 +942,65 @@ body.modo-sepia #info_codigo {
 body.modo-sepia #cronometro {
     color: #a0741d;
 }
+
+#listaRequisitos {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    /* POSICIONAMENTO */
+    position: absolute;
+    /* Garante que fique fora do fluxo normal */
+    top: 100%;
+    /* Cola logo abaixo da linha do input */
+    left: 0;
+    width: 100%;
+    margin-top: 5px;
+    /* Pequeno respiro */
+
+    /* ALINHAMENTO EM LINHA ÚNICA */
+    display: flex;
+    flex-wrap: nowrap;
+    /* PROÍBE quebrar linha */
+    justify-content: space-between;
+    /* Espalha os itens igualmente */
+    align-items: center;
+    gap: 2px;
+    right: 110px;
+    /* ESTILO DO TEXTO */
+    font-size: 0.7rem;
+    /* Tamanho ideal para leitura em linha única */
+    font-weight: 600;
+    white-space: nowrap;
+    /* Reforça que o texto não pode quebrar */
+}
+
+/* Cores (Mantenha igual) */
+.requisito-pendente {
+    color: #ff3333;
+    transition: color 0.3s ease;
+}
+
+.requisito-concluido {
+    color: #28a745;
+    transition: color 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    #listaRequisitos {
+       flex-wrap: wrap;
+       font-size: 0.6rem;
+    }
+}
+
+@media (max-width: 399px) {
+    #listaRequisitos {
+       flex-wrap: wrap;
+       font-size: 0.49rem;
+    }
+}
+
+/* Isso faz a área de seleção do Cropper ficar redonda visualmente */
+.cropper-view-box,
+.cropper-face {
+    border-radius: 50%;
+}

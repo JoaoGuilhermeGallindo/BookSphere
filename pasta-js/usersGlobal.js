@@ -30,7 +30,7 @@ async function loadGlobalUserData() {
     // --- LÓGICA DE NOMES ---
     const rawUsername = dados.usuario;
     let headerUsername = rawUsername;
-    if (rawUsername.length > 8) {
+    if (rawUsername.length >= 8) {
       headerUsername = rawUsername.substring(0, 6) + '...';
     }
 

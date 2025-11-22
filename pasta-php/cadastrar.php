@@ -6,16 +6,46 @@ require_once 'conexao.php'; // (Ajuste o caminho se necessário)
 // 2. Remover a conexão antiga (mysqli)
 // (Todo o bloco $servername, $username, $conn = new mysqli... foi removido)
 
-// 3. Receber os dados do formulário (sem alterações)
+// 3. Receber os dados do formulário 
 $nome      = $_POST['nome'] ?? '';
 $email     = $_POST['email'] ?? '';
-$usuario   = $_POST['usuario'] ?? '';
+// --- ALTERAÇÃO AQUI ---
+$usuarioRaw = $_POST['usuario'] ?? '';
+// Forçamos minúsculo e trocamos espaços por _ no PHP também
+$usuario   = strtolower(str_replace(' ', '_', $usuarioRaw));
+// ----------------------
 $senha     = $_POST['senha'] ?? '';
 $confirmar = $_POST['confirmar_senha'] ?? '';
 
 // 4. Validações (sem alterações)
 if (mb_strlen($nome, 'UTF-8') > 100) {
     echo "nome_muito_longo";
+    exit;
+}
+
+if (mb_strlen($usuario, 'UTF-8') > 30) {
+    echo "usuario_muito_longo";
+    exit;
+}
+
+// --- NOVA VALIDAÇÃO: TAMANHO DA SENHA ---
+if (strlen($senha) > 255) {
+    echo "senha_muito_longa";
+    exit;
+}
+// ---------------------------------------
+
+// ... validações anteriores (nome, usuario, etc) ...
+
+// Validação de Força da Senha
+// Explicação da Regex:
+// (?=.*[a-z]) -> Pelo menos 1 minúscula
+// (?=.*[A-Z]) -> Pelo menos 1 maiúscula
+// (?=.*\d)    -> Pelo menos 1 número
+// (?=.*[\W_]) -> Pelo menos 1 símbolo (ex: @, #, !, etc)
+// .{8,}       -> Pelo menos 8 caracteres no total
+if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/', $senha)) {
+    echo "senha_fraca";
     exit;
 }
 

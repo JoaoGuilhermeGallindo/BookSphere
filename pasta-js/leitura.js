@@ -90,22 +90,54 @@ function isSinglePageView() {
 
 async function renderPage(num, canvas, ctx, customScale) {
   if (!state.pdfDoc || num < 1 || num > state.pdfDoc.numPages) {
+    // Limpeza de segurança
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     canvas.style.width = "0px";
     canvas.style.height = "0px";
     return;
   }
+
   const page = await state.pdfDoc.getPage(num);
   const scaleToUse = customScale || state.scale;
   const viewport = page.getViewport({ scale: scaleToUse });
+
+  // Fator de Alta Resolução (Retina/Mobile)
   const outputScale = window.devicePixelRatio || 1;
+
+  // Define o tamanho físico do canvas (pixels reais)
   canvas.width = Math.floor(viewport.width * outputScale);
   canvas.height = Math.floor(viewport.height * outputScale);
+
+  // Define o tamanho visual do canvas (CSS)
   canvas.style.width = `${viewport.width}px`;
   canvas.style.height = `${viewport.height}px`;
-  const transform =
-    outputScale !== 1 ? [outputScale, 0, 0, outputScale, 0, 0] : null;
-  await page.render({ canvasContext: ctx, viewport, transform }).promise;
+
+  // =========================================================
+  // ✅ CORREÇÃO DEFINITIVA DO BUG F11 (INVERSÃO)
+  // =========================================================
+
+  // 1. Reseta qualquer transformação anterior para o padrão absoluto
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+
+  // 2. Aplica a escala de alta resolução DIRETAMENTE NO CONTEXTO
+  // Isso faz com que o desenho fique nítido sem confundir o PDF.js
+  ctx.scale(outputScale, outputScale);
+
+  // 3. Limpa a área (O contexto já está limpo pelo setTransform, mas garantimos)
+  // Nota: Como usamos scale() acima, limpamos baseados no viewport original
+  ctx.clearRect(0, 0, viewport.width, viewport.height);
+
+  // 4. Renderiza SEM passar o array 'transform' manual.
+  // Deixamos o PDF.js calcular a matriz dele sozinho, desenhando
+  // "normalmente" dentro do nosso contexto que já está ampliado.
+  const renderContext = {
+    canvasContext: ctx,
+    viewport: viewport
+    // REMOVIDO: transform: ... (Isso era o causador do conflito)
+  };
+
+  await page.render(renderContext).promise;
 }
 
 async function renderBook() {
@@ -486,8 +518,17 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-// Redimensionar
-window.addEventListener("resize", renderBook);
+// =========================================================
+// ✅ CORREÇÃO DE PERFORMANCE (DEBOUNCE)
+// Só renderiza o livro quando o usuário PARAR de redimensionar a janela
+// =========================================================
+let resizeTimeout;
+window.addEventListener("resize", () => {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(() => {
+    renderBook();
+  }, 200); // Espera 200ms após o redimensionamento parar
+});
 
 // === Funções Auxiliares ===
 

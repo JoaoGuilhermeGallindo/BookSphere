@@ -24,23 +24,45 @@
 
                 <h1>Bem-vindo!</h1>
 
-                <div class="textfield-floating">
+                <div class="textfield-floating" style="margin-bottom: 30px; position: relative;">
                     <input type="email" id="email" name="email" required placeholder=" " autocomplete="email">
                     <label for="email">E-mail</label>
+
                     <i class="bi bi-envelope input-icon"></i>
+
+                    <i id="statusEmailIcone" class="bi"
+                        style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); display: none;"></i>
+
+                    <span id="msgEmailErro" style="
+                        position: absolute; 
+                        bottom: -22px; 
+                        left: 0; 
+                        width: 100%; 
+                        text-align: center; 
+                        font-size: 0.8rem; 
+                        color: #ff3333; 
+                        font-weight: 500;
+                        display: none;">
+                    </span>
                 </div>
-                <div class="textfield-floating">
+
+                <div class="textfield-floating" style="margin-bottom: 30px; position: relative;">
                     <input type="password" id="senha" name="senha" required placeholder=" ">
                     <label for="senha">Senha</label>
+
                     <i class="bi bi-lock input-icon"></i>
+
                     <i class="bi bi-eye-slash" id="toggleSenha"></i>
+
+                    <i id="statusSenhaIcone" class="bi"
+                        style="position: absolute; right: 45px; top: 50%; transform: translateY(-50%); display: none;"></i>
                 </div>
 
                 <div class="options-container">
                     <div class="remember-me">
                         <input type="checkbox" id="rememberMe" name="rememberMe" class="custom-checkbox" value="on">
                         <label for="rememberMe"></label>
-                        <span>Lembrar-me</span> 
+                        <span>Lembrar-me</span>
                     </div>
                     <div class="help-links">
                         <a href="recuperar.html?tipo=senha">Esqueceu a senha?</a>

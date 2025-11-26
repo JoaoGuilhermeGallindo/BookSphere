@@ -519,15 +519,37 @@ document.addEventListener("keydown", (e) => {
 });
 
 // =========================================================
-// ✅ CORREÇÃO DE PERFORMANCE (DEBOUNCE)
-// Só renderiza o livro quando o usuário PARAR de redimensionar a janela
+// ✅ CORREÇÃO "BLINDADA" PARA MOBILE
 // =========================================================
 let resizeTimeout;
+let lastWidth = window.innerWidth;
+
 window.addEventListener("resize", () => {
+  // 1. REGRA DO FOCO (A MAIS IMPORTANTE):
+  // Se o usuário estiver digitando (input ou textarea focado),
+  // IGNORA totalmente o resize. O teclado abriu, não queremos mexer no livro.
+  const activeEl = document.activeElement;
+  if (activeEl && (activeEl.tagName === "INPUT" || activeEl.tagName === "TEXTAREA")) {
+    console.log("Teclado aberto detectado: Resize bloqueado.");
+    return;
+  }
+
+  // 2. REGRA DA LARGURA (Backup):
+  // Mesmo sem foco, só redesenha se a LARGURA mudar significativamente (girou a tela).
+  // Aumentei a tolerância para 10px para evitar bugs de navegadores móveis.
+  const currentWidth = window.innerWidth;
+  if (Math.abs(currentWidth - lastWidth) < 10) {
+    return;
+  }
+
+  // Se passou pelas duas barreiras, aí sim atualiza
+  lastWidth = currentWidth;
+
   clearTimeout(resizeTimeout);
   resizeTimeout = setTimeout(() => {
+    console.log("Redimensionando livro...");
     renderBook();
-  }, 200); // Espera 200ms após o redimensionamento parar
+  }, 200);
 });
 
 // === Funções Auxiliares ===

@@ -519,27 +519,35 @@ document.addEventListener("keydown", (e) => {
 });
 
 // =========================================================
-// ✅ CORREÇÃO DEFINITIVA PARA MOBILE (IGNORAR TECLADO)
+// ✅ CORREÇÃO "BLINDADA" PARA MOBILE
 // =========================================================
 let resizeTimeout;
-let lastWidth = window.innerWidth; // Salva a largura inicial
+let lastWidth = window.innerWidth;
 
 window.addEventListener("resize", () => {
-  const currentWidth = window.innerWidth;
+  // 1. REGRA DO FOCO (A MAIS IMPORTANTE):
+  // Se o usuário estiver digitando (input ou textarea focado),
+  // IGNORA totalmente o resize. O teclado abriu, não queremos mexer no livro.
+  const activeEl = document.activeElement;
+  if (activeEl && (activeEl.tagName === "INPUT" || activeEl.tagName === "TEXTAREA")) {
+    console.log("Teclado aberto detectado: Resize bloqueado.");
+    return;
+  }
 
-  // O PULO DO GATO:
-  // Se a largura for a mesma (diferença menor que 1px), significa que
-  // só a altura mudou (provavelmente o teclado abriu ou a barra de endereço sumiu).
-  // Nesse caso, NÃO fazemos nada. O livro fica quieto.
-  if (Math.abs(currentWidth - lastWidth) < 1) {
+  // 2. REGRA DA LARGURA (Backup):
+  // Mesmo sem foco, só redesenha se a LARGURA mudar significativamente (girou a tela).
+  // Aumentei a tolerância para 10px para evitar bugs de navegadores móveis.
+  const currentWidth = window.innerWidth;
+  if (Math.abs(currentWidth - lastWidth) < 10) {
     return; 
   }
 
-  // Se a largura mudou (girou o celular ou redimensionou janela no PC), aí sim redesenha
+  // Se passou pelas duas barreiras, aí sim atualiza
   lastWidth = currentWidth;
 
   clearTimeout(resizeTimeout);
   resizeTimeout = setTimeout(() => {
+    console.log("Redimensionando livro...");
     renderBook();
   }, 200);
 });

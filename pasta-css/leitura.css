@@ -871,8 +871,25 @@
      cursor: pointer;
  }
 
- .popup-content button:hover {      
+ .popup-content button:hover {
      background-color: #0056b3;
  }
 
- 
+ /* Garante que o container principal ocupe a altura MÍNIMA da tela */
+ /* Usamos 'dvh' (dynamic viewport height) ou 'vh' com min-height */
+
+ #main-content {
+     /* Impede que o container encolha demais quando o teclado sobe */
+     min-height: 500px;
+
+     /* Tenta manter a altura estável em mobile */
+     height: 100dvh;
+ }
+
+ /* Garante que o canvas não tente se redimensionar via CSS */
+ canvas {
+     max-width: 100%;
+     /* Removemos height: auto se estiver causando distorção, 
+       mas geralmente object-fit ajuda */
+     object-fit: contain;
+ }

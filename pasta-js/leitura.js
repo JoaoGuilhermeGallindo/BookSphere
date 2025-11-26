@@ -532,7 +532,7 @@ window.addEventListener("resize", () => {
   // só a altura mudou (provavelmente o teclado abriu ou a barra de endereço sumiu).
   // Nesse caso, NÃO fazemos nada. O livro fica quieto.
   if (Math.abs(currentWidth - lastWidth) < 1) {
-    return;
+    return; 
   }
 
   // Se a largura mudou (girou o celular ou redimensionou janela no PC), aí sim redesenha

@@ -27,11 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (emailInput) {
         emailInput.addEventListener('input', function () {
             const valor = this.value.trim();
+            mostrarMensagem(""); // Limpa mensagens
 
-            // Limpa mensagens globais ao digitar
-            mostrarMensagem("");
-
-            // Reset visual
             if (statusEmailIcone) statusEmailIcone.style.display = 'none';
             if (msgEmailErro) msgEmailErro.style.display = 'none';
 
@@ -42,11 +39,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 statusEmailIcone.className = 'bi';
 
                 if (validarEmail(valor)) {
-                    // Formato Válido (Verde)
                     statusEmailIcone.classList.add('bi-check-circle-fill');
                     statusEmailIcone.style.color = 'green';
                 } else {
-                    // Formato Inválido (Vermelho)
                     statusEmailIcone.classList.add('bi-x-circle-fill');
                     statusEmailIcone.style.color = 'red';
                 }
@@ -60,9 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (senhaInput) {
         senhaInput.addEventListener('input', function () {
-            // Limpa mensagens globais ao digitar
             mostrarMensagem("");
-
             const valor = this.value;
             if (statusSenhaIcone) {
                 if (valor.length > 0) {
@@ -76,15 +69,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-
-    // --- SUBMIT DO FORMULÁRIO ---
+    // --- SUBMIT DO FORMULÁRIO (LOGIN NORMAL) ---
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        // Validação final de formato antes de enviar
         if (!validarEmail(emailInput.value)) {
             mostrarMensagem("Por favor, insira um e-mail válido.", 'red');
-            // Força o ícone vermelho
             if (statusEmailIcone) {
                 statusEmailIcone.className = 'bi bi-x-circle-fill';
                 statusEmailIcone.style.color = 'red';
@@ -96,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const formData = new FormData(form);
 
         try {
-            mostrarMensagem("Autenticando...", "blue"); // Feedback imediato
+            mostrarMensagem("Autenticando...", "blue");
 
             const resposta = await fetch('../pasta-php/login.php', {
                 method: 'POST',
@@ -108,7 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (texto.includes('sucesso')) {
                 mostrarMensagem('Login realizado com sucesso!', 'green');
                 setTimeout(() => {
-                    // Verifica se tem redirecionamento salvo ou vai pra home
                     const destino = sessionStorage.getItem('voltar_para');
                     if (destino) {
                         sessionStorage.removeItem('voltar_para');
@@ -120,23 +109,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
             } else if (texto.includes('E-mail não encontrado')) {
                 mostrarMensagem('E-mail não encontrado.', 'red');
-                // Ícone vermelho no email
                 if (statusEmailIcone) {
                     statusEmailIcone.className = 'bi bi-x-circle-fill';
                     statusEmailIcone.style.color = 'red';
                 }
-
             } else if (texto.includes('Senha incorreta')) {
                 mostrarMensagem('Senha incorreta.', 'red');
-                // Ícone vermelho na senha
                 if (statusSenhaIcone) {
                     statusSenhaIcone.className = 'bi bi-x-circle-fill';
                     statusSenhaIcone.style.color = 'red';
                     statusSenhaIcone.style.display = 'block';
                 }
-                // Limpa o campo de senha
                 senhaInput.value = "";
-
             } else {
                 mostrarMensagem(texto, 'red');
             }
@@ -150,10 +134,13 @@ document.addEventListener('DOMContentLoaded', () => {
     boxMsg.style.display = 'none';
 });
 
-// --- LÓGICA DE OCULTAR/MOSTRAR SENHA (MANTIDA IGUAL) ---
+// =========================================================
+// CÓDIGO GLOBAL (FORA DO DOMContentLoaded)
+// O Google PRECISA que esta função esteja aqui fora para vê-la.
+// =========================================================
+
 const toggleSenha = document.getElementById('toggleSenha');
-const toggleConfirmar = document.getElementById('toggleConfirmar'); // Caso exista em algum lugar
-// (Note que deletei a redeclaração de 'senhaInput' pois já declarei acima)
+const toggleConfirmar = document.getElementById('toggleConfirmar');
 
 function togglePasswordVisibility(input, icon) {
     if (!input || !icon) return;
@@ -175,4 +162,51 @@ if (toggleSenha) {
         togglePasswordVisibility(input, toggleSenha);
     });
 }
-// ... (Lógica do Google mantida igual) ...
+
+// ✅ FUNÇÃO DO GOOGLE (GLOBAL)
+function processarLoginGoogle(response) {
+    const token = response.credential;
+
+    // Feedback visual (opcional, mas bom)
+    const mensagem = document.getElementById('mensagem');
+    const boxMsg = document.querySelector('.box-msg');
+    if(mensagem) {
+        mensagem.textContent = "Verificando Google...";
+        mensagem.style.color = "blue";
+        if(boxMsg) boxMsg.style.display = "block";
+    }
+
+    fetch('../pasta-php/login-google.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ token: token })
+    })
+    .then(res => res.json())
+    .then(dados => {
+        if (dados.sucesso) {
+            if(mensagem) {
+                mensagem.textContent = "Sucesso! Entrando...";
+                mensagem.style.color = "green";
+            }
+            
+            // REDIRECIONAMENTO
+            setTimeout(() => {
+                const destino = sessionStorage.getItem('voltar_para');
+                if (destino) {
+                    sessionStorage.removeItem('voltar_para');
+                    window.location.href = destino;
+                } else {
+                    window.location.href = '../pasta-html/home.html';
+                }
+            }, 1000);
+        } else {
+            alert('Erro ao logar com Google: ' + (dados.mensagem || 'Erro desconhecido'));
+        }
+    })
+    .catch(err => {
+        console.error('Erro na requisição Google:', err);
+        alert('Erro de conexão com o servidor.');
+    });
+}

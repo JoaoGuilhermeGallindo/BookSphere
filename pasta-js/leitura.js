@@ -519,15 +519,29 @@ document.addEventListener("keydown", (e) => {
 });
 
 // =========================================================
-// ✅ CORREÇÃO DE PERFORMANCE (DEBOUNCE)
-// Só renderiza o livro quando o usuário PARAR de redimensionar a janela
+// ✅ CORREÇÃO DEFINITIVA PARA MOBILE (IGNORAR TECLADO)
 // =========================================================
 let resizeTimeout;
+let lastWidth = window.innerWidth; // Salva a largura inicial
+
 window.addEventListener("resize", () => {
+  const currentWidth = window.innerWidth;
+
+  // O PULO DO GATO:
+  // Se a largura for a mesma (diferença menor que 1px), significa que
+  // só a altura mudou (provavelmente o teclado abriu ou a barra de endereço sumiu).
+  // Nesse caso, NÃO fazemos nada. O livro fica quieto.
+  if (Math.abs(currentWidth - lastWidth) < 1) {
+    return;
+  }
+
+  // Se a largura mudou (girou o celular ou redimensionou janela no PC), aí sim redesenha
+  lastWidth = currentWidth;
+
   clearTimeout(resizeTimeout);
   resizeTimeout = setTimeout(() => {
     renderBook();
-  }, 200); // Espera 200ms após o redimensionamento parar
+  }, 200);
 });
 
 // === Funções Auxiliares ===

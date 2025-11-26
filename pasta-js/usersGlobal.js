@@ -37,10 +37,10 @@ async function loadGlobalUserData() {
 
     // Define os limites baseados no tamanho da tela
     // PC: Se passar de 12 (limite 13), corta. Mobile: Se passar de 7 (limite 8), corta.
-    const limiteCaracteres = isMobile ? 8 : 13;
+    const limiteCaracteres = isMobile ? 8 : 11;
 
     // Onde cortar a string (deixa um pouco maior no PC)
-    const pontoDeCorte = isMobile ? 4 : 10;
+    const pontoDeCorte = isMobile ? 4 : 6;
 
     if (rawUsername.length >= limiteCaracteres) {
       headerUsername = rawUsername.substring(0, pontoDeCorte) + '...';

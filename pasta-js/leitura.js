@@ -285,13 +285,21 @@ function changeZoom(delta) {
     const normalizedTitle = bookTitle.toLowerCase(); // Normaliza o título
 
     if (isMobileView) {
-      // --- 1. LÓGICA DE ZOOM PARA CELULAR (Já existente) ---
+      // --- 1. LÓGICA DE ZOOM PARA CELULAR ---
       const page = await state.pdfDoc.getPage(1);
       const viewport = page.getViewport({ scale: 1 });
       const targetWidth = elements.mainContent.clientWidth - 20;
       const newScale = targetWidth / viewport.width;
+
       state.scale = newScale;
-      state.MIN_SCALE = newScale;
+
+      // O ERRO ESTAVA AQUI:
+      // state.MIN_SCALE = newScale; <-- Isso travava o zoom no tamanho da tela
+
+      // ✅ CORREÇÃO:
+      // Definimos o mínimo bem baixo (ex: 0.1) para você ter liberdade de diminuir
+      state.MIN_SCALE = 0.1;
+
     } else {
       // --- 2. LÓGICA DE ZOOM PARA DESKTOP (Nova) ---
 
@@ -343,8 +351,15 @@ function changeZoom(delta) {
 
     // 3. SE TEMOS UMA PÁGINA SALVA (DO DB OU LOCALSTORAGE)
     if (savedPage) {
-      // Define o marcador para a página exata que foi salva
-      state.bookmarkedPage = savedPage;
+
+      // ✅ CORREÇÃO: Lógica para não marcar a capa/página 1
+      if (savedPage > 1) {
+        // Se for página 2 para frente, marca o ícone
+        state.bookmarkedPage = savedPage;
+      } else {
+        // Se for página 1, considera como "início padrão" e deixa desmarcado
+        state.bookmarkedPage = null;
+      }
 
       // Agora, calcula a página de INÍCIO (a da esquerda)
       let pageToLoad = savedPage;

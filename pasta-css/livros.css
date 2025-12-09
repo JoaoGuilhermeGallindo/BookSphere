@@ -258,6 +258,9 @@ body.modo-noturno .menu-lateral button {
     margin-top: 10px;
     margin-bottom: 40px;
     border-right: none;
+    /* ADICIONE ESTAS DUAS LINHAS: */
+    background-color: white; /* Força branco enquanto carrega */
+    color: black;            /* Força texto preto enquanto carrega */
   }
 
   body.modo-noturno .menu-lateral {

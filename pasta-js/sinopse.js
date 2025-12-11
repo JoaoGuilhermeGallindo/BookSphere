@@ -831,13 +831,53 @@ document.addEventListener("DOMContentLoaded", () => {
   const livro = livros[id];
 
   if (livro) {
-    // Preenche informações na página
+    // 1. Preenche informações visuais na página (O que você já tinha)
     document.getElementById("titulo").innerText = livro.titulo;
     document.getElementById("autor").innerText = livro.autor;
     document.getElementById("paginas").innerText = livro.paginas;
     document.getElementById("paginas2").innerText = livro.paginas2;
     document.getElementById("capa").src = livro.capa;
     document.getElementById("sinopse").innerText = livro.sinopse;
+
+    // ==========================================================
+    // ✅ PASSO 2 AQUI: CRIA O JSON-LD PARA O GOOGLE
+    // ==========================================================
+
+    // Atualiza o Título da Aba do Navegador (Muito importante para SEO)
+    document.title = `${livro.titulo} | Ler Online no BookSphere`;
+
+    // Cria os dados estruturados
+    const bookSchema = {
+      "@context": "https://schema.org",
+      "@type": "Book",
+      "name": livro.titulo,
+      "author": {
+        "@type": "Person",
+        "name": livro.autor
+      },
+      "description": livro.sinopse,
+      "image": window.location.origin + "/" + livro.capa.replace('../', ''), // Tenta criar link absoluto
+      "inLanguage": "pt-BR",
+      "isAccessibleForFree": true,
+      "url": window.location.href,
+      "provider": {
+        "@type": "Organization",
+        "name": "BookSphere"
+      }
+    };
+
+    // Procura o script que criamos no HTML ou cria um novo
+    let scriptTag = document.getElementById('json-ld-book');
+    if (!scriptTag) {
+      scriptTag = document.createElement('script');
+      scriptTag.id = 'json-ld-book';
+      scriptTag.type = 'application/ld+json';
+      document.body.appendChild(scriptTag);
+    }
+
+    // Injeta o JSON dentro da tag
+    scriptTag.textContent = JSON.stringify(bookSchema);
+    // ==========================================================
   }
 });
 

@@ -408,7 +408,7 @@ h2 {
 
 .livros-wrapper {
     display: flex;
-    animation: rolar 55s linear infinite;
+    animation: rolar 45s linear infinite;
     /* velocidade aqui */
     gap: 20px;
 }

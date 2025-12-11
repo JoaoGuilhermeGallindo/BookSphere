@@ -398,6 +398,22 @@ function changeZoom(delta) {
       console.log("Novo acesso: Abrindo na Capa");
     }
 
+    // ==========================================================
+    // 4. CORREÇÃO DE PÁGINA DUPLA (O Passo que faltava)
+    // ==========================================================
+    // Verifica se está no PC (Página Dupla)
+    const singleView = window.getComputedStyle(elements.rightPageWrapper).display === "none";
+
+    // Se NÃO for mobile e a página não for a capa
+    if (!singleView && pageToLoad > 1) {
+      // Se a página for ÍMPAR (ex: 13), subtrai 1.
+      // Isso força o livro a abrir no par correto (ex: 12-13)
+      if (pageToLoad % 2 !== 0) {
+        pageToLoad = pageToLoad - 1;
+      }
+    }
+    // ==========================================================
+
     // Define a página final
     state.currentPage = pageToLoad;
 

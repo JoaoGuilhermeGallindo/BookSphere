@@ -625,7 +625,7 @@ const livros = {
     pdf: "OElixirdaLongaVida.pdf",
   },
   "a-princesa-da-babilonia": {
-    titulo: "A Princesa de Babilonia",
+    titulo: "A Princesa de Babilônia",
     autor: "Voltaire",
     paginas: "46 Páginas - PDF",
     paginas2: "92 Páginas - ONLINE",

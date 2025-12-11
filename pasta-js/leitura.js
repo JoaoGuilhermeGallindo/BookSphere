@@ -229,8 +229,26 @@ function updateUI() {
 }
 
 function navigate(direction) {
-  const step = isSinglePageView() ? 1 : 2;
-  const newPage = state.currentPage + direction * step;
+  // Verifica se é página única ou dupla
+  const isSingle = isSinglePageView();
+  let step = isSingle ? 1 : 2;
+
+  // CÁLCULO DA NOVA PÁGINA
+  let newPage = state.currentPage + direction * step;
+
+  // CORREÇÃO: Se estivermos na página 2 (Desktop) e voltarmos, 
+  // o cálculo dá 0. Devemos forçar ir para a 1 (Capa).
+  if (!isSingle && state.currentPage === 2 && direction === -1) {
+      newPage = 1;
+  }
+  
+  // CORREÇÃO: Se estivermos na Capa (1) e avançarmos no Desktop,
+  // devemos ir para a 2 (e não para a 3)
+  if (!isSingle && state.currentPage === 1 && direction === 1) {
+      newPage = 2;
+  }
+
+  // Validação e Renderização
   if (newPage >= 1 && newPage <= state.pdfDoc.numPages) {
     state.currentPage = newPage;
     renderBook();
@@ -399,13 +417,16 @@ function changeZoom(delta) {
     }
 
     // ==========================================================
-    // 4. CORREÇÃO DE PÁGINA DUPLA (O Passo que faltava)
+    // 4. CORREÇÃO DE PÁGINA DUPLA (VERSÃO CORRIGIDA)
     // ==========================================================
-    // Verifica se está no PC (Página Dupla)
-    const singleView = window.getComputedStyle(elements.rightPageWrapper).display === "none";
 
-    // Se NÃO for mobile e a página não for a capa
-    if (!singleView && pageToLoad > 1) {
+    // O ERRO ESTAVA AQUI: Não podemos usar 'getComputedStyle' antes do livro renderizar.
+    // SOLUÇÃO: Verificamos a largura da tela. Se for maior que 991px, é Desktop (Página Dupla).
+    const isDesktop = window.innerWidth > 991;
+
+    // Se for Desktop e a página alvo não for a capa
+    if (isDesktop && pageToLoad > 1) {
+
       // Se a página for ÍMPAR (ex: 13), subtrai 1.
       // Isso força o livro a abrir no par correto (ex: 12-13)
       if (pageToLoad % 2 !== 0) {

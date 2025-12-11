@@ -179,6 +179,11 @@ async function renderBook() {
 }
 
 function updateUI() {
+  // --- SALVA NA SESSÃO (Para resistir ao F5) ---
+  if (state.currentPage) {
+    sessionStorage.setItem(`lastPage_${PDF_BOOK_ID}`, state.currentPage);
+  }
+  // ---------------------------------------------
   const singlePage = isSinglePageView();
   const totalPages = state.pdfDoc.numPages;
   // Indicador de Página
@@ -263,11 +268,14 @@ function changeZoom(delta) {
   // --- FIM DA LÓGICA CORRIGIDA ---
 
   state.scale = newScale;
+
+  // --- SALVA O ZOOM NO LOCALSTORAGE (Persiste mesmo fechando a aba) ---
+  localStorage.setItem(`zoom_${PDF_BOOK_ID}`, newScale);
+  // -------------------------------------------------------------------
+
   renderBook();
 }
 
-// Carrega o PDF
-// --- SUBSTITUA PELO BLOCO ABAIXO ---
 
 // Carrega o PDF (agora em uma função async auto-executável)
 // --- SUBSTITUA O BLOCO INTEIRO (ETAPA 3.5) POR ESTE ---
@@ -277,47 +285,46 @@ function changeZoom(delta) {
     const pdfDoc_ = await pdfjsLib.getDocument(pdfPath).promise;
     state.pdfDoc = pdfDoc_;
     // =================================================
-    // ✅ CORREÇÃO: AJUSTE DE ZOOM INICIAL
+    // LÓGICA DE ZOOM INICIAL (Com Memória)
     // =================================================
 
-    // Verifica se estamos na visualização mobile (página única)
+    // 1. Tenta recuperar o zoom salvo pelo usuário
+    const savedZoom = localStorage.getItem(`zoom_${PDF_BOOK_ID}`);
+    const normalizedTitle = bookTitle.toLowerCase();
     const isMobileView = window.innerWidth <= 991;
-    const normalizedTitle = bookTitle.toLowerCase(); // Normaliza o título
 
-    if (isMobileView) {
-      // --- 1. LÓGICA DE ZOOM PARA CELULAR ---
-      const page = await state.pdfDoc.getPage(1);
-      const viewport = page.getViewport({ scale: 1 });
-      const targetWidth = elements.mainContent.clientWidth - 20;
-      const newScale = targetWidth / viewport.width;
+    if (savedZoom) {
+      // Se já tem um zoom salvo, USA ELE (respeita a vontade do usuário)
+      state.scale = parseFloat(savedZoom);
 
-      state.scale = newScale;
-
-      // O ERRO ESTAVA AQUI:
-      // state.MIN_SCALE = newScale; <-- Isso travava o zoom no tamanho da tela
-
-      // ✅ CORREÇÃO:
-      // Definimos o mínimo bem baixo (ex: 0.1) para você ter liberdade de diminuir
-      state.MIN_SCALE = 0.1;
+      // Mantém o mínimo correto para mobile
+      if (isMobileView) {
+        state.MIN_SCALE = 0.1;
+      }
 
     } else {
-      // --- 2. LÓGICA DE ZOOM PARA DESKTOP (Nova) ---
+      // Se NÃO tem zoom salvo, usa a lógica padrão (automática)
 
-      // Verificação especial para "Iracema"
-      if (normalizedTitle === "iracema") {
-        // Define um zoom inicial maior, ex: 1.0 (o padrão global é 0.8)
-        // Ajuste 1.0 para 1.1 ou 1.2 se ainda achar pequeno
-        state.scale = 2.0;
+      if (isMobileView) {
+        // Lógica Mobile (ajusta à largura)
+        const page = await state.pdfDoc.getPage(1);
+        const viewport = page.getViewport({ scale: 1 });
+        const targetWidth = elements.mainContent.clientWidth - 20;
+
+        state.scale = targetWidth / viewport.width;
+        state.MIN_SCALE = 0.1;
+
+      } else {
+        // Lógica Desktop
+        if (normalizedTitle === "iracema") {
+          state.scale = 2.0;
+        } else {
+          state.scale = 0.8; // Padrão
+        }
       }
-      // (Para outros livros no desktop, ele usará o padrão state.scale = 0.8)
     }
     // =================================================
-    // FIM DA CORREÇÃO
-    // =================================================
 
-    loadData(); // O resto da função continua igual...
-    await loadNotesFromDB();
-    // ... (o resto da sua função) ...
     loadData();
     await loadNotesFromDB(); // <-- ADICIONE ESTA LINHA
 
@@ -344,43 +351,59 @@ function changeZoom(delta) {
       }
     }
 
-    // Se não encontrou no DB, usa o do localStorage (se houver)
-    // if (!savedPage && state.bookmarkedPage) {
-    //    savedPage = state.bookmarkedPage;
-    // }
+    // ==========================================================
+    // LÓGICA DE CARREGAMENTO INTELIGENTE (Reload vs Navegação)
+    // ==========================================================
 
-    // 3. SE TEMOS UMA PÁGINA SALVA (DO DB OU LOCALSTORAGE)
-    if (savedPage) {
+    // 1. Detecta se o usuário deu F5 (Reload)
+    // A API 'performance' nos diz se a página foi recarregada ou acessada via link
+    const navEntries = performance.getEntriesByType("navigation");
+    const isReload = navEntries.length > 0 && navEntries[0].type === 'reload';
 
-      // ✅ CORREÇÃO: Lógica para não marcar a capa/página 1
-      if (savedPage > 1) {
-        // Se for página 2 para frente, marca o ícone
-        state.bookmarkedPage = savedPage;
-      } else {
-        // Se for página 1, considera como "início padrão" e deixa desmarcado
-        state.bookmarkedPage = null;
-      }
+    let sessionPage = null;
 
-      // Agora, calcula a página de INÍCIO (a da esquerda)
-      let pageToLoad = savedPage;
-
-      // isSinglePageView() ainda não funciona, pois o renderBook não rodou.
-      // Vamos checar o CSS "raw" (igual a função faz)
-      const singleView =
-        window.getComputedStyle(elements.rightPageWrapper).display === "none";
-
-      if (!singleView && savedPage > 1) {
-        // Se estamos em página dupla E a página salva é PAR (direita)
-        if (savedPage % 2 === 0) {
-          pageToLoad = savedPage - 1; // Carrega a página anterior (esquerda)
-        }
-      }
-      // Se for ímpar (esquerda) ou página única, pageToLoad = savedPage (correto)
-      state.currentPage = pageToLoad;
+    if (isReload) {
+      // Se for F5, tentamos recuperar onde ele estava antes de piscar a tela
+      const sessionPageStr = sessionStorage.getItem(`lastPage_${PDF_BOOK_ID}`);
+      sessionPage = sessionPageStr ? parseInt(sessionPageStr, 10) : null;
+    } else {
+      // Se NÃO for F5 (veio da Home, clicou no link), LIMPA a memória antiga
+      // Assim garantimos que ele vai pegar o Marcador do Banco de Dados
+      sessionStorage.removeItem(`lastPage_${PDF_BOOK_ID}`);
     }
 
-    // 4. Finalmente, renderiza o livro na página correta
+    // 2. Configura o ÍCONE de favorito (Sempre fiel ao Banco de Dados)
+    if (savedPage && savedPage > 1) {
+      state.bookmarkedPage = savedPage;
+    } else {
+      state.bookmarkedPage = null;
+    }
+
+    // 3. Define qual página vai abrir na tela
+    let pageToLoad = 1; // Padrão: Capa
+
+    if (sessionPage) {
+      // PRIORIDADE 1: Apenas se for F5
+      pageToLoad = sessionPage;
+      console.log("F5 Detectado: Mantendo página atual", pageToLoad);
+
+    } else if (savedPage && savedPage > 1) {
+      // PRIORIDADE 2: Se veio da Home, usa o Marcador Oficial
+      pageToLoad = savedPage;
+      console.log("Acesso via Link: Abrindo no Marcador", pageToLoad);
+
+    } else {
+      // PRIORIDADE 3: Capa
+      pageToLoad = 1;
+      console.log("Novo acesso: Abrindo na Capa");
+    }
+
+    // Define a página final
+    state.currentPage = pageToLoad;
+
+    // Renderiza
     renderBook();
+
   } catch (err) {
     console.error("Erro ao carregar PDF:", err);
     document.getElementById("main-content").innerHTML =

@@ -403,14 +403,26 @@ h2 {
     flex-shrink: 0;
     width: 180px;
     object-fit: cover;
-    /* impede que as capas estiquem ou encolham */
+    
+    /* ADICIONE ISSO: */
+    transform: translateZ(0); /* Trava a imagem na GPU */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    image-rendering: -webkit-optimize-contrast; /* Melhora a nitidez */
 }
 
 .livros-wrapper {
     display: flex;
-    animation: rolar 55s linear infinite;
+    animation: rolar 60s linear infinite;
     /* velocidade aqui */
     gap: 20px;
+
+    /* ADICIONE ISSO PARA PARAR DE TREMER: */
+    will-change: transform; /* Avisa o navegador que vai mexer */
+    transform: translate3d(0, 0, 0); /* Força o uso da placa de vídeo */
+    -webkit-backface-visibility: hidden; /* Evita que a "costas" do elemento pisque */
+    backface-visibility: hidden;
+    perspective: 1000px; /* Melhora a renderização 3D */
 }
 
 @keyframes rolar {
@@ -419,7 +431,7 @@ h2 {
     }
 
     100% {
-        transform: translateX(-81%);
+        transform: translateX(-71%);
     }
 
     /* move metade porque repetimos a lista */

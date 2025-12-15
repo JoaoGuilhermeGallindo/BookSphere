@@ -393,12 +393,12 @@ const livros = {
   },
 
   "os-sertoes": {
-    titulo: "Os Sertoes",
+    titulo: "Os Sertões",
     autor: "Euclides da Cunha",
     paginas: "119 Páginas - PDF",
     paginas2: "289 Páginas - ONLINE",
     capa: "../Capas/OsSertoes.jpg",
-    sinopse: `Publicado em 1902, Os Sertoes é uma obra de não-ficção literária que combina jornalismo, história e literatura. Euclides da Cunha relata a Guerra de Canudos, que ocorreu no interior da Bahia, explorando a vida, a geografia e a cultura do sertanejo brasileiro. A obra é dividida em três partes: "A Terra", "O Homem" e "A Luta", abordando respectivamente o cenário natural do sertão, o perfil e a resistência do povo sertanejo e o confronto com o exército republicano. Cunha analisa causas, consequências e aspectos sociais, políticos e culturais do conflito, oferecendo uma visão profunda e crítica do Brasil da época. Os Sertoes é considerado um marco da literatura e da historiografia brasileira. A obra combina rigor científico com sensibilidade literária, tornando-se leitura essencial para entender o sertão, seus habitantes e os conflitos que marcaram a história nacional.`,
+    sinopse: `Publicado em 1902, Os Sertões é uma obra de não-ficção literária que combina jornalismo, história e literatura. Euclides da Cunha relata a Guerra de Canudos, que ocorreu no interior da Bahia, explorando a vida, a geografia e a cultura do sertanejo brasileiro. A obra é dividida em três partes: "A Terra", "O Homem" e "A Luta", abordando respectivamente o cenário natural do sertão, o perfil e a resistência do povo sertanejo e o confronto com o exército republicano. Cunha analisa causas, consequências e aspectos sociais, políticos e culturais do conflito, oferecendo uma visão profunda e crítica do Brasil da época. Os Sertões é considerado um marco da literatura e da historiografia brasileira. A obra combina rigor científico com sensibilidade literária, tornando-se leitura essencial para entender o sertão, seus habitantes e os conflitos que marcaram a história nacional.`,
     pdf: "OsSertoes.pdf",
   },
 
@@ -506,7 +506,7 @@ const livros = {
     pdf: "Fausto.pdf",
   },
   "candido": {
-    titulo: "Cândido, ou O Otimismo",
+    titulo: "Cândido",
     autor: "Voltaire",
     paginas: "68 Páginas - PDF",
     paginas2: "134 Páginas - ONLINE",

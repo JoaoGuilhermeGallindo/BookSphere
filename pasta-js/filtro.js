@@ -344,7 +344,7 @@ const data = [
   },
   {
     id: "os-sertoes",
-    titulo: "Os Sertoes",
+    titulo: "Os Sertões",
     autor: "Euclides da Cunha",
     capa: "../Capas/OsSertoes.jpg",
     genero: "Histórico",

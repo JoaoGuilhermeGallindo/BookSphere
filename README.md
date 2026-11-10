@@ -33,7 +33,7 @@ Desenvolvido em equipe como Trabalho de Conclusão de Curso (TCC), o projeto re�
 
 Acesse a versão online:
 
-[BookSphere — Acessar plataforma](https://victoroliveira2303.github.io/BookSphere/pasta-html/index.html)
+[BookSphere — Acessar plataforma](https://victoroliveira2303.github.io/BookSphere/pasta-html/home.html)
 
 ## 👥 Desenvolvimento
 
